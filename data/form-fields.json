@@ -1,0 +1,836 @@
+{
+  "version": "1.0",
+  "groups": [
+    {
+      "id": "basic",
+      "title": "基本条件"
+    },
+    {
+      "id": "hardware",
+      "title": "硬件条件"
+    },
+    {
+      "id": "family",
+      "title": "家庭背景"
+    },
+    {
+      "id": "soft",
+      "title": "软性条件（自评）"
+    },
+    {
+      "id": "want",
+      "title": "择偶期望"
+    },
+    {
+      "id": "calibration",
+      "title": "自评校准"
+    }
+  ],
+  "fields": [
+    {
+      "id": "gender",
+      "label": "性别",
+      "group": "basic",
+      "type": "radio",
+      "required": true,
+      "options": [
+        {
+          "value": "male",
+          "label": "男"
+        },
+        {
+          "value": "female",
+          "label": "女"
+        }
+      ]
+    },
+    {
+      "id": "age",
+      "label": "年龄",
+      "group": "basic",
+      "type": "number",
+      "required": true,
+      "min": 18,
+      "max": 75,
+      "unit": "岁"
+    },
+    {
+      "id": "city",
+      "label": "常住城市",
+      "group": "basic",
+      "type": "text",
+      "required": true,
+      "placeholder": "如：杭州"
+    },
+    {
+      "id": "height_cm",
+      "label": "身高",
+      "group": "basic",
+      "type": "number",
+      "required": true,
+      "min": 140,
+      "max": 210,
+      "unit": "cm"
+    },
+    {
+      "id": "weight_kg",
+      "label": "体重",
+      "group": "basic",
+      "type": "number",
+      "required": false,
+      "min": 35,
+      "max": 160,
+      "unit": "kg"
+    },
+    {
+      "id": "education",
+      "label": "最高学历",
+      "group": "hardware",
+      "type": "select",
+      "required": true,
+      "options": [
+        {
+          "value": "highschool",
+          "label": "高中及以下"
+        },
+        {
+          "value": "college",
+          "label": "大专"
+        },
+        {
+          "value": "bachelor",
+          "label": "本科"
+        },
+        {
+          "value": "master",
+          "label": "硕士"
+        },
+        {
+          "value": "phd",
+          "label": "博士"
+        }
+      ]
+    },
+    {
+      "id": "school_tier",
+      "label": "院校层次",
+      "group": "hardware",
+      "type": "select",
+      "required": true,
+      "options": [
+        {
+          "value": "none",
+          "label": "非全日制 / 未提及"
+        },
+        {
+          "value": "ordinary",
+          "label": "普通院校"
+        },
+        {
+          "value": "211",
+          "label": "211"
+        },
+        {
+          "value": "985",
+          "label": "985"
+        },
+        {
+          "value": "top",
+          "label": "清北华五"
+        }
+      ]
+    },
+    {
+      "id": "occupation",
+      "label": "职业",
+      "group": "hardware",
+      "type": "select",
+      "required": true,
+      "options": [
+        {
+          "value": "gov",
+          "label": "体制内（公务员 / 事业编）"
+        },
+        {
+          "value": "soe",
+          "label": "国企"
+        },
+        {
+          "value": "private",
+          "label": "私企 / 外企"
+        },
+        {
+          "value": "freelance",
+          "label": "自由职业"
+        },
+        {
+          "value": "startup",
+          "label": "创业 / 个体"
+        },
+        {
+          "value": "student",
+          "label": "学生"
+        },
+        {
+          "value": "other",
+          "label": "其他"
+        }
+      ]
+    },
+    {
+      "id": "income_wan",
+      "label": "年收入",
+      "group": "hardware",
+      "type": "number",
+      "required": true,
+      "min": 0,
+      "max": 2000,
+      "unit": "万"
+    },
+    {
+      "id": "has_house",
+      "label": "房产",
+      "group": "hardware",
+      "type": "select",
+      "required": true,
+      "options": [
+        {
+          "value": "none",
+          "label": "无房"
+        },
+        {
+          "value": "loan",
+          "label": "有房（有贷）"
+        },
+        {
+          "value": "paid",
+          "label": "有房（无贷）"
+        },
+        {
+          "value": "multi",
+          "label": "多套"
+        }
+      ]
+    },
+    {
+      "id": "has_car",
+      "label": "车",
+      "group": "hardware",
+      "type": "select",
+      "required": true,
+      "options": [
+        {
+          "value": "none",
+          "label": "无车"
+        },
+        {
+          "value": "basic",
+          "label": "10 万以下"
+        },
+        {
+          "value": "mid",
+          "label": "10–30 万"
+        },
+        {
+          "value": "high",
+          "label": "30 万以上"
+        }
+      ]
+    },
+    {
+      "id": "hukou",
+      "label": "户籍",
+      "group": "hardware",
+      "type": "select",
+      "required": true,
+      "options": [
+        {
+          "value": "local",
+          "label": "本地城镇户口"
+        },
+        {
+          "value": "urban_other",
+          "label": "外地城镇户口"
+        },
+        {
+          "value": "rural",
+          "label": "农村户口"
+        }
+      ]
+    },
+    {
+      "id": "marital",
+      "label": "婚史",
+      "group": "hardware",
+      "type": "select",
+      "required": true,
+      "options": [
+        {
+          "value": "single",
+          "label": "未婚"
+        },
+        {
+          "value": "divorced",
+          "label": "离异无孩"
+        },
+        {
+          "value": "divorced_kid",
+          "label": "离异有孩"
+        }
+      ]
+    },
+    {
+      "id": "family_origin",
+      "label": "原生家庭",
+      "group": "family",
+      "type": "select",
+      "required": true,
+      "options": [
+        {
+          "value": "urban_upper",
+          "label": "城市中产及以上"
+        },
+        {
+          "value": "urban_normal",
+          "label": "城市普通"
+        },
+        {
+          "value": "county",
+          "label": "县城"
+        },
+        {
+          "value": "rural",
+          "label": "农村"
+        }
+      ]
+    },
+    {
+      "id": "siblings",
+      "label": "兄弟姐妹",
+      "group": "family",
+      "type": "select",
+      "required": true,
+      "options": [
+        {
+          "value": "only",
+          "label": "独生"
+        },
+        {
+          "value": "has",
+          "label": "非独生"
+        }
+      ]
+    },
+    {
+      "id": "siblings_detail",
+      "label": "手足情况（含性别与排序）",
+      "group": "family",
+      "type": "select",
+      "required": false,
+      "help": "语料显示「有弟弟」与「有姐姐」影响相反，比上面二值字段更细（D15 新增）",
+      "options": [
+        {
+          "value": "only_child",
+          "label": "独生子女"
+        },
+        {
+          "value": "sister_only",
+          "label": "有姐姐（无弟弟）"
+        },
+        {
+          "value": "brother_only",
+          "label": "有哥哥（无弟弟）"
+        },
+        {
+          "value": "has_younger_brother",
+          "label": "有弟弟"
+        },
+        {
+          "value": "has_younger_sister",
+          "label": "有妹妹（无弟弟）"
+        },
+        {
+          "value": "mixed",
+          "label": "兄弟姐妹都有"
+        },
+        {
+          "value": "unknown",
+          "label": "不详 / 不愿说"
+        }
+      ]
+    },
+    {
+      "id": "family_wealth",
+      "label": "家庭资产档",
+      "group": "family",
+      "type": "select",
+      "required": false,
+      "help": "语料的 A7/A8/A9 口径；A7 为反推值（derived），引擎不作硬判定",
+      "options": [
+        {
+          "value": "a6",
+          "label": "A6 及以下（无房或仅自住刚需）"
+        },
+        {
+          "value": "a7",
+          "label": "A7（千万以下，高不成低不就）"
+        },
+        {
+          "value": "a8",
+          "label": "A8（净资产 1000 万+）"
+        },
+        {
+          "value": "a9",
+          "label": "A9（亿级）"
+        },
+        {
+          "value": "unknown",
+          "label": "不详"
+        }
+      ]
+    },
+    {
+      "id": "parents_pension",
+      "label": "父母退休金",
+      "group": "family",
+      "type": "select",
+      "required": false,
+      "help": "男生十项加分表第 8 项：父母有退休金 / 养老金",
+      "options": [
+        {
+          "value": "both",
+          "label": "双方都有退休金"
+        },
+        {
+          "value": "one",
+          "label": "一方有"
+        },
+        {
+          "value": "none",
+          "label": "都没有"
+        },
+        {
+          "value": "unknown",
+          "label": "不详"
+        }
+      ]
+    },
+    {
+      "id": "family_atmosphere",
+      "label": "原生家庭氛围",
+      "group": "family",
+      "type": "select",
+      "required": false,
+      "help": "男生十项加分表第 10 项：原生家庭幸福",
+      "options": [
+        {
+          "value": "harmonious",
+          "label": "和睦、父母关系好"
+        },
+        {
+          "value": "ordinary",
+          "label": "一般"
+        },
+        {
+          "value": "conflict",
+          "label": "有明显矛盾/离异"
+        },
+        {
+          "value": "unknown",
+          "label": "不详"
+        }
+      ]
+    },
+    {
+      "id": "personality",
+      "label": "性格自评",
+      "group": "soft",
+      "type": "select",
+      "required": false,
+      "options": [
+        {
+          "value": "outgoing",
+          "label": "外向健谈"
+        },
+        {
+          "value": "warm",
+          "label": "温和内敛"
+        },
+        {
+          "value": "slow",
+          "label": "慢热"
+        },
+        {
+          "value": "direct",
+          "label": "强势直率"
+        }
+      ],
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "communication",
+      "label": "沟通能力自评",
+      "group": "soft",
+      "type": "scale",
+      "required": false,
+      "min": 1,
+      "max": 5,
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）。1 = 经常聊死，5 = 很会推进关系"
+    },
+    {
+      "id": "emotional_stability",
+      "label": "情绪稳定自评",
+      "group": "soft",
+      "type": "scale",
+      "required": false,
+      "min": 1,
+      "max": 5,
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "living_skills",
+      "label": "生活能力自评",
+      "group": "soft",
+      "type": "scale",
+      "required": false,
+      "min": 1,
+      "max": 5,
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）。做饭 / 家务 / 生活自理"
+    },
+    {
+      "id": "social_circle",
+      "label": "社交圈广度自评",
+      "group": "soft",
+      "type": "scale",
+      "required": false,
+      "min": 1,
+      "max": 5,
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "hobbies",
+      "label": "兴趣 / 特长（选填）",
+      "group": "soft",
+      "type": "text",
+      "required": false,
+      "placeholder": "如：羽毛球、摄影"
+    },
+    {
+      "id": "want_gender",
+      "label": "期望对方性别",
+      "group": "want",
+      "type": "radio",
+      "required": false,
+      "options": [
+        {
+          "value": "male",
+          "label": "男"
+        },
+        {
+          "value": "female",
+          "label": "女"
+        }
+      ],
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "want_age_min",
+      "label": "期望对方年龄下限",
+      "group": "want",
+      "type": "number",
+      "required": false,
+      "min": 18,
+      "max": 75,
+      "unit": "岁",
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "want_age_max",
+      "label": "期望对方年龄上限",
+      "group": "want",
+      "type": "number",
+      "required": false,
+      "min": 18,
+      "max": 75,
+      "unit": "岁",
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "want_height_min",
+      "label": "期望对方身高下限",
+      "group": "want",
+      "type": "number",
+      "required": false,
+      "min": 140,
+      "max": 210,
+      "unit": "cm",
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "want_education_min",
+      "label": "期望对方学历下限",
+      "group": "want",
+      "type": "select",
+      "required": false,
+      "options": [
+        {
+          "value": "highschool",
+          "label": "高中及以下"
+        },
+        {
+          "value": "college",
+          "label": "大专"
+        },
+        {
+          "value": "bachelor",
+          "label": "本科"
+        },
+        {
+          "value": "master",
+          "label": "硕士"
+        },
+        {
+          "value": "phd",
+          "label": "博士"
+        }
+      ],
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "want_occupation",
+      "label": "期望对方职业性质",
+      "group": "want",
+      "type": "select",
+      "required": false,
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）。「要求对方体制内」是语料里最常见的要求之一（D15 新增）",
+      "options": [
+        {
+          "value": "any",
+          "label": "不限"
+        },
+        {
+          "value": "gov",
+          "label": "体制内（公务员 / 事业编）"
+        },
+        {
+          "value": "soe",
+          "label": "国企"
+        },
+        {
+          "value": "private",
+          "label": "私企 / 外企"
+        },
+        {
+          "value": "startup",
+          "label": "创业 / 个体"
+        },
+        {
+          "value": "freelance",
+          "label": "自由职业"
+        }
+      ]
+    },
+    {
+      "id": "want_house",
+      "label": "要求对方有房",
+      "group": "want",
+      "type": "radio",
+      "required": false,
+      "options": [
+        {
+          "value": "yes",
+          "label": "必须有"
+        },
+        {
+          "value": "no",
+          "label": "不要求"
+        }
+      ],
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "want_appearance_min",
+      "label": "期望对方颜值下限",
+      "group": "want",
+      "type": "number",
+      "required": false,
+      "min": 1,
+      "max": 9,
+      "step": 0.5,
+      "unit": "分",
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "self_appearance",
+      "label": "颜值自评",
+      "group": "calibration",
+      "type": "number",
+      "required": false,
+      "min": 1,
+      "max": 9,
+      "step": 0.5,
+      "unit": "分",
+      "help": "可留空：留空表示未知 / 不便填写，颜值轨道不参与综合分（D28）。按 1–9 分制；5.5 = 有争议的班草 / 无争议的校草门槛"
+    },
+    {
+      "id": "self_rank",
+      "label": "与同龄同性相比，你处在",
+      "group": "calibration",
+      "type": "select",
+      "required": false,
+      "options": [
+        {
+          "value": "top10",
+          "label": "前 10%"
+        },
+        {
+          "value": "top25",
+          "label": "前 25%"
+        },
+        {
+          "value": "mid",
+          "label": "中间"
+        },
+        {
+          "value": "bottom",
+          "label": "中等偏下"
+        }
+      ],
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "admiration_freq",
+      "label": "现实中被人主动表达好感 / 搭讪的频率",
+      "group": "calibration",
+      "type": "select",
+      "required": false,
+      "options": [
+        {
+          "value": "often",
+          "label": "经常"
+        },
+        {
+          "value": "sometimes",
+          "label": "偶尔"
+        },
+        {
+          "value": "rare",
+          "label": "几乎没有"
+        }
+      ],
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "feedback_gap",
+      "label": "相亲/介绍给你的对象，整体条件与你相比",
+      "group": "calibration",
+      "type": "select",
+      "required": false,
+      "options": [
+        {
+          "value": "better",
+          "label": "明显更好"
+        },
+        {
+          "value": "same",
+          "label": "差不多"
+        },
+        {
+          "value": "worse",
+          "label": "明显更差"
+        },
+        {
+          "value": "none",
+          "label": "没有被介绍过"
+        }
+      ],
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "photo_quality",
+      "label": "上传照片的处理程度",
+      "group": "calibration",
+      "type": "radio",
+      "required": false,
+      "options": [
+        {
+          "value": "raw",
+          "label": "原相机直出"
+        },
+        {
+          "value": "light",
+          "label": "轻度美颜"
+        },
+        {
+          "value": "heavy",
+          "label": "重度精修"
+        }
+      ],
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "face_natural",
+      "label": "面部是否原生（未做过医美/整形）",
+      "group": "calibration",
+      "type": "radio",
+      "required": false,
+      "options": [
+        {
+          "value": "yes",
+          "label": "原生未整"
+        },
+        {
+          "value": "minor",
+          "label": "做过轻医美"
+        },
+        {
+          "value": "no",
+          "label": "做过手术类项目"
+        }
+      ],
+      "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "self_rank_position",
+      "label": "打分局名次（第几名）",
+      "group": "calibration",
+      "type": "number",
+      "required": false,
+      "unit": "名",
+      "min": 1,
+      "help": "可留空：留空表示未知 / 未参加，不解锁名次档位画像，也不影响分数（D28）"
+    },
+    {
+      "id": "self_rank_pool",
+      "label": "打分局池子大小",
+      "group": "calibration",
+      "type": "number",
+      "required": false,
+      "unit": "人",
+      "min": 2,
+      "help": "可留空：仅用于展示名次口径（如「40 人池」），不参与计分"
+    },
+    {
+      "id": "activity_type",
+      "label": "参加的相亲活动类型",
+      "group": "calibration",
+      "type": "select",
+      "required": false,
+      "options": [
+        {
+          "value": "high",
+          "label": "高净值专场"
+        },
+        {
+          "value": "three",
+          "label": "三高专场"
+        },
+        {
+          "value": "normal",
+          "label": "普通活动"
+        }
+      ],
+      "help": "可留空：留空表示未知 / 未参加，不解锁渠道档位画像，也不影响分数（D28）"
+    }
+  ]
+}

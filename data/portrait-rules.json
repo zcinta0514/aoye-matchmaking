@@ -1,0 +1,459 @@
+{
+  "version": "2.0",
+  "note": "画像条目表 v2.0：在 v1.3 语义类别之上，把语料里可用的「对方条件 / 偏好 / 渠道」批量接入（见 tools/portrait-coverage.mjs 的覆盖率报表）。category 仍是渲染路由依据：target-attribute / target-preference / subject-requirements / channel / none。不得编造；个体案例数字组合（≥3 类）直接构建失败。",
+  "dimensions": [
+    "资产/家庭",
+    "收入",
+    "职业/身份",
+    "身高/长相",
+    "渠道/场合",
+    "地区",
+    "年龄",
+    "学历",
+    "婚史",
+    "家庭结构",
+    "性格/情绪价值"
+  ],
+  "items": [
+    {
+      "id": "UP-FAM-PENSION",
+      "side": "upper",
+      "category": "target-attribute",
+      "dimension": "资产/家庭",
+      "display": "对方家庭（父母）有退休金——语料口径：没有养老保险，不管条件多好都算不好",
+      "sourceLabel": "依据：家庭条件口径（语料）",
+      "standard": "S-FAM-002"
+    },
+    {
+      "id": "UP-INCOME-EXEMPT",
+      "side": "upper",
+      "category": "target-attribute",
+      "dimension": "收入",
+      "display": "对方年入 30 万以上：语料口径下可不再对其外貌、年龄、身高、家境、工作、脾气提太多要求",
+      "sourceLabel": "依据：高收入豁免口径（语料）",
+      "standard": "S-INCOME-003",
+      "when": {
+        "field": "subject.want_gender",
+        "op": "eq",
+        "value": "male"
+      }
+    },
+    {
+      "id": "UP-ASSET-BAND",
+      "side": "upper",
+      "category": "target-attribute",
+      "dimension": "资产/家庭",
+      "bandType": "asset",
+      "fields": [
+        "whoYouCanReach"
+      ],
+      "maxItems": 1,
+      "sourceLabel": "依据：{bandName}（语料档位）"
+    },
+    {
+      "id": "UP-RANK-BAND",
+      "side": "upper",
+      "category": "target-attribute",
+      "dimension": "职业/身份",
+      "bandType": "rank",
+      "fields": [
+        "whoYouCanReach"
+      ],
+      "maxItems": 2,
+      "sourceLabel": "依据：{bandName}（语料档位）"
+    },
+    {
+      "id": "UP-CHANNEL-BAND",
+      "side": "upper",
+      "category": "target-attribute",
+      "dimension": "渠道/场合",
+      "bandType": "channel",
+      "fields": [
+        "whoYouCanReach"
+      ],
+      "maxItems": 2,
+      "sourceLabel": "依据：{bandName}（语料档位）"
+    },
+    {
+      "id": "LOW-DOOR",
+      "side": "lower",
+      "category": "target-attribute",
+      "dimension": "资产/家庭",
+      "display": "同层（门当户对）：对方家庭资产约为自家的 100%–200%——语料把这段当作「有感情的路子」的主力区间",
+      "sourceLabel": "依据：门当户对定义（语料）",
+      "standard": "S-ASSET-006",
+      "rules": [
+        "R-MATCH-046"
+      ],
+      "when": {
+        "field": "subject.family_wealth",
+        "op": "exists"
+      }
+    },
+    {
+      "id": "LOW-NORMAL-CHANNEL",
+      "side": "lower",
+      "category": "channel",
+      "dimension": "渠道/场合",
+      "display": "同城同标签的单身池（高个子 / 体制内 / 宠物 / 85 后 90 后等专场分组）——普通画像扩大接触面的主渠道",
+      "sourceLabel": "依据：普通活动档（语料）",
+      "band": "event.normal"
+    },
+    {
+      "id": "PREF-MARKET-VALUE",
+      "side": "upper",
+      "category": "target-preference",
+      "dimension": "收入",
+      "display": "按该机构口径，市场对两性的定价维度不同（原话「男方看收入、女方看颜值」）——市场看你的第一维度是社会价值与收入",
+      "sourceLabel": "依据：男女价值参照表（语料）",
+      "standard": "S-MATCH-006",
+      "rules": [
+        "R-DEMO-017"
+      ],
+      "when": {
+        "field": "subject.gender",
+        "op": "eq",
+        "value": "male"
+      }
+    },
+    {
+      "id": "UP-HEIGHT-DIRECTION",
+      "side": "upper",
+      "category": "target-preference",
+      "dimension": "身高/长相",
+      "display": "按该机构口径，对方（女性）对男性的排序是身高 > 颜值 > 收入 > 家境 > 性格——她最先看你的是身高与外形（单账号口径，待复核；无数字门槛）",
+      "sourceLabel": "依据：女看男排序口径（语料）",
+      "standard": "S-MATCH-005",
+      "rules": [
+        "R-MATCH-027"
+      ],
+      "when": {
+        "field": "subject.gender",
+        "op": "eq",
+        "value": "male"
+      }
+    },
+    {
+      "id": "UP-VALUE-DIRECTION",
+      "side": "upper",
+      "category": "target-preference",
+      "dimension": "职业/身份",
+      "display": "按该机构口径，市场对女性的首看维度是年龄、外貌、性格，以及原生家庭是否有负担——这是市场看你的第一组维度，不是对个人价值的判断",
+      "sourceLabel": "依据：男女价值参照表（语料）",
+      "standard": "S-MATCH-006",
+      "rules": [
+        "R-DEMO-016"
+      ],
+      "when": {
+        "field": "subject.gender",
+        "op": "eq",
+        "value": "female"
+      }
+    },
+    {
+      "id": "UP-OCC-COST",
+      "side": "upper",
+      "category": "subject-requirements",
+      "dimension": "职业/身份",
+      "display": "要求对方体制内会显著收窄匹配池（语料原话：看似没门槛、实际要求很高），建议当作加分项而不是硬门槛",
+      "sourceLabel": "依据：要求成本口径（语料）",
+      "standard": "S-MATCH-010",
+      "when": {
+        "field": "subject.want_occupation",
+        "op": "eq",
+        "value": "gov"
+      },
+      "rules": [
+        "R-MATCH-043"
+      ]
+    },
+    {
+      "id": "GAP-LOOKS",
+      "category": "none",
+      "dimension": "身高/长相",
+      "gap": {
+        "reason": "corpus-no-basis",
+        "detail": "语料只有方向性口径（排序 / 显性维度，见「对方 / 市场更看重你什么」一节），没有对「对方长相」的条件门槛"
+      }
+    },
+    {
+      "id": "GAP-OCCUPATION",
+      "category": "none",
+      "dimension": "职业/身份",
+      "gap": {
+        "reason": "missing-input",
+        "detail": "缺「打分局名次」与「参加的活动类型」两个输入；补上后 rank / channel 档位画像会自动解锁",
+        "unlockFields": [
+          "打分局名次",
+          "参加的活动类型"
+        ]
+      }
+    },
+    {
+      "id": "GAP-INCOME",
+      "category": "none",
+      "dimension": "收入",
+      "gap": {
+        "reason": "missing-input",
+        "detail": "语料的收入口径按性别方向生效（男方年入可豁免要求）；表单暂无「期望对方收入」字段",
+        "unlockFields": [
+          "期望对方收入"
+        ]
+      }
+    },
+    {
+      "id": "GAP-REGION",
+      "category": "none",
+      "dimension": "地区",
+      "gap": {
+        "reason": "corpus-no-basis",
+        "detail": "地域口径只覆盖太原 / 南昌 / 北京等少数城市的分档，未覆盖该城市"
+      }
+    },
+    {
+      "id": "UP-FAM-ATMOSPHERE",
+      "side": "upper",
+      "category": "target-attribute",
+      "dimension": "资产/家庭",
+      "display": "对方原生家庭氛围：语料口径要求家庭和谐（无强势妈妈、无醉酒爸爸、父母不离异）",
+      "sourceLabel": "依据：原生家庭检查项（语料）",
+      "standard": "S-FAM-003",
+      "rules": [
+        "R-DIM-023"
+      ]
+    },
+    {
+      "id": "UP-FAM-CONDITIONS",
+      "side": "upper",
+      "category": "target-attribute",
+      "dimension": "资产/家庭",
+      "display": "语料里的「条件好」三要素：父母有养老保险、婚后每月拿得出家庭生活开销、有不用还贷的住房",
+      "sourceLabel": "依据：条件好三要素（语料）",
+      "rules": [
+        "R-DIM-020"
+      ]
+    },
+    {
+      "id": "UP-RANK-TOP-CLAIM",
+      "side": "upper",
+      "category": "target-attribute",
+      "dimension": "年龄",
+      "display": "打分局前 3 名（山东样板）：语料口径下可提出的要求更多（95 后与情绪稳定），也有明确要求不了的项",
+      "sourceLabel": "依据：打分局前 3 名口径（语料）",
+      "standard": "S-MATCH-002",
+      "rules": [
+        "R-MATCH-013"
+      ],
+      "when": {
+        "all": [
+          {
+            "field": "subject.gender",
+            "op": "eq",
+            "value": "female"
+          },
+          {
+            "field": "subject.self_rank_position",
+            "op": "between",
+            "value": [
+              1,
+              3
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "LOW-DOWNWARD-PROFILE",
+      "side": "lower",
+      "category": "target-attribute",
+      "dimension": "画像实例",
+      "display": "语料里提到一条机制：当一方条件明显占优时，可以只要求对方「不负债、不拖累」，其余项不设硬条件——不列具体条件单",
+      "sourceLabel": "依据：条件占优时的匹配机制（语料）",
+      "standard": "S-MATCH-008",
+      "rules": [
+        "R-MATCH-022"
+      ],
+      "when": {
+        "field": "subject.gender",
+        "op": "eq",
+        "value": "male"
+      }
+    },
+    {
+      "id": "LOW-COMPAT-BEHAVIOR",
+      "side": "lower",
+      "category": "target-attribute",
+      "dimension": "性格/情绪价值",
+      "display": "语料的底线清单口径：对方须具备可验证的平等与尊重行为、两性认知在线、非高冲突沟通风格",
+      "sourceLabel": "依据：底线清单（语料）",
+      "rules": [
+        "R-MATCH-006"
+      ]
+    },
+    {
+      "id": "PREF-MALE-LOOKS",
+      "side": "upper",
+      "category": "target-preference",
+      "dimension": "身高/长相",
+      "display": "男生最难被替代的特质是形象：100 个男生里看得过去的约 5 个；「不够帅」常是女生没有坚定选择的真实原因",
+      "sourceLabel": "依据：形象回报口径（语料）",
+      "rules": [
+        "R-DIM-044"
+      ],
+      "when": {
+        "field": "subject.gender",
+        "op": "eq",
+        "value": "male"
+      }
+    },
+    {
+      "id": "PREF-PERSONALITY-F",
+      "side": "upper",
+      "category": "target-preference",
+      "dimension": "性格/情绪价值",
+      "display": "30 岁以上事业有成的男性把性格列第一（择偶排序）；性格好在婚恋市场上大于颜值、学历、工作能力甚至家庭",
+      "sourceLabel": "依据：性格优先口径（语料）",
+      "rules": [
+        "R-MATCH-026",
+        "R-DIM-029"
+      ],
+      "when": {
+        "field": "subject.gender",
+        "op": "eq",
+        "value": "female"
+      }
+    },
+    {
+      "id": "PREF-BROTHER-AUDIT",
+      "side": "upper",
+      "category": "target-preference",
+      "dimension": "家庭结构",
+      "display": "按该机构口径，对方会重点看你家「弟弟是否拖累」——需要对方不介意才可继续（家产分配明确可抵消）",
+      "sourceLabel": "依据：弟弟拖累审查（语料）",
+      "rules": [
+        "R-DIM-026"
+      ],
+      "when": {
+        "field": "subject.siblings_detail",
+        "op": "eq",
+        "value": "has_younger_brother"
+      }
+    },
+    {
+      "id": "PREF-LOCAL-MARKET",
+      "side": "upper",
+      "category": "target-preference",
+      "dimension": "地区",
+      "display": "北京 / 深圳 / 上海等城市「本地人优先找本地人」；户口可降级但不能没有",
+      "sourceLabel": "依据：本地优先口径（语料）",
+      "rules": [
+        "R-DIM-042"
+      ],
+      "when": {
+        "field": "context.cityTier",
+        "op": "eq",
+        "value": 1
+      }
+    },
+    {
+      "id": "PREF-A8-DOWNGRADE-F",
+      "side": "upper",
+      "category": "target-preference",
+      "dimension": "学历",
+      "display": "按该机构口径，A8 及以上家庭看极高颜值会下调学历与家庭门槛（家庭无大拖累、专升本也可）",
+      "sourceLabel": "依据：顶美例外通道（语料）",
+      "standard": "S-LOOKS-021",
+      "rules": [
+        "R-MATCH-021"
+      ],
+      "when": {
+        "field": "subject.gender",
+        "op": "eq",
+        "value": "female"
+      }
+    },
+    {
+      "id": "PREF-AGE-WINDOW-F",
+      "side": "upper",
+      "category": "target-preference",
+      "dimension": "年龄",
+      "display": "按该机构口径，市场看女性的年龄窗口较窄——30+ 后可选范围明显收紧（单条对照口径，仅作参考）",
+      "sourceLabel": "依据：年龄窗口口径（语料）",
+      "rules": [
+        "R-MATCH-028"
+      ],
+      "when": {
+        "field": "subject.gender",
+        "op": "eq",
+        "value": "female"
+      }
+    },
+    {
+      "id": "GAP-AGE",
+      "category": "none",
+      "dimension": "年龄",
+      "gap": {
+        "reason": "corpus-no-basis",
+        "detail": "语料只有打分局名次条件下的年龄要求（前 3）与窗口描述，没有独立的「对方年龄」条件门槛"
+      }
+    },
+    {
+      "id": "GAP-EDUCATION",
+      "category": "none",
+      "dimension": "学历",
+      "gap": {
+        "reason": "corpus-no-basis",
+        "detail": "语料只给了「顶美可下调学历门槛」这类放宽口径（见偏好节），没有对方的学历条件门槛"
+      }
+    },
+    {
+      "id": "GAP-MARITAL",
+      "category": "none",
+      "dimension": "婚史",
+      "gap": {
+        "reason": "corpus-no-basis",
+        "detail": "语料只有二婚市场叙事（S-AGE-010 内部数字不自洽）与个别极端表述，没有可用的对方婚史口径"
+      }
+    },
+    {
+      "id": "GAP-FAMILY-STRUCTURE",
+      "category": "none",
+      "dimension": "家庭结构",
+      "gap": {
+        "reason": "corpus-no-basis",
+        "detail": "语料把「独生/有弟弟」当需求侧成本（R-DIM-025/026）而不是对方条件；没有对方的家庭结构门槛"
+      }
+    },
+    {
+      "id": "PREF-OCC-F",
+      "side": "upper",
+      "category": "target-preference",
+      "dimension": "职业/身份",
+      "display": "按该机构口径，女性的编制 / 稳定工作属稳定项，但不构成核心竞争力——市场看的是外貌、身段、家庭条件与年龄",
+      "sourceLabel": "依据：编制与女性竞争力口径（语料）",
+      "standard": "S-OCC-001",
+      "rules": [
+        "R-DIM-014"
+      ],
+      "when": {
+        "field": "subject.gender",
+        "op": "eq",
+        "value": "female"
+      }
+    },
+    {
+      "id": "PREF-CHAIN-MALE-EXPECT-F",
+      "side": "upper",
+      "category": "target-preference",
+      "dimension": "身高/长相",
+      "display": "语料转述口径：这类男生看的是 1 米 65 以上、工作稳定、长相过得去（链条转述，非博主直接给女生的门槛）",
+      "sourceLabel": "依据：链条转述口径（语料）",
+      "standard": "S-HEIGHT-005",
+      "when": {
+        "field": "subject.gender",
+        "op": "eq",
+        "value": "female"
+      }
+    }
+  ]
+}

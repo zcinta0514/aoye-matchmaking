@@ -1,0 +1,1404 @@
+{
+  "generatedAt": "2026-10-05",
+  "coverage": "基于 26.5% 语料（401/1511 条已转写；12 个有转写的账号）",
+  "notes": "age 为语料自述年龄；仅给出出生年者按 2026-出生年 推算（与语料内“97年29周岁=2026-1997”一致）。weight 统一换算为 kg（1斤=0.5kg）。无法确认的字段一律为 null，不做推测。appearanceScore 为博主给出的颜值分（1-9分制）；null 表示该案例未给分。",
+  "cases": [
+    {
+      "id": "C-001",
+      "account": "aoye98",
+      "aweme_id": "7649728311765060883",
+      "gender": "female",
+      "age": 25,
+      "city": null,
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": "硕士",
+        "school": null,
+        "job": "在读硕士",
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": "独生女；父母体制内公务员、在县城算小领导；家庭幸福、父母尊重个人意愿",
+        "appearanceNote": null
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "画像：土著、独生子、1米72、140斤、形象一般、房车全、211本硕、体制内事业编、不太会聊天",
+        "targetProfile": "土著独生子 / 172cm / 70kg / 形象一般 / 房车全 / 211本硕 / 体制内事业编 / 不太会聊天",
+        "advice": "'画像我给您画的,你是他的心智首选'——她是这类男生的第一选择；想要更高的身高需自己主动'让自己闪闪发光'；社会化程度不高，适合财务类岗位"
+      },
+      "quote": "找个土著,独生子,1米72,140斤,形象一般,房车全,211本硕,体制内的事业编,不太会聊天,这路子考不考虑? …… 画像我给您画的,你是他的心智首选。",
+      "confidence": "medium",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主直接给出正向画像并称“你是他的心智首选”。"
+    },
+    {
+      "id": "C-002",
+      "account": "aoye98",
+      "aweme_id": "7638942595967683875",
+      "gender": "female",
+      "age": 26,
+      "city": "济南",
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": "硕士",
+        "school": null,
+        "job": "体制内",
+        "income": null,
+        "house": "名下有一套老家房子（可卖）",
+        "car": null,
+        "family": "父母都是体制内、算小领导；有一个小15岁的弟弟；家庭房产+股票+现金约500万",
+        "appearanceNote": "自评：普通人，可能稍微好一点点"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "有弟弟+非独生，门当户对明显变难",
+        "targetProfile": "对标画像：二本学历、同样有个弟弟、1米7、私企财务、艺术生转拉丁舞老师、家里一两百万、不要求事业编、不要求211",
+        "advice": "让父母婚前把房子买了；去参加济南市共青团、市妇联在机关事务局办的联谊活动"
+      },
+      "quote": "复制粘贴的比你好找呀。二本学历,同样有个弟弟,一米七,然后在私企工作……家里不用四五百万,一两百万就行。不用事业编制,不用二一一。编制比你高,形象比你好,比你主动。",
+      "confidence": "high",
+      "verdictContext": "reverse-context",
+      "verdictContextNote": "结论是“有弟弟+非独生→门当户对变难”，对标画像是用来反证“别人比你好找”的比较对象。"
+    },
+    {
+      "id": "C-003",
+      "account": "aoye98",
+      "aweme_id": "7637831090509466906",
+      "gender": "female",
+      "age": null,
+      "city": "南京",
+      "input": {
+        "height": 173,
+        "weight": 68,
+        "education": "985博士在读",
+        "school": "985（南京）",
+        "job": "在读博士",
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": "农村家庭、小镇做题家；有一个差9岁的弟弟",
+        "appearanceNote": "自评2到3分，自认偏胖（体重135-138斤）"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 2.5,
+        "band": "硬件尚可、颜值与体重拖后腿，建议走感情路线",
+        "targetProfile": "家庭条件差不多的农村男生",
+        "advice": "在学校里找——'同学是99%的人一生当中的天花板,尤其是高中同学'；减肥；把主体性长出来"
+      },
+      "quote": "当然呀,同学是99%的人一生当中的天花板,尤其是高中同学。……你觉得家庭差不多的都是农村的这种男生,你觉得可以吗?(言下之意就是找有感情的路子)",
+      "confidence": "high",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主正向给出“找有感情的路子 / 农村家庭男生”的结论。"
+    },
+    {
+      "id": "C-004",
+      "account": "aoye98",
+      "aweme_id": "7648981216003214611",
+      "gender": "female",
+      "age": 27,
+      "city": "上海",
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": null,
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": "家乡有两套房子",
+        "car": "两辆车",
+        "family": "父母国企退休；家乡小三线城市；家庭资产约A7.5；父母有退休工资",
+        "appearanceNote": "自认颜值是主要竞争力，'在上海不算特别有优势'"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "按匿名颜值打分局名次分档（35女）：第1名→高净值活动（男嘉宾全是A9）；前3名→三高专场（高薪高颜高学历）；第8-9名→找有感情的路线；15名往后→（未展开）",
+        "targetProfile": "前3名路线：高薪高颜高学历；8-9名路线：一起买房、一块努力、陪着他还贷",
+        "advice": "不用跟上海本地女生比，'在博士里好看就行了'"
+      },
+      "quote": "35个女生里你能打第一,我直接邀请你参加高净值活动。男生全是A9。……你要是35个女生里挑第八第九,别就找有感情这个路子的,两个人一块买房,一块努力,或者你陪着他还。",
+      "confidence": "medium",
+      "verdictContext": "conditional-ceiling",
+      "verdictContextNote": "“先去打分局，若进前 3 才触达三高/A9 场”，是条件性潜在上限，不是承诺结论。"
+    },
+    {
+      "id": "C-005",
+      "account": "aoye98",
+      "aweme_id": "7640076462543867176",
+      "gender": "female",
+      "age": 29,
+      "city": "北京",
+      "input": {
+        "height": 177,
+        "weight": 55,
+        "education": "本科",
+        "school": null,
+        "job": "互联网运营",
+        "income": null,
+        "house": "家里一套商品房+一套老破小，合计六七百万",
+        "car": null,
+        "family": "工薪家庭；东北人，在北京工作",
+        "appearanceNote": null
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "北京条件不错但年龄偏大，需在'年龄/颜值/上进'上做减法",
+        "targetProfile": "大7岁、老北京人（不要城六区，如门头沟）、有户口、别卡独生子、211本硕、可卡身高别卡颜值、区县委办局公务员、性格内向闷一点、不太会提供情绪价值",
+        "advice": "不要求上进和浪漫，踏实过日子就行"
+      },
+      "quote": "年龄大个7岁,老北京人不要要求成六区的,找个就是比方说门头沟的,有户口的,然后别卡独生子。……能卡个身高,别卡颜值,并大个7岁,区县委办局的公务员。",
+      "confidence": "high",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主正向给出具体可达画像（大7岁/老北京/公务员）。"
+    },
+    {
+      "id": "C-006",
+      "account": "aoye98",
+      "aweme_id": "7637107374934838571",
+      "gender": "female",
+      "age": 24,
+      "city": "石家庄",
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": "专科",
+        "school": null,
+        "job": "剪辑",
+        "income": null,
+        "house": "石家庄有房、安徽县城有房",
+        "car": null,
+        "family": "安徽人，幼儿园随父母定居石家庄；有一个妹妹（初中）、一个弟弟（小学，抱养）；原生家庭较和谐",
+        "appearanceNote": null
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "抱养弟弟的家庭，验证成本高，是婚恋硬伤",
+        "targetProfile": "95年、独生子、跟着妈妈生活、无负债、能做到尊重女性——这已是天花板",
+        "advice": "对'大7岁'等要求要认识到验证成本；把要求降到可验证的现实区间"
+      },
+      "quote": "95年,家里是独生子,跟着妈妈。独生子,无负债,能做到尊重女性,就是你的天花板了。咱极度重男轻女的家庭,我跟您直说了啊。绝对的上限啊。",
+      "confidence": "medium",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主正向给出“95年独生子…就是你的天花板”。"
+    },
+    {
+      "id": "C-007",
+      "account": "aoye98",
+      "aweme_id": "7636008548790553907",
+      "gender": "female",
+      "age": 29,
+      "city": "北京",
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": null,
+        "school": null,
+        "job": "事业编",
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": null,
+        "appearanceNote": "自评4到5分"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 4.5,
+        "band": "体制内+学历+户口是资产，颜值是普通档；前男友为94年银行客户经理、北京土著、家境约两三千万",
+        "targetProfile": "92年（大5岁）、无房、存款200万、山东人、175cm、形象一般、不太会提供情绪价值、下班打游戏、偶尔撸串、B站看动漫、有一个哥哥已婚",
+        "advice": "把'体制内'这条拿掉（北京体制内=学历高=家境不会差），学历和户口保留，不用非得找本地人；不建议卡颜值——A8家庭的男生不会为颜值考虑你"
+      },
+      "quote": "你把体制内拿了,因为啥,北京的体制内代表他学历高,他学历高代表他家境不会差……把体制内拿了,把学历拿了,把户口拿了,不用非得找本地人吧?不用非得找本地人。",
+      "confidence": "high",
+      "verdictContext": "reverse-context",
+      "verdictContextNote": "“A8家庭的男生不会为颜值考虑你”是反证语境（此前被误读为 S 档依据）；本案例另有正向画像（92年/存款200万/山东人），但不属 S 档声明。"
+    },
+    {
+      "id": "C-008",
+      "account": "aoye98",
+      "aweme_id": "7636347544313793830",
+      "gender": "female",
+      "age": 26,
+      "city": "北京",
+      "input": {
+        "height": 158,
+        "weight": 51,
+        "education": "211本科",
+        "school": "211",
+        "job": "互联网（无北京户口）",
+        "income": "年薪约30万",
+        "house": null,
+        "car": null,
+        "family": "天津郊区人，独生女",
+        "appearanceNote": "未出镜；'朋友们说跟本人没差别'"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "丁克+无户口两条红线：丁克直接下两个生态位（黄金掉到白银都找不了，再往下找青铜）",
+        "targetProfile": "92年（大8岁）、北京本地土著、卡独生子、211本硕、乡镇区办公务员、月收入6000-8000、有全款房、物欲低、喜欢打游戏、踏实",
+        "advice": "两条红线在婚恋市场太吃亏；若坚持丁克需接受生态位下降"
+      },
+      "quote": "女生丁克来婚恋市场,直接进城里下两个生态位,黄金直接掉的白银都找不了,再往下掉一个生态位,找青铜。",
+      "confidence": "high",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主正向给出具体可达画像（92年/北京土著/公务员/有全款房）。"
+    },
+    {
+      "id": "C-009",
+      "account": "aoye98",
+      "aweme_id": "7636347718041881866",
+      "gender": "female",
+      "age": 28,
+      "city": "三四线小县城",
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": null,
+        "school": null,
+        "job": "体制内",
+        "income": null,
+        "house": "家里有车有房",
+        "car": "有",
+        "family": "父母都有工作（父亲在职、母亲退休）；本人短婚未育（只领证未办婚礼）",
+        "appearanceNote": null
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "二婚市场：男女年龄感差约6-8年；社会能量强的男生最多接受到28-29岁的女生",
+        "targetProfile": "可接受离异，但不接受带孩子的男生；正在接触的男生条件匹配，只是父母不知情",
+        "advice": "建议继续接触并去做他父母的工作；核心追问是'这个男人加入你的生活，他能解决你哪些问题'"
+      },
+      "quote": "男女啊,在二婚市场上的这个年龄感之差大概存在六到八年……他其实不可能能接受三十一二岁的女生,就撑死也就是二十八九。",
+      "confidence": "high",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主对现实中正在接触的具体对象给出正面背书（建议继续推进）。"
+    },
+    {
+      "id": "C-010",
+      "account": "aoye98",
+      "aweme_id": "7636352944786509094",
+      "gender": "female",
+      "age": null,
+      "city": "烟台",
+      "input": {
+        "height": 165,
+        "weight": 53.5,
+        "education": null,
+        "school": null,
+        "job": "猎头顾问（交付+项目管理）",
+        "income": "月收入1万多一点",
+        "house": "无房",
+        "car": "结婚时父母给20万的车（含在陪嫁内）",
+        "family": "山东烟台本地人，独生女；父母普通上班、都有退休金；结婚父母给30-40万",
+        "appearanceNote": "被指'漂亮但不精致、不高级感'"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "硬件中上，但性格强势/主见强/服从性差是减分项",
+        "targetProfile": "山大本硕、大4岁（94年）、山东人、独生子、父母不离异、父亲银行退休、母亲央企退休、有退休金、能给20万；男生有20万存款、178cm/180斤（胖一点）",
+        "advice": "不能要求情绪价值、不能要求外貌；'能要求山东人,能要求独生子'"
+      },
+      "quote": "找个山大的本硕,比你大四岁,九四年,能要求山东人,能要求独生子。能要求他父母不离异……这男生能要求有个二十万的存款,不能要求情价值,不能要求外貌。",
+      "confidence": "high",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主正向给出具体可达画像（山大本硕/大4岁/山东独生子）。",
+      "inputMeta": {
+        "appearanceNote": {
+          "derivedFromVerdict": true,
+          "usedAsEngineInput": false,
+          "note": "被指‘漂亮但不精致、不高级感’：博主判断，非来访者自述。"
+        }
+      }
+    },
+    {
+      "id": "C-011",
+      "account": "aoye98",
+      "aweme_id": "7635978483570674994",
+      "gender": "female",
+      "age": 24,
+      "city": "武汉",
+      "input": {
+        "height": 170,
+        "weight": 65,
+        "education": "本科（护理学+公共事业管理双学位）",
+        "school": "华中科技大学",
+        "job": "同济医院护士（2024年入职）",
+        "income": null,
+        "house": "家里三四线城市两套房，其中一套在自己名下",
+        "car": "家里有车",
+        "family": "湖北人；父母普通工薪阶层；家中存款约100万",
+        "appearanceNote": "自认挺胖；母胎单身"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "有夜班/加班属性必然减分，与性别无关",
+        "targetProfile": null,
+        "advice": "建议去香港读港大公共卫生——'消费能力就是机会的密度'；'你要雕琢你自己'：更瘦、学历更高、性格活泼热情"
+      },
+      "quote": "第一个维度,咱有加班属性,有夜班属性吗?当然。那必然是减分的,不分男女,跟性别无关。……我推荐您去香港。",
+      "confidence": "high",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有“夜班减分”的通用判断与“去香港/雕琢自己”的建议，没有可达结论。"
+    },
+    {
+      "id": "C-012",
+      "account": "aoye98",
+      "aweme_id": "7648625116548533547",
+      "gender": "female",
+      "age": 28,
+      "city": "山东",
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": "211硕士",
+        "school": "211",
+        "job": "高校在编老师",
+        "income": null,
+        "house": "家里三套房产（与弟弟一半一半）",
+        "car": null,
+        "family": "有一个弟弟（对本人影响不大）；父母资金尚可；不重男轻女",
+        "appearanceNote": null
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "上下限按匿名颜值打分局名次给出（40名女生）：第1名→'大一八、小一九'、家里做水泥/搅拌站加工厂、厂二代、非独生不接班、山东全款500万房+100万车；前3名→'触及待遇退休的正常A8家庭'、年龄可要求95后、情绪稳定、大气爷们（要求不了独生子、要求不了付出意识）；前7-8名→找有感情路线、'复制粘贴的你'、家庭是你们家100%-200%；20名开外→（未展开）",
+        "targetProfile": "见 band 分档",
+        "advice": "先去参加山东当地同行的匿名颜值打分局，看自己在40个女生里排第几，再对号入座"
+      },
+      "quote": "你去参加一个山东当地同行办的这种颜值打分局,匿名的男生给女生打……40个女生里,你能打第一啊,找大一八,小一九,没有问题……你要是40个女生里咱打前三的话,找一个触及待遇退休的正常A8家庭,也问题不大。",
+      "confidence": "high",
+      "verdictContext": "conditional-ceiling",
+      "verdictContextNote": "“先去打分局，按名次对号入座”，第 1 名/前 3 名的画像都是条件性上限。"
+    },
+    {
+      "id": "C-013",
+      "account": "aoye98",
+      "aweme_id": "7635583648997068070",
+      "gender": "female",
+      "age": 26,
+      "city": "四五线小城市",
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": "普通本科（去年毕业）",
+        "school": null,
+        "job": "体制内（先创业后考编）",
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": "父母普通上班（母亲退休，父亲是体制内普通员工）；家里存款几十万；自己名下100多万",
+        "appearanceNote": "想通过整容上嫁"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "整容上嫁没戏——'装修只能提升房租,不能提升房价'；硬实力软实力都不够",
+        "targetProfile": "大4岁、做劳动密集型行业、专科学历、有全款房、身高约1米7出头（ASR存疑）",
+        "advice": "卷外貌是核心，但重心不要放在整容上；换城市——去北京上海，'消费能力就是机会的密度'"
+      },
+      "quote": "装修只能提升房租,不能提升房价。……即便是卷外貌,你也得来北京上海。叫狼行千里吃肉嘛,马行千里吃草。",
+      "confidence": "medium",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "“上嫁没戏，但正常可找大4岁/专科/有全款房，这是极限了”——博主正向给出的低位可达上限。"
+    },
+    {
+      "id": "C-014",
+      "account": "aoye98",
+      "aweme_id": "7639676121834851593",
+      "gender": "female",
+      "age": 22,
+      "city": null,
+      "input": {
+        "height": 162,
+        "weight": 72.5,
+        "education": null,
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": "农村家庭；有一个姐姐",
+        "appearanceNote": "自认微胖（145斤）；希望对方月收入5万以上、能接受45岁"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "自身条件与要求严重错位",
+        "targetProfile": null,
+        "advice": "'1米62,145斤……45岁有房有车月入5万不会找咱'；颜值是门票，颜值是第一产出效能；只能先卷外貌、减肥"
+      },
+      "quote": "她就是45岁,有房有车,月收5万才不找咱。1米62,145斤。……颜值是门票,颜值是第一产出效能。所谓的情绪价值就是颜值。长得好看叫情绪价值,长得丑就骚扰。",
+      "confidence": "medium",
+      "verdictContext": "reverse-context",
+      "verdictContextNote": "“45岁有房有车月入5万不会找咱”是反证语境。"
+    },
+    {
+      "id": "C-015",
+      "account": "41252723284",
+      "aweme_id": "7550418120528203017",
+      "gender": "female",
+      "age": null,
+      "city": "河南",
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": "本科在读",
+        "school": null,
+        "job": "在读学生",
+        "income": null,
+        "house": "结婚时家里给买一套房",
+        "car": "结婚配一个七八十万的车",
+        "family": "家里约1000万资产；有一个上小学的弟弟；家里允许去其他城市发展",
+        "appearanceNote": null
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "条件较好、可适度向上匹配，但需要在情绪支持、形象经营、生育安排等议题上与对方达成一致（原转写含筹码化表述，已按伦理规范中性化）",
+        "targetProfile": "可接受年龄差10岁左右；可找独生子（前提是对方不介意她有弟弟）",
+        "advice": "渠道和识人能力很重要；'社交圈要干净、性格要温柔、工作肯定要好'；提醒小心被杀猪盘"
+      },
+      "quote": "咱们如果说想向上找的话,你汲取别人的能量呢,通过你的情绪,你的外貌,你的生育价值去补,渠道问题很重要,并且有识人的能力。",
+      "confidence": "medium",
+      "verdictContext": "conditional-ceiling",
+      "verdictContextNote": "“独生子当然可以找，前提是对方不介意你有弟弟”——条件性结论。",
+      "quoteFlagged": true
+    },
+    {
+      "id": "C-016",
+      "account": "25845559030",
+      "aweme_id": "7370301317480336692",
+      "gender": "female",
+      "age": 34,
+      "city": "太原",
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": "硕士",
+        "school": null,
+        "job": "市直单位公务员（体制内）",
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": "独生女；离异带一个6岁女儿，孩子由父母帮带",
+        "appearanceNote": null
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": null,
+        "targetProfile": null,
+        "advice": null
+      },
+      "quote": "我是92年的硕士,是体制单位的一个公务员,市职单位的。然后我现在是带一个女儿,六岁了。我也是独生女,所以我女儿基本上就是我爸妈在帮我带。",
+      "confidence": "low",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有自我介绍，没有博主结论。"
+    },
+    {
+      "id": "C-017",
+      "account": "aoye98",
+      "aweme_id": "7655262631128796450",
+      "gender": "female",
+      "age": 25,
+      "city": null,
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": null,
+        "school": null,
+        "job": "无业（靠男友养）",
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": "父母都没有正式工作",
+        "appearanceNote": null
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "不是择偶定位问题，是先把'改'做出来",
+        "targetProfile": null,
+        "advice": "先找个班上；'答不值钱,改值钱'；'再有两年你就废了'"
+      },
+      "quote": "你先找个班上。……人和人的差距是怎么一步步拉大的?不在于你找了多少支点,是在于你改了多少次,改是值钱的。",
+      "confidence": "low",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有“先找个班上/改值钱”，不是择偶可达结论。"
+    },
+    {
+      "id": "C-018",
+      "account": "aoye98",
+      "aweme_id": "7650107302800018724",
+      "gender": "female",
+      "age": 21,
+      "city": "二三线城市",
+      "input": {
+        "height": 167,
+        "weight": 45,
+        "education": null,
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": null,
+        "appearanceNote": "自报颜值5.5-6"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 5.8,
+        "band": "5.7-5.8：'二三线城市的高中里,100个女生里前三名'、'100个女生里保五争三'",
+        "targetProfile": null,
+        "advice": null
+      },
+      "quote": "绝对有六分,没问题。我就这么跟你说,二三线城市的高中里面,100个女生里前三名了,5.7,5.8真的有了,100个女生里保五争三。",
+      "confidence": "low",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分，没有择偶结论。"
+    },
+    {
+      "id": "C-019",
+      "account": "aoye98",
+      "aweme_id": "7661209960478444827",
+      "gender": "female",
+      "age": 20,
+      "city": null,
+      "input": {
+        "height": 179,
+        "weight": 55,
+        "education": null,
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": null,
+        "appearanceNote": "被朋友说像关晓彤；本人问1米79是优势还是劣势"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 4.2,
+        "band": "4分出头，比普通人强；1米79是超模身高、百分之百是优势",
+        "targetProfile": null,
+        "advice": "'别胖就行'"
+      },
+      "quote": "优势,绝对是优势,百分之百是优势啊,别胖就行。……再上身高,我能给您打4出头,就比普通人给您强。嗯,4.2差不多有了。",
+      "confidence": "medium",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分与身高判断，没有择偶结论。"
+    },
+    {
+      "id": "C-020",
+      "account": "aoye98",
+      "aweme_id": "7648982262922382646",
+      "gender": "female",
+      "age": null,
+      "city": "德国（留学）",
+      "input": {
+        "height": 165,
+        "weight": 58.5,
+        "education": null,
+        "school": null,
+        "job": "留学生",
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": null,
+        "appearanceNote": "自评3-4分，问'3到4分是普通人吗'"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 4,
+        "band": "4分往右一点点（普通人档）；主播先说'好看、有气质、七八分'随后收回",
+        "targetProfile": null,
+        "advice": null
+      },
+      "quote": "三到四分是普通人吗?对。四分往右一点点。我给自己定过也差不多四分左右。",
+      "confidence": "low",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分，没有择偶结论。"
+    },
+    {
+      "id": "C-021",
+      "account": "aoye98",
+      "aweme_id": "7638930281780596006",
+      "gender": "female",
+      "age": null,
+      "city": null,
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": null,
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": null,
+        "appearanceNote": "自报5.5分"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 5.5,
+        "band": "5.5分（有争议的班花档）：三庭分布、头肩比、颅面比例、牙弓比例都很好",
+        "targetProfile": null,
+        "advice": null
+      },
+      "quote": "你们看这个女生,不论是三庭分布,还是她的头肩比,还是她的颅面比例,对吧?牙弓比例,都很好。5.5,有了。",
+      "confidence": "low",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分，没有择偶结论。"
+    },
+    {
+      "id": "C-022",
+      "account": "aoye98",
+      "aweme_id": "7639325798792482102",
+      "gender": "male",
+      "age": null,
+      "city": "河南（四线县城）",
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": "二本",
+        "school": "二本",
+        "job": "县城体制内（事业编）",
+        "income": "月薪4-5千",
+        "house": "家里在县城有几套房",
+        "car": "尚未买车（家里打算给买20万左右的）",
+        "family": "父母做生意；有一个已婚哥哥；家庭资产自称A7.3-A7.8（约700-800万）",
+        "appearanceNote": "自评颜值3.5，'正常人'"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 3.5,
+        "band": "两条可选路径：①体制内+颜值4-4.5分；②第一学历985/211、有点独生女（他自认'学历太高我有点害怕'）",
+        "targetProfile": "保住颜值、学历、体制内工作；对方需尊重伴侣的职业规划与家务分工协商；不必独生女；身高165cm以上（原转写含性别偏见用词，已中性化）",
+        "advice": "'体制内跟颜值你选一个,年龄跟情绪价值你选一个,家庭跟生活习惯你选一个'；两个路子选一个，要不然就做减法"
+      },
+      "quote": "你选一个,就刚才那个路子,保住颜值,保住学历,再把体制内的工作保住,把他的道德品质的下限保住,他两性认知在线保住,他不女权,不强势在保住,不用非得独生女,一米六五以上。",
+      "confidence": "high",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主正向给出两条可选路径（体制内+4-4.5分 / 985-211独生女）。",
+      "quoteFlagged": true,
+      "inputMeta": {
+        "appearanceNote": {
+          "derivedFromVerdict": true,
+          "usedAsEngineInput": false,
+          "note": "自评颜值3.5：ASR 分句无法确定是谁说的，保守按博主判断处理。"
+        }
+      }
+    },
+    {
+      "id": "C-023",
+      "account": "aoye98",
+      "aweme_id": "7638160736476286234",
+      "gender": "male",
+      "age": null,
+      "city": "北京",
+      "input": {
+        "height": 185,
+        "weight": 140,
+        "education": null,
+        "school": null,
+        "job": "刚毕业不到一年",
+        "income": "存款2-3万",
+        "house": "名下一套全款房（父母买的）",
+        "car": null,
+        "family": "父母已退休，父亲是正处级处长、母亲为另一单位职工；有一个大19岁的姐姐",
+        "appearanceNote": "长相普通人；体重280斤"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "体型是核心短板；硬件（房+家庭）尚可",
+        "targetProfile": "女生：专科（电器自动化）、私企后台数据运营、月薪3000-5000、颜值4.7-4.8（普通人偏上、清爽干净）、父母感情不好/离异、跟奶奶长大、有同父异母的哥哥已婚、嫁妆能出十几二十万",
+        "advice": "必须保持主动，'你只要停止主动,这道关系over了'；心宽体胖者幸福感强、减不了肥"
+      },
+      "quote": "我三年,大学毕业,然后专科,比方说学电器自动化的,现在就比方说在家私企,后台做个数据运营,月收入的话,三千到五千……颜值,普通人偏上一点,四点七,四点八。",
+      "confidence": "high",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主正向给出具体可达画像（专科/私企数据运营/4.7-4.8分）。"
+    },
+    {
+      "id": "C-024",
+      "account": "aoye98",
+      "aweme_id": "7638583110027824447",
+      "gender": "male",
+      "age": 29,
+      "city": "东北五线城市",
+      "input": {
+        "height": 185,
+        "weight": 80,
+        "education": "大专",
+        "school": null,
+        "job": "国企劳动技术岗（有夜班）",
+        "income": "月薪8K左右",
+        "house": "本地一套全款房",
+        "car": null,
+        "family": "父母经营小生意、都买了保险（原文'小看家庭'，疑为'小康家庭'）",
+        "appearanceNote": null
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "硬件达标，可要求'本地+独生女'",
+        "targetProfile": "本地独生女、168cm、颜值普通人、体重100斤左右、专升本文凭、餐饮品牌财务（会计专业）、月收入3500、物欲低、情绪稳定、两年内结婚生子、父母同为央企退休、家境A7.2",
+        "advice": "可要求脾气好一点；'能给你提供情绪价值的人,情绪都不稳定'——情绪价值和情绪稳定二选一"
+      },
+      "quote": "找个本地人,独生女,1米68,颜值普通人,体重100斤,专升本的学历……她就是想两年之内把婚结了,想要个孩子,独生女,小康家庭,父母同一个央企退休,家里面A7.2。",
+      "confidence": "high",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主正向给出具体可达画像（本地独生女/168cm/会计）。"
+    },
+    {
+      "id": "C-025",
+      "account": "aoye98",
+      "aweme_id": "7640453220631891241",
+      "gender": "male",
+      "age": null,
+      "city": "宁波",
+      "input": {
+        "height": null,
+        "weight": 75,
+        "education": "本科",
+        "school": null,
+        "job": "抖音电商（目前在公司上班）",
+        "income": "年收入15-20万（自称未来可达40-50万年薪）",
+        "house": "家里给买了一套房；彩礼自己准备好了",
+        "car": "还没考驾照、未买车",
+        "family": "母亲是国企经理；父亲之前干土方、刚出狱；家里有人大代表",
+        "appearanceNote": "形象4分，'平常就是普通人'"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 4,
+        "band": "收入增长预期不被认可（'收入增长到40到50,有很多的不确定性,有很多的风险'）；父亲背景是隐形减分项",
+        "targetProfile": "身高165、体重100斤（50kg）、颜值4.5-5、私企客户端项目负责人、月收入5000-8000、专升本文凭、家里陪嫁能给8万到18万",
+        "advice": "趁年轻现在就找；同时考虑回江西找对象"
+      },
+      "quote": "我一米六五,一百斤,颜值4.5到5,这女生在私企做客户端,当个比方说项目负责人。月收入这女生5000到8000,专升本的学历。然后家里面,陪嫁能给个8万到18万,就是这路子了。",
+      "confidence": "medium",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主正向给出具体可达画像（1米65/100斤/4.5-5分/私企项目负责人）。"
+    },
+    {
+      "id": "C-026",
+      "account": "aoye98",
+      "aweme_id": "7636331944761937202",
+      "gender": "male",
+      "age": null,
+      "city": "西安",
+      "input": {
+        "height": 180,
+        "weight": 67.5,
+        "education": null,
+        "school": null,
+        "job": "应届/待选调（会回家乡省会西安）",
+        "income": null,
+        "house": "家里两套房+一辆车（一套新房付了50%）",
+        "car": "有",
+        "family": "父母都是国企退休；独生子",
+        "appearanceNote": "被评'长得正派'"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "三类路子之一：A9家庭女生——家里兄弟姐妹三个、名校海归（约翰霍普金斯/康奈尔/宾夕法尼亚）、因家庭原因回西安、颜值普通人、性格强势、全款房车、年龄大4岁（94年）、嫁妆100万、在西安的基金机构上班",
+        "targetProfile": "见 band",
+        "advice": "'正经家庭的女儿没问题'；收入高的比颜值高的好找——'千万不要拿你在行业领域的优秀,定义到婚恋市场上的优秀'"
+      },
+      "quote": "这女生A9家庭,家里面兄弟姐妹三个,女生本硕学历,约翰·霍普金斯、康奈尔、宾夕法尼亚。因为家庭原因,然后回到了西安……年龄比你大四岁,94年。正常家里面陪嫁能给100个,在西安的基金机构上班。",
+      "confidence": "high",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主正向给出 A9 家庭女生画像（三选一路径之一），但为单条语料（n=1）。",
+      "inputMeta": {
+        "appearanceNote": {
+          "derivedFromVerdict": true,
+          "usedAsEngineInput": false,
+          "note": "被评‘长得正派’：博主判断。"
+        }
+      }
+    },
+    {
+      "id": "C-027",
+      "account": "aoye98",
+      "aweme_id": "7635962961365880074",
+      "gender": "male",
+      "age": 35,
+      "city": "多伦多（加拿大）",
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": null,
+        "school": null,
+        "job": "财务管理（金融/投行方向）",
+        "income": "年收入约30万加元；有上海150-200万人民币offer",
+        "house": "两套全款房",
+        "car": "一辆车",
+        "family": "父母早移民加拿大；本人加拿大公民（PR）；25岁结婚、27岁离婚，离异无孩",
+        "appearanceNote": null
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "34-35岁+离异无孩+有身份+两套全款房，'绝对是在加拿大找，回国太卷了'",
+        "targetProfile": null,
+        "advice": "'婚恋这个话题受地域的局限性极强'；换城市元气成本极高，建议就在多伦多找；指出他'非常挑剔'（精神层面要求高）"
+      },
+      "quote": "婚恋这个话题受地域的局限性极强。婚恋这个话题的前置条件一定是城市。……您绝对是在加拿大找。回国太卷了。",
+      "confidence": "high",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主正向给出结论“绝对是在加拿大找”，但结论是地域而非档位。"
+    },
+    {
+      "id": "C-028",
+      "account": "aoye98",
+      "aweme_id": "7635583942271208731",
+      "gender": "male",
+      "age": null,
+      "city": "青岛",
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": null,
+        "school": null,
+        "job": "上市公司销售",
+        "income": "年收入约12万",
+        "house": "家里给买了全款房",
+        "car": null,
+        "family": "父母已退休，母亲返聘、年收入约10万，父亲做点小生意",
+        "appearanceNote": "最近一直跑外勤，'看起来有点憔悴'"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "想找有政治资源的老丈人——'那你做梦了,洗洗睡吧'",
+        "targetProfile": null,
+        "advice": "中国男人找老婆的四条路：生育属性（找年轻的）、感情路线、资源属性、商业价值；不要靠执念和不甘心去找资源型配偶"
+      },
+      "quote": "咱中国男人找老婆,中华上下5000年,他就这么几个路子。要不然就是生育属性高,咱们找年轻的。咱们找有感情这个路子的……第二种就是找有资源属性的。",
+      "confidence": "medium",
+      "verdictContext": "reverse-context",
+      "verdictContextNote": "“那你做梦了，洗洗睡吧”是反证语境。"
+    },
+    {
+      "id": "C-029",
+      "account": "aoye98",
+      "aweme_id": "7635976663062433034",
+      "gender": "male",
+      "age": null,
+      "city": "安徽（一线城市工作）",
+      "input": {
+        "height": 173,
+        "weight": 57.5,
+        "education": null,
+        "school": null,
+        "job": "直播+广告拍摄（出镜/销售性质）",
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": "安徽人",
+        "appearanceNote": "素颜出镜；纯面部美学被评'绝对6分以上'，但身高减分"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 6,
+        "band": "'出镜类型工作不用问上限'；颜值6分以上但被1米73的身高封印",
+        "targetProfile": "错位美女——先建立真实的相处感受，再谈长期关系；把要求聚焦在双方对亲密关系、生育安排与生活方式的期待是否匹配，而不是学历、行业、编制、户口等社会标签",
+        "advice": "在生活当中找，不要走相亲市场的高配路线"
+      },
+      "quote": "你要说纯面部美学分数,绝对有一说一拉,6分以上,但您确实身高有点减分。……单可以要求性价值,要求情绪价值,别要求社会价值。",
+      "confidence": "medium",
+      "verdictContext": "reverse-context",
+      "verdictContextNote": "“出镜类型工作不用问上限”是反证语境（说明上限够不着）。",
+      "quoteFlagged": true,
+      "inputMeta": {
+        "appearanceNote": {
+          "derivedFromVerdict": true,
+          "usedAsEngineInput": false,
+          "note": "纯面部美学被评‘6分以上’：博主判断。"
+        }
+      }
+    },
+    {
+      "id": "C-030",
+      "account": "aoye98",
+      "aweme_id": "7637428832835833134",
+      "gender": "male",
+      "age": 32,
+      "city": null,
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": "高中",
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": "1994年生；离异，抚养权在自己这里（女孩）；家里催婚",
+        "appearanceNote": null
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "没有想清楚再婚的目的，不建议为了结婚而结婚",
+        "targetProfile": null,
+        "advice": "'你先反问自己,这个女人加入你的生活,她能解决你的什么问题?'——核心诉求、主干线想不清楚，就单身挺好"
+      },
+      "quote": "那你先反问自己,这个女人加入你的生活,她能解决你的什么问题?解决不了什么问题。……那就单身挺好呀。",
+      "confidence": "medium",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有“不要为了结婚而结婚”的劝告，没有可达结论。"
+    },
+    {
+      "id": "C-031",
+      "account": "aoye98",
+      "aweme_id": "7644910414186253609",
+      "gender": "male",
+      "age": null,
+      "city": null,
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": "专科",
+        "school": null,
+        "job": "与政府打交道的行业（接班）",
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": "家庭情况包含敏感信息，已脱敏；自己一个人干了八九年，'从一开始的一百到现在的大百'（金额口径不清）",
+        "appearanceNote": null
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "学历与家庭背景普通，同时期待对方主要承担家务与照顾角色，与自身可提供的条件存在错配（属结构性不匹配，非对某一群体的评价）",
+        "targetProfile": "颜值6分左右的女生（'把她往上卖'）",
+        "advice": "你看得上的女生不会给你在家洗衣做饭；'再过三年,再上那儿（再沉淀）'"
+      },
+      "quote": "专科农村家庭,然后颜值六分。……你要能看上,你觉得你这么多年努力就白费了。……你能带着出去的女生,她有一个优渥的学历也好,工作也好,她不考虑你。",
+      "confidence": "medium",
+      "verdictContext": "reverse-context",
+      "verdictContextNote": "结论是“期望与条件错配”，并劝其再沉淀（反证语境）。"
+    },
+    {
+      "id": "C-032",
+      "account": "30578719968",
+      "aweme_id": "7552245295359216905",
+      "gender": "male",
+      "age": 33,
+      "city": "南京（连云港人）",
+      "input": {
+        "height": 181,
+        "weight": null,
+        "education": "博士（南京医科大学，泌尿外科）",
+        "school": "南京医科大学",
+        "job": "南京三甲医院主治大夫（刚考完主治）",
+        "income": null,
+        "house": "无房",
+        "car": "一辆车、无负债",
+        "family": "江苏连云港人；独生子；母亲事业单位、父亲做小生意",
+        "appearanceNote": "过去恋爱对象颜值都比较高"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "'您这个上线非常高'、'依然是准第一梯队'；黄金周期最少还有3年，次黄金周期也有3年",
+        "targetProfile": "错位美女（颜值要求要下调）；家庭比较和睦的女生",
+        "advice": "抓紧相亲，不要等；去参加南京市团委、南京市共青团组织的联谊活动；需要拿别的筹码来补年龄"
+      },
+      "quote": "新一线城市,三甲医院的大夫,你们不知道有多吃香?……南京三甲医院的主治大夫,起码您的黄金周期最少还有三年,次黄金周期也有三年。",
+      "confidence": "high",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主正向给出“准第一梯队/上限非常高”，但为单条语料（n=1）。"
+    },
+    {
+      "id": "C-033",
+      "account": "30578719968",
+      "aweme_id": "7551510893993987355",
+      "gender": "male",
+      "age": 28,
+      "city": "北京",
+      "input": {
+        "height": 181,
+        "weight": 76.5,
+        "education": null,
+        "school": null,
+        "job": "讲师（旅游/天文科普）",
+        "income": null,
+        "house": "名下一套房",
+        "car": "一辆车",
+        "family": "单亲家庭，跟父亲生活；父亲铁路、母亲退休；个人存款十来万",
+        "appearanceNote": "自评2分左右；曾230斤，现153斤；母胎单身"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 2,
+        "band": "外形已大幅改善，但自信与主体性不足；'非常好一个男生,不要自卑'",
+        "targetProfile": null,
+        "advice": "先以情感为导向谈一段恋爱（可以先投入物质/付费），不要以目标为导向直接找妻子；先把自信心长出来"
+      },
+      "quote": "你现在就奔着情绪价值的赶紧去谈一段恋爱,以情感为导向,不要以目标为导向。……你先把自信心先长出来,把你的主体性价值先构建出来。",
+      "confidence": "high",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有“先谈恋爱、把自信心长出来”的建议，无可达结论。",
+      "quoteFlagged": true
+    },
+    {
+      "id": "C-034",
+      "account": "30578719968",
+      "aweme_id": "7551886955248733474",
+      "gender": "male",
+      "age": null,
+      "city": null,
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": null,
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": "婚姻状况：离异；抚养一名男孩（8岁，由父母帮带）",
+        "appearanceNote": null
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "带孩再婚的匹配周期明显更长、可选范围更窄，男女皆然；差异来自育儿投入与家庭重组成本，不是对单亲家庭的评价（博主口径，非平台结论）",
+        "targetProfile": null,
+        "advice": "对中介的“包成功”承诺保持警惕；更现实的路径是通过长期相处建立信任，让对方看见你的可靠性与真实条件"
+      },
+      "quote": "男生离婚真的去争夺抚养权,大概率是一个负责任的好父亲……男生离异带男孩,竞争力是悬崖式的往下掉。",
+      "confidence": "high",
+      "verdictContext": "reverse-context",
+      "verdictContextNote": "结论是带孩再婚更难（负面预期），属反证语境。",
+      "quoteFlagged": true
+    },
+    {
+      "id": "C-035",
+      "account": "41252723284",
+      "aweme_id": "7550417741316934962",
+      "gender": "male",
+      "age": 26,
+      "city": "洛阳（读书地：长春）",
+      "input": {
+        "height": 183,
+        "weight": 78,
+        "education": "硕士（本硕都在吉林大学，医学外科学）",
+        "school": "吉林大学",
+        "job": "在读研究生",
+        "income": null,
+        "house": "家里两套房",
+        "car": null,
+        "family": "河南洛阳人；父母都是医院职工；结婚家里能给100-200万",
+        "appearanceNote": "被评'挺帅的'"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "可找颜值5.5分左右——'5.5分是已经能吃到颜值红利了'",
+        "targetProfile": "本科、父母双职工体制内、能给点小帮衬、可能有一个弟弟的女生",
+        "advice": "颜值稍微放宽一点点，'要是找最漂亮的,人家能够吃到颜值红利,筛选范围也很大'；提醒他'你其实挺挑的'、恋爱心态要调整；渠道：体制内专场/相亲"
+      },
+      "quote": "能找,颜值5.5分就是已经能吃到颜值红利了。你得想一下自己的利他性,他跟你在一起,他能得到什么好处?",
+      "confidence": "high",
+      "verdictContext": "positive-reachable",
+      "verdictContextNote": "博主正向给出“能找，颜值5.5分已经能吃到颜值红利”。",
+      "inputMeta": {
+        "appearanceNote": {
+          "derivedFromVerdict": true,
+          "usedAsEngineInput": false,
+          "note": "被评‘挺帅的’：博主判断。"
+        }
+      }
+    },
+    {
+      "id": "C-036",
+      "account": "aoye98",
+      "aweme_id": "7639675904297422099",
+      "gender": "male",
+      "age": 19,
+      "city": null,
+      "input": {
+        "height": 187,
+        "weight": null,
+        "education": null,
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": "2007年生",
+        "appearanceNote": "素颜出镜"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 6,
+        "band": "'6分,标标准准的班草级帅哥,1米87,没问题'",
+        "targetProfile": null,
+        "advice": null
+      },
+      "quote": "坏了,这个真有6分,兄弟,你这可真有6分。……6分,标标准准的班草级帅哥,1米87,没问题。",
+      "confidence": "low",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分（打分局），没有择偶可达结论。"
+    },
+    {
+      "id": "C-037",
+      "account": "aoye98",
+      "aweme_id": "7639291023436369190",
+      "gender": "male",
+      "age": 20,
+      "city": null,
+      "input": {
+        "height": 175,
+        "weight": 62.5,
+        "education": null,
+        "school": null,
+        "job": "学生",
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": "2006年生",
+        "appearanceNote": "自称从小到大被女生要联系方式，自评6分"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 5.6,
+        "band": "5.5-5.7；'175就不敢说6分以上了，每个人的颜值都会被身高所封印'",
+        "targetProfile": null,
+        "advice": null
+      },
+      "quote": "兄弟,我跟你直说了,我也个不高,1米75咱就不敢说6分以上了。……就每个人的颜值都会被身高所封印。",
+      "confidence": "low",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分（打分局），没有择偶可达结论。"
+    },
+    {
+      "id": "C-038",
+      "account": "aoye98",
+      "aweme_id": "7646730995613355327",
+      "gender": "male",
+      "age": null,
+      "city": null,
+      "input": {
+        "height": 178,
+        "weight": null,
+        "education": null,
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": null,
+        "appearanceNote": "自称素颜6分、状态好6.5"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 5.25,
+        "band": "5.2-5.3，'100个男生比23、24'；'6分就是全班里你是最帅的那个,百里挑一'；侧脸、山根、下颌线好",
+        "targetProfile": null,
+        "advice": null
+      },
+      "quote": "咱俩可没6.5啊,素颜6分也没有。6分就是全班里你是最帅的那个,百里挑一。……5.2、5.3。100个男生比23比24。",
+      "confidence": "medium",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分（打分局），没有择偶可达结论。"
+    },
+    {
+      "id": "C-039",
+      "account": "aoye98",
+      "aweme_id": "7641867771478822185",
+      "gender": "male",
+      "age": null,
+      "city": null,
+      "input": {
+        "height": 184.5,
+        "weight": 66,
+        "education": null,
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": null,
+        "appearanceNote": "自报5.2-5.3；美颜/顶光影响了成像"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 5.25,
+        "band": "5.2-5.3（调好光后）；'100个男生里前10,就是某一个角度看是帅的'；女生颜值4.5以上干净一点就能收到搭讪，男生起码得高0.8分",
+        "targetProfile": null,
+        "advice": "关掉顶光、把美颜调对"
+      },
+      "quote": "咱俩连麦的理由是颜值5.2到5.3分……100个男生里前10,就是某一个角度看是帅的。……女生我觉得4.5以上干净一点就能收到搭讪,男生起码得高0.8分。",
+      "confidence": "medium",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分（打分局），没有择偶可达结论。"
+    },
+    {
+      "id": "C-040",
+      "account": "aoye98",
+      "aweme_id": "7648597115379223814",
+      "gender": "male",
+      "age": 28,
+      "city": null,
+      "input": {
+        "height": 181,
+        "weight": 65,
+        "education": "播音主持相关（本人称未学过，声音天生）",
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": null,
+        "appearanceNote": "声音被夸'挺帅'"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 4.7,
+        "band": "4.7：'100个男生里前35名'；'你的声音有6分'",
+        "targetProfile": null,
+        "advice": null
+      },
+      "quote": "光脚(原文误识为广角)1米81,我跟你说4.7有了,100个男生里前35名。",
+      "confidence": "low",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分（打分局），没有择偶可达结论。"
+    },
+    {
+      "id": "C-041",
+      "account": "aoye98",
+      "aweme_id": "7651951385243684142",
+      "gender": "male",
+      "age": 26,
+      "city": "杭州",
+      "input": {
+        "height": 185,
+        "weight": 69,
+        "education": null,
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": "2000年生",
+        "appearanceNote": "自称有5.1，主播给5.6；'面相看起来有点爱玩'"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 5.6,
+        "band": "5.6（未达6分）；'在杭州,你要真有6分,我送你一场活动'",
+        "targetProfile": null,
+        "advice": "未达6分'咱就老老实实花钱参加吧'"
+      },
+      "quote": "00年,身高1米85,体重是69。有5.1吧?5.6。……实在确实没6分啊。",
+      "confidence": "low",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分（打分局），没有择偶可达结论。"
+    },
+    {
+      "id": "C-042",
+      "account": "aoye98",
+      "aweme_id": "7641522903011314987",
+      "gender": "male",
+      "age": null,
+      "city": null,
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": null,
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": null,
+        "appearanceNote": "自报5.5分，想请月老'画个像'"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 5.35,
+        "band": "5.3-5.4，'稍微比5.5低一点点'；因差0.1分未获得画像服务",
+        "targetProfile": null,
+        "advice": "'您差了0.1分,所以我可以下次再连您'"
+      },
+      "quote": "5分,大概有多少分?5.4,5.3,差不多。稍微比5.5稍微低一点点。……您连麦前面看点写的是5.5分,但可能因为您差了0.1分。",
+      "confidence": "low",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分（打分局），没有择偶可达结论。"
+    },
+    {
+      "id": "C-043",
+      "account": "aoye98",
+      "aweme_id": "7645700520702725419",
+      "gender": "male",
+      "age": null,
+      "city": null,
+      "input": {
+        "height": null,
+        "weight": null,
+        "education": null,
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": null,
+        "appearanceNote": "画面很暗、灯坏了一盏"
+      },
+      "hayesVerdict": {
+        "appearanceScore": 5,
+        "band": "5分（画面条件下）",
+        "targetProfile": null,
+        "advice": null
+      },
+      "quote": "你这次连麦的理由是想让月老看看有没有颜值5分。是的……没事,没事,没事。好,有五分,有五分。",
+      "confidence": "low",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分（打分局），没有择偶可达结论。"
+    },
+    {
+      "id": "C-044",
+      "account": "47590488570",
+      "aweme_id": "7658258264647701433",
+      "gender": "male",
+      "age": 23,
+      "city": "深圳",
+      "input": {
+        "height": 185,
+        "weight": 85,
+        "education": "北京体育大学（'北铁'，ASR存疑）",
+        "school": null,
+        "job": "体育生/运动相关",
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": null,
+        "appearanceNote": "爱好运动"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": null,
+        "targetProfile": "要求女生165-175cm；其他'相处得来就行'",
+        "advice": null
+      },
+      "quote": "大家好,我今年03,然后毕业于北铁。平时兴趣爱好就是喜欢运动。那你喜欢的女生类型?165到175,相处的来就是。那你多高?185,85。",
+      "confidence": "low",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分（打分局），没有择偶可达结论。"
+    },
+    {
+      "id": "C-045",
+      "account": "aoye98",
+      "aweme_id": "7636296747161013550",
+      "gender": "male",
+      "age": null,
+      "city": null,
+      "input": {
+        "height": 183,
+        "weight": null,
+        "education": null,
+        "school": null,
+        "job": null,
+        "income": null,
+        "house": null,
+        "car": null,
+        "family": null,
+        "appearanceNote": "净高183，被评'宿舍校草的长相'；本人称'不靠脸吃饭'"
+      },
+      "hayesVerdict": {
+        "appearanceScore": null,
+        "band": "'宿舍校草'档（未给具体分数）",
+        "targetProfile": null,
+        "advice": null
+      },
+      "quote": "净高183……我非常客观的说啊,咱就是宿舍校草的长相。",
+      "confidence": "low",
+      "verdictContext": "unspecified",
+      "verdictContextNote": "只有颜值分（打分局），没有择偶可达结论。",
+      "inputMeta": {
+        "appearanceNote": {
+          "derivedFromVerdict": true,
+          "usedAsEngineInput": false,
+          "note": "‘宿舍校草’档：博主判断，且未给出分数。"
+        }
+      }
+    }
+  ]
+}

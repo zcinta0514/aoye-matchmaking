@@ -1,0 +1,1164 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-10-06T06:49:35.134Z",
+  "purpose": "规则中 machine.when.field 的唯一合法取值来源。写规则前先查这里；缺字段就往这里加，不要在规则里发明字段名。",
+  "counts": {
+    "subjectFields": 42,
+    "fromWebForm": 42,
+    "fromKnowledgeExtra": 0,
+    "computedFields": 22,
+    "photoDimensions": 18
+  },
+  "facts": [
+    {
+      "field": "subject.gender",
+      "id": "gender",
+      "label": "性别",
+      "group": "basic",
+      "type": "enum",
+      "required": true,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "male",
+        "female"
+      ],
+      "valueLabels": {
+        "male": "男",
+        "female": "女"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.age",
+      "id": "age",
+      "label": "年龄",
+      "group": "basic",
+      "type": "number",
+      "required": true,
+      "unit": "岁",
+      "min": 18,
+      "max": 75,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.city",
+      "id": "city",
+      "label": "常住城市",
+      "group": "basic",
+      "type": "string",
+      "required": true,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.height_cm",
+      "id": "height_cm",
+      "label": "身高",
+      "group": "basic",
+      "type": "number",
+      "required": true,
+      "unit": "cm",
+      "min": 140,
+      "max": 210,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.weight_kg",
+      "id": "weight_kg",
+      "label": "体重",
+      "group": "basic",
+      "type": "number",
+      "required": false,
+      "unit": "kg",
+      "min": 35,
+      "max": 160,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.education",
+      "id": "education",
+      "label": "最高学历",
+      "group": "hardware",
+      "type": "enum",
+      "required": true,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "highschool",
+        "college",
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "valueLabels": {
+        "highschool": "高中及以下",
+        "college": "大专",
+        "bachelor": "本科",
+        "master": "硕士",
+        "phd": "博士"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.school_tier",
+      "id": "school_tier",
+      "label": "院校层次",
+      "group": "hardware",
+      "type": "enum",
+      "required": true,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "none",
+        "ordinary",
+        "211",
+        "985",
+        "top"
+      ],
+      "valueLabels": {
+        "211": "211",
+        "985": "985",
+        "none": "非全日制 / 未提及",
+        "ordinary": "普通院校",
+        "top": "清北华五"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.occupation",
+      "id": "occupation",
+      "label": "职业",
+      "group": "hardware",
+      "type": "enum",
+      "required": true,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "gov",
+        "soe",
+        "private",
+        "freelance",
+        "startup",
+        "student",
+        "other"
+      ],
+      "valueLabels": {
+        "gov": "体制内（公务员 / 事业编）",
+        "soe": "国企",
+        "private": "私企 / 外企",
+        "freelance": "自由职业",
+        "startup": "创业 / 个体",
+        "student": "学生",
+        "other": "其他"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.income_wan",
+      "id": "income_wan",
+      "label": "年收入",
+      "group": "hardware",
+      "type": "number",
+      "required": true,
+      "unit": "万",
+      "min": 0,
+      "max": 2000,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.has_house",
+      "id": "has_house",
+      "label": "房产",
+      "group": "hardware",
+      "type": "enum",
+      "required": true,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "none",
+        "loan",
+        "paid",
+        "multi"
+      ],
+      "valueLabels": {
+        "none": "无房",
+        "loan": "有房（有贷）",
+        "paid": "有房（无贷）",
+        "multi": "多套"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.has_car",
+      "id": "has_car",
+      "label": "车",
+      "group": "hardware",
+      "type": "enum",
+      "required": true,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "none",
+        "basic",
+        "mid",
+        "high"
+      ],
+      "valueLabels": {
+        "none": "无车",
+        "basic": "10 万以下",
+        "mid": "10–30 万",
+        "high": "30 万以上"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.hukou",
+      "id": "hukou",
+      "label": "户籍",
+      "group": "hardware",
+      "type": "enum",
+      "required": true,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "local",
+        "urban_other",
+        "rural"
+      ],
+      "valueLabels": {
+        "local": "本地城镇户口",
+        "urban_other": "外地城镇户口",
+        "rural": "农村户口"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.marital",
+      "id": "marital",
+      "label": "婚史",
+      "group": "hardware",
+      "type": "enum",
+      "required": true,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "single",
+        "divorced",
+        "divorced_kid"
+      ],
+      "valueLabels": {
+        "single": "未婚",
+        "divorced": "离异无孩",
+        "divorced_kid": "离异有孩"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.family_origin",
+      "id": "family_origin",
+      "label": "原生家庭",
+      "group": "family",
+      "type": "enum",
+      "required": true,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "urban_upper",
+        "urban_normal",
+        "county",
+        "rural"
+      ],
+      "valueLabels": {
+        "urban_upper": "城市中产及以上",
+        "urban_normal": "城市普通",
+        "county": "县城",
+        "rural": "农村"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.siblings",
+      "id": "siblings",
+      "label": "兄弟姐妹",
+      "group": "family",
+      "type": "enum",
+      "required": true,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "only",
+        "has"
+      ],
+      "valueLabels": {
+        "only": "独生",
+        "has": "非独生"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.siblings_detail",
+      "id": "siblings_detail",
+      "label": "手足情况（含性别与排序）",
+      "group": "family",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "only_child",
+        "sister_only",
+        "brother_only",
+        "has_younger_brother",
+        "has_younger_sister",
+        "mixed",
+        "unknown"
+      ],
+      "valueLabels": {
+        "only_child": "独生子女",
+        "sister_only": "有姐姐（无弟弟）",
+        "brother_only": "有哥哥（无弟弟）",
+        "has_younger_brother": "有弟弟",
+        "has_younger_sister": "有妹妹（无弟弟）",
+        "mixed": "兄弟姐妹都有",
+        "unknown": "不详 / 不愿说"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.family_wealth",
+      "id": "family_wealth",
+      "label": "家庭资产档",
+      "group": "family",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "a6",
+        "a7",
+        "a8",
+        "a9",
+        "unknown"
+      ],
+      "valueLabels": {
+        "a6": "A6 及以下（无房或仅自住刚需）",
+        "a7": "A7（千万以下，高不成低不就）",
+        "a8": "A8（净资产 1000 万+）",
+        "a9": "A9（亿级）",
+        "unknown": "不详"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.parents_pension",
+      "id": "parents_pension",
+      "label": "父母退休金",
+      "group": "family",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "both",
+        "one",
+        "none",
+        "unknown"
+      ],
+      "valueLabels": {
+        "both": "双方都有退休金",
+        "one": "一方有",
+        "none": "都没有",
+        "unknown": "不详"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.family_atmosphere",
+      "id": "family_atmosphere",
+      "label": "原生家庭氛围",
+      "group": "family",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "harmonious",
+        "ordinary",
+        "conflict",
+        "unknown"
+      ],
+      "valueLabels": {
+        "harmonious": "和睦、父母关系好",
+        "ordinary": "一般",
+        "conflict": "有明显矛盾/离异",
+        "unknown": "不详"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.personality",
+      "id": "personality",
+      "label": "性格自评",
+      "group": "soft",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "outgoing",
+        "warm",
+        "slow",
+        "direct"
+      ],
+      "valueLabels": {
+        "outgoing": "外向健谈",
+        "warm": "温和内敛",
+        "slow": "慢热",
+        "direct": "强势直率"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.communication",
+      "id": "communication",
+      "label": "沟通能力自评",
+      "group": "soft",
+      "type": "number",
+      "required": false,
+      "unit": null,
+      "min": 1,
+      "max": 5,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.emotional_stability",
+      "id": "emotional_stability",
+      "label": "情绪稳定自评",
+      "group": "soft",
+      "type": "number",
+      "required": false,
+      "unit": null,
+      "min": 1,
+      "max": 5,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.living_skills",
+      "id": "living_skills",
+      "label": "生活能力自评",
+      "group": "soft",
+      "type": "number",
+      "required": false,
+      "unit": null,
+      "min": 1,
+      "max": 5,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.social_circle",
+      "id": "social_circle",
+      "label": "社交圈广度自评",
+      "group": "soft",
+      "type": "number",
+      "required": false,
+      "unit": null,
+      "min": 1,
+      "max": 5,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.hobbies",
+      "id": "hobbies",
+      "label": "兴趣 / 特长（选填）",
+      "group": "soft",
+      "type": "string",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.want_gender",
+      "id": "want_gender",
+      "label": "期望对方性别",
+      "group": "want",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "male",
+        "female"
+      ],
+      "valueLabels": {
+        "male": "男",
+        "female": "女"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.want_age_min",
+      "id": "want_age_min",
+      "label": "期望对方年龄下限",
+      "group": "want",
+      "type": "number",
+      "required": false,
+      "unit": "岁",
+      "min": 18,
+      "max": 75,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.want_age_max",
+      "id": "want_age_max",
+      "label": "期望对方年龄上限",
+      "group": "want",
+      "type": "number",
+      "required": false,
+      "unit": "岁",
+      "min": 18,
+      "max": 75,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.want_height_min",
+      "id": "want_height_min",
+      "label": "期望对方身高下限",
+      "group": "want",
+      "type": "number",
+      "required": false,
+      "unit": "cm",
+      "min": 140,
+      "max": 210,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.want_education_min",
+      "id": "want_education_min",
+      "label": "期望对方学历下限",
+      "group": "want",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "highschool",
+        "college",
+        "bachelor",
+        "master",
+        "phd"
+      ],
+      "valueLabels": {
+        "highschool": "高中及以下",
+        "college": "大专",
+        "bachelor": "本科",
+        "master": "硕士",
+        "phd": "博士"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.want_occupation",
+      "id": "want_occupation",
+      "label": "期望对方职业性质",
+      "group": "want",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "any",
+        "gov",
+        "soe",
+        "private",
+        "startup",
+        "freelance"
+      ],
+      "valueLabels": {
+        "any": "不限",
+        "gov": "体制内（公务员 / 事业编）",
+        "soe": "国企",
+        "private": "私企 / 外企",
+        "startup": "创业 / 个体",
+        "freelance": "自由职业"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.want_house",
+      "id": "want_house",
+      "label": "要求对方有房",
+      "group": "want",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "yes",
+        "no"
+      ],
+      "valueLabels": {
+        "yes": "必须有",
+        "no": "不要求"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.want_appearance_min",
+      "id": "want_appearance_min",
+      "label": "期望对方颜值下限",
+      "group": "want",
+      "type": "number",
+      "required": false,
+      "unit": "分",
+      "min": 1,
+      "max": 9,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.self_appearance",
+      "id": "self_appearance",
+      "label": "颜值自评",
+      "group": "calibration",
+      "type": "number",
+      "required": false,
+      "unit": "分",
+      "min": 1,
+      "max": 9,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.self_rank",
+      "id": "self_rank",
+      "label": "与同龄同性相比，你处在",
+      "group": "calibration",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "top10",
+        "top25",
+        "mid",
+        "bottom"
+      ],
+      "valueLabels": {
+        "top10": "前 10%",
+        "top25": "前 25%",
+        "mid": "中间",
+        "bottom": "中等偏下"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.admiration_freq",
+      "id": "admiration_freq",
+      "label": "现实中被人主动表达好感 / 搭讪的频率",
+      "group": "calibration",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "often",
+        "sometimes",
+        "rare"
+      ],
+      "valueLabels": {
+        "often": "经常",
+        "sometimes": "偶尔",
+        "rare": "几乎没有"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.feedback_gap",
+      "id": "feedback_gap",
+      "label": "相亲/介绍给你的对象，整体条件与你相比",
+      "group": "calibration",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "better",
+        "same",
+        "worse",
+        "none"
+      ],
+      "valueLabels": {
+        "better": "明显更好",
+        "same": "差不多",
+        "worse": "明显更差",
+        "none": "没有被介绍过"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.photo_quality",
+      "id": "photo_quality",
+      "label": "上传照片的处理程度",
+      "group": "calibration",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "raw",
+        "light",
+        "heavy"
+      ],
+      "valueLabels": {
+        "raw": "原相机直出",
+        "light": "轻度美颜",
+        "heavy": "重度精修"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.face_natural",
+      "id": "face_natural",
+      "label": "面部是否原生（未做过医美/整形）",
+      "group": "calibration",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "yes",
+        "minor",
+        "no"
+      ],
+      "valueLabels": {
+        "yes": "原生未整",
+        "minor": "做过轻医美",
+        "no": "做过手术类项目"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.self_rank_position",
+      "id": "self_rank_position",
+      "label": "打分局名次（第几名）",
+      "group": "calibration",
+      "type": "number",
+      "required": false,
+      "unit": "名",
+      "min": 1,
+      "max": null,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.self_rank_pool",
+      "id": "self_rank_pool",
+      "label": "打分局池子大小",
+      "group": "calibration",
+      "type": "number",
+      "required": false,
+      "unit": "人",
+      "min": 2,
+      "max": null,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.activity_type",
+      "id": "activity_type",
+      "label": "参加的相亲活动类型",
+      "group": "calibration",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "high",
+        "three",
+        "normal"
+      ],
+      "valueLabels": {
+        "high": "高净值专场",
+        "three": "三高专场",
+        "normal": "普通活动"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "appearance.final.low",
+      "label": "颜值分区间下界",
+      "type": "number",
+      "note": "照片+自评校准后的区间"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "appearance.final.high",
+      "label": "颜值分区间上界",
+      "type": "number"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "appearance.final.mid",
+      "label": "颜值分区间中值",
+      "type": "number"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "appearance.final.consensus",
+      "label": "自评与照片是否一致",
+      "type": "boolean"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "appearance.divergence",
+      "label": "自评分−照片分",
+      "type": "number"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "appearance.divergenceAbs",
+      "label": "分歧绝对值",
+      "type": "number"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "appearance.selfTrack.raw",
+      "label": "自评轨道原始分",
+      "type": "number"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "appearance.selfTrack.adjusted",
+      "label": "自评轨道校准后分",
+      "type": "number"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "appearance.selfTrack.low",
+      "label": "自评轨道区间下界",
+      "type": "number"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "appearance.selfTrack.high",
+      "label": "自评轨道区间上界",
+      "type": "number"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "appearance.photoTrack.low",
+      "label": "照片轨道区间下界",
+      "type": "number"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "appearance.photoTrack.high",
+      "label": "照片轨道区间上界",
+      "type": "number"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "hardware.score",
+      "label": "硬件总分",
+      "type": "number",
+      "note": "受 composites 定义影响"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "hardware.breakdown.<dimId>",
+      "label": "单个硬件维度得分",
+      "type": "number",
+      "note": "<dimId> 取 knowledge/rules.json 中 dimensions[].id"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "soft.score",
+      "label": "软性总分",
+      "type": "number"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "soft.breakdown.<dimId>",
+      "label": "单个软性维度得分",
+      "type": "number"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "context.cityTier",
+      "label": "城市档（一线/新一线/二三线等）",
+      "type": "enum"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "context.city",
+      "label": "引擎解析后的城市名",
+      "type": "string",
+      "note": "与 subject.city 的区别：这是引擎规范化后的值（含别名匹配）。规则优先用 subject.city。"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "want.appearance_gap",
+      "label": "期望颜值 − 实际颜值上界",
+      "type": "number",
+      "note": "正数=期望过高"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "want.height_gap",
+      "label": "期望身高 − 实际身高",
+      "type": "number",
+      "note": "正数=要求比自己高"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "want.age_gap_older",
+      "label": "可接受最大年龄 − 实际年龄",
+      "type": "number"
+    },
+    {
+      "source": "web/lib/pipeline.mjs buildFacts",
+      "field": "want.age_gap_younger",
+      "label": "实际年龄 − 可接受最小年龄",
+      "type": "number"
+    }
+  ],
+  "photoFacts": [
+    {
+      "field": "photo.looks.three_courts",
+      "id": "looks.three_courts",
+      "label": "三庭比例",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.features_balance",
+      "id": "looks.features_balance",
+      "label": "眉眼唇 / 五官比例与量感",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.dental_arch",
+      "id": "looks.dental_arch",
+      "label": "牙弓比例",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.head_shoulder_ratio",
+      "id": "looks.head_shoulder_ratio",
+      "label": "头肩比",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.facial_fold",
+      "id": "looks.facial_fold",
+      "label": "面部折叠度",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.craniofacial_ratio",
+      "id": "looks.craniofacial_ratio",
+      "label": "颅面比例",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.face_size",
+      "id": "looks.face_size",
+      "label": "脸型 / 脸面大小",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.nose",
+      "id": "looks.nose",
+      "label": "鼻型 / 山根（含是否原生）",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.profile",
+      "id": "looks.profile",
+      "label": "侧脸轮廓（下颌线/侧脸形态）",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.height",
+      "id": "looks.height",
+      "label": "身高（男性硬上限 / 女性优势或小幅减分）",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.weight",
+      "id": "looks.weight",
+      "label": "体重 / 胖瘦",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.skin",
+      "id": "looks.skin",
+      "label": "皮肤状态",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.grooming",
+      "id": "looks.grooming",
+      "label": "穿搭 / 发型 / 妆容 / 干净度",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.posture_presence",
+      "id": "looks.posture_presence",
+      "label": "体态 / 气质 / 精神状态",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.figure_ratio",
+      "id": "looks.figure_ratio",
+      "label": "身材比例",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.dim.face_score",
+      "id": "dim.face_score",
+      "label": "颜值（长相）",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.dim.body_shape",
+      "id": "dim.body_shape",
+      "label": "身材/体态",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.dim.grooming",
+      "id": "dim.grooming",
+      "label": "形象打理/干净度",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    }
+  ],
+  "ops": [
+    "eq",
+    "neq",
+    "gt",
+    "gte",
+    "lt",
+    "lte",
+    "in",
+    "nin",
+    "between",
+    "exists",
+    "missing",
+    "includes",
+    "matches"
+  ],
+  "actions": [
+    "clampScale",
+    "setBand",
+    "advice",
+    "giveUp",
+    "text",
+    "flag",
+    "requireEvidence"
+  ],
+  "internalFactsNotForRules": [
+    "context.cityMatched（引擎内部的城市匹配细节，规则不得依赖它）",
+    "context.gender（与 subject.gender 重复——两条路径指向同一事实是陷阱，已要求 webapp 移除）"
+  ],
+  "warnings": [
+    "appearance.selfTrack / photoTrack 是对象（{raw, adjusted, low, high, reasons}），只能用其标量子路径（.raw/.adjusted/.low/.high）做数值比较。",
+    "photo 维度以 knowledge/rules.json 的 appearance 维度为准（运行期注入键）；knowledge/photo-dimensions.json 中未在 ruleset 定义的 face.eye_brow_symmetry / style.hair / style.makeup 不会注入，已从字典剔除。"
+  ]
+}

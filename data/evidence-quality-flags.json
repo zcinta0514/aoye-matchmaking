@@ -1,0 +1,2353 @@
+{
+  "generatedAt": "2026-10-06T03:39:16.695Z",
+  "corpusSnapshot": {
+    "transcribed": 3513,
+    "planned": 3430,
+    "audioMinutes": 4636.9
+  },
+  "kinds": {
+    "number-adjacency": "身高/体重/数字粘连，无法可靠切分",
+    "loop-echo": "转写循环回音（同一句连续重复）",
+    "unit-misread": "单位误读（亿/米等）",
+    "amount-slang": "金额口语（个=万）",
+    "unresolved-variant": "疑似 ASR 变体但证据不足，未入纠错表"
+  },
+  "flags": [
+    {
+      "aweme_id": "7551510893993987355",
+      "account": "30578719968",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 18 次，回音区约 20.0 秒",
+      "repeat": 18,
+      "seconds": 20,
+      "sample": "我说你会想要不要做什么?"
+    },
+    {
+      "aweme_id": "7682794252489811045",
+      "account": "33349790582",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 14 次，回音区约 28.0 秒",
+      "repeat": 14,
+      "seconds": 28,
+      "sample": "你会想到这些人都留不住。",
+      "citedBy": [
+        "R-DIM-039 @ rules.json",
+        "R-MATCH-018 @ rules.json",
+        "dim.hukou @ rules.json",
+        "R-DIM-039 @ rules.part.02.json",
+        "dim.hukou @ rules.part.02.json",
+        "R-MATCH-018 @ rules.part.03.json"
+      ]
+    },
+    {
+      "aweme_id": "7683050623499711739",
+      "account": "33349790582",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 37 次，回音区约 39.3 秒",
+      "repeat": 37,
+      "seconds": 39.3,
+      "sample": "你不够好"
+    },
+    {
+      "aweme_id": "7688292683130892197",
+      "account": "33349790582",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 18 次，回音区约 4.9 秒",
+      "repeat": 18,
+      "seconds": 4.9,
+      "sample": "你自己在这条链子上的",
+      "citedBy": [
+        "S-HEIGHT-005 @ standards.json",
+        "R-DIM-022 @ rules.json",
+        "R-DIM-038 @ rules.json",
+        "dim.height @ rules.json",
+        "dim.parents_pension @ rules.json",
+        "R-DIM-022 @ rules.part.02.json",
+        "R-DIM-038 @ rules.part.02.json",
+        "dim.height @ rules.part.02.json",
+        "dim.parents_pension @ rules.part.02.json"
+      ]
+    },
+    {
+      "aweme_id": "7548054896106851627",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 43 次，回音区约 11.0 秒",
+      "repeat": 43,
+      "seconds": 11,
+      "sample": "杨树"
+    },
+    {
+      "aweme_id": "7553592052330007871",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 55 次，回音区约 30.0 秒",
+      "repeat": 55,
+      "seconds": 30,
+      "sample": "晚霞"
+    },
+    {
+      "aweme_id": "7578500725547745124",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 54 次，回音区约 15.1 秒",
+      "repeat": 54,
+      "seconds": 15.1,
+      "sample": "一样的"
+    },
+    {
+      "aweme_id": "7596335172686080938",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 13 次，回音区约 26.0 秒",
+      "repeat": 13,
+      "seconds": 26,
+      "sample": "我都想要是什么事,就不说话了。"
+    },
+    {
+      "aweme_id": "7604811800564495850",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 43 次，回音区约 14.1 秒",
+      "repeat": 43,
+      "seconds": 14.1,
+      "sample": "订阅"
+    },
+    {
+      "aweme_id": "7608882752172233663",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 73 次，回音区约 19.6 秒",
+      "repeat": 73,
+      "seconds": 19.6,
+      "sample": "作曲"
+    },
+    {
+      "aweme_id": "7618173533353919337",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 16 次，回音区约 30.0 秒",
+      "repeat": 16,
+      "seconds": 30,
+      "sample": "我只是想到这冗长的一生再无法相见。"
+    },
+    {
+      "aweme_id": "7618944753309553791",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 43 次，回音区约 7.4 秒",
+      "repeat": 43,
+      "seconds": 7.4,
+      "sample": "订阅"
+    },
+    {
+      "aweme_id": "7642362952829978259",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 13 次，回音区约 25.0 秒",
+      "repeat": 13,
+      "seconds": 25,
+      "sample": "学校的学校。"
+    },
+    {
+      "aweme_id": "7645654925671137222",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 44 次，回音区约 20.2 秒",
+      "repeat": 44,
+      "seconds": 20.2,
+      "sample": "制作词"
+    },
+    {
+      "aweme_id": "7674903843649450987",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 56 次，回音区约 16.1 秒",
+      "repeat": 56,
+      "seconds": 16.1,
+      "sample": "我爱你"
+    },
+    {
+      "aweme_id": "7677986310816578422",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 43 次，回音区约 1.8 秒",
+      "repeat": 43,
+      "seconds": 1.8,
+      "sample": "让你身后"
+    },
+    {
+      "aweme_id": "7681221781596280703",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 36 次，回音区约 15.8 秒",
+      "repeat": 36,
+      "seconds": 15.8,
+      "sample": "李宗盛"
+    },
+    {
+      "aweme_id": "7681303661397751379",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 47 次，回音区约 52.0 秒",
+      "repeat": 47,
+      "seconds": 52,
+      "sample": "我和你一位"
+    },
+    {
+      "aweme_id": "7682608184855239871",
+      "account": "35285446600",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 70 次，回音区约 27.8 秒",
+      "repeat": 70,
+      "seconds": 27.8,
+      "sample": "作曲"
+    },
+    {
+      "aweme_id": "7648682012740149413",
+      "account": "37021273006",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 74 次，回音区约 21.6 秒",
+      "repeat": 74,
+      "seconds": 21.6,
+      "sample": "食物"
+    },
+    {
+      "aweme_id": "7681251997505772721",
+      "account": "37021273006",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 18 次，回音区约 40.0 秒",
+      "repeat": 18,
+      "seconds": 40,
+      "sample": "你也不想要"
+    },
+    {
+      "aweme_id": "7681639343329697275",
+      "account": "38744562015",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 14 次，回音区约 12.8 秒",
+      "repeat": 14,
+      "seconds": 12.8,
+      "sample": "stir"
+    },
+    {
+      "aweme_id": "7685320914938177201",
+      "account": "38744562015",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 37 次，回音区约 46.5 秒",
+      "repeat": 37,
+      "seconds": 46.5,
+      "sample": "i can back and break"
+    },
+    {
+      "aweme_id": "7550418120528203017",
+      "account": "41252723284",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 28 次，回音区约 28.0 秒",
+      "repeat": 28,
+      "seconds": 28,
+      "sample": "好,拜拜。",
+      "citedBy": [
+        "R-DIM-026 @ rules.json",
+        "R-MATCH-023 @ rules.json",
+        "dim.siblings @ rules.json",
+        "R-DIM-026 @ rules.part.02.json",
+        "dim.siblings @ rules.part.02.json",
+        "R-MATCH-023 @ rules.part.03.json"
+      ]
+    },
+    {
+      "aweme_id": "7618934664967946597",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 27 次，回音区约 27.3 秒",
+      "repeat": 27,
+      "seconds": 27.3,
+      "sample": "我现在就好了。"
+    },
+    {
+      "aweme_id": "7640415648669453489",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 16 次，回音区约 21.5 秒",
+      "repeat": 16,
+      "seconds": 21.5,
+      "sample": "你会把你感觉到这种感觉"
+    },
+    {
+      "aweme_id": "7641139870480287739",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 27 次，回音区约 46.0 秒",
+      "repeat": 27,
+      "seconds": 46,
+      "sample": "我刚才睡着"
+    },
+    {
+      "aweme_id": "7647482595786201509",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 5 次，回音区约 10.0 秒",
+      "repeat": 5,
+      "seconds": 10,
+      "sample": "我为你梳理专门的渠道,我为你梳理专门的渠道。",
+      "citedBy": [
+        "S-INCOME-005 @ standards.json"
+      ]
+    },
+    {
+      "aweme_id": "7660054519484591217",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 20 次，回音区约 30.0 秒",
+      "repeat": 20,
+      "seconds": 30,
+      "sample": "她的外在形象越来越多",
+      "citedBy": [
+        "S-LOOKS-015 @ standards.json",
+        "R-LOOKS-011 @ rules.json",
+        "R-DIM-044 @ rules.json",
+        "R-DEMO-031 @ rules.json",
+        "dim.face_score @ rules.json",
+        "R-LOOKS-011 @ rules.part.01.json",
+        "R-DIM-044 @ rules.part.02.json",
+        "dim.face_score @ rules.part.02.json",
+        "R-DEMO-031 @ rules.part.04.json"
+      ]
+    },
+    {
+      "aweme_id": "7661206155389605361",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 30 次，回音区约 29.6 秒",
+      "repeat": 30,
+      "seconds": 29.6,
+      "sample": "关注呢?"
+    },
+    {
+      "aweme_id": "7664928566988175995",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 14 次，回音区约 6.1 秒",
+      "repeat": 14,
+      "seconds": 6.1,
+      "sample": "分的外表男生评价格",
+      "citedBy": [
+        "S-LOOKS-001 @ standards.json",
+        "R-LOOKS-001 @ rules.json",
+        "appearance @ rules.json",
+        "R-LOOKS-001 @ rules.part.01.json",
+        "appearance @ rules.part.01.json"
+      ]
+    },
+    {
+      "aweme_id": "7669023650187644198",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "high",
+      "detail": "同一句连续重复 14 次，回音区约 394.1 秒",
+      "repeat": 14,
+      "seconds": 394.1,
+      "sample": "诶诶诶诶诶诶诶诶诶诶诶诶诶诶诶诶诶诶诶诶诶诶诶诶诶诶"
+    },
+    {
+      "aweme_id": "7669767079802096202",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 43 次，回音区约 14.9 秒",
+      "repeat": 43,
+      "seconds": 14.9,
+      "sample": "订阅"
+    },
+    {
+      "aweme_id": "7671840757959580145",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "high",
+      "detail": "同一句连续重复 74 次，回音区约 111.2 秒",
+      "repeat": 74,
+      "seconds": 111.2,
+      "sample": "我一生都打拼"
+    },
+    {
+      "aweme_id": "7680936240792117754",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "high",
+      "detail": "同一句连续重复 74 次，回音区约 111.2 秒",
+      "repeat": 74,
+      "seconds": 111.2,
+      "sample": "我一生都打拼"
+    },
+    {
+      "aweme_id": "7685629284296207049",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 43 次，回音区约 20.0 秒",
+      "repeat": 43,
+      "seconds": 20,
+      "sample": "订阅"
+    },
+    {
+      "aweme_id": "7687156188056028273",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 13 次，回音区约 26.0 秒",
+      "repeat": 13,
+      "seconds": 26,
+      "sample": "我们开始的视频。"
+    },
+    {
+      "aweme_id": "7688635319428648122",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 44 次，回音区约 0.1 秒",
+      "repeat": 44,
+      "seconds": 0.1,
+      "sample": "我们现在的生活"
+    },
+    {
+      "aweme_id": "7689305727126698353",
+      "account": "47590488570",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 6 次，回音区约 14.0 秒",
+      "repeat": 6,
+      "seconds": 14,
+      "sample": "决胜将长"
+    },
+    {
+      "aweme_id": "7692776737243380328",
+      "account": "47902271366",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 5 次，回音区约 15.4 秒",
+      "repeat": 5,
+      "seconds": 15.4,
+      "sample": "却旧带有个人选择适误。"
+    },
+    {
+      "aweme_id": "7682008160483200298",
+      "account": "48854385344",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 16 次，回音区约 20.0 秒",
+      "repeat": 16,
+      "seconds": 20,
+      "sample": "我们就会找到能力的地方。",
+      "citedBy": [
+        "dim.lifestyle @ rules.json",
+        "dim.lifestyle @ rules.part.02.json"
+      ]
+    },
+    {
+      "aweme_id": "7682307446672575786",
+      "account": "48854385344",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 20 次，回音区约 28.0 秒",
+      "repeat": 20,
+      "seconds": 28,
+      "sample": "我现在就会降到这个地方。",
+      "citedBy": [
+        "R-MATCH-020 @ rules.json",
+        "R-MATCH-020 @ rules.part.03.json"
+      ]
+    },
+    {
+      "aweme_id": "7683440574711598346",
+      "account": "48854385344",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 12 次，回音区约 20.0 秒",
+      "repeat": 12,
+      "seconds": 20,
+      "sample": "你先要分析,你先要分析。"
+    },
+    {
+      "aweme_id": "7686005817153228066",
+      "account": "48854385344",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 5 次，回音区约 10.0 秒",
+      "repeat": 5,
+      "seconds": 10,
+      "sample": "可见这东西是真稀缺。"
+    },
+    {
+      "aweme_id": "7687565236722879790",
+      "account": "48854385344",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 35 次，回音区约 0.2 秒",
+      "repeat": 35,
+      "seconds": 0.2,
+      "sample": "你越缺什么",
+      "citedBy": [
+        "S-DEMO-007 @ standards.json",
+        "R-DEMO-018 @ rules.json",
+        "R-DEMO-019 @ rules.json",
+        "dim.urban_rural @ rules.json",
+        "dim.urban_rural @ rules.part.02.json",
+        "R-DEMO-018 @ rules.part.04.json",
+        "R-DEMO-019 @ rules.part.04.json"
+      ]
+    },
+    {
+      "aweme_id": "7689034774287109395",
+      "account": "48854385344",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 19 次，回音区约 19.8 秒",
+      "repeat": 19,
+      "seconds": 19.8,
+      "sample": "我现在就会把你打开。",
+      "citedBy": [
+        "R-DIM-035 @ rules.json",
+        "dim.consumption @ rules.json",
+        "R-DIM-035 @ rules.part.02.json",
+        "dim.consumption @ rules.part.02.json"
+      ]
+    },
+    {
+      "aweme_id": "7692372947864014134",
+      "account": "48854385344",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 20 次，回音区约 25.6 秒",
+      "repeat": 20,
+      "seconds": 25.6,
+      "sample": "我会在我身上的心态"
+    },
+    {
+      "aweme_id": "7692456894744549513",
+      "account": "48854385344",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 43 次，回音区约 8.3 秒",
+      "repeat": 43,
+      "seconds": 8.3,
+      "sample": "订阅"
+    },
+    {
+      "aweme_id": "7676827647775074149",
+      "account": "52303954498",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 28 次，回音区约 30.0 秒",
+      "repeat": 28,
+      "seconds": 30,
+      "sample": "杨徨"
+    },
+    {
+      "aweme_id": "7246214896587738383",
+      "account": "79612800869",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 16 次，回音区约 30.0 秒",
+      "repeat": 16,
+      "seconds": 30,
+      "sample": "都会"
+    },
+    {
+      "aweme_id": "7672014336218526528",
+      "account": "79612800869",
+      "kind": "loop-echo",
+      "severity": "high",
+      "detail": "同一句连续重复 5 次，回音区约 150.0 秒",
+      "repeat": 5,
+      "seconds": 150,
+      "sample": "优优独播剧场——YoYo Television Se"
+    },
+    {
+      "aweme_id": "7687216664803135461",
+      "account": "79612800869",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 37 次，回音区约 9.9 秒",
+      "repeat": 37,
+      "seconds": 9.9,
+      "sample": "我那一年"
+    },
+    {
+      "aweme_id": "7663006934123849841",
+      "account": "88152643597",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 31 次，回音区约 11.0 秒",
+      "repeat": 31,
+      "seconds": 11,
+      "sample": "好不忍我"
+    },
+    {
+      "aweme_id": "7665259476971680357",
+      "account": "88152643597",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 27 次，回音区约 14.6 秒",
+      "repeat": 27,
+      "seconds": 14.6,
+      "sample": "这掷呐。"
+    },
+    {
+      "aweme_id": "7542051964033731903",
+      "account": "92845092804",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 5 次，回音区约 4.7 秒",
+      "repeat": 5,
+      "seconds": 4.7,
+      "sample": "有判施是有判施是有判施。"
+    },
+    {
+      "aweme_id": "7669767079802096202",
+      "account": "96845155343",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 13 次，回音区约 6.8 秒",
+      "repeat": 13,
+      "seconds": 6.8,
+      "sample": "我下得有笨不断。"
+    },
+    {
+      "aweme_id": "7641138112459343272",
+      "account": "aoye020",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 42 次，回音区约 7.7 秒",
+      "repeat": 42,
+      "seconds": 7.7,
+      "sample": "You got me"
+    },
+    {
+      "aweme_id": "7663006934123849841",
+      "account": "aoye020",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 31 次，回音区约 11.0 秒",
+      "repeat": 31,
+      "seconds": 11,
+      "sample": "好不忍我"
+    },
+    {
+      "aweme_id": "7687544561515163241",
+      "account": "aoye184",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 16 次，回音区约 43.2 秒",
+      "repeat": 16,
+      "seconds": 43.2,
+      "sample": "be a good person"
+    },
+    {
+      "aweme_id": "7553704182910356745",
+      "account": "aoye28",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 8 次，回音区约 11.0 秒",
+      "repeat": 8,
+      "seconds": 11,
+      "sample": "我学习。"
+    },
+    {
+      "aweme_id": "7648983991869099307",
+      "account": "aoye28",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 12 次，回音区约 30.0 秒",
+      "repeat": 12,
+      "seconds": 30,
+      "sample": "的话",
+      "citedBy": [
+        "S-LOOKS-005 @ standards.json"
+      ]
+    },
+    {
+      "aweme_id": "7680502615470124197",
+      "account": "aoye28",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 12 次，回音区约 12.0 秒",
+      "repeat": 12,
+      "seconds": 12,
+      "sample": "作曲 李宗盛"
+    },
+    {
+      "aweme_id": "7689047424085647354",
+      "account": "aoye28",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 27 次，回音区约 10.7 秒",
+      "repeat": 27,
+      "seconds": 10.7,
+      "sample": "词补巨"
+    },
+    {
+      "aweme_id": "7690172677071310122",
+      "account": "aoye28",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 5 次，回音区约 6.5 秒",
+      "repeat": 5,
+      "seconds": 6.5,
+      "sample": "哈哈哈哈"
+    },
+    {
+      "aweme_id": "7690173296658107648",
+      "account": "aoye28",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 5 次，回音区约 2.5 秒",
+      "repeat": 5,
+      "seconds": 2.5,
+      "sample": "闹着玩"
+    },
+    {
+      "aweme_id": "7624048641145619270",
+      "account": "aoye306",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 6 次，回音区约 25.9 秒",
+      "repeat": 6,
+      "seconds": 25.9,
+      "sample": "狂猾神教育堂"
+    },
+    {
+      "aweme_id": "7685714660339912650",
+      "account": "aoye612",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 18 次，回音区约 9.0 秒",
+      "repeat": 18,
+      "seconds": 9,
+      "sample": "宵刺并不甩。"
+    },
+    {
+      "aweme_id": "7682023422884469925",
+      "account": "aoye82",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 20 次，回音区约 7.5 秒",
+      "repeat": 20,
+      "seconds": 7.5,
+      "sample": "我忽然不忽然。"
+    },
+    {
+      "aweme_id": "7691265517756647419",
+      "account": "aoye888000",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 35 次，回音区约 22.0 秒",
+      "repeat": 35,
+      "seconds": 22,
+      "sample": "我愛你"
+    },
+    {
+      "aweme_id": "7630057446190452004",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 28 次，回音区约 29.0 秒",
+      "repeat": 28,
+      "seconds": 29,
+      "sample": "谢谢老师。"
+    },
+    {
+      "aweme_id": "7630434496197709062",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 8 次，回音区约 15.2 秒",
+      "repeat": 8,
+      "seconds": 15.2,
+      "sample": "我认为你能夸我一下。"
+    },
+    {
+      "aweme_id": "7630783744361729343",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 13 次，回音区约 13.0 秒",
+      "repeat": 13,
+      "seconds": 13,
+      "sample": "谢谢主播。"
+    },
+    {
+      "aweme_id": "7631179390205840649",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 44 次，回音区约 60.0 秒",
+      "repeat": 44,
+      "seconds": 60,
+      "sample": "功能不错"
+    },
+    {
+      "aweme_id": "7631181882729745690",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 34 次，回音区约 34.0 秒",
+      "repeat": 34,
+      "seconds": 34,
+      "sample": "I don't know about it."
+    },
+    {
+      "aweme_id": "7631895443542183218",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 8 次，回音区约 2.8 秒",
+      "repeat": 8,
+      "seconds": 2.8,
+      "sample": "没有"
+    },
+    {
+      "aweme_id": "7631895668906315046",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 25 次，回音区约 29.0 秒",
+      "repeat": 25,
+      "seconds": 29,
+      "sample": "好,拜拜。"
+    },
+    {
+      "aweme_id": "7632287987014847794",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "high",
+      "detail": "同一句连续重复 27 次，回音区约 87.8 秒",
+      "repeat": 27,
+      "seconds": 87.8,
+      "sample": "我说你还没有说话"
+    },
+    {
+      "aweme_id": "7632634393214913830",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "high",
+      "detail": "同一句连续重复 6 次，回音区约 166.2 秒",
+      "repeat": 6,
+      "seconds": 166.2,
+      "sample": "俩俩俩俩俩俩俩俩俩俩俩俩俩俩俩俩俩俩俩俩俩俩俩俩俩俩"
+    },
+    {
+      "aweme_id": "7632638893065538826",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 55 次，回音区约 0.1 秒",
+      "repeat": 55,
+      "seconds": 0.1,
+      "sample": "我说是"
+    },
+    {
+      "aweme_id": "7633382439263505673",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 12 次，回音区约 10.0 秒",
+      "repeat": 12,
+      "seconds": 10,
+      "sample": "就是"
+    },
+    {
+      "aweme_id": "7633385626368249126",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 55 次，回音区约 0.3 秒",
+      "repeat": 55,
+      "seconds": 0.3,
+      "sample": "我说的"
+    },
+    {
+      "aweme_id": "7633737471922015498",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 18 次，回音区约 18.0 秒",
+      "repeat": 18,
+      "seconds": 18,
+      "sample": "我真的给了太多人。"
+    },
+    {
+      "aweme_id": "7633774587255246126",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 15 次，回音区约 14.2 秒",
+      "repeat": 15,
+      "seconds": 14.2,
+      "sample": "你哥哥挺好。"
+    },
+    {
+      "aweme_id": "7634124210255842611",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 11 次，回音区约 22.0 秒",
+      "repeat": 11,
+      "seconds": 22,
+      "sample": "我现在就会说,女人的择偶逻辑。"
+    },
+    {
+      "aweme_id": "7635221859373518130",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 20 次，回音区约 23.0 秒",
+      "repeat": 20,
+      "seconds": 23,
+      "sample": "好,谢谢老师,没问题。"
+    },
+    {
+      "aweme_id": "7635225728027577627",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "high",
+      "detail": "同一句连续重复 9 次，回音区约 246.6 秒",
+      "repeat": 9,
+      "seconds": 246.6,
+      "sample": "教教教教教教教教教教教教教教教教教教教教教教教教教教"
+    },
+    {
+      "aweme_id": "7635582435148696859",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 10 次，回音区约 7.9 秒",
+      "repeat": 10,
+      "seconds": 7.9,
+      "sample": "我会给你推荐。"
+    },
+    {
+      "aweme_id": "7635704023836530387",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 18 次，回音区约 40.0 秒",
+      "repeat": 18,
+      "seconds": 40,
+      "sample": "你也不想要"
+    },
+    {
+      "aweme_id": "7635976663062433034",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 7 次，回音区约 7.0 秒",
+      "repeat": 7,
+      "seconds": 7,
+      "sample": "我说我会有个人魅力啊。",
+      "citedBy": [
+        "S-LOOKS-012 @ standards.json"
+      ]
+    },
+    {
+      "aweme_id": "7636008085957463305",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "high",
+      "detail": "同一句连续重复 8 次，回音区约 222.3 秒",
+      "repeat": 8,
+      "seconds": 222.3,
+      "sample": "教教教教教教教教教教教教教教教教教教教教教教教教教教"
+    },
+    {
+      "aweme_id": "7637806182517738802",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 44 次，回音区约 30.0 秒",
+      "repeat": 44,
+      "seconds": 30,
+      "sample": "你不想说"
+    },
+    {
+      "aweme_id": "7638583110027824447",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 27 次，回音区约 21.5 秒",
+      "repeat": 27,
+      "seconds": 21.5,
+      "sample": "我让她看着,",
+      "citedBy": [
+        "S-WEIGHT-003 @ standards.json",
+        "R-MATCH-001 @ rules.json",
+        "R-MATCH-010 @ rules.json",
+        "R-MATCH-039 @ rules.json",
+        "R-MATCH-046 @ rules.json",
+        "R-DEMO-021 @ rules.json",
+        "asset.a7 @ rules.json",
+        "dim.education @ rules.json",
+        "dim.emotional_stability @ rules.json",
+        "dim.emotion_value @ rules.json",
+        "dim.education @ rules.part.02.json",
+        "dim.emotional_stability @ rules.part.02.json",
+        "dim.emotion_value @ rules.part.02.json",
+        "R-MATCH-001 @ rules.part.03.json",
+        "R-MATCH-010 @ rules.part.03.json",
+        "R-MATCH-039 @ rules.part.03.json",
+        "R-MATCH-046 @ rules.part.03.json",
+        "asset.a7 @ rules.part.03.json",
+        "R-DEMO-021 @ rules.part.04.json"
+      ]
+    },
+    {
+      "aweme_id": "7639291023436369190",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 6 次，回音区约 9.0 秒",
+      "repeat": 6,
+      "seconds": 9,
+      "sample": "我说实话了,我们是在直高,没有其他人的颜值。",
+      "citedBy": [
+        "S-LOOKS-007 @ standards.json",
+        "S-HEIGHT-003 @ standards.json",
+        "S-HEIGHT-009 @ standards.json",
+        "R-LOOKS-007 @ rules.json",
+        "R-LOOKS-012 @ rules.json",
+        "R-DIM-005 @ rules.json",
+        "looks.height @ rules.json",
+        "R-LOOKS-007 @ rules.part.01.json",
+        "R-LOOKS-012 @ rules.part.01.json",
+        "looks.height @ rules.part.01.json",
+        "R-DIM-005 @ rules.part.02.json"
+      ]
+    },
+    {
+      "aweme_id": "7639306639819951395",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 5 次，回音区约 18.0 秒",
+      "repeat": 5,
+      "seconds": 18,
+      "sample": "请不吝点赞 订阅 转发 打赏支持明镜与点点栏目。",
+      "citedBy": [
+        "R-DEMO-002 @ rules.json",
+        "dim.consumption @ rules.json",
+        "dim.consumption @ rules.part.02.json",
+        "R-DEMO-002 @ rules.part.04.json"
+      ]
+    },
+    {
+      "aweme_id": "7640075343360986387",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 67 次，回音区约 7.9 秒",
+      "repeat": 67,
+      "seconds": 7.9,
+      "sample": "哎呀"
+    },
+    {
+      "aweme_id": "7641922176569004970",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "high",
+      "detail": "同一句连续重复 44 次，回音区约 68.5 秒",
+      "repeat": 44,
+      "seconds": 68.5,
+      "sample": "订阅"
+    },
+    {
+      "aweme_id": "7643013486221593897",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 10 次，回音区约 16.6 秒",
+      "repeat": 10,
+      "seconds": 16.6,
+      "sample": "谢谢",
+      "citedBy": [
+        "S-LOOKS-010 @ standards.json",
+        "R-LOOKS-025 @ rules.json",
+        "R-LOOKS-025 @ rules.part.01.json"
+      ]
+    },
+    {
+      "aweme_id": "7644903046916427050",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 43 次，回音区约 19.2 秒",
+      "repeat": 43,
+      "seconds": 19.2,
+      "sample": "订阅"
+    },
+    {
+      "aweme_id": "7669864533050066879",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 5 次，回音区约 7.0 秒",
+      "repeat": 5,
+      "seconds": 7,
+      "sample": "You make my heart"
+    },
+    {
+      "aweme_id": "7674905861310909738",
+      "account": "aoye98",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 13 次，回音区约 13.0 秒",
+      "repeat": 13,
+      "seconds": 13,
+      "sample": "你自己家人。"
+    },
+    {
+      "aweme_id": "7427482443394960666",
+      "account": "yslll2008",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 18 次，回音区约 7.9 秒",
+      "repeat": 18,
+      "seconds": 7.9,
+      "sample": "不在乱的旧"
+    },
+    {
+      "aweme_id": "7429407012087221563",
+      "account": "yslll2008",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 40 次，回音区约 9.1 秒",
+      "repeat": 40,
+      "seconds": 9.1,
+      "sample": "团扫"
+    },
+    {
+      "aweme_id": "7616588929928993211",
+      "account": "yslll2008",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 43 次，回音区约 19.5 秒",
+      "repeat": 43,
+      "seconds": 19.5,
+      "sample": "订阅"
+    },
+    {
+      "aweme_id": "7626908674116747450",
+      "account": "yslll2008",
+      "kind": "loop-echo",
+      "severity": "medium",
+      "detail": "同一句连续重复 31 次，回音区约 16.4 秒",
+      "repeat": 31,
+      "seconds": 16.4,
+      "sample": "是一冲。"
+    },
+    {
+      "aweme_id": "7250320800694177058",
+      "account": "79612800869",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "个包间就是 它能人多的话能做20个 和我站在那看又不一样 又不"
+    },
+    {
+      "aweme_id": "7306150617586748707",
+      "account": "79612800869",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "咱们现在一共大概有多少元共 35个 35个 咱们大概投资了有 "
+    },
+    {
+      "aweme_id": "7652790112559861038",
+      "account": "88152643597",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "方方上进 能让我们拍的大概就10个 结婚期高吧 我们就送苹果时"
+    },
+    {
+      "aweme_id": "7660153947198008802",
+      "account": "88152643597",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "符合他条件的女生 一个月就是12个 第二个他会管控一下过程 就"
+    },
+    {
+      "aweme_id": "7664146348479938725",
+      "account": "89534406513",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "5个想嫁,真正敢嫁的也就2-3个。A8 顶级,一般都是小企业"
+    },
+    {
+      "aweme_id": "7636710395441225838",
+      "account": "96845155343",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "算啥? 没公开的吗?公开算谈5个。 还有一个问题可以问吗? "
+    },
+    {
+      "aweme_id": "7632907368389658010",
+      "account": "Jerry4098",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "自己的收入一年差不多在10到12个,甚至有的时候会多一点,每个"
+    },
+    {
+      "aweme_id": "7640817304742572275",
+      "account": "Jerry4098",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "有相亲过50个以上 但是不到100个 两三年之间的时间 但是我没"
+    },
+    {
+      "aweme_id": "7642629688410702747",
+      "account": "Jerry4098",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "还挺高的,一个月差不多15到20个。您想找的上价大概是要多往上"
+    },
+    {
+      "aweme_id": "7644871304105312430",
+      "account": "Jerry4098",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": ",母亲是体内的,独生女的,共500个。 如果我的话 您想去找一个"
+    },
+    {
+      "aweme_id": "7639419507698307151",
+      "account": "aoye020",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "样子算下来 他一个月呢 就是12个 那第二件事呢 就是他会管控"
+    },
+    {
+      "aweme_id": "7649753606141313125",
+      "account": "aoye020",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "姿过来的。我们女生的话呢,是28个。其中有一小半也是燕姿过来了"
+    },
+    {
+      "aweme_id": "7518500807826869554",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "7,120斤,年收入大概就是40个。 对象的话是校花那种,就6"
+    },
+    {
+      "aweme_id": "7518503540604620083",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "款划完的情况下,一个月大概是5个。那就在沉淀沉淀杯,像咱这学"
+    },
+    {
+      "aweme_id": "7520727049888156974",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "果结婚的话,父母大概可以支持100个。 咱颜值上显,咱颜值咋样?"
+    },
+    {
+      "aweme_id": "7521834598473403657",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "连人,在西藏工作,年收入大概20个。 我想了解一下,我自己在婚"
+    },
+    {
+      "aweme_id": "7522958455980772617",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "高其实我会有一点要求 我想要1米700以上的 不矮的吧 一米七八年"
+    },
+    {
+      "aweme_id": "7522959186615864602",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "己A9之后 粉丝从9个变成了17个 8个女生不想吃苦了 我这也"
+    },
+    {
+      "aweme_id": "7528527146399796518",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "己有6分,大概连了有,可能有100个,你是唯一一个有的。 哦,谢"
+    },
+    {
+      "aweme_id": "7529482656985206066",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "里第十 有了啊 好谢谢 169米100前03年 标标准准的四分 就"
+    },
+    {
+      "aweme_id": "7529608584473185563",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "情况 然后生了小孩 大概才拿500个 你不是来逗我的 就你上来说"
+    },
+    {
+      "aweme_id": "7530002726046944538",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "的 02年165 然后是48000个 你看评论区的分数 现在最低"
+    },
+    {
+      "aweme_id": "7531504194193263910",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "68然后102然后98年的 1米93196斤 21"
+    },
+    {
+      "aweme_id": "7533355062840610082",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": ",谢谢你。 我是04的 然后1米6180点 现在评论区的有效分数 最"
+    },
+    {
+      "aweme_id": "7533706165239205155",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "1米6588斤。你想想听我给你打个分?嗯"
+    },
+    {
+      "aweme_id": "7534822741678116096",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "我做文科。99年的,一年是10个,我有点紧张。没事。做招标的"
+    },
+    {
+      "aweme_id": "7536695366343789824",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "养老是没有压力的。 助力的话20个。有一个哥哥是在北京已经成家"
+    },
+    {
+      "aweme_id": "7538890997363772698",
+      "account": "aoye28",
+      "kind": "unit-misread",
+      "severity": "high",
+      "detail": "单位误读（如 1亿8三 = 1米83）",
+      "sample": "工作,年薪是20左右,身高是1亿8三,性格偏内向这种。独生子,"
+    },
+    {
+      "aweme_id": "7538890997363772698",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": " 7、80吧,然后现在存款有50个。 两个很优秀呀。 最看重性"
+    },
+    {
+      "aweme_id": "7539255234699201842",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "我是1米8255斤左右吧。平时有健身。96年"
+    },
+    {
+      "aweme_id": "7540385789981510938",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "百万。 我曾经在一年内 枪了20个 30个 一部分是他很喜欢你"
+    },
+    {
+      "aweme_id": "7542222568879623463",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "遗传的可能性比较小 它大概是1米9293 这样子只有120多斤 其实"
+    },
+    {
+      "aweme_id": "7545221143456697651",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "社保才可以买住宅的嘛,当时是120个,今年是买了车子是30多个,"
+    },
+    {
+      "aweme_id": "7545925470206872841",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "是体制内一年到手可能23不到24个。如果要是切片法马上你可不敢"
+    },
+    {
+      "aweme_id": "7546706724971941139",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "事业编制,年收入可能会15到20个。 同时呢,我就考回了我自己"
+    },
+    {
+      "aweme_id": "7551132697674992942",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "斤这样。安徽五虎,家庭可能是500个。因为我其实是28岁了,可能"
+    },
+    {
+      "aweme_id": "7551767891160304955",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "班学奖得住 我那个学校大概有10个 对 行的哥我爱你一生一世 "
+    },
+    {
+      "aweme_id": "7551891158838873370",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "我120斤02年1米88 你1米88120斤妈呀这水滴稠 你干啥这么臭"
+    },
+    {
+      "aweme_id": "7551898600968588582",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": " 相亲是近期市场 随时能变现500个 咱们就要买了房子退掉了 咱"
+    },
+    {
+      "aweme_id": "7553704065520241971",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "吧 02年女生5.8到6分 1米68105斤 有个同富异母的哥哥 中专"
+    },
+    {
+      "aweme_id": "7555955731296488742",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "工作是本地央企的程序员,睡前20个,有房有车无贷款,在市区有4"
+    },
+    {
+      "aweme_id": "7557023543561653514",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "个哥哥 家里面台里 那给他出20个 98年国企上班 郑州人在西"
+    },
+    {
+      "aweme_id": "7558906545472408870",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "收入在14到16,自己存款有26个。 然后老师说,厉害啊,00"
+    },
+    {
+      "aweme_id": "7562664929438764315",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "郁症了 这父母这牢给你 就像1米680肉可带 咱要不先坐好 先搬出"
+    },
+    {
+      "aweme_id": "7562942312133889338",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": " 我接咨询男的 我还没有接了500个 500个里要求最合理的 没"
+    },
+    {
+      "aweme_id": "7563030438516673802",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "的 我个人的可质 被辞入的话20个 但是我家庭的话 3000个"
+    },
+    {
+      "aweme_id": "7564413057204489524",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "颜值有6分。有6分吧。19岁1米8276公斤。 就您像迷你版的王力宏"
+    },
+    {
+      "aweme_id": "7564858248847756596",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "是200多 然后血糖的话就是156个 现在也没有一个 很明确的一"
+    },
+    {
+      "aweme_id": "7566737333492518171",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "第一名 这个美颜太严重了 我190个 188左右吧 几分吗 你打"
+    },
+    {
+      "aweme_id": "7566751725277728027",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "恋爱 社交软件上 他一天能划100个 证明这个男生闲的没事干 渠"
+    },
+    {
+      "aweme_id": "7567023064049102322",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "40个人了。 这样的办公室有5个。这是第一个家。这是第二个家"
+    },
+    {
+      "aweme_id": "7569334275661745446",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "然后又亏到60,总共加钱亏了60个,九年工资没了。 咱如果说0"
+    },
+    {
+      "aweme_id": "7647969527942651237",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "线城市,然后分开的时候有分到300个。自己是体制内公务员,孩子该"
+    },
+    {
+      "aweme_id": "7654172697567448354",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "白发1米830,08年的商量联维,你眼打个"
+    },
+    {
+      "aweme_id": "7663951578231993019",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "自己有6分,大概连了有可能有100个,你是唯一一个有的。 哦,谢"
+    },
+    {
+      "aweme_id": "7670215948104062394",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "本科99年的,一年是10个,我有一点紧张。没事。做招标"
+    },
+    {
+      "aweme_id": "7675324643288288550",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "对对对,反正您给我打个分。我1米7217,您就直接说就可以了。别说了"
+    },
+    {
+      "aweme_id": "7682144892857382565",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "事业编制,年收入可能会15到20个。 同时呢我就考回了我自己家"
+    },
+    {
+      "aweme_id": "7687487355579043557",
+      "account": "aoye28",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "20斤 02年 1米88 你1米88120斤 妈呀 这水滴稠 你干啥这"
+    },
+    {
+      "aweme_id": "7689106465025510692",
+      "account": "aoye28",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "0个对我感兴趣的,100个挑10个,总有一个傻子呀。 不是,就"
+    },
+    {
+      "aweme_id": "7643563097026953124",
+      "account": "aoye306",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "个问题月老现在的身高体重是?1米85150斤。最胖的时候到现在一共减了"
+    },
+    {
+      "aweme_id": "7581561745953639734",
+      "account": "aoye98",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "父母都是东北体制内的,身高1米7778,独生子女,然后家庭氛围都比"
+    },
+    {
+      "aweme_id": "7589988719105543443",
+      "account": "aoye98",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "不能接受有孩子瘦一点。 然后1米65110斤以内有少女感不能抽烟喝酒可"
+    },
+    {
+      "aweme_id": "7631518635802086702",
+      "account": "aoye98",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "7.5,就固定资产的话呢,是30个, 存款的话呢,是100个,"
+    },
+    {
+      "aweme_id": "7636331944761937202",
+      "account": "aoye98",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": ",94年。正常家里面陪价能给100个,在西安的基隆机构上班。 没"
+    },
+    {
+      "aweme_id": "7639325798792482102",
+      "account": "aoye98",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "聊这个事。 现在我父母给了我70个,定期。 定期,另外一回事。",
+      "citedBy": [
+        "S-LOOKS-002 @ standards.json",
+        "S-EDU-003 @ standards.json",
+        "R-LOOKS-002 @ rules.json",
+        "R-LOOKS-011 @ rules.json",
+        "R-DIM-011 @ rules.json",
+        "R-DIM-025 @ rules.json",
+        "R-MATCH-006 @ rules.json",
+        "R-MATCH-007 @ rules.json",
+        "R-MATCH-008 @ rules.json",
+        "R-MATCH-043 @ rules.json",
+        "dim.education @ rules.json",
+        "R-LOOKS-002 @ rules.part.01.json",
+        "R-LOOKS-011 @ rules.part.01.json",
+        "R-DIM-011 @ rules.part.02.json",
+        "R-DIM-025 @ rules.part.02.json",
+        "dim.education @ rules.part.02.json",
+        "R-MATCH-006 @ rules.part.03.json",
+        "R-MATCH-007 @ rules.part.03.json",
+        "R-MATCH-008 @ rules.part.03.json",
+        "R-MATCH-043 @ rules.part.03.json"
+      ]
+    },
+    {
+      "aweme_id": "7652318711637970239",
+      "account": "aoye98",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "会不会。 不到1米75那就是1米691米70。 1米71其实,算了",
+      "citedBy": [
+        "R-LOOKS-012 @ rules.json",
+        "R-LOOKS-012 @ rules.part.01.json"
+      ]
+    },
+    {
+      "aweme_id": "7656400717271354624",
+      "account": "aoye98",
+      "kind": "number-adjacency",
+      "severity": "high",
+      "detail": "身高与体重（或后续数字）粘连，无法可靠切分",
+      "sample": "我1米6390斤,20岁06年的。你把被子",
+      "citedBy": [
+        "S-LOOKS-004 @ standards.json",
+        "S-LOOKS-005 @ standards.json",
+        "R-LOOKS-003 @ rules.json",
+        "R-LOOKS-004 @ rules.json",
+        "R-LOOKS-003 @ rules.part.01.json",
+        "R-LOOKS-004 @ rules.part.01.json"
+      ]
+    },
+    {
+      "aweme_id": "7693166454128199141",
+      "account": "dykf2pc31e2p",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "较轻松 时间多一点 当时赚了200个 大二比较忙了 就只赚了10"
+    },
+    {
+      "aweme_id": "7582521331070815542",
+      "account": "weipangxiaotao52",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "5个。整整5个。想不到你套学了5"
+    },
+    {
+      "aweme_id": "7582869889263340842",
+      "account": "weipangxiaotao52",
+      "kind": "amount-slang",
+      "severity": "medium",
+      "detail": "金额用「个」代「万」，但与「人数」写法冲突，需人工判定",
+      "sample": "2.6个 哈哈 终于红了。 正名里超"
+    },
+    {
+      "aweme_id": "7648595760484764969",
+      "account": "aoye28",
+      "kind": "unresolved-variant",
+      "severity": "low",
+      "detail": "疑似「宿舍舍草」但未入表：语境明确是 5 分宿舍档，但无法确定原词是\"舍草\"还是\"宿舍花\"",
+      "sample": "宿舍社会"
+    },
+    {
+      "aweme_id": "7656400717271354624",
+      "account": "aoye98",
+      "kind": "unresolved-variant",
+      "severity": "medium",
+      "detail": "疑似「宿舍舍草」但未入表：语境明确是 5 分宿舍档，但无法确定原词是\"舍草\"还是\"宿舍花\"",
+      "sample": "宿舍社会",
+      "citedBy": [
+        "S-LOOKS-004 @ standards.json",
+        "S-LOOKS-005 @ standards.json",
+        "R-LOOKS-003 @ rules.json",
+        "R-LOOKS-004 @ rules.json",
+        "R-LOOKS-003 @ rules.part.01.json",
+        "R-LOOKS-004 @ rules.part.01.json"
+      ]
+    },
+    {
+      "aweme_id": "7522206030583827721",
+      "account": "aoye28",
+      "kind": "unresolved-variant",
+      "severity": "low",
+      "detail": "疑似「石家庄」但未入表：同一人设故事指向石家庄，但也可能是真实地名",
+      "sample": "沙庄"
+    },
+    {
+      "aweme_id": "7637107374934838571",
+      "account": "aoye98",
+      "kind": "unresolved-variant",
+      "severity": "medium",
+      "detail": "疑似「石家庄」但未入表：同一人设故事指向石家庄，但也可能是真实地名",
+      "sample": "沙庄",
+      "citedBy": [
+        "R-MATCH-005 @ rules.json",
+        "R-MATCH-044 @ rules.json",
+        "R-MATCH-005 @ rules.part.03.json",
+        "R-MATCH-044 @ rules.part.03.json"
+      ]
+    },
+    {
+      "aweme_id": "7627415924639319945",
+      "account": "Jerry4098",
+      "kind": "unresolved-variant",
+      "severity": "low",
+      "detail": "疑似「校草/舍草」但未入表：与\"笑话\"粘连，语义不明",
+      "sample": "笑草"
+    },
+    {
+      "aweme_id": "7671619744629345577",
+      "account": "aoye28",
+      "kind": "unresolved-variant",
+      "severity": "low",
+      "detail": "疑似「校草/舍草」但未入表：与\"笑话\"粘连，语义不明",
+      "sample": "笑草"
+    },
+    {
+      "aweme_id": "7679354287630220017",
+      "account": "89534406513",
+      "kind": "unresolved-variant",
+      "severity": "low",
+      "detail": "疑似「编制」但未入表：出现在转写循环回音区，证据不可靠",
+      "sample": "鞭子"
+    },
+    {
+      "aweme_id": "7638583110027824447",
+      "account": "aoye98",
+      "kind": "unresolved-variant",
+      "severity": "medium",
+      "detail": "疑似「编制」但未入表：出现在转写循环回音区，证据不可靠",
+      "sample": "鞭子",
+      "citedBy": [
+        "S-WEIGHT-003 @ standards.json",
+        "R-MATCH-001 @ rules.json",
+        "R-MATCH-010 @ rules.json",
+        "R-MATCH-039 @ rules.json",
+        "R-MATCH-046 @ rules.json",
+        "R-DEMO-021 @ rules.json",
+        "asset.a7 @ rules.json",
+        "dim.education @ rules.json",
+        "dim.emotional_stability @ rules.json",
+        "dim.emotion_value @ rules.json",
+        "dim.education @ rules.part.02.json",
+        "dim.emotional_stability @ rules.part.02.json",
+        "dim.emotion_value @ rules.part.02.json",
+        "R-MATCH-001 @ rules.part.03.json",
+        "R-MATCH-010 @ rules.part.03.json",
+        "R-MATCH-039 @ rules.part.03.json",
+        "R-MATCH-046 @ rules.part.03.json",
+        "asset.a7 @ rules.part.03.json",
+        "R-DEMO-021 @ rules.part.04.json"
+      ]
+    },
+    {
+      "aweme_id": "7576019697057942811",
+      "account": "aoye28",
+      "kind": "unresolved-variant",
+      "severity": "low",
+      "detail": "疑似「普信男」但未入表：语料中不存在标准写法\"普信男\"，无法交叉验证",
+      "sample": "普京男"
+    },
+    {
+      "aweme_id": "7519964542844063027",
+      "account": "aoye28",
+      "kind": "unresolved-variant",
+      "severity": "low",
+      "detail": "疑似「独生女」但未入表：只有孤立 token，无上下文可判定",
+      "sample": "独生旅"
+    },
+    {
+      "aweme_id": "7655411121071762555",
+      "account": "aoye28",
+      "kind": "unresolved-variant",
+      "severity": "low",
+      "detail": "疑似「独生女」但未入表：只有孤立 token，无上下文可判定",
+      "sample": "独生旅"
+    },
+    {
+      "aweme_id": "7636347304823360806",
+      "account": "aoye98",
+      "kind": "unresolved-variant",
+      "severity": "medium",
+      "detail": "疑似「独生女」但未入表：只有孤立 token，无上下文可判定",
+      "sample": "独生旅",
+      "citedBy": [
+        "S-AGE-009 @ standards.json",
+        "S-MATCH-008 @ standards.json",
+        "R-MATCH-004 @ rules.json",
+        "R-MATCH-022 @ rules.json",
+        "R-MATCH-042 @ rules.json",
+        "R-DEMO-013 @ rules.json",
+        "R-MATCH-004 @ rules.part.03.json",
+        "R-MATCH-022 @ rules.part.03.json",
+        "R-MATCH-042 @ rules.part.03.json",
+        "R-DEMO-013 @ rules.part.04.json"
+      ]
+    }
+  ],
+  "summary": {
+    "byKind": {
+      "loop-echo": 104,
+      "amount-slang": 51,
+      "number-adjacency": 19,
+      "unit-misread": 1,
+      "unresolved-variant": 12
+    },
+    "bySeverity": {
+      "medium": 150,
+      "high": 29,
+      "low": 8
+    },
+    "affectedAccounts": [
+      "30578719968",
+      "33349790582",
+      "35285446600",
+      "37021273006",
+      "38744562015",
+      "41252723284",
+      "47590488570",
+      "47902271366",
+      "48854385344",
+      "52303954498",
+      "79612800869",
+      "88152643597",
+      "89534406513",
+      "92845092804",
+      "96845155343",
+      "Jerry4098",
+      "aoye020",
+      "aoye184",
+      "aoye28",
+      "aoye306",
+      "aoye612",
+      "aoye82",
+      "aoye888000",
+      "aoye98",
+      "dykf2pc31e2p",
+      "weipangxiaotao52",
+      "yslll2008"
+    ],
+    "loopEcho": {
+      "videos": 104,
+      "share": 3,
+      "affectedMinutes": 55.5,
+      "minutesShare": 1.2,
+      "byAccount": [
+        {
+          "account": "52303954498",
+          "videos": 1,
+          "total": 1,
+          "share": 100,
+          "minutes": 0.5
+        },
+        {
+          "account": "yslll2008",
+          "videos": 4,
+          "total": 7,
+          "share": 57.1,
+          "minutes": 0.9
+        },
+        {
+          "account": "92845092804",
+          "videos": 1,
+          "total": 2,
+          "share": 50,
+          "minutes": 0.1
+        },
+        {
+          "account": "30578719968",
+          "videos": 1,
+          "total": 3,
+          "share": 33.3,
+          "minutes": 0.3
+        },
+        {
+          "account": "41252723284",
+          "videos": 1,
+          "total": 3,
+          "share": 33.3,
+          "minutes": 0.5
+        },
+        {
+          "account": "35285446600",
+          "videos": 15,
+          "total": 48,
+          "share": 31.3,
+          "minutes": 5.2
+        },
+        {
+          "account": "33349790582",
+          "videos": 3,
+          "total": 13,
+          "share": 23.1,
+          "minutes": 1.2
+        },
+        {
+          "account": "37021273006",
+          "videos": 2,
+          "total": 11,
+          "share": 18.2,
+          "minutes": 1
+        },
+        {
+          "account": "48854385344",
+          "videos": 8,
+          "total": 67,
+          "share": 11.9,
+          "minutes": 2.2
+        },
+        {
+          "account": "47590488570",
+          "videos": 15,
+          "total": 138,
+          "share": 10.9,
+          "minutes": 14.4
+        },
+        {
+          "account": "aoye98",
+          "videos": 31,
+          "total": 368,
+          "share": 8.4,
+          "minutes": 21
+        },
+        {
+          "account": "aoye888000",
+          "videos": 1,
+          "total": 22,
+          "share": 4.5,
+          "minutes": 0.4
+        },
+        {
+          "account": "aoye020",
+          "videos": 2,
+          "total": 45,
+          "share": 4.4,
+          "minutes": 0.3
+        },
+        {
+          "account": "38744562015",
+          "videos": 2,
+          "total": 49,
+          "share": 4.1,
+          "minutes": 1
+        },
+        {
+          "account": "88152643597",
+          "videos": 2,
+          "total": 51,
+          "share": 3.9,
+          "minutes": 0.4
+        },
+        {
+          "account": "47902271366",
+          "videos": 1,
+          "total": 30,
+          "share": 3.3,
+          "minutes": 0.3
+        },
+        {
+          "account": "79612800869",
+          "videos": 3,
+          "total": 95,
+          "share": 3.2,
+          "minutes": 3.2
+        },
+        {
+          "account": "96845155343",
+          "videos": 1,
+          "total": 32,
+          "share": 3.1,
+          "minutes": 0.1
+        },
+        {
+          "account": "aoye184",
+          "videos": 1,
+          "total": 52,
+          "share": 1.9,
+          "minutes": 0.7
+        },
+        {
+          "account": "aoye82",
+          "videos": 1,
+          "total": 55,
+          "share": 1.8,
+          "minutes": 0.1
+        },
+        {
+          "account": "aoye612",
+          "videos": 1,
+          "total": 100,
+          "share": 1,
+          "minutes": 0.2
+        },
+        {
+          "account": "aoye306",
+          "videos": 1,
+          "total": 145,
+          "share": 0.7,
+          "minutes": 0.4
+        },
+        {
+          "account": "aoye28",
+          "videos": 6,
+          "total": 1059,
+          "share": 0.6,
+          "minutes": 1.2
+        },
+        {
+          "account": "20090777434",
+          "videos": 0,
+          "total": 1,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "25845559030",
+          "videos": 0,
+          "total": 5,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "30209110703",
+          "videos": 0,
+          "total": 1,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "33946354652",
+          "videos": 0,
+          "total": 1,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "43827813879",
+          "videos": 0,
+          "total": 44,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "49222795548",
+          "videos": 0,
+          "total": 13,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "58784526906",
+          "videos": 0,
+          "total": 108,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "65234883858",
+          "videos": 0,
+          "total": 28,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "69409326310",
+          "videos": 0,
+          "total": 45,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "75653126150",
+          "videos": 0,
+          "total": 2,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "76893282674",
+          "videos": 0,
+          "total": 12,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "78949694532",
+          "videos": 0,
+          "total": 4,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "85311791636",
+          "videos": 0,
+          "total": 6,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "86386466956",
+          "videos": 0,
+          "total": 28,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "89534406513",
+          "videos": 0,
+          "total": 103,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "92588116052",
+          "videos": 0,
+          "total": 2,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "92756887501",
+          "videos": 0,
+          "total": 14,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "93025352569",
+          "videos": 0,
+          "total": 3,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "Jerry4098",
+          "videos": 0,
+          "total": 80,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "LRHzixun",
+          "videos": 0,
+          "total": 18,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "Xxy68855",
+          "videos": 0,
+          "total": 14,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "aoye0008",
+          "videos": 0,
+          "total": 15,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "aoye0208",
+          "videos": 0,
+          "total": 117,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "aoye0567",
+          "videos": 0,
+          "total": 115,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "aoye131",
+          "videos": 0,
+          "total": 14,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "aoye197",
+          "videos": 0,
+          "total": 14,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "aoye1988818",
+          "videos": 0,
+          "total": 111,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "aoyedada",
+          "videos": 0,
+          "total": 1,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "ctyyyds666666",
+          "videos": 0,
+          "total": 5,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "dykf2pc31e2p",
+          "videos": 0,
+          "total": 43,
+          "share": 0,
+          "minutes": 0
+        },
+        {
+          "account": "weipangxiaotao52",
+          "videos": 0,
+          "total": 150,
+          "share": 0,
+          "minutes": 0
+        }
+      ]
+    }
+  }
+}
