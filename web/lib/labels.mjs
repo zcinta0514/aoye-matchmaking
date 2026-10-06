@@ -28,6 +28,7 @@ export const FIELD_OPTION_LABELS = {
   "feedback_gap": { "better": "明显更好", "same": "差不多", "worse": "明显更差", "none": "没有被介绍过" },
   "photo_quality": { "raw": "原相机直出", "light": "轻度美颜", "heavy": "重度精修" },
   "face_natural": { "yes": "原生未整", "minor": "做过轻医美", "no": "做过手术类项目" },
+  "activity_type": { "high": "高净值专场", "three": "三高专场", "normal": "普通活动" },
 };
 
 export const SCOPE_LABELS = { scoring: "计分", matching: "匹配", advice: "建议", demographic: "人群定位", band: "档位" };

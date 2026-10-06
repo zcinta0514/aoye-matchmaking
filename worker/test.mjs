@@ -1,5 +1,11 @@
+/* 测试纪律：
+   - CORS 类断言必须模拟浏览器预检（OPTIONS + Access-Control-Request-Headers），不能用 curl 思维——
+     真实浏览器会先预检；预检少放行一个自定义头，整个请求会被浏览器拦下，而 curl 永远测不出来。
+   - 自定义头清单从 web/static/provider-proxy.mjs 的实际源码扫描，不写死字符串：
+     前端新增头而 Worker 没同步时，本文件必须变红。 */
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import worker, { LIMITS, countImages, rateLimit, resetRateBuckets, secureCompare } from "./index.js";
 
 const FAKE_KEY = "sk-test-DEADBEEF-1234567890";
@@ -228,4 +234,30 @@ test("访问码门禁：无码/错码 401、对码放行、回包与日志不含
     console.error = originals.error;
     console.warn = originals.warn;
   }
+});
+
+test("CORS 回归（防漂移）：前端实际发送的每个自定义头都必须被预检放行、且 Worker 真的会读", async () => {
+  resetRateBuckets();
+  const providerSource = fs.readFileSync(new URL("../web/static/provider-proxy.mjs", import.meta.url), "utf8");
+  const workerSource = fs.readFileSync(new URL("./index.js", import.meta.url), "utf8");
+  const customHeaders = Array.from(new Set((providerSource.match(/headers\["([^"]+)"\]\s*=/g) || []).map((text) => text.match(/\["([^"]+)"\]/)[1])));
+  assert.ok(customHeaders.length >= 1, "必须从 provider-proxy.mjs 扫到至少一个自定义头");
+  assert.ok(customHeaders.indexOf("x-aoye-code") !== -1, "前端代理必须发送 x-aoye-code");
+
+  const preflight = await worker.fetch(requestOf("/analyze", {
+    method: "OPTIONS",
+    headers: { origin: ORIGIN, "access-control-request-method": "POST", "access-control-request-headers": "content-type, " + customHeaders.join(", ") }
+  }), envOf());
+  assert.equal(preflight.status, 204);
+  const allow = String(preflight.headers.get("access-control-allow-headers") || "").toLowerCase();
+  assert.ok(allow.indexOf("content-type") !== -1, "预检必须放行 content-type");
+  customHeaders.forEach((name) => {
+    assert.ok(allow.indexOf(name.toLowerCase()) !== -1, "预检必须放行前端实际发送的自定义头：" + name);
+    assert.ok(workerSource.indexOf('headers.get("' + name + '")') !== -1, "Worker 必须真的读取该头（不能只声明不读）：" + name);
+  });
+
+  /* 元断言：模拟前端以后新增一个头——检测逻辑必须能发现它没被放行，保证本测试真的会拦漂移。 */
+  const hypothetical = customHeaders.concat("x-aoye-future");
+  const missing = hypothetical.filter((name) => allow.indexOf(name.toLowerCase()) === -1);
+  assert.deepEqual(missing, ["x-aoye-future"], "新增自定义头若未同步到 ACAH，本测试必须判定为缺失");
 });

@@ -38,7 +38,7 @@ function el(tag, attrs, children) {
       if (key === "text") node.textContent = attrs[key];
       else if (key === "html") node.innerHTML = attrs[key];
       else if (key.indexOf("on") === 0) node.addEventListener(key.slice(2), attrs[key]);
-      else node.setAttribute(key, attrs[key]);
+      else if (attrs[key] !== undefined && attrs[key] !== null) node.setAttribute(key, attrs[key]);
     });
   }
   (children || []).forEach((child) => node.appendChild(child));
@@ -79,7 +79,7 @@ function renderField(field) {
     control = el("input", {
       type: field.type === "number" ? "number" : "text",
       id: "f-" + field.id, name: field.id,
-      min: field.min, max: field.max, step: field.step || "any",
+      min: field.min === undefined || field.min === null ? undefined : field.min, max: field.max === undefined || field.max === null ? undefined : field.max, step: field.step || "any",
       placeholder: field.placeholder || ""
     });
   }

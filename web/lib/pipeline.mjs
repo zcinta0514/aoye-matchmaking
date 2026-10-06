@@ -5,9 +5,10 @@ import { buildSelfTrack, blendAppearance, mapAnchorsToInterval, applyClamps, sco
 import { analyzePhotos } from "./provider.mjs";
 import { loadCompositeCriteria, loadCompositeMapping, scoreComposite } from "./composite.mjs";
 import { loadBandCriteria, evaluateBands } from "./bands.mjs";
-import { newId, roundTo, formatNumber } from "./util.mjs";
+import { newId, roundTo, formatNumber, readJson } from "./util.mjs";
 import { STRENGTH, loadIndependence, loadQualityFlags, classifyEvidence, strengthOfDimension, strengthOfRule, strengthMeta, isCountable, summarize, claimBadgeForRule } from "./strength.mjs";
 import { loadExtrapolationRules, evaluateExtrapolations } from "./extrapolation.mjs";
+import { buildPortrait } from "./portrait.mjs";
 import { displayValue, scopeLabel, viaLabel, PHOTO_MODE_LABELS, APPEARANCE_BASIS_LABELS, CONFIDENCE_LABELS, PHOTO_LEVEL_LABELS } from "./labels.mjs";
 
 const WEB_DIR = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -17,6 +18,8 @@ const DEFAULT_EXTRAPOLATION = path.join(WEB_DIR, "config", "extrapolation-rules.
 const DEFAULT_COMPOSITE_CRITERIA = path.join(WEB_DIR, "config", "composite-criteria.json");
 const DEFAULT_COMPOSITE_MAPPING = path.join(WEB_DIR, "config", "composite-mapping.json");
 const DEFAULT_QUALITY_FLAGS = path.join(REPO_ROOT, "knowledge", "evidence-quality-flags.json");
+const DEFAULT_STANDARDS = path.join(REPO_ROOT, "knowledge", "standards.json");
+const DEFAULT_PORTRAIT_RULES = path.join(WEB_DIR, "config", "portrait-rules.json");
 const DEFAULT_BAND_CRITERIA = path.join(WEB_DIR, "config", "band-criteria.json");
 const CALIBRATION_FIELDS = new Set(["self_appearance", "self_rank", "admiration_freq", "feedback_gap", "photo_quality", "face_natural", "want_gender", "want_age_min", "want_age_max", "want_height_min", "want_education_min", "want_house", "want_appearance_min", "hobbies"]);
 const NO_EVIDENCE_NOTE = "无语料依据（基线/工程默认）";
@@ -372,6 +375,9 @@ export async function generateReport(options) {
   /* D24：档位只用 knowledge/rules.json 的 9 条 bands（博主本人词汇）；
      baseline 的 S/A/B/C 刻度仅作 engineering-default 参照，不参与任何判定、不出现在结论句。 */
   const bandCriteria = loadBandCriteria(options.bandCriteriaPath || DEFAULT_BAND_CRITERIA);
+  /* 具象画像数据源：standards.json（语料标准）+ portrait-rules.json（条目表）。 */
+  const standardsDoc = options.standardsDoc || readJson(options.standardsPath || DEFAULT_STANDARDS);
+  const portraitDoc = options.portraitRulesDoc || readJson(options.portraitRulesPath || DEFAULT_PORTRAIT_RULES);
   const bandEvaluation = evaluateBands(ruleset.bands, bandCriteria, form, context);
   const setBandEffect = effects.find((effect) => effect.kind === "setBand");
   let band = null;
@@ -518,6 +524,19 @@ export async function generateReport(options) {
 
   /* 11) 画像文字 */
   const matchedBandRecord = band ? ruleset.bands.find((item) => item.id === band.id) || null : null;
+  /* 具象画像：把语料里「能配上/保底」的具体描述组装成人话（不编造，来源折叠可查）。 */
+  const concretePortrait = buildPortrait({
+    doc: portraitDoc,
+    form: form,
+    facts: factsV1,
+    ladder: ladder,
+    ruleset: ruleset,
+    standards: (standardsDoc && standardsDoc.standards) || [],
+    cityTier: context.cityTier,
+    appearance: finalAppearance,
+    appearanceLabel: appearanceLabel
+  });
+
   const portraitText = band
     ? ("档位描述：" + band.name + "（" + ([bandEvaluation.bandTypeLabels[band.bandType], bandSource].filter(Boolean).join(" · ")) + "）。" + bandEvaluation.disclaimer)
     : (typeof level === "number"
@@ -534,8 +553,12 @@ export async function generateReport(options) {
   const heroText = [];
   if (strengths.length) heroText.push("相对占优的是：" + strengths.map((item) => item.name + "（" + formatNumber(item.score) + " 分）").join("、"));
   if (blockers.length) heroText.push("相对偏弱的是：" + blockers.map((item) => item.name + "（" + formatNumber(item.score) + " 分）").join("、"));
-  if (extrapolation.active) heroText.push("你的组合在该机构语料里样本不足，部分结论由相近人群外推，误差不可估计");
-  if (excludedItems.length) heroText.push("另有 " + excludedItems.length + " 项因证据不足未计入，整体确定性有限");
+  if (extrapolation.active && excludedItems.length) {
+    heroText.push("你的组合在该机构语料里样本不足，部分结论由相近人群外推、误差不可估计；另有 " + excludedItems.length + " 项因证据不足未计入");
+  } else {
+    if (extrapolation.active) heroText.push("你的组合在该机构语料里样本不足，部分结论由相近人群外推，误差不可估计");
+    if (excludedItems.length) heroText.push("另有 " + excludedItems.length + " 项因证据不足未计入，整体确定性有限");
+  }
   if (!heroText.length) heroText.push("现有信息里没有足够的长板或短板项可以概括");
   const hero = {
     positioning: band
@@ -667,6 +690,7 @@ export async function generateReport(options) {
     levelIfAllCounted,
     portrait: {
       text: portraitText,
+      concrete: concretePortrait,
       targetProfile,
       band: band ? {
         id: band.id,

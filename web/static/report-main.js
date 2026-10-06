@@ -38,7 +38,8 @@ async function runSelfTest(params) {
     "data/rules.json", "data/baseline-rules.json", "data/form-fields.json", "data/cities.json",
     "data/facts.json", "data/evidence-independence.json", "data/evidence-quality-flags.json",
     "data/cases.json", "data/band-criteria.json", "data/composite-criteria.json",
-    "data/composite-mapping.json", "data/extrapolation-rules.json"
+    "data/composite-mapping.json", "data/extrapolation-rules.json",
+    "data/standards.json", "data/portrait-rules.json"
   ], dataDir);
   const sample = buildSample("data/cases.json", "C-022");
   const ruleset = loadRuleset({ mainPath: "data/rules.json", baselinePath: "data/baseline-rules.json" });

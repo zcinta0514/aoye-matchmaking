@@ -1,10 +1,10 @@
 {
   "version": "1.0",
-  "generatedAt": "2026-10-06T06:08:57.311Z",
+  "generatedAt": "2026-10-06T06:49:35.134Z",
   "purpose": "规则中 machine.when.field 的唯一合法取值来源。写规则前先查这里；缺字段就往这里加，不要在规则里发明字段名。",
   "counts": {
-    "subjectFields": 39,
-    "fromWebForm": 39,
+    "subjectFields": 42,
+    "fromWebForm": 42,
     "fromKnowledgeExtra": 0,
     "computedFields": 22,
     "photoDimensions": 18
@@ -791,6 +791,56 @@
         "yes": "原生未整",
         "minor": "做过轻医美",
         "no": "做过手术类项目"
+      },
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.self_rank_position",
+      "id": "self_rank_position",
+      "label": "打分局名次（第几名）",
+      "group": "calibration",
+      "type": "number",
+      "required": false,
+      "unit": "名",
+      "min": 1,
+      "max": null,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.self_rank_pool",
+      "id": "self_rank_pool",
+      "label": "打分局池子大小",
+      "group": "calibration",
+      "type": "number",
+      "required": false,
+      "unit": "人",
+      "min": 2,
+      "max": null,
+      "values": null,
+      "valueLabels": null,
+      "source": "web/config/form-fields.json"
+    },
+    {
+      "field": "subject.activity_type",
+      "id": "activity_type",
+      "label": "参加的相亲活动类型",
+      "group": "calibration",
+      "type": "enum",
+      "required": false,
+      "unit": null,
+      "min": null,
+      "max": null,
+      "values": [
+        "high",
+        "three",
+        "normal"
+      ],
+      "valueLabels": {
+        "high": "高净值专场",
+        "three": "三高专场",
+        "normal": "普通活动"
       },
       "source": "web/config/form-fields.json"
     },

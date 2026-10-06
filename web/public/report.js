@@ -1,5 +1,14 @@
 const TOKEN_KEY = "aoye_access_token";
 
+/* 展示层措辞中性化：语料原文里的「向下/向上兼容」不直接露给用户；证据引文保持原文。 */
+function neutralizeWording(text) {
+  return String(text === undefined || text === null ? "" : text)
+    .split("向下兼容").join("放宽一档")
+    .split("向上兼容").join("提升一档")
+    .split("向下找").join("放宽去找")
+    .split("向下").join("放宽");
+}
+
 function getToken() {
   try { return window.localStorage.getItem(TOKEN_KEY) || ""; } catch { return ""; }
 }
@@ -191,7 +200,7 @@ function render(report) {
   ].join("");
 
   const extrapolationBanner = extrapolation.active
-    ? "<div class='card extrapolation-card'><h2>外推说明</h2>" + (extrapolation.applied || []).map((item) => "<p>⚠ " + esc(item.message) + "</p>").join("") + "</div>"
+    ? "<div class='card extrapolation-card'><p><strong>外推说明</strong>：" + (extrapolation.applied || []).map((item) => "⚠ " + esc(item.message)).join(" ") + "</p></div>"
     : "";
 
   const giveUps = (report.giveUps || []).map((item) => "<li>" + esc(item.displayText || item.text) + tag(item.origin) + claimMark(item) + "</li>").join("")
@@ -313,7 +322,7 @@ function render(report) {
   const evaluableRows = ladderRows.filter((item) => item.matchStatus !== "input-missing");
   const missingRows = ladderRows.filter((item) => item.matchStatus === "input-missing");
   const ladder = evaluableRows.map((item) =>
-    "<tr class='" + (item.active ? "row-active" : "") + "'><td>" + (item.active ? "▶ " : "") + esc(item.name) + tag(item.origin) + strengthMark(item.strength) + "</td><td>" + esc(stripChannelNotice(item.definition)) + "</td><td>" + esc((item.entryCriteria || []).join("；")) + "</td><td>" + esc(item.reachableMatch || "—") + "</td><td>" + esc(bandStatus[item.matchStatus] || (item.matchStatus === null ? "—" : item.matchStatus)) + "</td></tr>"
+    "<tr class='" + (item.active ? "row-active" : "") + "'><td>" + (item.active ? "▶ " : "") + esc(item.name) + tag(item.origin) + strengthMark(item.strength) + "</td><td>" + esc(neutralizeWording(stripChannelNotice(item.definition))) + "</td><td>" + esc(neutralizeWording((item.entryCriteria || []).join("；"))) + "</td><td>" + esc(neutralizeWording(item.reachableMatch || "—")) + "</td><td>" + esc(bandStatus[item.matchStatus] || (item.matchStatus === null ? "—" : item.matchStatus)) + "</td></tr>"
   ).join("") || "<tr><td colspan='5' class='muted'>无语料档位可映射。</td></tr>";
   const ladderFootnotes =
     (missingRows.length ? "<div class='muted'>另有 " + missingRows.length + " 档因你未提供相关输入而未评估：<details class='inline-details'><summary>展开查看</summary><ul>" + missingRows.map((item) => "<li>" + esc(item.name) + "：需要「" + esc(item.needsField || "—") + "」</li>").join("") + "</ul></details></div>" : "") +
@@ -329,16 +338,70 @@ function render(report) {
   const heroLower = hero.lower === undefined ? (report.matchWindow ? report.matchWindow.lower.score : null) : hero.lower;
   const heroStable = hero.stable || (report.matchWindow ? { low: report.matchWindow.stable.low, high: report.matchWindow.stable.high } : null);
   const heroAnalysis = (hero.analysis || []).map((line) => "<li>" + esc(line) + "</li>").join("");
+  const portrait = report.portrait.concrete || null;
+  const portraitItemInner = (item) => {
+    const sources = (item.sourceIds || []).map(esc).join(" / ");
+    const evidence = (item.evidence || []).map((entry) => "<blockquote>" + esc(entry.quote) + "（" + esc(entry.account) + "）</blockquote>").join("");
+    return esc(item.text) +
+      (item.sourceLabel ? " <span class='tag tag-muted'>" + esc(item.sourceLabel) + "</span>" : "") +
+      "<details class='basis-details'><summary></summary><div class='muted'>来源：" + sources + "</div>" + evidence + "</details>";
+  };
+  const portraitItem = (item) => "<li>" + portraitItemInner(item) + "</li>";
+  /* 无法给出的维度按原因分组：缺输入（补上可解锁）与语料没有口径，不能混成一句。 */
+  const missingInput = portrait ? portrait.missing.filter((item) => item.reason === "missing-input") : [];
+  const missingCorpus = portrait ? portrait.missing.filter((item) => item.reason !== "missing-input") : [];
+  /* 三级呈现：hero 只留一行可行动提示（跳转到「覆盖说明」折叠节），完整原因全部保留在折叠节里。 */
+  const unlockFields = Array.from(new Set(missingInput.reduce((acc, item) => acc.concat(item.unlockFields || []), [])));
+  const unlockHint = portrait && portrait.missing.length
+    ? "<p class='muted portrait-gap-hint'>" +
+      (unlockFields.length
+        ? "补上「" + esc(unlockFields.join("」「")) + "」，可解锁" + esc(missingInput.map((item) => item.dimension).join("、")) + "画像；"
+        : "") +
+      "其余维度语料没有口径的原因见 <a href='#coverage-notes'>「覆盖说明」</a></p>"
+    : "";
+  const coverageNotes = portrait && portrait.missing.length
+    ? "<details class='section-details card-fold' id='coverage-notes'><summary>覆盖说明：为什么有些维度没有</summary><div class='card'>" +
+      "<p class='muted'>每个维度「给不了」的完整原因都在这里（不做简化）；补上标注的输入即可解锁对应画像。</p><ul class='advice-list'>" +
+      portrait.missing.map((item) =>
+        "<li><strong>" + esc(item.dimension) + "</strong>（" + (item.reason === "missing-input" ? "缺输入" : "语料没有口径") + "）：" + esc(item.detail || "") +
+        ((item.unlockFields || []).length ? "　<span class='tag tag-knowledge'>补上：" + esc((item.unlockFields || []).join(" / ")) + "</span>" : "") +
+        "</li>").join("") +
+      "</ul></div></details>"
+    : "";
+  /* 覆盖面上来之后：每节默认只显示前 2 条，其余合并进一个折叠，保证可见行数不涨。 */
+  const PORTRAIT_SHOW_LIMIT = 2;
+  const hiddenPortrait = [];
+  const portraitSection = (title, items) => {
+    const list = items || [];
+    if (!list.length) return "";
+    list.slice(PORTRAIT_SHOW_LIMIT).forEach((item) => hiddenPortrait.push({ title: title, item: item }));
+    return "<div class='portrait-head'>" + title + "</div><ul class='portrait-list'>" + list.slice(0, PORTRAIT_SHOW_LIMIT).map(portraitItem).join("") + "</ul>";
+  };
+  const portraitBounds = portrait ? [
+    portraitSection("能配上的（参考）", portrait.upper),
+    portraitSection("保底的（参考）", portrait.lower),
+    portraitSection("去哪遇到这些人（参考）", portrait.channels),
+    portraitSection("对方 / 市场更看重你什么（参考）", portrait.preferences)
+  ].join("") : "";
+  const portraitMoreLine = hiddenPortrait.length
+    ? "<div class='muted'><details class='portrait-more'><summary>其余 " + hiddenPortrait.length + " 条画像（展开查看）</summary><ul class='portrait-list'>" +
+      hiddenPortrait.map((entry) => "<li><span class='muted'>[" + esc(entry.title) + "]</span> " + portraitItemInner(entry.item) + "</li>").join("") +
+      "</ul></details></div>"
+    : "";
+  const portraitBlock = portrait
+    ? "<div class='hero-portrait'>" +
+      (portrait.self ? "<p class='portrait-self'><span class='portrait-key'>你的定位</span>：" + esc(portrait.self) + "</p>" : "") +
+      portraitBounds +
+      portraitMoreLine +
+      unlockHint +
+      "</div>"
+    : "";
   const heroCard = "<div class='card hero-card'>" +
     "<h1>择偶定位报告</h1>" +
     "<p class='hero-positioning'>" + esc(hero.positioning || "本次可用的信息不足以给出综合分") + "</p>" +
-    "<div class='hero-numbers'>" +
-      "<div class='hero-num'><div class='hero-label'>择偶上限（参考）</div><div class='hero-value'>" + fmt(heroUpper) + "</div></div>" +
-      "<div class='hero-num'><div class='hero-label'>需要妥协的下限（参考）</div><div class='hero-value'>" + fmt(heroLower) + "</div></div>" +
-    "</div>" +
-    (heroStable ? "<p class='hero-stable'>稳妥区间（参考）：" + fmt(heroStable.low) + " – " + fmt(heroStable.high) + "</p>" : "") +
-    (heroAnalysis ? "<ul class='hero-analysis'>" + heroAnalysis + "</ul>" : "") +
-    "<p class='hero-note'>" + esc(hero.note || "") + "</p>" +
+    "<p class='hero-numbers-inline'>择偶上限（参考） <b>" + fmt(heroUpper) + "</b> · 需要妥协的下限（参考） <b>" + fmt(heroLower) + "</b>　<span class='muted'>" + esc(hero.note || "区间为语料口径 + 工程窗口参数算出的参考，不是预测") + "</span></p>" +
+    portraitBlock +
+    (heroAnalysis ? "<p class='hero-analysis-line'>" + esc((hero.analysis || []).join("　")) + "</p>" : "") +
     "</div>";
 
   const fold = (title, body, extraClass) =>
@@ -383,8 +446,10 @@ function render(report) {
   const rulesFold = fold("命中规则", "<table><thead><tr><th>编号</th><th>说明</th><th>范围</th><th>执行方式</th><th>证据强度</th></tr></thead><tbody>" + rulesApplied + "</tbody></table>");
   const evidenceFold = fold("证据引用（可追溯）", "<table><thead><tr><th>账号</th><th>aweme_id</th><th>强度</th><th>用于</th></tr></thead><tbody>" + evidence + "</tbody></table>");
   const advisoryFold = fold("体系参考（未自动执行）", "<p class='muted'>这些条目只作人工参考、不参与自动执行；内容与证据照常列出。</p><ul class='ref-list'>" + advisory + "</ul>");
-  const unstructuredFold = fold("尚未结构化的规则", "<p class='muted'>每条规则应二选一：写明可自动执行的条件，或声明为仅供人工参考。以下规则两者都没有。</p><ul class='ref-list'>" + unstructured + "</ul>" +
-    (ruleErrors ? "<h3>求值出错的规则</h3><ul class='advice-list'>" + ruleErrors + "</ul>" : ""));
+  const unstructuredFold = (report.unstructuredRules || []).length || ruleErrors
+    ? fold("尚未结构化的规则", "<p class='muted'>每条规则应二选一：写明可自动执行的条件，或声明为仅供人工参考。以下规则两者都没有。</p><ul class='ref-list'>" + unstructured + "</ul>" +
+      (ruleErrors ? "<h3>求值出错的规则</h3><ul class='advice-list'>" + ruleErrors + "</ul>" : ""))
+    : "";
   const caveatsFold = fold("局限与置信度", "<ul class='caveat'>" + caveats + "</ul>");
   const ledgerFold = fold("关于本报告",
     "<p class='muted'>报告 " + esc(report.id) + "　生成时间 " + esc(report.createdAt) + "　规则集 v" + esc(report.engine.mainRules.version) + "　照片轨道：" + esc(report.engine.photoModeLabel || report.engine.photoMode || "未启用") + "</p>" +
@@ -398,6 +463,7 @@ function render(report) {
     heroCard,
     extrapolationBanner,
     "<div class='report-actions'><button class='btn' id='toggle-basis'>展开全部依据</button><button class='btn' id='print-btn'>打印 / 存 PDF</button><a class='btn' href='/'>再测一份</a></div>",
+    coverageNotes,
     giveupFold,
     scoreFold,
     appearanceFold,

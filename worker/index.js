@@ -37,7 +37,9 @@ function corsHeaders(origin, env) {
   return {
     "Access-Control-Allow-Origin": origin || list[0],
     "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Access-Control-Allow-Headers": "content-type",
+    /* ★ 必须包含前端实际发送的全部自定义头。少列一个 → 浏览器预检失败 →
+       整个请求被浏览器拦下（curl 不受影响，所以只测 curl 会漏掉这个 bug）。 */
+    "Access-Control-Allow-Headers": "content-type, x-aoye-code",
     "Access-Control-Max-Age": "3600",
     "Vary": "Origin"
   };

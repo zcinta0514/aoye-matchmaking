@@ -27,12 +27,13 @@ if (PHOTOS === "proxy" && !/^https:[/][/]/.test(PROXY_URL)) {
   process.exit(2);
 }
 
-const LIB_FILES = ["engine.mjs", "load-browser.mjs", "city.mjs", "ruleset.mjs", "strength.mjs", "bands.mjs", "composite.mjs", "extrapolation.mjs", "facts-coverage.mjs", "sample.mjs", "validate.mjs", "labels.mjs", "pipeline.mjs"];
+const LIB_FILES = ["engine.mjs", "load-browser.mjs", "city.mjs", "ruleset.mjs", "strength.mjs", "bands.mjs", "composite.mjs", "extrapolation.mjs", "facts-coverage.mjs", "sample.mjs", "validate.mjs", "labels.mjs", "portrait.mjs", "pipeline.mjs"];
 const DATA_FILES = [
   ["knowledge", "rules.json"], ["knowledge", "facts.json"], ["knowledge", "evidence-independence.json"],
   ["knowledge", "evidence-quality-flags.json"], ["knowledge", "cases.json"], ["knowledge", "standards.json"],
   ["web/config", "baseline-rules.json"], ["web/config", "form-fields.json"], ["web/config", "cities.json"],
   ["web/config", "band-criteria.json"], ["web/config", "composite-criteria.json"], ["web/config", "composite-mapping.json"],
+  ["web/config", "portrait-rules.json"],
   ["web/config", "extrapolation-rules.json"]
 ];
 
@@ -57,7 +58,9 @@ function rewritePipeline(code) {
     "const DEFAULT_COMPOSITE_CRITERIA = " + JSON.stringify("data/composite-criteria.json") + ";",
     "const DEFAULT_COMPOSITE_MAPPING = " + JSON.stringify("data/composite-mapping.json") + ";",
     "const DEFAULT_QUALITY_FLAGS = " + JSON.stringify("data/evidence-quality-flags.json") + ";",
-    "const DEFAULT_BAND_CRITERIA = " + JSON.stringify("data/band-criteria.json") + ";"
+    "const DEFAULT_BAND_CRITERIA = " + JSON.stringify("data/band-criteria.json") + ";",
+    "const DEFAULT_STANDARDS = " + JSON.stringify("data/standards.json") + ";",
+    "const DEFAULT_PORTRAIT_RULES = " + JSON.stringify("data/portrait-rules.json") + ";"
   ];
   let out = lines.slice(0, startIndex).concat(constants, lines.slice(endIndex + 1)).join(String.fromCharCode(10));
   out = out.replace(/import path from "node:path";/g, "").replace(/import { fileURLToPath } from "node:url";/g, "");

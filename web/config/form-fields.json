@@ -789,6 +789,48 @@
         }
       ],
       "help": "可留空：留空表示未知 / 不便填写，该项不参与计分（D28）"
+    },
+    {
+      "id": "self_rank_position",
+      "label": "打分局名次（第几名）",
+      "group": "calibration",
+      "type": "number",
+      "required": false,
+      "unit": "名",
+      "min": 1,
+      "help": "可留空：留空表示未知 / 未参加，不解锁名次档位画像，也不影响分数（D28）"
+    },
+    {
+      "id": "self_rank_pool",
+      "label": "打分局池子大小",
+      "group": "calibration",
+      "type": "number",
+      "required": false,
+      "unit": "人",
+      "min": 2,
+      "help": "可留空：仅用于展示名次口径（如「40 人池」），不参与计分"
+    },
+    {
+      "id": "activity_type",
+      "label": "参加的相亲活动类型",
+      "group": "calibration",
+      "type": "select",
+      "required": false,
+      "options": [
+        {
+          "value": "high",
+          "label": "高净值专场"
+        },
+        {
+          "value": "three",
+          "label": "三高专场"
+        },
+        {
+          "value": "normal",
+          "label": "普通活动"
+        }
+      ],
+      "help": "可留空：留空表示未知 / 未参加，不解锁渠道档位画像，也不影响分数（D28）"
     }
   ]
 }

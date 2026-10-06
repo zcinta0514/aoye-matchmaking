@@ -15,7 +15,8 @@ const DATA_FILES = [
   "data/rules.json", "data/baseline-rules.json", "data/form-fields.json", "data/cities.json",
   "data/facts.json", "data/evidence-independence.json", "data/evidence-quality-flags.json",
   "data/cases.json", "data/band-criteria.json", "data/composite-criteria.json",
-  "data/composite-mapping.json", "data/extrapolation-rules.json"
+  "data/composite-mapping.json", "data/extrapolation-rules.json",
+  "data/standards.json", "data/portrait-rules.json"
 ];
 
 const state = { fields: [], groups: [], files: [], ruleset: null, cities: null, sample: null };
@@ -27,7 +28,7 @@ function el(tag, attrs, children) {
       if (key === "text") node.textContent = attrs[key];
       else if (key === "html") node.innerHTML = attrs[key];
       else if (key.indexOf("on") === 0) node.addEventListener(key.slice(2), attrs[key]);
-      else node.setAttribute(key, attrs[key]);
+      else if (attrs[key] !== undefined && attrs[key] !== null) node.setAttribute(key, attrs[key]);
     });
   }
   (children || []).forEach((child) => node.appendChild(child));
@@ -63,7 +64,7 @@ function renderField(field) {
       control.appendChild(item);
     }
   } else {
-    control = el("input", { type: field.type === "number" ? "number" : "text", id: "f-" + field.id, name: field.id, min: field.min, max: field.max, step: field.step || "any", placeholder: field.placeholder || "" });
+    control = el("input", { type: field.type === "number" ? "number" : "text", id: "f-" + field.id, name: field.id, min: field.min === undefined || field.min === null ? undefined : field.min, max: field.max === undefined || field.max === null ? undefined : field.max, step: field.step || "any", placeholder: field.placeholder || "" });
   }
   row.appendChild(control);
   if (field.help) row.appendChild(el("div", { class: "help", text: field.help }));

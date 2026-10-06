@@ -125,14 +125,19 @@ th { font-size: 12px; color: var(--muted); font-weight: 600; }
 /* 结论先行（D32）：hero 卡 + 默认折叠的分区卡 */
 .hero-card h1 { margin: 0 0 4px; font-size: 24px; }
 .hero-positioning { font-size: 17px; line-height: 1.6; margin: 6px 0 16px; }
-.hero-numbers { display: flex; gap: 14px; flex-wrap: wrap; }
-.hero-num { flex: 1 1 220px; background: #fbfaf7; border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
-.hero-num .hero-label { font-size: 13px; color: var(--muted); }
-.hero-num .hero-value { font-size: 34px; font-weight: 700; color: var(--accent); line-height: 1.25; }
-.hero-stable { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
+.hero-numbers-inline { margin: 6px 0 12px; font-size: 15px; }
+.hero-numbers-inline b { font-size: 20px; color: var(--accent); }
+.hero-numbers-inline .muted { font-size: 12px; }
+.hero-portrait { background: #fbfaf7; border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px 6px; }
+.portrait-self { margin: 0 0 8px; font-size: 15px; }
+.portrait-key { font-weight: 700; }
+.portrait-head { font-weight: 700; font-size: 14px; margin: 10px 0 4px; }
+.portrait-list { margin: 0; padding-left: 18px; }
+.portrait-list li { margin: 5px 0; }
+.portrait-list blockquote { margin: 4px 0 0; color: #444; border-left: 3px solid var(--line); padding-left: 10px; font-size: 13px; }
+.hero-portrait > .muted { margin: 8px 0 6px; }
 .hero-analysis { margin: 12px 0 0; padding-left: 20px; }
 .hero-analysis li { margin: 4px 0; }
-.hero-note { margin: 12px 0 0; font-size: 12px; color: var(--muted); }
 .card-fold { margin: 12px 0; }
 .card-fold > summary { list-style: none; cursor: pointer; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 20px; font-size: 16px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
 .card-fold > summary::-webkit-details-marker { display: none; }
@@ -158,3 +163,8 @@ th { font-size: 12px; color: var(--muted); font-weight: 600; }
 .photo-detail { margin-top: 14px; }
 .photo-detail > summary { cursor: pointer; font-weight: 600; }
 h4 { font-size: 14px; margin: 16px 0 6px; }
+
+/* 「其余 N 条画像」折叠 */
+.portrait-more { display: inline; }
+.portrait-more > summary { cursor: pointer; font-size: 13px; color: var(--muted); }
+.portrait-more > ul { margin: 6px 0 0; padding-left: 18px; }
