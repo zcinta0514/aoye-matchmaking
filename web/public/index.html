@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>鳌烨择偶定位系统 · 生成报告</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand">
+        <strong>鳌烨择偶定位系统</strong>
+        <span class="badge badge-muted">骨架版 v0.1</span>
+      </div>
+      <nav class="topnav">
+        <a href="/">生成报告</a>
+        <a href="#" id="meta-link">规则集状态</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="intro card">
+      <h1>生成你的择偶定位报告</h1>
+      <p class="muted">
+        填写基本条件 → 上传 1–3 张照片 → 自评校准 → 生成报告。
+        照片只做「可观察维度描述」，分数由 <code>knowledge/rules.json</code> 的规则映射成区间，并与你的自评交叉校准，全程可追溯。
+      </p>
+      <p class="disclosure">证据均来自同一机构（鳌烨传媒）的公开内容；强度标签只表示「机构内多个账号是否一致」，不代表跨机构或第三方独立验证。</p>
+      <div id="meta-panel" class="meta-panel hidden"></div>
+    </section>
+
+    <form id="report-form" novalidate>
+      <div id="form-sections"></div>
+
+      <section class="card">
+        <h2>照片（1–3 张，正脸 / 半身）</h2>
+        <p class="muted">未配置模型时会跳过照片分析（纯表单模式），流程照常可跑通。所有照片仅存本机 <code>web/data/uploads/</code>。</p>
+        <input id="photo-input" type="file" accept="image/*" multiple />
+        <div id="photo-previews" class="photo-previews"></div>
+      </section>
+
+      <section class="card submit-card">
+        <button type="button" class="btn ghost" id="fill-sample">填示例数据（真实案例 C-022）</button>
+        <button type="submit" class="btn primary" id="submit-btn">生成定位报告</button>
+        <div id="sample-note" class="sample-note hidden"></div>
+        <div id="form-status" class="status"></div>
+        <div id="form-errors" class="errors hidden"></div>
+      </section>
+    </form>
+  </main>
+
+  <footer class="wrap footer muted">
+    规则来源：knowledge/rules.json（权威，含证据）+ web/config/baseline-rules.json（演示基线，未取证，仅补缺）。
+  </footer>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

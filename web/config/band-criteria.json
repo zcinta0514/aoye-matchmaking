@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-10-06T00:00:00Z",
+  "meta": {
+    "origin": "web-config",
+    "note": "D24：报告梯队只说博主自己的词汇（knowledge/rules.json 的 bands）。本文件给每条 band 一个可判定的输入条件；没有对应表单字段的 band 标 needsField（报告显示「输入未提供」），绝不猜。baseline 的 S/A/B/C 不参与任何判定。"
+  },
+  "disclaimer": "梯队阶梯使用博主本人的分类词汇（打分局名次 / 资产档 / 活动渠道 / 生态位）；本系统不输出自创的 S/A/B/C 档位。",
+  "bandTypeLabels": { "rank": "打分局名次", "asset": "资产档", "channel": "活动渠道", "ecosystem": "生态位" },
+  "bands": {
+    "match.rank.t1": { "when": null, "needsField": "打分局名次（第几名 / 池子大小）" },
+    "match.rank.t7": { "when": null, "needsField": "打分局名次（第几名 / 池子大小）" },
+    "asset.a9": { "when": { "field": "subject.family_wealth", "op": "eq", "value": "a9" } },
+    "asset.a8": { "when": { "field": "subject.family_wealth", "op": "eq", "value": "a8" } },
+    "asset.a7": { "when": { "field": "subject.family_wealth", "op": "eq", "value": "a7" } },
+    "event.high": { "when": null, "needsField": "参加的相亲活动类型（高净值 / 三高 / 普通）" },
+    "event.three": { "when": null, "needsField": "参加的相亲活动类型（高净值 / 三高 / 普通）" },
+    "event.normal": { "when": null, "needsField": "参加的相亲活动类型（高净值 / 三高 / 普通）" },
+    "ecosystem.tier": { "when": null, "needsField": "生态位（黄金 / 白银 / 青铜，语料口径）" }
+  }
+}

@@ -1,0 +1,3495 @@
+{
+  "generatedAt": "2026-10-05T15:59:52.912Z",
+  "coverage": "标准抽取基于 knowledge/01-06 六个知识与 rules.json（153 条规则）的全部数字标准；生成时点语料转写进度 1907/3430 条（55.6%，后台转写仍在进行，覆盖度会继续变化）。",
+  "tierPolicy": {
+    "hard": "语料有明确原话、数字可直接执行（阈值/分值/分界）。可进入网页判定逻辑。",
+    "soft": "语料有数值但口径模糊（ASR 损伤、单条孤例、活动宣传/案例/链条转述、单位或对象存疑）。默认不得进入硬过滤，需人工确认或补充语料后启用。",
+    "derived": "语料没有直接给出该数字，是知识库作者的推算/归一（如 40+20+15=75%、A7=千万以下、5.5≈前5-10%）。禁止进入任何硬判定/过滤逻辑，只可作为文案或解释。"
+  },
+  "claimPolicy": {
+    "claimType": {
+      "market-norm": "关于市场如何运转的断言；经验型需多源才算 hard（D21）。",
+      "event-rule": "某主办方/某场次的准入规则；必须显式标「仅代表该主办方/该场活动」（D25）。",
+      "marketing": "机构获客话术或城市矩阵号单源当地口径；不得作为规律输出，只能进 advisory（D25/D27）。"
+    },
+    "kind": {
+      "definitional": "博主陈述的规则/表格/门槛线；可单源为 hard，但必须公示 sources（D21）。",
+      "empirical": "关于市场如何运转的断言；必须多源才算 hard（D21）。"
+    },
+    "sourceLabel": "event-rule / marketing 类标准的来源标签（主办方/场次/矩阵号），报告必须展示（D27）。"
+  },
+  "standards": [
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-001",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "评分底标（男女各一套标尺）",
+      "threshold": {
+        "op": "range",
+        "value": [
+          1,
+          9
+        ],
+        "unit": "分",
+        "step": 0.5
+      },
+      "meaning": "颜值分为 1-9 分、0.5 分一档；分数是把人放进「100 个同龄人」池子里的位次折算，不是绝对值。",
+      "tier": "hard",
+      "refs": [
+        "R-LOOKS-001",
+        "R-LOOKS-025",
+        "05-glossary#颜值分"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7664928566988175995",
+          "quote": "1-9分的外表男生评价提起来咯。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7651589852420427048",
+          "quote": "4分是中位数，这你能知道吧，颜值偏态分布。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7654913599751654708",
+          "quote": "咱就是说95年，不要和年轻人比啊……95年里100个人里，这样不是前30，没问题。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 3,
+        "transcripts": 3,
+        "accounts": 2
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-002",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "无外形优势的评估对象",
+      "threshold": {
+        "op": "range",
+        "value": [
+          3,
+          4
+        ],
+        "unit": "分"
+      },
+      "meaning": "3-4 分判为普通人；4 分 ≈ 100 人中的第 50 名（中位数），4 分往右才脱离普通。",
+      "tier": "hard",
+      "refs": [
+        "R-LOOKS-002"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7648982262922382646",
+          "quote": "三到四分是普通人吗？对。四分往右一点点。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7639325798792482102",
+          "quote": "敢颜值怎样？正常人吧，3.5左右吧。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-003",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "干净、收拾过的普通偏上",
+      "threshold": {
+        "op": "range",
+        "value": [
+          4.2,
+          4.5
+        ],
+        "unit": "分"
+      },
+      "meaning": "「比普通人强」档；女生口径 4.2 ≈ 100 个女生前 40 名。单条案例（2 条、均来自 aoye98），非跨账号结论。",
+      "tier": "soft",
+      "refs": [
+        "R-LOOKS-003",
+        "01-appearance-scale#§2"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7661209960478444827",
+          "quote": "再上身高，我能给您打4出头，就比普通人给您强……4.2差不多有了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7653425487565360436",
+          "quote": "4.2，差不多有了。……100个女生里前40名，没问题。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-004",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "宿舍/小群体尺度",
+      "threshold": {
+        "op": "range",
+        "value": [
+          4.6,
+          4.9
+        ],
+        "unit": "分"
+      },
+      "meaning": "4.6-4.9 = 宿舍花/舍草层；4.7-4.8 是「标标准准的小舍花」（多来源）；4.8-4.9 的「有争议的宿舍花（8 人里约 7 人认）」为单条语料口径（aoye98/7656400717271354624）。该视频开头有一处身高/体重的数字粘连（回听已确认相邻两个数字为独立词，见 standards-coverage §八），但本条引用句出现在后段、不与粘连位置相邻；4.6-4.7 段另有其它来源互证。",
+      "tier": "hard",
+      "refs": [
+        "R-LOOKS-003"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7650475626062810422",
+          "quote": "这就叫标标准准的小舍花。……一个宿舍里有争议的那个舍花。4.7、4.8差不多。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7656400717271354624",
+          "quote": "有争议的宿舍舍花差不多就是8个人里7个人里出一个，就4.8、4.9。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7647499397491674404",
+          "quote": "身高稍微一丢丢减分，干净五分不错啊……4.6。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7650833393881533731",
+          "quote": "能争一下宿舍设花？5分的宿舍设花？……4.7，差不多。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 4,
+        "transcripts": 4,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [
+        {
+          "value": "5.3-5.4 = 100 个男生第 6、7",
+          "source": "aoye98/7643013486221593897",
+          "note": "同一账号另一场次口径；与「5.3≈前20 / 5.2-5.3=第18-19」相差约 ±10 名，未强行统一。"
+        },
+        {
+          "value": "「有争议的班花/班草」= 5.5（另一口径）",
+          "source": "aoye98/7640777429912538409、aoye28/7652319341093965092",
+          "note": "本条把「有争议的班花」定在 5.2-5.3；另一口径定在 5.5。两边并列，未强行统一（详见 S-LOOKS-006）。"
+        }
+      ],
+      "id": "S-LOOKS-005",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "宿舍花上限≈班花下限",
+      "threshold": {
+        "op": "range",
+        "value": [
+          5,
+          5.3
+        ],
+        "unit": "分"
+      },
+      "meaning": "5 分出头 = 无争议的宿舍花，水平约等于有争议的班花/班草；5.2-5.3 分数带另有 aoye28 两条独立来源互证；男 5.3 ≈ 100 个男生前 20。「无争议宿舍花≈有争议班花」的等价表述为单条语料（aoye98/7656400717271354624，该视频开头有数字粘连但本句在后段，回听已确认）；「有争议的班花=5.5」的竞争口径见冲突。",
+      "tier": "hard",
+      "refs": [
+        "R-LOOKS-004"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7656400717271354624",
+          "quote": "没争议的就是5分出头了……你要说没争议的宿舍舍花，基本上就跟有争议的班花就是一个水平了，就是5.2到5.3。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7627766660082953083",
+          "quote": "一个男生1米88，140斤，五官端正，他给打了个5.3分，5.3分差不多就是100个男生里面前20的水平。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "差不多，5.2、5.3。100个男生里第18、19。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7652319341093965092",
+          "quote": "差不多，5.2 5.3。100个男生里第18 19。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7648983991869099307",
+          "quote": "5.2 5.3。100个男生里第19第20。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 5,
+        "transcripts": 5,
+        "accounts": 3
+      }
+    },
+    {
+      "conflicts": [
+        {
+          "value": "5.2-5.3（同样被称为「有争议的班花」）",
+          "source": "aoye98/7656400717271354624",
+          "note": "同一账号两条口径；本条不再收敛。"
+        },
+        {
+          "value": "前 5、第 6（百人位次）",
+          "source": "aoye98/7641522903011314987",
+          "note": "与另一条「100 个人里保八成五」并存，「保八成五」含义存疑，未采用。"
+        }
+      ],
+      "id": "S-LOOKS-006",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "第一个「好看」门槛",
+      "threshold": {
+        "op": ">=",
+        "value": 5.5,
+        "unit": "分"
+      },
+      "meaning": "5.5 = 有争议的班花班草 / 无争议的校草，开始「能吃到颜值红利」。男生文字版 checklist：光脚 1 米 80、五官无硬伤（三庭/眉眼唇/牙弓/头肩比/面部折叠度组合无短板）、会穿搭、身材好、皮肤好。",
+      "tier": "hard",
+      "refs": [
+        "R-LOOKS-005",
+        "R-LOOKS-016"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "5.5分就是有争议的班花班草。……光脚1米80，五官不能有硬伤，会穿搭，身材好，皮肤好，基本上就算5.5分了。"
+        },
+        {
+          "account": "41252723284",
+          "aweme_id": "7550417741316934962",
+          "quote": "能找，颜值5.5分就是已经能吃到颜值红利了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7641522903011314987",
+          "quote": "小班草这百个男生里前5、第6。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7656724726068301062",
+          "quote": "5.5分就是有争议的班草、无争议的校草。100个人里保八成五吧。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 4,
+        "transcripts": 4,
+        "accounts": 2
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-007",
+      "dimension": "looks",
+      "appliesTo": "female",
+      "condition": "女生准 6 分档",
+      "threshold": {
+        "op": "range",
+        "value": [
+          5.7,
+          5.8
+        ],
+        "unit": "分"
+      },
+      "meaning": "女 5.7-5.8 = 「保五争三」：100 个女生里前 3-5 名；博主会同时说「绝对有六分」。男生因身高封印常止步 5.7。",
+      "tier": "hard",
+      "refs": [
+        "R-LOOKS-007"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7650107302800018724",
+          "quote": "二三线城市的高中里面，100个女生里前三名了，5.7、5.8真的有了，100个女生里保五争三。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7643415586243906822",
+          "quote": "5.8、5.7、100个女生里保五争三，我给的1米74成了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7639291023436369190",
+          "quote": "1米75咱就不敢说6分以上了。……我给你打5.5、5.7。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 3,
+        "transcripts": 3,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-008",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "班草级/直播连麦门槛",
+      "threshold": {
+        "op": ">=",
+        "value": 6,
+        "unit": "分"
+      },
+      "meaning": "6 = 百里挑一 / 班草级；也是博主直播里「能开摄像头（露脸连麦）」的准入线。「百里挑一」为语义口径，语料未给精确 1/100 数。",
+      "tier": "hard",
+      "refs": [
+        "R-LOOKS-006"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420044572282158",
+          "quote": "兄弟咱这可达不到料。六叫班草叫百里挑一。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7646730995613355327",
+          "quote": "6分就是全班比你是最帅的那个，百里挑一。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7653425487565360436",
+          "quote": "原来只是6分能开摄像头。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 3,
+        "transcripts": 3,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-009",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "申报 6.5 时",
+      "threshold": {
+        "op": "none",
+        "value": "无锚点",
+        "unit": "分"
+      },
+      "meaning": "6.5 分在语料里只有来访者申报，博主当场否认（「咱俩可没6.5啊」）；不得作为独立档位进入判定。",
+      "tier": "soft",
+      "refs": [
+        "R-LOOKS-008",
+        "01-appearance-scale#§2"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7646730995613355327",
+          "quote": "咱俩卖的理由是素颜6分状态好有6.5。应该是吧？哥，咱俩可没6.5啊，素颜6分也没有。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [
+        {
+          "value": "4.2=女前40 vs 4.6=女第36-37",
+          "source": "aoye98/7653425487565360436 vs aoye98/7647499397491674404",
+          "note": "0.4 分只差 3-4 名，属小样本噪声，两边并列。"
+        },
+        {
+          "value": "5.3-5.4=第6-7 vs 5.2-5.3=第18-19 vs 5.3=前20",
+          "source": "aoye98/7643013486221593897、aoye98/7640777429912538409、47590488570/7627766660082953083",
+          "note": "同分位次相差约 12 名，未强行统一。"
+        },
+        {
+          "value": "5.5=前5/第6 vs 「保八成五」",
+          "source": "aoye98/7641522903011314987 vs aoye98/7656724726068301062",
+          "note": "「保八成五」语义存疑，不采用为百分位。"
+        }
+      ],
+      "id": "S-LOOKS-010",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "分数 → 百人位次（同分数段多口径）",
+      "threshold": {
+        "op": "map",
+        "value": "4.2-5.5 分 → 100 人池位次",
+        "unit": "名次"
+      },
+      "meaning": "语料给出的位次锚点：4.2=女前40；4.6=男第22-23、女第36-37；4.7=男前35；4.8-4.9=男前30；4.9=男第21；5.2-5.3=男第18-19；5.3=男前20；5.3-5.4=男第6-7；5.5=男前5/第6。位次口径不稳定，误差约 ±0.2 分/±10 名，实现只可按区间使用。",
+      "tier": "hard",
+      "refs": [
+        "R-LOOKS-003",
+        "R-LOOKS-004",
+        "R-LOOKS-005",
+        "R-LOOKS-025",
+        "01-appearance-scale#§10"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7655981256437517602",
+          "quote": "4.6，100个男生里，第23，第22。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7647499397491674404",
+          "quote": "4.6。……100给你生理第37，第36。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7648597115379223814",
+          "quote": "广角1米81，我跟你说4.7有了，100个男生里前35名。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7654913599751654708",
+          "quote": "4.9、4.8。……100个男生里前30。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7649352622561824019",
+          "quote": "4.9，100个男生里的21，能征下宿舍涉草没问题，上镜丑三分吗？"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "差不多，5.2、5.3。100个男生里第18、19。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7627766660082953083",
+          "quote": "5.3分差不多就是100个男生里面前20的水平。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7643013486221593897",
+          "quote": "6分就是百里挑一，就是班草级帅哥，可能稍微差一点。5.3，5.4，100个男生里第6，第7。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7641522903011314987",
+          "quote": "小班草这百个男生里前5、第6。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7653425487565360436",
+          "quote": "4.2，差不多有了。……100个女生里前40名，没问题。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 10,
+        "transcripts": 10,
+        "accounts": 2
+      }
+    },
+    {
+      "conflicts": [
+        {
+          "value": "aoye28 多例直接给出 7 分",
+          "source": "aoye28/7659837950730137211、7660245501128622949",
+          "note": "与 aoye98「全中国就你一个男生，你也不可能是7分」（几乎不可达）口径冲突；账号间可及性判断不同，不能跨账号混用。"
+        }
+      ],
+      "id": "S-LOOKS-011",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "申报 ≥7 分时先核原生",
+      "threshold": {
+        "op": ">=",
+        "value": 7,
+        "unit": "分"
+      },
+      "meaning": "7 分 = 极高档位、几乎不可达；必须纯天然（博主会反问是否动过、要求捏鼻核验），确认原生后才认可。",
+      "tier": "hard",
+      "refs": [
+        "R-LOOKS-009"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644902230331542826",
+          "quote": "全中国就你一个男生，你也不可能是7分。……你的脸有动过吗？是原生的吗？……你要说纯天然的，真的是有7分。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7659837950730137211",
+          "quote": "有7分。有7分。差不多7分。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7660245501128622949",
+          "quote": "有7分，有7分。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 3,
+        "transcripts": 3,
+        "accounts": 2
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-012",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "讨论明星颜值/上限",
+      "threshold": {
+        "op": "=",
+        "value": 8,
+        "unit": "分"
+      },
+      "meaning": "8 = 娱乐圈头部男明星档（「8 分守门员」）；张凌赫（ASR：张灵鹤）被估 8.1。单条、含 ASR 人名错字。",
+      "tier": "soft",
+      "refs": [
+        "06-casebook#6.1"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7635976663062433034",
+          "quote": "张灵鹤有几分，8.1，8分，差不多吧。……娱乐圈头部男明星的颜值，但你要说超头部达不到吧，8分手门员吧。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-013",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "分数上限",
+      "threshold": {
+        "op": ">=",
+        "value": 8.5,
+        "unit": "分"
+      },
+      "meaning": "8.5 = 国花国草（娱乐圈级别）；同条把「那扎」估到 8.7-8.8。",
+      "tier": "hard",
+      "refs": [
+        "R-LOOKS-010",
+        "06-casebook#6.1"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7661209960478444827",
+          "quote": "娱乐圈女明星谁能上8.5？8.5就是国花国草。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7661209960478444827",
+          "quote": "那扎我的审美有8.7？8.8？"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7657152085863058734",
+          "quote": "8.5上就是国花嘛。就一千万个人里出一个的颜值。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 2
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-014",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "男女同待遇换算",
+      "threshold": {
+        "op": "=",
+        "value": 0.8,
+        "unit": "分（男-女差）"
+      },
+      "meaning": "女生 4.5 以上、干净就能收到搭讪；男生要同等待遇，分数起码比女生高 0.8 分（≈5.3）。",
+      "tier": "soft",
+      "tierNote": "单条来源（仅 aoye98/7641867771478822185），全库仅 1 例「0.8 分差值」；营销语境下的即席换算，降为 soft。",
+      "refs": [
+        "R-LOOKS-011"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7641867771478822185",
+          "quote": "女生我觉得4.5以上干净一点就能收到搭讪。男生起码得高0.8分。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-015",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "颜值供给密度（博主观点）",
+      "threshold": {
+        "op": "=",
+        "value": "100 女 30 好看 / 100 男 5 帅",
+        "unit": "比例"
+      },
+      "meaning": "语料口径（博主观点）：两性在相亲市场的颜值供给密度不同——女生靠化妆与打理更容易达到「好看」的观感，男生达到同等观感的比例更低（约 20:1）。这是市场观察，不构成对任何人的评价。",
+      "tier": "soft",
+      "tierNote": "单条来源（47590488570/7660054519484591217），属博主观点/情绪化表达（「真的真的更重要」），非可核验标准；降为 soft。",
+      "refs": [
+        "R-DEMO-043",
+        "06-casebook#6.8"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7660054519484591217",
+          "quote": "100个女生，你起码能找到30个好看的女生。……但是100个男生中5个长的。……帅个就是20里面的挑一个。"
+        }
+      ],
+      "claimType": "marketing",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-016",
+      "dimension": "looks",
+      "appliesTo": "female",
+      "condition": "女性颜值构成权重",
+      "threshold": {
+        "op": "weights",
+        "value": {
+          "自信体态": 40,
+          "身材比例与穿衣": 20,
+          "发型与妆容": 15,
+          "五官": "剩余"
+        },
+        "unit": "%"
+      },
+      "meaning": "女性颜值权重：40% 自信与体态 + 20% 身材比例与穿衣搭配 + 15% 发型与妆容，剩下才轮到五官（南昌矩阵号口径）。",
+      "tier": "hard",
+      "refs": [
+        "R-LOOKS-017"
+      ],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7682010628554231090",
+          "quote": "40%靠的是自信和体态，20%靠的是身材比例和穿衣的搭配，15%是来自于我们的发型还有妆容，剩下的才轮得到自己的五官。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-017",
+      "dimension": "looks",
+      "appliesTo": "female",
+      "condition": "女性颜值「可改变项」占比（推算）",
+      "threshold": {
+        "op": "=",
+        "value": 75,
+        "unit": "%"
+      },
+      "meaning": "由 40+20+15 三项相加推算出的「后天可改变项占 75%」。语料没有直接出现 75% 这个数，禁止进入硬判定逻辑，只能作为文案/解释。",
+      "tier": "derived",
+      "refs": [
+        "01-appearance-scale#§7（作者推算）"
+      ],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7682010628554231090",
+          "quote": "40%靠的是自信和体态，20%靠的是身材比例和穿衣的搭配，15%是来自于我们的发型还有妆容，剩下的才轮得到自己的五官。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-018",
+      "dimension": "looks",
+      "appliesTo": "female",
+      "condition": "面部美学分之外的叠加",
+      "threshold": {
+        "op": "example",
+        "value": "面部 5.8-5.9 + 性格 → 综合 6.2-6.3",
+        "unit": "分"
+      },
+      "meaning": "性格/气质可在纯面部美学分上叠加，示例：面部 5.8-5.9 叠成综合 6.2-6.3。",
+      "tier": "soft",
+      "refs": [
+        "R-LOOKS-020"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7645562474632056127",
+          "quote": "您的性格很好，性格加分的，纯面部美学5.8 5.9……加上性格我觉得有6.2 6.3"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-019",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "非一线城市打分",
+      "threshold": {
+        "op": "note",
+        "value": "广义场 6 分 ≠ 珠海的 6 分",
+        "unit": "分"
+      },
+      "meaning": "同一张脸存在「广义分（全国池）」与「地方分（当地池）」两套口径：达不到广义 6 分的人，可能达到珠海的 6 分。单条、低置信，细则归 04 地域文件。",
+      "tier": "soft",
+      "refs": [
+        "R-LOOKS-024"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7661210006183824678",
+          "quote": "兄弟我就这么说，广义场的6分他没达到，狭义场在珠海的6分能达到。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-020",
+      "dimension": "looks",
+      "appliesTo": "both",
+      "condition": "照片/镜头条件",
+      "threshold": {
+        "op": "note",
+        "value": "照片条件：美颜/顶光可能低估真实呈现（不设分数阈值）",
+        "unit": "—"
+      },
+      "meaning": "照片/镜头可能低估真实呈现：语料提示先关顶光、调好美颜再判分（案例里校准后 5.2-5.3 成立）。产品输出建议：提供自然光下的正脸原相机照，不展示对个人外形的负面评价。",
+      "tier": "soft",
+      "refs": [
+        "R-LOOKS-019"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7649352622561824019",
+          "quote": "上镜丑三分。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7641867771478822185",
+          "quote": "你头顶是顶光……你把头顶的光关了，然后的话把美颜调对，5.2、5.3有了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420044572282158",
+          "quote": "全地球人都不上镜，只要上镜，你的五官的缺点全部会放大。……明星为什么能当明星了，人家能扛得住电影镜头。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 3,
+        "transcripts": 3,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-LOOKS-021",
+      "dimension": "looks",
+      "appliesTo": "female",
+      "condition": "顶美例外通道",
+      "threshold": {
+        "op": "none",
+        "value": "顶美（无数值门槛）",
+        "unit": "档位"
+      },
+      "meaning": "真正的顶美可让 A8 男生主动降低学历/家境门槛（全日制本科 → 专升本也可）；但「顶美」没有给出可计算的分数阈值，只有构成描述（皮肤/体态/身材比例/穿衣审美/整体状态），不能直接进硬判定。",
+      "tier": "soft",
+      "refs": [
+        "R-LOOKS-021",
+        "R-MATCH-021"
+      ],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7682020548599172403",
+          "quote": "不少A8的男生，他是愿意为了真正的顶美，主动去降低原来的择偶门槛……原来要求女方必须是全日制本科，遇到顶美以后，就算你是专升本也是没有关系的。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7682020548599172403",
+          "quote": "顶美也不是说只是你的五官漂亮，还是要看皮肤状态、体态、身材的比例、穿衣的审美，以及整个人呈现出来的状态。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-HEIGHT-001",
+      "dimension": "height",
+      "appliesTo": "male",
+      "condition": "男生硬件评分表第 1 项",
+      "threshold": {
+        "op": ">=",
+        "value": 175,
+        "unit": "cm"
+      },
+      "meaning": "身高 1 米 75 以上加 10 分（十项满分表之一）。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-002",
+        "R-MATCH-017"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "第一，身高1米75以上的加10分。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·男生硬件十项评分表",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-HEIGHT-002",
+      "dimension": "height",
+      "appliesTo": "male",
+      "condition": "男生 5.5 分 checklist",
+      "threshold": {
+        "op": ">=",
+        "value": 180,
+        "unit": "cm（光脚）"
+      },
+      "meaning": "男生拿到 5.5 分的硬前提之一：光脚 1 米 80，且五官无硬伤、会穿搭、身材好、皮肤好。",
+      "tier": "hard",
+      "refs": [
+        "R-LOOKS-005",
+        "R-LOOKS-016"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "光脚1米80，五官不能有硬伤，会穿搭，身材好，皮肤好，基本上就算5.5分了。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·男生 5.5 分文字版 checklist",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-HEIGHT-003",
+      "dimension": "height",
+      "appliesTo": "male",
+      "condition": "颜值分封顶",
+      "threshold": {
+        "op": "<=",
+        "value": 175,
+        "unit": "cm → 6 分封印线"
+      },
+      "meaning": "男 1 米 75 在直播间「不敢说 6 分以上」；面部美学分再高，上限也被身高制裁（1 米 88/140 斤/五官端正=5.3，前 20）。注意两条线用途不同：硬件评分表是 175+（S-HEIGHT-001），5.5 档 checklist 是光脚 180（S-HEIGHT-002）。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-005",
+        "R-LOOKS-012"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7639291023436369190",
+          "quote": "1米75咱就不敢说6分以上了。……每个人的颜值都会被身高所封印。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7627766660082953083",
+          "quote": "不论你的面部美学分数有多高，上限永远逃不掉身高的一个制裁。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 2
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-HEIGHT-004",
+      "dimension": "height",
+      "appliesTo": "male",
+      "condition": "心智首选边界（女性案例：01 年县城硕士）",
+      "threshold": {
+        "op": "=",
+        "value": 172,
+        "unit": "cm（首选上限）；180 为「不考虑」线"
+      },
+      "meaning": "画像锚点：1 米 72 的土著独生子=她的心智首选；同样条件加到 1 米 8，对方「就不考虑咱了」——这是上下限算法的边界样例。",
+      "tier": "soft",
+      "tierNote": "单例（一位来访者的画像边界），非普适阈值；概念（加一档就不考虑）可保留，数字降为 soft。",
+      "refs": [
+        "R-MATCH-003",
+        "R-MATCH-031"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7649728311765060883",
+          "quote": "你看，找个土著，独生子，1米72，140斤，形象一般，房车全，211本数，体制内的事业边，不太会聊天，这路子考不考虑？……画像我给您画的，你是他的心智首选。……他1米8就不考虑咱了。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-HEIGHT-005",
+      "dimension": "height",
+      "appliesTo": "female",
+      "condition": "向上社交链条中男方的期待（宁波账号口径）",
+      "threshold": {
+        "op": ">=",
+        "value": 165,
+        "unit": "cm"
+      },
+      "meaning": "「有车有房 1 米 75 以上、有本事的男的」想找的是 1 米 65 以上、工作稳定、长相过得去的女生。属链条转述，非博主直接给女生的门槛。",
+      "tier": "soft",
+      "refs": [
+        "R-DIM-038",
+        "04-demographics#§2"
+      ],
+      "evidence": [
+        {
+          "account": "33349790582",
+          "aweme_id": "7688292683130892197",
+          "quote": "有车有房1米75以上，有本事的男的呢？他想找1米65以上，工作稳定，长相过得去的。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-HEIGHT-006",
+      "dimension": "height",
+      "appliesTo": "both",
+      "condition": "高个子专场加分（深圳活动口径）",
+      "threshold": {
+        "op": "=",
+        "value": 0.5,
+        "unit": "分（加分上限）"
+      },
+      "meaning": "个子够高在打分/活动筛选中可加约 0.5 分。单账号活动宣传口径。",
+      "tier": "soft",
+      "refs": [
+        "R-DIM-006",
+        "R-DEMO-042"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7641872702176759076",
+          "quote": "最重要的一个是看身高。如果你个子够高，其实你是能够加到个0.5分左右的。"
+        }
+      ],
+      "claimType": "event-rule",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·深圳高个子专场",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [
+        {
+          "value": "女生 4.2%",
+          "source": "47590488570/7625984741712386426",
+          "note": "ASR 残缺导致口径不明（是「女生 165 以上占比」还是别的高考数据无法确认），待复核；不得进入判定。"
+        }
+      ],
+      "id": "S-HEIGHT-007",
+      "dimension": "height",
+      "appliesTo": "male",
+      "condition": "身高基数/稀缺度",
+      "threshold": {
+        "op": "=",
+        "value": "平均 169.7；≥180 约 5%；≥185 不到 1%",
+        "unit": "cm / %"
+      },
+      "meaning": "全国男性平均身高 169.7；1 米 8 以上约占 5%，1 米 85 以上不到 1%。同句还有「女生（身高口径）4.2%」，但该片段 ASR 残缺（「女生替照背的4.2%」），指向不明确，引用时只取男性数据。",
+      "tier": "soft",
+      "refs": [
+        "R-DIM-008",
+        "R-DEMO-044"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7625984741712386426",
+          "quote": "我国男性的平均身高是175吗？根本不是，而是169.7。1米8以上的就只占全国人数的5%，这比女生替照背的4.2%的占比还要少。1米85以上的更少，连1%都不到。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "tierNote": "D21：经验型断言仅 1 条来源，降 soft（需多源才可为 hard）。",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [
+        {
+          "value": "1米74 = 黄金身高",
+          "source": "aoye28/7650463510761082138",
+          "note": "与 179 优势线、162 减分线并列；女性身高口径存在 162/165/172/174/179 多个版本，单一上下限不成立。"
+        },
+        {
+          "value": "1米72 = 黄金身高",
+          "source": "aoye28/7653922226392217445",
+          "note": "同账号另一处给出不同黄金身高值，未强行统一。"
+        }
+      ],
+      "id": "S-HEIGHT-008",
+      "dimension": "height",
+      "appliesTo": "female",
+      "condition": "女性身高加减分",
+      "threshold": {
+        "op": ">=",
+        "value": 179,
+        "unit": "cm（优势线）；162 为小幅减分线"
+      },
+      "meaning": "女 1 米 79 是「超模身高、百分之百优势」（前提是别胖）；1 米 62 被评「身高稍微一丢丢减分」但仍可给 5 分档。",
+      "tier": "soft",
+      "tierNote": "两处均为单例：179 出自一条带「捧杀」语境的直播，162 出自一位来访者；同族口径还出现 165/172/174 等不同说法，降为 soft。",
+      "refs": [
+        "R-LOOKS-013"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7661209960478444827",
+          "quote": "优势，绝对是优势，百分之百是优势，别胖就行。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7647499397491674404",
+          "quote": "身高稍微一丢丢减分，干净五分不错啊。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7650463510761082138",
+          "quote": "1米74现在是当今社会审美女性的黄金身高。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7653922226392217445",
+          "quote": "1米72女生真的是黄金身高啊"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 4,
+        "transcripts": 4,
+        "accounts": 2
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-WEIGHT-001",
+      "dimension": "weight",
+      "appliesTo": "female",
+      "condition": "体重关注阈值样本（单条）",
+      "threshold": {
+        "op": ">=",
+        "value": 145,
+        "unit": "斤（162cm 时的样本值）"
+      },
+      "meaning": "语料样本：1 米 62 / 145 斤被归入「体重需要管理」区间（样本记录，不作产品输出）；同条提到男女对「微胖」的认知不同。产品只建议健康的生活方式管理。",
+      "tier": "soft",
+      "refs": [
+        "R-DIM-010",
+        "06-casebook#C-014"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7639676121834851593",
+          "quote": "1米62，145斤。男女对微胖的理解可不一样，姑娘。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-WEIGHT-002",
+      "dimension": "weight",
+      "appliesTo": "female",
+      "condition": "体重关注阈值样本（单条）",
+      "threshold": {
+        "op": ">=",
+        "value": [
+          135,
+          138
+        ],
+        "unit": "斤（173cm 时的样本值）"
+      },
+      "meaning": "语料样本：1 米 73 / 135-138 斤在个别案例中被归入体重议题（样本记录，不作产品输出）；针对身体的评价不进入产品文案，只保留健康管理建议。",
+      "tier": "soft",
+      "refs": [
+        "R-DIM-010",
+        "06-casebook#C-003"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7637831090509466906",
+          "quote": "我的身高是1米73。然后体重现在是135到138之间。……男女对微胖的认知不一样。……就还是太胖了。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-WEIGHT-003",
+      "dimension": "weight",
+      "appliesTo": "female",
+      "condition": "画像里的正常体重样例",
+      "threshold": {
+        "op": "=",
+        "value": 100,
+        "unit": "斤（168cm 时，画像正常区间）"
+      },
+      "meaning": "168cm/100 斤出现在「本地独生女」的目标画像里，属正常区间；同画像要求「物欲低、情绪稳定、专升本文凭、月入 3500」。",
+      "tier": "soft",
+      "refs": [
+        "02-dimensions#§2.1"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638583110027824447",
+          "quote": "找个本地人，独生女，1米68，颜值普通人，体重100斤"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-WEIGHT-004",
+      "dimension": "weight",
+      "appliesTo": "female",
+      "condition": "第一印象吸引力样例（个案）",
+      "threshold": {
+        "op": "=",
+        "value": "165cm / 90 斤 + 颜值 4.7-4.8",
+        "unit": "cm/斤/分"
+      },
+      "meaning": "语料用「1 米 65 / 90 斤 + 颜值 4.7-4.8」举例说明第一印象的吸引力组合（个案，非普适阈值，不作产品输出）。",
+      "tier": "soft",
+      "refs": [
+        "06-casebook#6.4"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7632634918417255726",
+          "quote": "比方说一个女生颜值4.7，4.8，白一点，瘦一点，1米65，90斤，可能就能激起来这个男生的生理性冲动。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-WEIGHT-005",
+      "dimension": "weight",
+      "appliesTo": "male",
+      "condition": "形象管理减分样本（郑州案例）",
+      "threshold": {
+        "op": "=",
+        "value": "175cm / 180 斤（样本值）",
+        "unit": "cm/斤"
+      },
+      "meaning": "语料样本：1 米 75 / 180 斤在郑州案例里被认为形象项减分，竞争中不如形象清爽的对手（样本记录，不作产品输出）；产品只提示形象管理是可改变项。",
+      "tier": "soft",
+      "refs": [
+        "04-demographics#§1.8"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7682641580730634225",
+          "quote": "比如说1米75，180斤，稍微油腻一点，聊天感觉差一点。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [
+        {
+          "value": "语料的另一种写法（ASR 损伤版本）",
+          "source": "47590488570/7638546961003941285",
+          "note": "对照表 ASR 损伤严重；此类等价表述只作内部建模用，不对用户展示。两边都保留。"
+        }
+      ],
+      "id": "S-WEIGHT-006",
+      "dimension": "weight",
+      "appliesTo": "female",
+      "condition": "体重议题的性别双标（内部等价项）",
+      "threshold": {
+        "op": "note",
+        "value": "体形焦虑议题存在性别双标（内部建模用；不向用户展示具体换算）",
+        "unit": "等价项"
+      },
+      "meaning": "语料显示相亲市场对男女体形/外形的关注存在双重标准（同一现象在男女身上用不同说法）。产品只输出中性提示：体重与体形可通过生活方式管理改善；不展示任何把体形与身体缺陷类比的表述。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-009",
+        "R-DIM-030"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7637831090509466906",
+          "quote": "女生胖一胖等于男人生啥？头秃，我知道我看过您的很多切片，我特别喜欢您。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7622657378560211641",
+          "quote": "女生胖就相当于说一个男生秃。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 2
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-AGE-001",
+      "dimension": "age",
+      "appliesTo": "female",
+      "condition": "长沙有门槛活动（城市/活动级）",
+      "threshold": {
+        "op": "<",
+        "value": 30,
+        "unit": "岁"
+      },
+      "meaning": "长沙活动口径：「女生卡 30 岁以下」；男生卡家境与收入。同条给女生三个补充条件（家境殷实/高学历/工作体面）满足其一。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-027",
+        "R-DEMO-031"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7650118291364764794",
+          "quote": "男生呢，我们依旧会卡下家境，然后收入。女生呢，卡30岁以下。家境殷实，高学历，工作体面，满足其中一项就可以。"
+        }
+      ],
+      "claimType": "event-rule",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·长沙优秀青年局",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-AGE-002",
+      "dimension": "age",
+      "appliesTo": "female",
+      "condition": "山东/东三省精英群（单条活动口径）",
+      "threshold": {
+        "op": ">=",
+        "value": 1998,
+        "unit": "出生年（98 后，约 ≤28 岁）"
+      },
+      "meaning": "精英群女生门槛「98 后」，且在颜值高、形象好的前提下再满足「家境殷实/高学历/工作体面」三者之一。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-028",
+        "R-DEMO-031"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644248802190870890",
+          "quote": "男生的门槛是90后高净值，女生的门槛是98后，在颜值高、形象好的前提下。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7643773318034843603",
+          "quote": "男生的门槛还是90后高净值，女生的门槛还是98后，在颜值高、形象好的前提下。"
+        }
+      ],
+      "claimType": "event-rule",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·山东/东三省精英群",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-AGE-003",
+      "dimension": "age",
+      "appliesTo": "female",
+      "condition": "高社会能量男性的接受上限（二婚语境，单条）",
+      "threshold": {
+        "op": "<=",
+        "value": [
+          28,
+          29
+        ],
+        "unit": "岁"
+      },
+      "meaning": "语料中高社会能量男性的年龄接受上限样例为 28-29 岁（单一个体口径，不构成平台结论）。",
+      "tier": "soft",
+      "tierNote": "单条来源、单一个体（高社会能量男二婚语境）；同账号另有其他年龄口径，降为 soft。",
+      "refs": [
+        "R-DEMO-033",
+        "R-MATCH-028"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636347718041881866",
+          "quote": "他其实不可能能接受三十一二岁的女生，就撑死也就是二十八九。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-AGE-004",
+      "dimension": "age",
+      "appliesTo": "female",
+      "condition": "婚龄窗口对照（单条）",
+      "threshold": {
+        "op": "=",
+        "value": "22 岁 vs 32 岁（对照样本）",
+        "unit": "岁"
+      },
+      "meaning": "语料用 22 岁与 32 岁做对照，说明部分客群把婚龄窗口当成硬筛选条件。产品只提示「部分客群对婚龄窗口要求较严」并给出中性门槛数字，不输出年龄定价类表述。",
+      "tier": "soft",
+      "tierNote": "单条来源，出自获客视频的营销论证段落，不是可执行阈值；降为 soft。",
+      "refs": [
+        "R-MATCH-028"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7653740377044021105",
+          "quote": "一个22岁的美女哪怕身无分文，找对渠道依然有巨大的可能可以找到高净值的伴侣。但她呢到了32岁，即使找门当户对也有可能被挑挑拣拣。"
+        }
+      ],
+      "claimType": "marketing",
+      "kind": "empirical",
+      "sourceLabel": "机构获客视频（22/32 岁对照）",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-AGE-005",
+      "dimension": "age",
+      "appliesTo": "female",
+      "condition": "年龄—收入等价项（内部，ASR 损伤）",
+      "threshold": {
+        "op": "note",
+        "value": "年龄—收入等价项（语料存在；不向用户展示具体换算）",
+        "unit": "等价项"
+      },
+      "meaning": "网传对照表把女性年龄与男性收入直接类比（ASR 严重损伤，仅此条可辨读）；此类换算涉及年龄贬损，产品不输出。30+ 的定位应使用其他筹码补位（见 S-AGE-003/004）。",
+      "tier": "soft",
+      "refs": [
+        "R-DIM-030",
+        "06-casebook#6.7"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7638546961003941285",
+          "quote": "35加女、性等于月薪3k男、性爱打卡网红店等于纹身喝酒抽烟三件套"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-AGE-006",
+      "dimension": "age",
+      "appliesTo": "male",
+      "condition": "有门槛活动/精英群（性别不对称）",
+      "threshold": {
+        "op": ">=",
+        "value": 1990,
+        "unit": "出生年（90 后；深圳场为男 85 后）"
+      },
+      "meaning": "东三省/山东精英群男生门槛「90 后 + 高净值」；深圳某专场为「男生 85 后、女生 90 后」。男性年龄权重低于女性但仍计入定价。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-028",
+        "R-DEMO-032"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644248802190870890",
+          "quote": "我准备建一个东三省的精英群，男生的门槛是90后高净值，女生的门槛是98后，在颜值高、形象好的前提下。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7668567854677735369",
+          "quote": "这次活动男生85后女生90后，这个年纪大家对情感理解也比较清晰。"
+        }
+      ],
+      "claimType": "event-rule",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·东三省/山东精英群；深圳 85 后/90 后专场",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 2
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-AGE-007",
+      "dimension": "age",
+      "appliesTo": "male",
+      "condition": "男性黄金周期（南京三甲主治 31 岁案例）",
+      "threshold": {
+        "op": "=",
+        "value": "31 岁 + 黄金 3 年 + 次黄金 3 年",
+        "unit": "岁/年"
+      },
+      "meaning": "31 岁前后判「黄金周期最少还有三年，次黄金周期也有三年」（即 31-34 黄金、34-37 次黄金）；单条案例，不能外推为通用公式。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-036"
+      ],
+      "evidence": [
+        {
+          "account": "30578719968",
+          "aweme_id": "7552245295359216905",
+          "quote": "南京三甲医院的主治大夫，起码您的黄金周期最少还有三年，次黄金周期也有三年。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-AGE-008",
+      "dimension": "age",
+      "appliesTo": "both",
+      "condition": "年龄差上限（北京案例）",
+      "threshold": {
+        "op": "<=",
+        "value": [
+          7,
+          8
+        ],
+        "unit": "岁差"
+      },
+      "meaning": "语料里可接受的年龄差跨度上限约 7-8 岁：北京案例「大 7 岁」可匹配（放宽城区/独生条件）；另一案例「92 年比你大八岁」成立。",
+      "tier": "hard",
+      "refs": [
+        "R-DEMO-037"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640076462543867176",
+          "quote": "年龄大个7岁，老北京人不要要求成六区的，找个就是比方说门头沟的，有户口的，然后别卡独生子。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7636347544313793830",
+          "quote": "比你大八岁，北京本地屠住110，也卡独生子。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7680500612643919867",
+          "quote": "比方说这男生在嘉兴。家里面有个A8.2。……比你大8岁。90年的。胖一点。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 3,
+        "transcripts": 3,
+        "accounts": 2
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-AGE-009",
+      "dimension": "age",
+      "appliesTo": "both",
+      "condition": "年龄差拒绝线",
+      "threshold": {
+        "op": ">=",
+        "value": 10,
+        "unit": "岁差"
+      },
+      "meaning": "「会比我大 10 岁左右，我也不太能接受」——约 10 岁被明确拒绝（单条男嘉宾表述）。",
+      "tier": "soft",
+      "tierNote": "单条个体表态；另有「大 12 岁绝对不可能」「大 20 岁也可谈」等不同阈值，降为 soft 并保留冲突。",
+      "refs": [
+        "R-DEMO-037"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636347304823360806",
+          "quote": "他们年纪又太大了，就是会比我大10岁左右，我也不太能接受。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7665572061636976037",
+          "quote": "比自己大12岁的。我告诉你绝对不可能。可能性是零。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7653922226392217445",
+          "quote": "你要能接受比自己大20岁啊"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 3,
+        "transcripts": 3,
+        "accounts": 2
+      }
+    },
+    {
+      "conflicts": [
+        {
+          "value": "31-32 男 ↔ 28-29 女（差约 3 岁）",
+          "source": "aoye98/7636347718041881866",
+          "note": "与「6-8 年」不相容，两边都保留，待复核。"
+        }
+      ],
+      "id": "S-AGE-010",
+      "dimension": "age",
+      "appliesTo": "both",
+      "condition": "二婚市场（存疑，内部不自洽）",
+      "threshold": {
+        "op": "=",
+        "value": "男女年龄感差 6-8 年",
+        "unit": "岁差"
+      },
+      "meaning": "博主称二婚市场男女年龄感之差约 6-8 年，但同段举例是男方 31-32 岁、女方被卡 28-29 岁（差约 3 岁），两处数字对不上。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-038"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636347718041881866",
+          "quote": "就是男女啊，在二婚市场上的这个年龄感之差大概存在六到八年。……基本上在94、95年，三十一二岁。……他其实不可能能接受三十一二岁的女生，就撑死也就是二十八九。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-AGE-011",
+      "dimension": "age",
+      "appliesTo": "both",
+      "condition": "单身基数（样本口径）",
+      "threshold": {
+        "op": ">=",
+        "value": 30,
+        "unit": "%（25 岁以上样本）"
+      },
+      "meaning": "「25 岁以上」人群里母胎单身至少约三成；到 30 岁起码一半人没谈过 100 天以上的恋爱。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-049"
+      ],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7683835218330963200",
+          "quote": "完全没有谈过恋爱的母胎单身solo的人，比你想象的要多的多的多。我们接触的这个样本里面至少说在三成。注意我说的是25岁以上的。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-INCOME-001",
+      "dimension": "income",
+      "appliesTo": "male",
+      "condition": "男生硬件评分表第 5 项",
+      "threshold": {
+        "op": ">=",
+        "value": 10,
+        "unit": "万元/年（税后）"
+      },
+      "meaning": "税后年收入 10 万以上加 10 分（十项满分表之一）。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-016",
+        "R-MATCH-017"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "第五的话，年收入税后在10万以上的加10分。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·男生硬件十项评分表",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-INCOME-002",
+      "dimension": "income",
+      "appliesTo": "male",
+      "condition": "竞争力描述（全国口径）",
+      "threshold": {
+        "op": "range",
+        "value": [
+          20,
+          30
+        ],
+        "unit": "万元/年"
+      },
+      "meaning": "一年能赚二三十万，在任何城市相亲市场「秒杀 90% 以上的竞争者」。",
+      "tier": "soft",
+      "refs": [
+        "R-DIM-016"
+      ],
+      "evidence": [
+        {
+          "account": "20090777434",
+          "aweme_id": "7509097036177902863",
+          "quote": "一年能赚二三十万的，无论你在中国哪个城市的相亲市场上，都能秒杀到90%以上的竞争者。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "tierNote": "D21：经验型断言仅 1 条来源，降 soft（需多源才可为 hard）。",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-INCOME-003",
+      "dimension": "income",
+      "appliesTo": "male",
+      "condition": "高收入豁免其他维度",
+      "threshold": {
+        "op": ">=",
+        "value": 30,
+        "unit": "万元/年"
+      },
+      "meaning": "30 万以上，可不再对男方的外貌、年龄、身高、家境、工作、脾气提太多要求。",
+      "tier": "soft",
+      "refs": [
+        "R-DIM-016",
+        "06-casebook#6.6"
+      ],
+      "evidence": [
+        {
+          "account": "20090777434",
+          "aweme_id": "7509097036177902863",
+          "quote": "30万以上，你就真的不要再对他的外貌、年龄、身高、家境、工作、脾气有太多的要求。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "tierNote": "D21：经验型断言仅 1 条来源，降 soft（需多源才可为 hard）。",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [
+        {
+          "value": "全国：年 10 万+才是加分线",
+          "source": "47590488570/7617107297344810085",
+          "note": "与太原口径并存；属城市能级条件依赖，未强行统一。"
+        }
+      ],
+      "id": "S-INCOME-004",
+      "dimension": "income",
+      "appliesTo": "male",
+      "condition": "太原/山西地方标尺（城市系数样板）",
+      "threshold": {
+        "op": "=",
+        "value": "月 5000 合格；年 10 万中上；体制内税后 10 万+ 吃香",
+        "unit": "元/月；万元/年"
+      },
+      "meaning": "同一收入在太原与一线含义不同：月入 5000 已「非常合格」，年入 10 万是「中上等」而非地板砖。实现必须有城市系数，不能全国统一用 10 万线。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-025",
+        "06-casebook#6.4"
+      ],
+      "evidence": [
+        {
+          "account": "25845559030",
+          "aweme_id": "7370263231828495656",
+          "quote": "在太原，月收入五千的男生已经是一个非常合格的水准了。……如果年收入过十万的话，已经是属于中上等了。……如果正好又是在体制内，税后还能在十万加的情况下，已经是非常吃香了。"
+        }
+      ],
+      "claimType": "marketing",
+      "kind": "definitional",
+      "sourceLabel": "太原矩阵号（鳌烨传媒）·单城市口径",
+      "tierNote": "D25/D27：机构营销或城市矩阵号单源口径，不得作为规律输出，降 soft（仅 advisory）。",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-INCOME-005",
+      "dimension": "income",
+      "appliesTo": "male",
+      "condition": "体制内收入基准（单条、反讽语境）",
+      "threshold": {
+        "op": "=",
+        "value": 12,
+        "unit": "万元/年（平均）"
+      },
+      "meaning": "「体制内男生平均年薪就是 12 万」——出自一条反讽视频（女生要求体制内年入百万），数字本身可用但语境特殊，标 soft。",
+      "tier": "soft",
+      "refs": [
+        "06-casebook#6.4"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7647482595786201509",
+          "quote": "体制内男生平均年薪就是12万。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-INCOME-006",
+      "dimension": "income",
+      "appliesTo": "both",
+      "condition": "职业含金量换算（南昌账号口径）",
+      "threshold": {
+        "op": "=",
+        "value": "月薪 8000 公务员 = 月入 2 万打工人 = 月入 5 万个体户 = 年入百万+BBA 小老板",
+        "unit": "等价链"
+      },
+      "meaning": "收入的「含金量」按职业折价：体制内 8000 相当于市场化 2 万；链条顶端是年入百万且开 BBA 的老板。单账号口径。",
+      "tier": "soft",
+      "refs": [
+        "R-DIM-015",
+        "02-dimensions#C1"
+      ],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7678636676851256618",
+          "quote": "一个月薪8000的公务员等于一个月入2万的普通打工人等于一个月入5万的个体工商户等于一个年入百万有自己公司且开BBA的小老板。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-ASSET-001",
+      "dimension": "asset",
+      "appliesTo": "male",
+      "condition": "男生硬件评分表第 3 项",
+      "threshold": {
+        "op": ">=",
+        "value": 100,
+        "unit": "平方米 或 全款"
+      },
+      "meaning": "房子 100 平以上或全款 +10 分；「有住房不用自己还贷款」是「真正条件好」三要素之一。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-017",
+        "R-MATCH-017"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "第三，房子在100平以上或者是全款的可以再加10分。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7641901227777451259",
+          "quote": "第三，有住房不用自己还贷款，那这个含金量多大的话，我觉得不用我再多说了哈。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·男生硬件十项评分表",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-ASSET-002",
+      "dimension": "asset",
+      "appliesTo": "male",
+      "condition": "男生硬件评分表第 4 项",
+      "threshold": {
+        "op": "=",
+        "value": "有车 +10；20 万以上或全款再加 10",
+        "unit": "万元"
+      },
+      "meaning": "有车加 10 分；20 万以上车型或全款车再加 10 分。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-018",
+        "R-MATCH-017"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "第四，有车加10分。如果是20万以上的车型或者是全款车再加10分。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·男生硬件十项评分表",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-ASSET-003",
+      "dimension": "asset",
+      "appliesTo": "both",
+      "condition": "家庭资产档 A8 定义",
+      "threshold": {
+        "op": ">=",
+        "value": 1000,
+        "unit": "万元（净资产，含车房/股票/基金/现金）"
+      },
+      "meaning": "A8 = 净资产 1000 万以上（车房/股票/基金/现金均计入），是家庭资产档的高配线，也是匹配档位与活动的定义口径。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-019",
+        "R-MATCH-016"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7625983656905404337",
+          "quote": "什么是A8男呢？就是净资产有1000万以上的男生，包括车子、房子、股票、基金、现金什么的。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7625983656905404337",
+          "quote": "在北京试婚的A8男估计只有几千个，但想找A8男的女生估计都有大几十万个。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-ASSET-004",
+      "dimension": "asset",
+      "appliesTo": "both",
+      "condition": "家庭资产档 A9 定义",
+      "threshold": {
+        "op": ">=",
+        "value": 1,
+        "unit": "亿元（亿开头）"
+      },
+      "meaning": "A9 = 家庭资产「亿开头」，圈子「普通人根本进不去」。",
+      "tier": "hard",
+      "refs": [
+        "R-MATCH-016"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7628121821187731195",
+          "quote": "A9是指你的家庭资产，各个十百千万，十万百万千万亿，亿开头的。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-ASSET-005",
+      "dimension": "asset",
+      "appliesTo": "both",
+      "condition": "A7 档（无直接数值边界）",
+      "threshold": {
+        "op": "note",
+        "value": "千万以下（推算）",
+        "unit": "万元"
+      },
+      "meaning": "语料只说「A7 很多女生觉得太普通、高不成低不就」，从未直接给出 A7 的数值边界；「千万以下」是知识库按 A8≥1000 万反推。属推算项，禁止进入硬判定。",
+      "tier": "derived",
+      "refs": [
+        "R-MATCH-016",
+        "rules.merged:band asset.a7（作者推断）"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7625983656905404337",
+          "quote": "A7很多女生就觉得太普通，高不成低不就的。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-ASSET-006",
+      "dimension": "asset",
+      "appliesTo": "both",
+      "condition": "门当户对定义",
+      "threshold": {
+        "op": "range",
+        "value": [
+          100,
+          200
+        ],
+        "unit": "%（对方家庭资产 = 自家的百分比）"
+      },
+      "meaning": "「门当户对」的量化口径：对方家庭资产是你家的 100%-200%；在这个区间走「有感情的路子」。",
+      "tier": "hard",
+      "refs": [
+        "R-MATCH-014",
+        "R-DEMO-023"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7648625116548533547",
+          "quote": "可以找他们家的家庭是你们家100%到200%的。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-ASSET-007",
+      "dimension": "asset",
+      "appliesTo": "both",
+      "condition": "北京案例量级（单条案例）",
+      "threshold": {
+        "op": "=",
+        "value": [
+          600,
+          700
+        ],
+        "unit": "万元"
+      },
+      "meaning": "北京案例：一套商品房 + 一套老破小合计约六七百万，作为「北京有房」的量级样例，非标准线。",
+      "tier": "soft",
+      "refs": [
+        "06-casebook#C-005"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640076462543867176",
+          "quote": "家里面有一套商品房，有一套老婆小，加起来可能就是六七百万。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-ASSET-008",
+      "dimension": "asset",
+      "appliesTo": "both",
+      "condition": "山东打分局 TOP1 可达档（案例）",
+      "threshold": {
+        "op": "=",
+        "value": "全款 500 万房 + 100 万车",
+        "unit": "万元"
+      },
+      "meaning": "40 人打分局女生第 1 名可匹配：做加工厂的厂二代（非接班）、山东全款 500 万房 + 100 万车。",
+      "tier": "soft",
+      "refs": [
+        "R-MATCH-012",
+        "R-DEMO-023"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7648625116548533547",
+          "quote": "在山东有全款500万的房子，100万汽车，没有任何问题。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-ASSET-009",
+      "dimension": "asset",
+      "appliesTo": "both",
+      "condition": "「真正条件好」三要素（可判定结构）",
+      "threshold": {
+        "op": "=",
+        "value": "①父母有养老保险 ②婚后每月能出生活费 ③有住房无贷（全款房）",
+        "unit": "结构"
+      },
+      "meaning": "「真正条件好」的三要素清单；全款/无贷被反复单列为硬加分。三要素无统一数字，②的具体金额未给。",
+      "tier": "soft",
+      "refs": [
+        "R-DIM-020",
+        "02-dimensions#§2.1"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7641901227777451259",
+          "quote": "总结来说就是父母有了养老保险，有能力承担你的一部分生活开销，有全款房。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-EDU-001",
+      "dimension": "education",
+      "appliesTo": "male",
+      "condition": "男生硬件评分表第 2 项",
+      "threshold": {
+        "op": ">=",
+        "value": "全日制本科",
+        "unit": "学历档"
+      },
+      "meaning": "全日制本科以上加 10 分（原文 ASR：全日是本科）。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-011",
+        "R-MATCH-017"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "第二，全日是本科以上学历的加10分。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·男生硬件十项评分表",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-EDU-002",
+      "dimension": "education",
+      "appliesTo": "female",
+      "condition": "专升本/大专降档（常规），顶美豁免",
+      "threshold": {
+        "op": "note",
+        "value": "专升本/大专 = 降档；顶美可豁免",
+        "unit": "学历档"
+      },
+      "meaning": "「专升本/大专在常规场景降档、顶美可豁免」是知识库 v1 的合并口径；语料里的直接原话只有豁免方向（「遇到顶美以后，就算你是专升本也是没有关系的」），降档方向没有独立原话。实现前需补语料。",
+      "tier": "soft",
+      "refs": [
+        "R-DIM-011",
+        "R-DIM-012"
+      ],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7682020548599172403",
+          "quote": "原来要求女方必须是全日制本科，遇到顶美以后，就算你是专升本也是没有关系的。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-EDU-003",
+      "dimension": "education",
+      "appliesTo": "both",
+      "condition": "院校层次（高档锚点）",
+      "threshold": {
+        "op": "=",
+        "value": "985 / 211",
+        "unit": "院校档"
+      },
+      "meaning": "第一学历 985/211 被当作高档配置与画像卖点（如「211 本硕」）；单条、无完整换算。",
+      "tier": "soft",
+      "refs": [
+        "R-DIM-011"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7639325798792482102",
+          "quote": "第一学历985211，然后又有点独生女。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-EDU-004",
+      "dimension": "education",
+      "appliesTo": "both",
+      "condition": "三高专场学历线",
+      "threshold": {
+        "op": "=",
+        "value": "C9 或 QS 排名前 20",
+        "unit": "院校档"
+      },
+      "meaning": "「三高专场」的高学历线：本科或研究生，院校毕业于 C9 或 QS 前 20；高薪线=年入百万以上。",
+      "tier": "soft",
+      "refs": [
+        "rules.merged:band event.three"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644083136891997459",
+          "quote": "高学历是本科或者研究生，然后院校毕业于C9或者是QS排名前20的一个学院。"
+        }
+      ],
+      "claimType": "event-rule",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·三高专场",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-OCC-001",
+      "dimension": "occupation",
+      "appliesTo": "male",
+      "condition": "男生硬件评分表第 7 项",
+      "threshold": {
+        "op": "=",
+        "value": "体制内 +10 分",
+        "unit": "分"
+      },
+      "meaning": "体制内工作加 10 分；但女方编制「不构成吸引优质男的核心竞争力」。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-014",
+        "R-MATCH-017"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "第七，体制内工作加10分。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7621886143206349221",
+          "quote": "吸引优质男的从不是你那稳定的几千块钱的一个月收入。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·男生硬件十项评分表",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-OCC-002",
+      "dimension": "occupation",
+      "appliesTo": "both",
+      "condition": "太原/山西编制内部排序",
+      "threshold": {
+        "op": "rank",
+        "value": "行政编 > 事业编 > 企业编",
+        "unit": "排序"
+      },
+      "meaning": "太原口径「最香的还是编制」，内部排序：行政编（公务员）> 事业编（教师等）> 企业编；无数字分值。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-025",
+        "02-dimensions#§2.1"
+      ],
+      "evidence": [
+        {
+          "account": "25845559030",
+          "aweme_id": "7367266582898183439",
+          "quote": "最受欢迎的、最乡的那肯定还是编制。有行政编、事业编、企业编。"
+        }
+      ],
+      "claimType": "marketing",
+      "kind": "definitional",
+      "sourceLabel": "太原矩阵号（鳌烨传媒）·单城市口径",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-OCC-003",
+      "dimension": "occupation",
+      "appliesTo": "both",
+      "condition": "三高专场高薪线",
+      "threshold": {
+        "op": ">=",
+        "value": 100,
+        "unit": "万元/年"
+      },
+      "meaning": "三高专场「高薪 = 年收入百万以上」；高颜值/高学历见 S-EDU-004。",
+      "tier": "soft",
+      "refs": [
+        "rules.merged:band event.three"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644083136891997459",
+          "quote": "高薪是指年收入百万以上，高研就是高研值。"
+        }
+      ],
+      "claimType": "event-rule",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·三高专场",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-FAM-001",
+      "dimension": "family",
+      "appliesTo": "male",
+      "condition": "男生硬件评分表第 9 项",
+      "threshold": {
+        "op": "=",
+        "value": "独生子女 +10 分",
+        "unit": "分"
+      },
+      "meaning": "独生子女加 10 分；「姐姐出嫁了也不是独生子」（资料不得偷换概念）。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-024",
+        "R-MATCH-017"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "第九，独生子女加10分。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7668958682801423099",
+          "quote": "姐姐出嫁了，你也不是独生子。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·男生硬件十项评分表",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-FAM-002",
+      "dimension": "family",
+      "appliesTo": "male",
+      "condition": "男生硬件评分表第 8 项；女方家庭同样被查",
+      "threshold": {
+        "op": "=",
+        "value": "父母有退休金/养老金 +10 分",
+        "unit": "分"
+      },
+      "meaning": "父母有退休金和养老金加 10 分；且被表述为「没有养老保险，不管条件多好都算不好」。向上链条中男方也要求女方父母有退休金。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-022",
+        "R-MATCH-017"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "第八，父母有退休金和养老金的再加10分。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7641901227777451259",
+          "quote": "如果父母没有养老保险，不管条件多好都算不好。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·男生硬件十项评分表",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-FAM-003",
+      "dimension": "family",
+      "appliesTo": "male",
+      "condition": "男生硬件评分表第 10 项",
+      "threshold": {
+        "op": "=",
+        "value": "原生家庭幸福 +10 分",
+        "unit": "分"
+      },
+      "meaning": "原生家庭幸福加 10 分；检查项包括无强势妈妈、无醉酒爸爸、父母不离异。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-023",
+        "R-MATCH-017"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "第十，原生家庭幸福的再加10分。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·男生硬件十项评分表",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-FAM-004",
+      "dimension": "family",
+      "appliesTo": "female",
+      "condition": "红线条件降档（孤例体系）",
+      "threshold": {
+        "op": "=",
+        "value": "丁克 → 降 2 个生态位",
+        "unit": "档"
+      },
+      "meaning": "「女生丁克来婚恋市场，直接降下两个生态位：黄金 → 白银都找不了，再往下找青铜」。生态位三档（黄金/白银/青铜）为博主自创且仅此一例，不能外推。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-034",
+        "R-MATCH-011"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636347544313793830",
+          "quote": "女生丁克来混练市场，直接进城里下两个生态位，黄金直接掉的白银都找不了，再往下掉一个生态位，找青铜。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-HW-001",
+      "dimension": "hardware",
+      "appliesTo": "male",
+      "condition": "男生硬件总评分表",
+      "threshold": {
+        "op": "=",
+        "value": {
+          "及格": 60,
+          "优秀": 80,
+          "项数": 10,
+          "每项": 10
+        },
+        "unit": "分"
+      },
+      "meaning": "男生硬件 10 项 × 10 分：身高 175+/全日制本科/房 100 平+或全款/有车（20 万+或全款再+10）/税后年入 10 万+/新一线以上稳定工作或本市人/体制内/父母退休金养老金/独生子女/原生家庭幸福。60 及格、80 优秀。女生版评分表在语料中未出现。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-002",
+        "R-MATCH-017"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "相亲市场上男生的评分及格先来咯。60分及格80分优秀，看看你能拿到几分。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·男生硬件十项评分表",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-BEHAVIOR-001",
+      "dimension": "behavior",
+      "appliesTo": "both",
+      "condition": "相亲现场表现（跨账号两套版本）",
+      "threshold": {
+        "op": "table",
+        "value": "底分 60；干净 +5；有来有回 +10；对服务员客气 +10；说得清标准 +5；等话题 -10；查户口 -15；迟到不解释 -10；提前任 -20",
+        "unit": "分"
+      },
+      "meaning": "见面行为分：60 底分 + 加减分表；80 分以上「缺的是机会」，60 分以下「缺的是实话」。两账号版本一致。",
+      "tier": "hard",
+      "refs": [
+        "R-DIM-033",
+        "R-DEMO-048"
+      ],
+      "evidence": [
+        {
+          "account": "33349790582",
+          "aweme_id": "7686806385938325221",
+          "quote": "你自己对算，起步60分。见面之前，把自己收拾得清清爽爽的，加5分。……聊天有来有回的，加10分。……对服务员客气的，加10分。……说得清自己想要什么样的人的，加5分。……全程等对方找话题的，扣10分。一坐下就查不口，收入多少啊，王子几套啦，父母干嘛的，扣15分。……把前人挂在嘴上扣20分。……80分以上的，你缺的不是条件，只是一个机会。60分以下的，你缺的也不是条件，是没人跟你讲实话。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7686783751560416531",
+          "quote": "你自己对着算一算，底分是60分哦。……见面之前呢，把自己收拾的清爽干净，加5分。……聊天呢，有来有回的加10分。……对服务员比较客气的加10分。……讲清楚自己的底线，然后想找什么样的人，这个加5分哦。……等着别人找话题的，这个扣10分。……这个扣15分，不是说你不能问，不是一见面你就问别人。……你迟到了你都不解释一句的，这个扣10分。……把前任挂在嘴边的这个扣20分啊。……80分往上的呢，你缺的不是条件，你缺的是机会。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·相亲行为评分表（跨账号两版）",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 2
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-MATCH-001",
+      "dimension": "matching",
+      "appliesTo": "female",
+      "condition": "35 人匿名颜值打分局（深圳/上海场）",
+      "threshold": {
+        "op": "map",
+        "value": "第 1 → 高净值活动（男嘉宾全 A9）；前 3 → 三高专场；第 8-9 → 感情路线；15 名往后 → 降档",
+        "unit": "名次"
+      },
+      "meaning": "35 人打分局名次 → 可触达活动/对象档位。第 1 名直通高净值局；前 3 进三高专场；第 8-9 走「一起买房、陪着还贷」的感情路线；15 名往后语料未展开。",
+      "tier": "hard",
+      "refs": [
+        "R-MATCH-012",
+        "R-MATCH-013",
+        "R-MATCH-014"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7648981216003214611",
+          "quote": "一般是35个男生，35个女生。35个女生里你能打第一，我直接邀请你参加高净值活动。……男生全是A9。……咱能打进前三，我办的三高专场，我也邀请你。……打的是第八第九……别就找有感情这个路子的。……15名往后。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·匿名颜值打分局（35 人场）位次表",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-MATCH-002",
+      "dimension": "matching",
+      "appliesTo": "female",
+      "condition": "40 人匿名颜值打分局（山东样板）",
+      "threshold": {
+        "op": "map",
+        "value": "第 1 → 厂二代（500 万房+100 万车）；前 3 → 正常 A8 家庭；前 7-8 → 家庭资产 100%-200%；20 名开外 → 未展开",
+        "unit": "名次"
+      },
+      "meaning": "40 人打分局女生名次 → 可达上限。前 3 可要求 95 后与情绪稳定，但要求不了独生子与付出意识；前 7-8 走门当户对感情路线。",
+      "tier": "hard",
+      "refs": [
+        "R-MATCH-012",
+        "R-MATCH-013",
+        "R-MATCH-014",
+        "R-DEMO-023"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7648625116548533547",
+          "quote": "40个女生里，你能打第一啊……在山东有全款500万的房子，100万汽车，没有任何问题。……咱打前三的话，找一个处级待遇退休的正常A8家庭，也问题不大。……前七前八，正常就找有感情的路子，找复制粘贴的你，可以找他们家的家庭是你们家100%到200%的。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·匿名颜值打分局（40 人场）位次表",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-MATCH-003",
+      "dimension": "matching",
+      "appliesTo": "female",
+      "condition": "竞争池检验",
+      "threshold": {
+        "op": "=",
+        "value": "竞争对手 = 小 7-8 岁、同画像的女生",
+        "unit": "岁差/对手画像"
+      },
+      "meaning": "定位是否成立，要把「比你小 7-8 岁、02/03 年、同画像」的对手放进池子检验；镜像版竞争者条件每项略优一档。",
+      "tier": "soft",
+      "tierNote": "单条连麦中的反问句（修辞），非结构化标准；降为 soft。",
+      "refs": [
+        "R-MATCH-004"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636008548790553907",
+          "quote": "你的竞争对手，你怎么PK掉比你小七八岁的女生，02、03年的女生也能看上？"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-MATCH-004",
+      "dimension": "matching",
+      "appliesTo": "both",
+      "condition": "市场权力曲线",
+      "threshold": {
+        "op": "curve",
+        "value": "月入 2000/买不起房 → 女绝对优势；月 8000-9000/能出首付 → 仍偏女；一线有房+A8 → 男占主动",
+        "unit": "收入档"
+      },
+      "meaning": "双方市场权力的分界：腰部以下女生碾压，中腰部仍偏女生，超过腰部（上海有房、A8 家庭）主动权转到男生。",
+      "tier": "soft",
+      "refs": [
+        "R-MATCH-030"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7635221339149765926",
+          "quote": "月收入2000，买不起房。……月收入再上海8000，9000，买房能出首付。……A8家庭，你这已经超过腰部了，已经到了男生有主动权的地方了。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "tierNote": "D21：经验型断言仅 1 条来源，降 soft（需多源才可为 hard）。",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-MATCH-005",
+      "dimension": "matching",
+      "appliesTo": "female",
+      "condition": "女看男排序（单账号口径）",
+      "threshold": {
+        "op": "rank",
+        "value": "身高 > 颜值 > 收入 > 家境 > 性格",
+        "unit": "排序"
+      },
+      "meaning": "女生真实择偶排序：身高第一、颜值第二，然后才是收入/家境/性格；例子：1 米 8 长相普通 > 1 米 6 超级帅。单账号，待复核。",
+      "tier": "soft",
+      "refs": [
+        "R-MATCH-027",
+        "R-DEMO-041"
+      ],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7693167762713201929",
+          "quote": "女生真实的择偶排序，我太清楚了。身高排（第一），颜值排（第二）啊，然后才是收入，家境性格等啊。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-MATCH-006",
+      "dimension": "matching",
+      "appliesTo": "both",
+      "condition": "男女价值参照表（对方怎么看你）",
+      "threshold": {
+        "op": "rank",
+        "value": "女：年龄 > 外貌 > 性格 > 家庭不拖累；男：社会能量/社会价值第一",
+        "unit": "排序"
+      },
+      "meaning": "市场对男女的定价维度不同：女生的第一价值是年龄/外貌/性格（家里不拖累即可），男生的第一价值是社会能量与社会价值。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-039"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638942595967683875",
+          "quote": "女生排第一的可能还是年龄，是外貌，是性格，然后家里面不拖累就行。男生排第一的还是她的社会能量，跟她的社会价值。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-MATCH-007",
+      "dimension": "matching",
+      "appliesTo": "female",
+      "condition": "30+ 事业有成男性的择偶排序",
+      "threshold": {
+        "op": "rank",
+        "value": "性格好 > 颜值 > 学历、工作能力 > 家庭",
+        "unit": "排序"
+      },
+      "meaning": "30 岁以上事业有成的男人，择偶排序第一位永远是性格好；性格好在婚恋市场上大于颜值、学历、工作能力甚至家庭。",
+      "tier": "soft",
+      "refs": [
+        "R-MATCH-026",
+        "R-DIM-029"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7681981213879522299",
+          "quote": "现在很多30以上事业有成的男人来找我咨询的时候，择偶排序，排的第一位的永远都是性格好。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-MATCH-008",
+      "dimension": "matching",
+      "appliesTo": "male",
+      "condition": "男性向下兼容画像",
+      "threshold": {
+        "op": "=",
+        "value": "02/03 年、普通学历/工作/家境/收入、1 米 7 多、白、性格好",
+        "unit": "画像"
+      },
+      "meaning": "男方可不看女方家境与收入，向下兼容；典型可得画像为 02/03 年、普通条件、1 米 7 多、白、性格好、身材好（只要不负债、不拖累）。",
+      "tier": "soft",
+      "tierNote": "单通连麦里的男性自我表述（向下兼容画像），非跨来源规则；降为 soft。",
+      "refs": [
+        "R-MATCH-022"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636347304823360806",
+          "quote": "我们男生能向下兼容，我们不看女生的家境跟收入，对我们也没用。……普通学历，普通工作，普通家境，普通收入，一米七多又白，性格又好。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-DEMO-001",
+      "dimension": "demographics",
+      "appliesTo": "both",
+      "condition": "上海「土著有房专场」门槛",
+      "threshold": {
+        "op": "=",
+        "value": "身份证 310 开头 或 已在上海购房",
+        "unit": "身份/购房"
+      },
+      "meaning": "上海本地专场的准入判定：身份证 310 开头或已在上海购房，二者满足其一。",
+      "tier": "hard",
+      "refs": [
+        "R-DEMO-004"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636699793313598729",
+          "quote": "只要您身份证开头是310，或者说您已经在上海购置了房产，就可以来参加。"
+        }
+      ],
+      "claimType": "event-rule",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·上海土著有房专场",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-DEMO-002",
+      "dimension": "demographics",
+      "appliesTo": "both",
+      "condition": "深圳「土著有房场」门槛",
+      "threshold": {
+        "op": "=",
+        "value": "身份证 4403 开头 或 已在深圳买房",
+        "unit": "身份/购房"
+      },
+      "meaning": "深圳本地专场准入：身份证号 4403 开头或在深圳买房；深圳是移民城市，土著场人少。",
+      "tier": "hard",
+      "refs": [
+        "R-DEMO-006"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640036505334877491",
+          "quote": "因为我们这边的条件其实是身份证号4403开头，或者是在深圳买房。"
+        }
+      ],
+      "claimType": "event-rule",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·深圳土著有房场",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-DEMO-003",
+      "dimension": "demographics",
+      "appliesTo": "both",
+      "condition": "深圳活动报名性别比",
+      "threshold": {
+        "op": "=",
+        "value": "男:女 = 1:1.5",
+        "unit": "比例（50 人场）"
+      },
+      "meaning": "深圳活动报名男女比控制在 1:1.5（女生多于男生）；单场口径（50 人），属活动级数据。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-009"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7641872702176759076",
+          "quote": "今天我们报名的人数呢，一共是50人，男女的比例的话，其实控制在1比1.5。"
+        }
+      ],
+      "claimType": "event-rule",
+      "kind": "empirical",
+      "sourceLabel": "月老鳌烨·深圳活动（50 人场）",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-DEMO-004",
+      "dimension": "demographics",
+      "appliesTo": "both",
+      "condition": "地域审美偏好（博主观点，无排名输出）",
+      "threshold": {
+        "op": "note",
+        "value": "地域审美偏好（博主观点）",
+        "unit": "口径"
+      },
+      "meaning": "博主曾在直播里表达地域审美偏好。按地域给人群定优劣既不严谨也不可执行，产品不输出此类地域排序，只保留城市产业/供需结构的中性描述。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-047"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7627767501510599355",
+          "quote": "如果让我颜值排序的话，在我心中我觉得前五的应该都在北方。……如果说把所有的美女排到一块，我觉得前五的还是北方。"
+        }
+      ],
+      "claimType": "marketing",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-DEMO-005",
+      "dimension": "demographics",
+      "appliesTo": "both",
+      "condition": "省内异地接受度（山东 vs 河北/山西）",
+      "threshold": {
+        "op": "=",
+        "value": "山东：省内互认；河北/山西：指定城市不互认",
+        "unit": "地域口径"
+      },
+      "meaning": "山东人能接受省内异地（济南/青岛/烟台/淄博等互认）；河北张家口不乐意找保定、山西同省亦有指定不互认。无数字。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-022"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7643773318034843603",
+          "quote": "在我接的所有咨询里，山东人最能接受本省异地恋。……就比方说我接河北的咨询，张家口的人是指定不乐意找保定的。"
+        }
+      ],
+      "claimType": "marketing",
+      "kind": "empirical",
+      "sourceLabel": "山东矩阵号招募视频",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-DEMO-006",
+      "dimension": "demographics",
+      "appliesTo": "male",
+      "condition": "男生硬件评分表第 6 项（城市能级）",
+      "threshold": {
+        "op": "=",
+        "value": "新一线以上稳定工作 或 本市人 +10 分",
+        "unit": "分"
+      },
+      "meaning": "城市能级本身是加分项：新一线以上有稳定工作或本市人再加 10 分。",
+      "tier": "hard",
+      "refs": [
+        "R-DEMO-029",
+        "R-MATCH-017"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "第六，新一线以上有稳定工作或者是本市人的再加10分。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "月老鳌烨·男生硬件十项评分表",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-MATCH-009",
+      "dimension": "matching",
+      "appliesTo": "female",
+      "condition": "高冲突沟通风格（两性同样适用）",
+      "threshold": {
+        "op": "note",
+        "value": "高冲突沟通风格在相亲初期降低匹配成功率（两性同样适用）",
+        "unit": "行为口径"
+      },
+      "meaning": "高冲突沟通风格在相亲初期会降低匹配成功率，两性同样适用。原语料中的等价换算属 ASR 残缺内容，不对用户展示，也不得进入判定。",
+      "tier": "soft",
+      "refs": [
+        "R-DIM-030"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7638546961003941285",
+          "quote": "35加女、性等于月薪3k男、性爱打卡网红店等于纹身喝酒抽烟三件套"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [
+        {
+          "value": "把人封顶到 5.7（机器条 R-LOOKS-012 的旧 clamp）",
+          "source": "knowledge/rules.json#R-LOOKS-012（已由规则方删除）",
+          "note": "与「1 米 7 拿 5.8」反例直接冲突；5.7 是单例落点，不是封顶值。"
+        }
+      ],
+      "id": "S-HEIGHT-009",
+      "dimension": "height",
+      "appliesTo": "male",
+      "condition": "身高 <180 的落点（反例：5.7 不是封顶值）",
+      "threshold": {
+        "op": "note",
+        "value": "1 米 7 左右可到 5.7-5.8；1 米 75 单例为 5.5-5.7",
+        "unit": "分"
+      },
+      "meaning": "语料反例：1 米 7 左右男生被给 5.8、5.7（100 个男生前 5）；1 米 75 男生被给 5.5-5.7。说明「身高封印」封的是 6 分档（<6），不是把所有 <175 的人硬压到 5.7——不得用 5.7 做统一上限。",
+      "tier": "soft",
+      "refs": [
+        "R-LOOKS-012（审计新增）"
+      ],
+      "tierNote": "soft（单例落点+反例）：仅记录边界与反例，不得作为封顶阈值；规则侧已删除 5.7 clamp，改为「不得输出 ≥6 分档」的 flag。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7633380527692582154",
+          "quote": "我身高不太高，身高1米7左右。……5.8，5.7，100个男生里前5。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7639291023436369190",
+          "quote": "1米75咱就不敢说6分以上了。……我给你打5.5、5.7。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-DEMO-007",
+      "dimension": "demographics",
+      "appliesTo": "both",
+      "condition": "城市能级枚举（引擎 schema 用，非语料数字）",
+      "threshold": {
+        "op": "enum",
+        "value": "1=一线 / 2=新一线 / 3=三四线及县域",
+        "unit": "tier"
+      },
+      "meaning": "城市能级 1/2/3 是引擎建模枚举；语料没有给出这套编号，只支持「城市能级越高、彩礼越淡」「新一线城市」这类定性表述。系统枚举，不是 hard 阈值，不得对外当作语料依据展示。",
+      "tier": "derived",
+      "refs": [
+        "R-DEMO-008/009/018/019/020（审计新增）"
+      ],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7687565236722879790",
+          "quote": "就是越大的城市，反而彩礼看得越淡，像北上广深那边，他们结婚可能彩礼就是意思一下就行。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7659396662623735080",
+          "quote": "除北上广身外，我们从7月份开始，在新一线、新二线城市一直在办优秀青年单身交友局。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sourceLabel": "引擎 schema（系统枚举）",
+      "sources": {
+        "count": 2,
+        "transcripts": 2,
+        "accounts": 2
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-AGE-012",
+      "dimension": "age",
+      "appliesTo": "male",
+      "condition": "「90 后」门槛的年龄换算（引擎推算）",
+      "threshold": {
+        "op": "=",
+        "value": 36,
+        "unit": "岁（2026 年换算）"
+      },
+      "meaning": "机器条 R-DEMO-015/021 用 36 岁代表「90 后之外」。36 = 2026 − 1990，是推算值：语料从未出现「36 岁门槛」，且随年份推进会失效。不得作为 hard 阈值。",
+      "tier": "derived",
+      "refs": [
+        "R-DEMO-015/021（审计新增）"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644248802190870890",
+          "quote": "男生的门槛是90后高净值，女生的门槛是98后，在颜值高、形象好的前提下。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "definitional",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-MATCH-010",
+      "dimension": "matching",
+      "appliesTo": "both",
+      "condition": "把「对方体制内/独生女」当硬条件",
+      "threshold": {
+        "op": "note",
+        "value": "看似没门槛、实际门槛很高（须追加验证与对价）",
+        "unit": "口径"
+      },
+      "meaning": "「但凡要求独生女、但凡要求体制内……看似没门槛，实际要求很高」——这是需求侧的要求成本，不是供给侧的体制内 +10（S-OCC-001）。机器条 R-MATCH-043 引用 S-OCC-001 属对象/方向错位，应改用本条。",
+      "tier": "soft",
+      "refs": [
+        "R-MATCH-043（审计新增）"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638160736476286234",
+          "quote": "但凡要求独生女，但凡要求体质内，这都是其实看似没门槛，看似没有多高求，但实际要求很高。"
+        }
+      ],
+      "claimType": "market-norm",
+      "kind": "empirical",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "conflicts": [],
+      "id": "S-ASSET-010",
+      "dimension": "asset",
+      "appliesTo": "both",
+      "condition": "北京 A8 供需叙事（单条直播）",
+      "threshold": {
+        "op": "note",
+        "value": "「几千 vs 大几十万」稀缺叙事（不对用户当规律输出）",
+        "unit": "口径"
+      },
+      "meaning": "单条直播里的供需稀缺叙事：北京适婚 A8 男「只有几千个」、想找 A8 男的女生「有大几十万」。属机构营销语境，只作背景，不对用户输出为市场规律。",
+      "tier": "soft",
+      "refs": [
+        "R-DEMO-003（审计拆分）"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7625983656905404337",
+          "quote": "在北京试婚的A8男估计只有几千个，但想找A8男的女生估计都有大几十万个。"
+        }
+      ],
+      "claimType": "marketing",
+      "kind": "empirical",
+      "sourceLabel": "北京 A8 供需话术（单条直播）",
+      "sources": {
+        "count": 1,
+        "transcripts": 1,
+        "accounts": 1
+      }
+    }
+  ],
+  "conflictSummary": [
+    {
+      "dimension": "looks",
+      "issue": "5.0-5.5 的百人位次在同账号/跨账号间不稳定：前5-6（5.5）/ 第6-7（5.3-5.4）/ 第18-20（5.2-5.3）/ 前20（5.3）并存；另有「保八成五」语义存疑。",
+      "resolution": "待定（保留并列，不强行统一）。实现只允许按区间使用（如「前 5%-20%」），禁止按单条精确值换算。"
+    },
+    {
+      "dimension": "looks",
+      "issue": "「有争议的班花/班草」= 5.2-5.3（aoye98/7656400717271354624）还是 5.5（aoye98/7640777429912538409、7656724726068301062）。",
+      "resolution": "待定。同一账号即席口径浮动，建议按「5.2-5.5 有争议班花带」展示，不用于硬过滤。"
+    },
+    {
+      "dimension": "looks",
+      "issue": "4.2 = 女前40（7653425487565360436）与 4.6 = 女第36-37（7647499397491674404）位次倒挂。",
+      "resolution": "待定（小样本噪声）。建库按 ±5 名容差处理。"
+    },
+    {
+      "dimension": "age",
+      "issue": "女性活动门槛：30 岁以下（长沙场）vs 98 后≈≤28 岁（山东/东三省精英群）vs 高社会能量男个人上限 28-29。",
+      "resolution": "条件依赖：按「活动层级/城市/目标人群」分列；不可合并成单一年龄线。"
+    },
+    {
+      "dimension": "age",
+      "issue": "二婚市场「年龄感差 6-8 年」与同段举例（男 31-32 / 女 28-29，约 3 年）不自洽。",
+      "resolution": "待定（原文存疑，两个数都保留）。"
+    },
+    {
+      "dimension": "height",
+      "issue": "「180+ 占 5%」同句中的「女生 4.2%」ASR 残缺，指向的身高口径无法确认。",
+      "resolution": "待定：当前只采用男性数据；女生占比不得引用。"
+    },
+    {
+      "dimension": "weight",
+      "issue": "微胖判定随身高/视角变化：162/145、173/135-138 被判胖，168/100 为画像正常。",
+      "resolution": "条件依赖：按身高给出参考区间，不做单一数值红线。"
+    },
+    {
+      "dimension": "income",
+      "issue": "全国加分线 10 万/年（47590488570/7617107297344810085）与太原「月 5000 即合格」（25845559030/7370263231828495656）。",
+      "resolution": "条件依赖：实现需城市系数；同一收入在不同城市不同估值。"
+    },
+    {
+      "dimension": "education",
+      "issue": "「专升本/大专降档」无独立原话，直接证据只有「顶美可豁免专升本」。",
+      "resolution": "待定：网页上线前需补语料或将该条标为 derived 语境说明。"
+    },
+    {
+      "dimension": "asset",
+      "issue": "A7 无直接数值边界（「千万以下」为按 A8≥1000 万反推）。",
+      "resolution": "待定：A7 边界为推算，不得进入硬判定。"
+    }
+  ],
+  "gaps": [
+    "女生版硬件评分表未出现（语料只有男生版 10 项表）。",
+    "1-2.5 分与 7.5-8.4 分无博主锚点（只有 8 分/8.1 与 8.5 的单条表述）。",
+    "「素颜分」「广义分/地方分」「顶美」没有可计算阈值。",
+    "缺「每差 1cm / 每差 1 岁 / 每差 1 万」的换算率（全库 0 命中）。",
+    "17 个矩阵城市中仅 8 个有实质市场描述；广州/成都/重庆/西安/武汉/苏州/温州/福州为空。",
+    "体重与颜值分之间无量化换算；A7 边界、年龄逐档降级表均缺失。"
+  ]
+}

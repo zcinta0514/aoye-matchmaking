@@ -1,0 +1,22 @@
+# 语料与产物（体积大，可重新生成）。
+# 注：data 实际是仓库外的 ../aoye-data 目录的软链，避免 Cindy worker savepoint 把视频快照进 .git。
+/data
+/data/
+web/data/
+logs/
+tmp_whisper/
+
+# 运行时
+node_modules/
+.DS_Store
+*.log
+
+# 本地模型凭据（绝不入库；模板见 .env.local.example）
+.env.local
+.env.local.*
+!.env.local.example
+
+# 临时
+/tmp/
+knowledge/_rules.preview.json
+dist/

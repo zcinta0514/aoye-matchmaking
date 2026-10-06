@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-10-06T00:00:00Z",
+  "meta": {
+    "origin": "web-config",
+    "note": "composites 的逐项可取分条件（knowledge/rules.json 的 composites 只给了 composedOf 与文字描述，没有 machine 条件）。条件用引擎 DSL 表达；points 与 composite 的 rawMax 对齐。formGaps 表示表单暂缺字段、该项暂不可计分。"
+  },
+  "composites": {
+    "hardware.male": {
+      "items": [
+        { "id": "item.height", "dim": "dim.height", "label": "身高 175+", "points": 10, "criterion": "身高 175cm 及以上（男生评分表：1 米 75 以上加 10 分）", "when": { "field": "subject.height_cm", "op": "gte", "value": 175 } },
+        { "id": "item.education", "dim": "dim.education", "label": "全日制本科及以上", "points": 10, "criterion": "全日制本科及以上学历", "when": { "field": "subject.education", "op": "in", "value": ["bachelor", "master", "phd"] } },
+        { "id": "item.property", "dim": "dim.property", "label": "有房（100 平或全款）", "points": 10, "criterion": "房 100 平或全款（表单只区分无房/有贷/无贷/多套，按「有房」近似）", "when": { "field": "subject.has_house", "op": "in", "value": ["loan", "paid", "multi"] }, "approximation": "表单无面积字段，按有房近似" },
+        { "id": "item.car", "dim": "dim.car", "label": "有车（20 万以上或全款再 +10）", "points": 10, "criterion": "有车 +10；20 万以上或全款再 +10（上限 20）", "when": { "field": "subject.has_car", "op": "in", "value": ["basic", "mid", "high"] }, "bonus": { "points": 10, "when": { "field": "subject.has_car", "op": "in", "value": ["mid", "high"] }, "note": "表单 10–30 万/30 万以上近似「20 万以上」" } },
+        { "id": "item.income", "dim": "dim.income", "label": "税后年入 10 万+", "points": 10, "criterion": "税后年收入 10 万及以上", "when": { "field": "subject.income_wan", "op": "gte", "value": 10 } },
+        { "id": "item.stable_or_local", "dim": "dim.occupation+dim.hukou", "label": "新一线以上稳定工作 / 本市人", "points": 10, "criterion": "新一线以上城市有稳定工作（体制内/国企/私企外企），或本人是本市户口（语料为「或」，按一项计分）", "when": { "any": [ { "field": "subject.occupation", "op": "in", "value": ["gov", "soe", "private"] }, { "field": "subject.hukou", "op": "eq", "value": "local" } ] } },
+        { "id": "item.establishment", "dim": "dim.establishment", "label": "体制内工作", "points": 10, "criterion": "体制内（公务员 / 事业编）", "when": { "field": "subject.occupation", "op": "eq", "value": "gov" } },
+        { "id": "item.only_child", "dim": "dim.only_child", "label": "独生子女", "points": 10, "criterion": "独生子女", "when": { "any": [ { "field": "subject.siblings", "op": "eq", "value": "only" }, { "field": "subject.siblings_detail", "op": "eq", "value": "only_child" } ] } },
+        { "id": "item.parents_pension", "dim": "dim.parents_pension", "label": "父母有退休金 / 养老金", "points": 10, "criterion": "父母有退休金和养老金（双方或一方有；语料原话为「父母有」）", "when": { "field": "subject.parents_pension", "op": "in", "value": ["both", "one"] }, "approximation": "表单「一方有」按达标近似" },
+        { "id": "item.family_atmosphere", "dim": "dim.family_atmosphere", "label": "原生家庭幸福", "points": 10, "criterion": "原生家庭和睦（语料口径「原生家庭幸福的再加 10 分」）", "when": { "field": "subject.family_atmosphere", "op": "eq", "value": "harmonious" } }
+      ],
+      "formGaps": []
+    },
+    "behavior": {
+      "standalone": true,
+      "note": "D1：作为独立「相亲现场行为自查」展示，不接入任何分数与 level（composite.usage=standalone-advisory）。"
+    }
+  }
+}

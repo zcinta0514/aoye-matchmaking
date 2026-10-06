@@ -1,0 +1,1123 @@
+{
+  "version": "0.1.0-baseline",
+  "generatedAt": "2026-10-05T00:00:00Z",
+  "meta": {
+    "origin": "web-baseline",
+    "authoritative": false,
+    "label": "演示基线（未取证）",
+    "note": "本文件不是知识库结论，仅用于在 knowledge/rules.json 尚未覆盖硬件/软性/家庭/匹配时跑通端到端流程。加载时 knowledge/rules.json 优先；本文件的每个结论在报告中都会标注『未取证·演示基线』。待知识库补齐后逐条删除。",
+    "levelWeights": {
+      "appearance": 0.4,
+      "hardware": 0.35,
+      "soft": 0.25
+    },
+    "window": {
+      "upper": 1.5,
+      "stableLow": -0.5,
+      "stableHigh": 1,
+      "lower": -2
+    },
+    "improvementThreshold": 6.5,
+    "photoTrack": {
+      "strongFit": 0.6,
+      "weakFit": 0.35,
+      "weakPad": 0.5
+    },
+    "selfCalibration": {
+      "contradictionPenalty": 0.5,
+      "marketSignalBonus": 0.5,
+      "marketSignalPenalty": 0.5,
+      "selfBandHalfWidth": 0.5,
+      "consensusPad": 0.25,
+      "minConsensusWidth": 1,
+      "maxUnionWidth": 3
+    },
+    "retiredRules": [
+      {
+        "id": "R-BASE-MATCH-001",
+        "giveUp": "GIVEUP-BASE-001",
+        "reason": "阈值 0.5 无源；知识库 R-MATCH-040（want.appearance_gap > 0，方向判定）接管",
+        "retiredAt": "2026-10-06"
+      },
+      {
+        "id": "R-BASE-MATCH-002",
+        "giveUp": "GIVEUP-BASE-002",
+        "reason": "与知识库 R-MATCH-050（结构矛盾）重复触发",
+        "retiredAt": "2026-10-06"
+      },
+      {
+        "id": "R-BASE-MATCH-003",
+        "giveUp": "GIVEUP-BASE-003",
+        "reason": "阈值 15cm 无源，知识库已裁定不做女性身高差 giveUp（D23）",
+        "retiredAt": "2026-10-06"
+      },
+      {
+        "id": "R-BASE-MATCH-004",
+        "giveUp": "GIVEUP-BASE-004",
+        "reason": "合取阈值「年龄差 7/8 岁 + 对方颜值 ≥6」为工程判断、无语料出处（D23）；年龄差数字由知识库 R-MATCH-041（between [7,8]）/ R-MATCH-042（gte 10）以 advice 覆盖；颜值门槛部分无接管，按 D23 删除而不重建",
+        "retiredAt": "2026-10-06"
+      }
+    ]
+  },
+  "scales": [
+    {
+      "id": "hardware",
+      "name": "硬件分",
+      "min": 1,
+      "max": 9,
+      "step": 0.5,
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "description": "演示标尺：身高 / 学历 / 收入 / 房车 / 户籍 / 年龄 / 家庭加权。",
+      "anchors": [
+        {
+          "label": "偏低",
+          "score": 3,
+          "min": 2,
+          "max": 3.5,
+          "observable": []
+        },
+        {
+          "label": "中等",
+          "score": 5,
+          "min": 4.5,
+          "max": 5.5,
+          "observable": []
+        },
+        {
+          "label": "中上",
+          "score": 6,
+          "min": 5.5,
+          "max": 6.5,
+          "observable": []
+        },
+        {
+          "label": "高",
+          "score": 7,
+          "min": 6.5,
+          "max": 7.5,
+          "observable": []
+        },
+        {
+          "label": "顶配",
+          "score": 8,
+          "min": 7.5,
+          "max": 9,
+          "observable": []
+        }
+      ],
+      "evidence": []
+    },
+    {
+      "id": "soft",
+      "name": "软性分",
+      "min": 1,
+      "max": 9,
+      "step": 0.5,
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "description": "演示标尺：性格 / 沟通 / 情绪稳定 / 生活能力 / 社交圈加权（基于自评）。",
+      "anchors": [
+        {
+          "label": "偏低",
+          "score": 3,
+          "min": 2,
+          "max": 3.5,
+          "observable": []
+        },
+        {
+          "label": "中等",
+          "score": 5,
+          "min": 4.5,
+          "max": 5.5,
+          "observable": []
+        },
+        {
+          "label": "中上",
+          "score": 6,
+          "min": 5.5,
+          "max": 6.5,
+          "observable": []
+        },
+        {
+          "label": "高",
+          "score": 7,
+          "min": 6.5,
+          "max": 7.5,
+          "observable": []
+        },
+        {
+          "label": "顶配",
+          "score": 8,
+          "min": 7.5,
+          "max": 9,
+          "observable": []
+        }
+      ],
+      "evidence": []
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "hardware.age",
+      "field": "age",
+      "name": "年龄",
+      "group": "hardware",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "numeric",
+      "unit": "岁",
+      "weight": 0.1,
+      "scoring": {
+        "type": "bands",
+        "byGender": {
+          "male": [
+            {
+              "max": 25,
+              "score": 5
+            },
+            {
+              "max": 30,
+              "score": 6
+            },
+            {
+              "max": 35,
+              "score": 5.5
+            },
+            {
+              "max": 40,
+              "score": 4.5
+            },
+            {
+              "max": 45,
+              "score": 3.5
+            },
+            {
+              "max": 999,
+              "score": 3
+            }
+          ],
+          "female": [
+            {
+              "max": 23,
+              "score": 5.5
+            },
+            {
+              "max": 26,
+              "score": 6
+            },
+            {
+              "max": 29,
+              "score": 5.5
+            },
+            {
+              "max": 32,
+              "score": 5
+            },
+            {
+              "max": 35,
+              "score": 4
+            },
+            {
+              "max": 999,
+              "score": 3
+            }
+          ]
+        }
+      },
+      "evidence": []
+    },
+    {
+      "id": "hardware.height",
+      "field": "height_cm",
+      "name": "身高",
+      "group": "hardware",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "numeric",
+      "unit": "cm",
+      "weight": 0.16,
+      "scoring": {
+        "type": "bands",
+        "byGender": {
+          "male": [
+            {
+              "max": 165,
+              "score": 3
+            },
+            {
+              "max": 170,
+              "score": 4
+            },
+            {
+              "max": 175,
+              "score": 5
+            },
+            {
+              "max": 180,
+              "score": 6
+            },
+            {
+              "max": 185,
+              "score": 7
+            },
+            {
+              "max": 999,
+              "score": 6.5
+            }
+          ],
+          "female": [
+            {
+              "max": 152,
+              "score": 3
+            },
+            {
+              "max": 158,
+              "score": 4
+            },
+            {
+              "max": 164,
+              "score": 5
+            },
+            {
+              "max": 170,
+              "score": 6
+            },
+            {
+              "max": 999,
+              "score": 6.5
+            }
+          ]
+        }
+      },
+      "evidence": []
+    },
+    {
+      "id": "hardware.education",
+      "field": "education",
+      "name": "学历",
+      "group": "hardware",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "ordinal",
+      "weight": 0.12,
+      "scoring": {
+        "type": "options",
+        "map": {
+          "highschool": 2.5,
+          "college": 3.5,
+          "bachelor": 5,
+          "master": 6.5,
+          "phd": 7
+        }
+      },
+      "evidence": []
+    },
+    {
+      "id": "hardware.school_tier",
+      "field": "school_tier",
+      "name": "院校层次",
+      "group": "hardware",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "ordinal",
+      "weight": 0.06,
+      "scoring": {
+        "type": "options",
+        "map": {
+          "211": 6,
+          "985": 7,
+          "none": 4,
+          "ordinary": 4.5,
+          "top": 8
+        }
+      },
+      "evidence": []
+    },
+    {
+      "id": "hardware.occupation",
+      "field": "occupation",
+      "name": "职业",
+      "group": "hardware",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "categorical",
+      "weight": 0.06,
+      "scoring": {
+        "type": "options",
+        "map": {
+          "gov": 6.5,
+          "soe": 5.5,
+          "private": 5,
+          "freelance": 4.5,
+          "startup": 5,
+          "student": 4.5,
+          "other": 4
+        }
+      },
+      "evidence": []
+    },
+    {
+      "id": "hardware.income",
+      "field": "income_wan",
+      "name": "年收入",
+      "group": "hardware",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "numeric",
+      "unit": "万",
+      "weight": 0.16,
+      "scoring": {
+        "type": "bands",
+        "byCityTier": {
+          "1": [
+            {
+              "max": 10,
+              "score": 2.5
+            },
+            {
+              "max": 20,
+              "score": 3.5
+            },
+            {
+              "max": 35,
+              "score": 5
+            },
+            {
+              "max": 60,
+              "score": 6.5
+            },
+            {
+              "max": 100,
+              "score": 7.5
+            },
+            {
+              "max": 9000000000,
+              "score": 8
+            }
+          ],
+          "2": [
+            {
+              "max": 6,
+              "score": 2.5
+            },
+            {
+              "max": 12,
+              "score": 3.5
+            },
+            {
+              "max": 20,
+              "score": 5
+            },
+            {
+              "max": 35,
+              "score": 6.5
+            },
+            {
+              "max": 60,
+              "score": 7.5
+            },
+            {
+              "max": 9000000000,
+              "score": 8
+            }
+          ],
+          "3": [
+            {
+              "max": 4,
+              "score": 2.5
+            },
+            {
+              "max": 8,
+              "score": 3.5
+            },
+            {
+              "max": 15,
+              "score": 5
+            },
+            {
+              "max": 25,
+              "score": 6.5
+            },
+            {
+              "max": 40,
+              "score": 7.5
+            },
+            {
+              "max": 9000000000,
+              "score": 8
+            }
+          ]
+        }
+      },
+      "evidence": []
+    },
+    {
+      "id": "hardware.house",
+      "field": "has_house",
+      "name": "房产",
+      "group": "hardware",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "categorical",
+      "weight": 0.12,
+      "scoring": {
+        "type": "options",
+        "map": {
+          "none": 3,
+          "loan": 5.5,
+          "paid": 6.5,
+          "multi": 7.5
+        }
+      },
+      "evidence": []
+    },
+    {
+      "id": "hardware.car",
+      "field": "has_car",
+      "name": "车",
+      "group": "hardware",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "categorical",
+      "weight": 0.05,
+      "scoring": {
+        "type": "options",
+        "map": {
+          "none": 4,
+          "basic": 5,
+          "mid": 6,
+          "high": 6.5
+        }
+      },
+      "evidence": []
+    },
+    {
+      "id": "hardware.hukou",
+      "field": "hukou",
+      "name": "户籍",
+      "group": "hardware",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "categorical",
+      "weight": 0.06,
+      "scoring": {
+        "type": "options",
+        "map": {
+          "local": 6,
+          "urban_other": 4.5,
+          "rural": 3.5
+        }
+      },
+      "evidence": []
+    },
+    {
+      "id": "family.family_origin",
+      "field": "family_origin",
+      "name": "原生家庭",
+      "group": "family",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "ordinal",
+      "weight": 0.08,
+      "scoring": {
+        "type": "options",
+        "map": {
+          "urban_upper": 6.5,
+          "urban_normal": 5,
+          "county": 4,
+          "rural": 3.5
+        }
+      },
+      "evidence": []
+    },
+    {
+      "id": "family.siblings",
+      "field": "siblings",
+      "name": "独生 / 非独生",
+      "group": "family",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "categorical",
+      "weight": 0.04,
+      "scoring": {
+        "type": "options",
+        "map": {
+          "only": 5.5,
+          "has": 5
+        }
+      },
+      "evidence": []
+    },
+    {
+      "id": "family.marital",
+      "field": "marital",
+      "name": "婚史",
+      "group": "family",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "categorical",
+      "weight": 0.12,
+      "scoring": {
+        "type": "options",
+        "map": {
+          "single": 6,
+          "divorced": 4,
+          "divorced_kid": 2.5
+        }
+      },
+      "evidence": []
+    },
+    {
+      "id": "soft.personality",
+      "field": "personality",
+      "name": "性格",
+      "group": "soft",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "categorical",
+      "weight": 0.2,
+      "scoring": {
+        "type": "options",
+        "map": {
+          "outgoing": 6.5,
+          "warm": 6,
+          "slow": 5,
+          "direct": 5
+        }
+      },
+      "evidence": []
+    },
+    {
+      "id": "soft.communication",
+      "field": "communication",
+      "name": "沟通能力",
+      "group": "soft",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "ordinal",
+      "weight": 0.3,
+      "scoring": {
+        "type": "scale1to5",
+        "scores": [
+          1,
+          3,
+          5,
+          7,
+          9
+        ]
+      },
+      "evidence": []
+    },
+    {
+      "id": "soft.emotional_stability",
+      "field": "emotional_stability",
+      "name": "情绪稳定",
+      "group": "soft",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "ordinal",
+      "weight": 0.25,
+      "scoring": {
+        "type": "scale1to5",
+        "scores": [
+          1,
+          3,
+          5,
+          7,
+          9
+        ]
+      },
+      "evidence": []
+    },
+    {
+      "id": "soft.living_skills",
+      "field": "living_skills",
+      "name": "生活能力",
+      "group": "soft",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "ordinal",
+      "weight": 0.15,
+      "scoring": {
+        "type": "scale1to5",
+        "scores": [
+          2,
+          4,
+          5.5,
+          6.5,
+          7.5
+        ]
+      },
+      "evidence": []
+    },
+    {
+      "id": "soft.social_circle",
+      "field": "social_circle",
+      "name": "社交圈广度",
+      "group": "soft",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "ordinal",
+      "weight": 0.1,
+      "scoring": {
+        "type": "scale1to5",
+        "scores": [
+          1,
+          3,
+          5,
+          6.5,
+          8
+        ]
+      },
+      "evidence": []
+    },
+    {
+      "id": "face.shape",
+      "name": "脸型与轮廓",
+      "group": "appearance",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "来源：docs/CONTRACT.md §三 提及判分观察『脸型大小』；待知识库补证据规则。",
+      "evidence": []
+    },
+    {
+      "id": "face.nose",
+      "name": "鼻型",
+      "group": "appearance",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "来源：docs/CONTRACT.md §三 提及『鼻子』为判分观察项；待知识库补证据规则。",
+      "evidence": []
+    },
+    {
+      "id": "face.harmony",
+      "name": "五官协调度",
+      "group": "appearance",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "演示基线维度：整体协调度描述，不打绝对分。",
+      "evidence": []
+    },
+    {
+      "id": "body.posture",
+      "name": "体态与身材管理",
+      "group": "appearance",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "演示基线维度：含肩颈姿态、体脂观感、精神面貌。",
+      "evidence": []
+    },
+    {
+      "id": "vibe.style",
+      "name": "气质风格",
+      "group": "appearance",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "演示基线维度：干净/商务/松弛/精致等风格描述。",
+      "evidence": []
+    },
+    {
+      "id": "grooming.hair_makeup",
+      "name": "妆造与发型",
+      "group": "appearance",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "演示基线维度：可优化项，与提升路径直接相关。",
+      "evidence": []
+    }
+  ],
+  "rules": [
+    {
+      "id": "R-BASE-SCORE-001",
+      "scope": "scoring",
+      "title": "自评 ≥7 分需验证原生脸（知识库 R-SCORE-001 的结构化镜像）",
+      "when": "自评颜值 ≥7 且面部不是原生未整",
+      "then": "先验证原生脸：未确认前 7 分档不成立，区间上限压到 6.5（知识库 R-SCORE-001 的结构化镜像）。",
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "subject.self_appearance",
+              "op": "gte",
+              "value": 7
+            },
+            {
+              "field": "subject.face_natural",
+              "op": "neq",
+              "value": "yes"
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "clampScale",
+            "scale": "appearance",
+            "max": 6.5
+          },
+          {
+            "kind": "advice",
+            "id": "ADV-BASE-001",
+            "severity": "warn",
+            "text": "自评 ≥7 分但面部非原生未整，颜值分区间上限压到 6.5：知识库 R-SCORE-001 要求 7 分档必须是原生脸。"
+          }
+        ]
+      },
+      "confidence": "low",
+      "conflict": false,
+      "evidence": [],
+      "mirrors": "R-SCORE-001"
+    },
+    {
+      "id": "R-BASE-SCORE-002",
+      "scope": "scoring",
+      "title": "高自评 + 重度精修照片时给上限设闸",
+      "when": "自评颜值 ≥7 且照片为重度精修",
+      "then": "照片无法验证原生基础：区间上限压到 6.5，提示补原相机正脸 / 半身照。",
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "subject.self_appearance",
+              "op": "gte",
+              "value": 7
+            },
+            {
+              "field": "subject.photo_quality",
+              "op": "eq",
+              "value": "heavy"
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "clampScale",
+            "scale": "appearance",
+            "max": 6.5
+          },
+          {
+            "kind": "advice",
+            "id": "ADV-BASE-002",
+            "severity": "warn",
+            "text": "自评 ≥7 分且上传照片为重度精修，无法验证原生基础。先补一组原相机正脸 / 半身照，再评估 7 分档。"
+          }
+        ]
+      },
+      "confidence": "low",
+      "conflict": false,
+      "evidence": []
+    },
+    {
+      "id": "R-BASE-SCORE-003",
+      "scope": "scoring",
+      "title": "自评高于维度映射区间时的分歧说明",
+      "when": "自评比照片维度映射区间高 ≥1 分",
+      "then": "说明分歧来源：熟悉度滤镜 / 妆造加成 / 照片挑选偏向，也可能是拍摄条件没拍出真实水平。",
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "appearance.divergence",
+              "op": "gte",
+              "value": 1
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-BASE-003",
+            "severity": "info",
+            "text": "自评 {{subject.self_appearance}} 分，比照片维度映射区间（{{appearance.photoTrack.mappedInterval.low}}–{{appearance.photoTrack.mappedInterval.high}}）高 {{appearance.divergence}} 分。常见来源：熟悉度滤镜、妆造加成、照片挑选偏向；也可能是拍摄条件没有拍出真实水平。"
+          }
+        ]
+      },
+      "confidence": "low",
+      "conflict": false,
+      "evidence": []
+    },
+    {
+      "id": "R-BASE-SCORE-004",
+      "scope": "scoring",
+      "title": "自评低于维度映射区间时的分歧说明",
+      "when": "自评比照片维度映射区间低 ≥1 分",
+      "then": "说明分歧来源：长期低自尊、参照系过高；建议按照片区间上沿重新校准。",
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "appearance.divergence",
+              "op": "lte",
+              "value": -1
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-BASE-004",
+            "severity": "info",
+            "text": "自评 {{subject.self_appearance}} 分，比照片维度映射区间（{{appearance.photoTrack.mappedInterval.low}}–{{appearance.photoTrack.mappedInterval.high}}）低 {{appearance.divergenceAbs}} 分。常见来源：长期低自尊、参照系过高（只跟顶配比）；建议按照片区间上沿重新校准自我定位。"
+          }
+        ]
+      },
+      "confidence": "low",
+      "conflict": false,
+      "evidence": []
+    },
+    {
+      "id": "R-BASE-ADVICE-001",
+      "scope": "advice",
+      "title": "身高是不可改变项，用其他维度对冲",
+      "when": "身高维度得分偏低（<4.5）",
+      "then": "身高不可改变：用体态、妆造、收入、沟通四项对冲。",
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "hardware.breakdown.hardware.height",
+              "op": "lt",
+              "value": 4.5
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-BASE-011",
+            "severity": "info",
+            "text": "身高在评分里偏低且不可改变：不要在同一条上反复比较，优先用体态、妆造、收入、沟通四项对冲。"
+          }
+        ]
+      },
+      "confidence": "low",
+      "conflict": false,
+      "evidence": []
+    },
+    {
+      "id": "R-BASE-ADVICE-002",
+      "scope": "advice",
+      "title": "沟通能力是最优先可提升项",
+      "when": "沟通能力自评 ≤3",
+      "then": "沟通能力是单项收益最大的可提升项，优先处理。",
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "subject.communication",
+              "op": "lte",
+              "value": 3
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-BASE-012",
+            "severity": "warn",
+            "text": "沟通能力自评 ≤3：这是单项收益最大的可提升项（直接决定第一次见面后的二次邀约率）。"
+          }
+        ]
+      },
+      "confidence": "low",
+      "conflict": false,
+      "evidence": []
+    },
+    {
+      "id": "R-BASE-ADVICE-003",
+      "scope": "advice",
+      "title": "一线城市收入错配提示",
+      "when": "一线城市且收入维度得分 <5",
+      "then": "考虑换城市或换赛道：同样收入在其他城市硬件分更高。",
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "context.cityTier",
+              "op": "eq",
+              "value": 1
+            },
+            {
+              "field": "hardware.breakdown.hardware.income",
+              "op": "lt",
+              "value": 5
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-BASE-013",
+            "severity": "info",
+            "text": "在一线城市，年收入带来的硬件分低于中位：考虑换城市（同样的收入在其他城市硬件分更高）或换赛道提升收入。"
+          }
+        ]
+      },
+      "confidence": "low",
+      "conflict": false,
+      "evidence": []
+    }
+  ],
+  "bands": [
+    {
+      "id": "S",
+      "name": "S 档 · 稀缺档",
+      "level": 7.5,
+      "range": [
+        7,
+        9
+      ],
+      "definition": "综合加权 ≥7：硬件、颜值、软性三项都处于高档位，或在单项上有压倒性优势。",
+      "entryCriteria": [
+        "综合 ≥ 7",
+        "无明显短板（单项不低于 5）"
+      ],
+      "reachableMatch": "同档为主；有明显短板（年龄 / 原生家庭 / 婚史）时向下兼容 0.5–1 档换其它优势。",
+      "typicalObstacle": "同档供给极少、验证周期长，容易在『再等等更好的』里消耗掉窗口期。",
+      "evidence": []
+    },
+    {
+      "id": "A",
+      "name": "A 档 · 明显优势",
+      "level": 6.5,
+      "range": [
+        6,
+        7
+      ],
+      "definition": "综合 6–7：多数单项在 6 分以上，1 项突出，没有致命短板。",
+      "entryCriteria": [
+        "综合 6–7"
+      ],
+      "reachableMatch": "稳定触达 5.5–6.5；向上探 7 档需要单项突出（颜值 / 家庭 / 收入任一）。",
+      "typicalObstacle": "误把『可选池大』当成『可以无限提要求』，叠加硬门槛后反而收窄。",
+      "evidence": []
+    },
+    {
+      "id": "B",
+      "name": "B 档 · 主流档",
+      "level": 5,
+      "range": [
+        4.5,
+        6
+      ],
+      "definition": "综合 4.5–6：有 1–2 项中上，其余中等，属于主流可匹配区间。",
+      "entryCriteria": [
+        "综合 4.5–6"
+      ],
+      "reachableMatch": "稳定区间 4–6；向上靠补齐短板，而不是继续叠加要求。",
+      "typicalObstacle": "短板（体态 / 沟通 / 年龄）未处理，却按高一档的标准筛选。",
+      "evidence": []
+    },
+    {
+      "id": "C",
+      "name": "C 档 · 需要向下兼容",
+      "level": 3.5,
+      "range": [
+        1,
+        4.5
+      ],
+      "definition": "综合 <4.5：多项处于中下，或存在婚史 / 身高 / 收入等硬约束。",
+      "entryCriteria": [
+        "综合 < 4.5"
+      ],
+      "reachableMatch": "稳定区间 2.5–4.5；优先修复可改变项（体态 / 妆造 / 沟通 / 收入）后再谈上探。",
+      "typicalObstacle": "把不可改变项（身高 / 年龄 / 婚史）当作主要矛盾，反复内耗。",
+      "evidence": []
+    }
+  ],
+  "improvementPlaybook": {
+    "grooming.hair_makeup": [
+      "找一次专业造型（发型 + 淡妆 / 修眉），拍一组原相机正脸照作为新基线。",
+      "固定 2–3 套合身版型，避免松垮和运动装的默认状态。"
+    ],
+    "body.posture": [
+      "体脂与体态是 3 个月内可见效的项目：每周 3 次力量 + 有氧，优先降体脂而不是纯减重。",
+      "每天 10 分钟靠墙站 / 开肩，改善圆肩和头前伸。"
+    ],
+    "vibe.style": [
+      "确定一个主风格（干净利落 / 松弛通勤），减少风格漂移造成的『不确定感』。"
+    ],
+    "soft.communication": [
+      "准备 10 个可复用的开放性问题与 3 段自我介绍故事，把『聊天』变成可练习项。",
+      "每次见面后复盘：对方笑了几次、谁在推进话题、下次邀约是否自然。"
+    ],
+    "soft.emotional_stability": [
+      "记录情绪触发点，练习『先复述对方情绪，再表达自己观点』。"
+    ],
+    "soft.social_circle": [
+      "每月新增 2 个线下场景（运动 / 兴趣 / 行业），扩大自然认识的基数。"
+    ],
+    "hardware.income": [
+      "把收入提升拆成可验证动作：换岗 / 副业 / 证书，给自己 6–12 个月节点。"
+    ],
+    "hardware.education": [
+      "在职学历 / 证书只在目标圈层确实认的时候才投入，先验证性价比。"
+    ],
+    "face.harmony": [
+      "非手术类优化（皮肤管理、牙科、修眉）优先级高于任何不可逆项目。"
+    ]
+  },
+  "glossary": []
+}

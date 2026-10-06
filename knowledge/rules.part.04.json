@@ -1,0 +1,2563 @@
+{
+  "version": "1.4.1",
+  "generatedAt": "2026-10-05T15:21:49.786Z",
+  "domain": "demographics",
+  "note": "v2：地域/年龄/性别差异。每条规则二选一：machine（可执行）或 advisory:true（不可执行，已说明原因）。数字阈值仅取 standards.json 的 hard 项；城市系数通过 context.cityTier 分支实现；已删除按地域出身的人群优劣排序（E7）与年龄/性别贬损等价（E6/E9）。 v1.2：按 standards-coverage 审计修正数值语义——城市编码声明为系统枚举（S-DEMO-007）、32 岁与年份推算值退出 machine 门槛（S-AGE-004 soft / S-AGE-012 derived）、太原收入标尺加城市限定、10 岁年龄差降为提示、补 standardRefs。 v1.3：按 claim-fix-list 处理 5 条数字断言——R-DEMO-008 的 10 万改为纯文本提示（不进判定）、R-DEMO-015 删除全部年份换算并补 2 条\"90 后\"互证、R-DEMO-014 维持 advisory；R-DEMO-037 的错误断言在 v2 已删。 v1.3.1：按 D25 给全部 33 条规则补 claimType（market-norm / event-rule / marketing）与 sources；R-DEMO-002/003/005/006 标 event-rule 并加\"仅代表该主办方\"；R-DEMO-004 判为 marketing 并改 advisory；R-DEMO-010/011 随 S-INCOME-002/003 降级同步改 advisory。 v1.4（V3 全量重扫）：精英群门槛确认为跨区域产品线口径（claimType=event-rule，新增福州/山西/南宁证据）；太原补齐非招募第二来源（播客口径：工资 2000-4000、房价 1-2 万/平）；年龄差加入 12/20 岁反例并降为提示；新增西安、广州两条 marketing 城市规则（D27）。 v1.4.1：新增深圳收入标尺（R-DEMO-044，引用官方统计的城市口径）；R-DEMO-010 补第二来源（aoye82，跨账号）后升 medium（仍 advisory，因 S-INCOME-002 降 soft）。",
+  "corpus": {
+    "transcribed": 916,
+    "planned": 3430,
+    "coveragePct": 26.7,
+    "accountsUsed": [
+      "aoye98",
+      "aoye28",
+      "47590488570",
+      "48854385344",
+      "30578719968",
+      "33349790582",
+      "25845559030",
+      "41252723284",
+      "20090777434"
+    ]
+  },
+  "scales": [],
+  "dimensions": [],
+  "composites": [],
+  "rules": [
+    {
+      "id": "R-DEMO-001",
+      "scope": "demographic",
+      "title": "北京：本地匹配偏好与城区/户口口径",
+      "when": "来访者常住北京；用于本地化提示",
+      "then": "北京市场的本地匹配偏好较强（单机构口径，3 条证据/1 个账号）：本地专场通常按城区与户口设置准入；跨城或非本地户口会显著增加匹配成本。",
+      "confidence": "medium",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "field": "subject.city",
+          "op": "matches",
+          "value": "北京"
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "text": "北京市场的本地匹配偏好较强，本地专场常按城区/户口设置准入；如果你不是本地户口或不打算长期在北京定居，匹配成本会更高。"
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420395706862889",
+          "quote": "北京土著找土著有执念……而且我觉得哪都都是本地人优先找本地人。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640076462543867176",
+          "quote": "年龄大个7岁，老北京人不要要求成六区（城六区）的，找个就是比方说门头沟的，有户口的，然后别卡独生子。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7689440280184917258",
+          "quote": "在北京我们有个城陆区屠住专场，身份证号110101到身份证号110108，您就能参加。之前办的都是北京屠住专场。"
+        }
+      ],
+      "standardRefs": [],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 3,
+        "accounts": 1
+      },
+      "sourcesNote": "按 D29 权威口径：3 条证据同属鳌烨矩阵（aoye28 为镜像号），独立账号数=1；原文案的\"北京本地偏好\"只作单机构口径。"
+    },
+    {
+      "id": "R-DEMO-002",
+      "scope": "demographic",
+      "title": "上海：土著有房专场准入口径",
+      "when": "来访者常住上海；用于本地化提示",
+      "then": "上海本地专场准入口径为身份证 310 开头或已在上海购房（S-DEMO-001）；同城匹配可减少住房、子女教育与赡养安排上的不确定性。",
+      "confidence": "medium",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "field": "subject.city",
+          "op": "matches",
+          "value": "上海"
+        },
+        "then": [
+          {
+            "kind": "text",
+            "text": "上海本地专场的准入口径：身份证 310 开头，或已在上海购房（依据 S-DEMO-001，活动方公开口径）。（仅代表该主办方专场准入，非当地普遍门槛。）（来源：月老鳌烨·上海土著有房专场。）"
+          },
+          {
+            "kind": "advice",
+            "text": "同城匹配可以减少住房、子女教育与赡养安排上的不确定性；这是活动方的现实口径，不是对你个人条件的评价。（仅代表该主办方专场准入，非当地普遍门槛。）（来源：月老鳌烨·上海土著有房专场。）"
+          }
+        ],
+        "note": "claimType=event-rule：仅代表该主办方专场的准入规则，不是当地普遍门槛。 来源标签：月老鳌烨·上海土著有房专场。"
+      },
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636699793313598729",
+          "quote": "只要您身份证开头是310，或者说您已经在上海购置了房产，就可以来参加。其实我们之前的经历也发现，上海人更愿意找上海人。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7639306639819951395",
+          "quote": "例如是上海人，〔找〕上海人，从现实的角度来分析，我总结了一下四点。第一点呢，是你不用过多的考虑赡养父母以及孩子教育投入的问题。第二点呢，是你不用规避风险。第三点呢，是不用考虑住房、买房压力。"
+        }
+      ],
+      "standardRefs": [
+        "S-DEMO-001"
+      ],
+      "claimType": "event-rule",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-003",
+      "scope": "demographic",
+      "title": "深圳：土著有房场准入口径与移民城市结构",
+      "when": "来访者常住深圳；用于本地化提示",
+      "then": "深圳本地专场准入口径为身份证 4403 开头或已在深圳购房（S-DEMO-002）；深圳移民人口占比高，本地专场规模显著小于北京与上海。",
+      "confidence": "medium",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "field": "subject.city",
+          "op": "matches",
+          "value": "深圳"
+        },
+        "then": [
+          {
+            "kind": "text",
+            "text": "深圳本地专场的准入口径：身份证 4403 开头，或已在深圳购房（依据 S-DEMO-002）。深圳移民人口占比高，本地专场规模明显小于北京、上海。（仅代表该主办方专场准入，非当地普遍门槛。）（来源：月老鳌烨·深圳土著有房场。）"
+          }
+        ],
+        "note": "claimType=event-rule：仅代表该主办方专场的准入规则，不是当地普遍门槛。 来源标签：月老鳌烨·深圳土著有房场。"
+      },
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640036505334877491",
+          "quote": "深圳毕竟是一个比较新鲜的城市，大家大部分都是外地人。所以说这个深圳土著〔场〕的话，它人肯定是不会太多的。也希望大家能理解，和北京上海的人数相比确实是少了一些。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7635614967051423002",
+          "quote": "5月10号我们会有一个深圳土著有房专场。从现实的角度出发，不用考虑住房户口。深圳人找深圳人，也排除了孩子远嫁、逢年过节两头跑。"
+        }
+      ],
+      "standardRefs": [
+        "S-DEMO-002"
+      ],
+      "claimType": "event-rule",
+      "sources": {
+        "transcripts": 2,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-004",
+      "scope": "demographic",
+      "title": "（advisory/marketing）某机构招募口径：深圳的匹配风格",
+      "when": "深圳用户；该说法来自同机构招募视频，仅作背景，不作规律输出",
+      "then": "该机构在 3 条深圳招募视频里把当地描述为\"包容度大、看个人能力与规划\"；这属于获客话术（claimType=marketing），不能读成\"深圳市场就是这样\"，也不得作为规律输出。（来源：月老鳌烨深圳说媒招募视频。）",
+      "confidence": "low",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7672727361784562609",
+          "quote": "在深圳这个地方，我们会发现大家的择偶需求是非常多样性的，但是它的包容程度又是最大的。那深圳这边男生对女方他没有太多的硬性要求。一般就是性格好，原生家庭完整，这个比较重要。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7682641580730634225",
+          "quote": "深圳虽然是很包容，但大家很看重你的个人能力，以及未来的一个能力规划……但郑州问的最多的人就是：他想不想结婚？有没有步入家庭建设的意愿？他这个人稳不稳定？"
+        }
+      ],
+      "standardRefs": [],
+      "claimType": "marketing",
+      "sources": {
+        "transcripts": 2,
+        "accounts": 1
+      },
+      "advisory": true
+    },
+    {
+      "id": "R-DEMO-005",
+      "scope": "demographic",
+      "title": "长沙：有门槛活动的女生年龄口径",
+      "when": "来访者常住长沙；用于活动口径提示",
+      "then": "长沙有门槛活动的公开口径为女生年龄卡在 30 岁以下、男生卡家境与收入（S-AGE-001）；属于活动口径而非普适规律。",
+      "confidence": "low",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "field": "subject.city",
+          "op": "matches",
+          "value": "长沙"
+        },
+        "then": [
+          {
+            "kind": "text",
+            "text": "长沙有门槛活动的公开口径：女生年龄卡在 30 岁以下，男生卡家境与收入（依据 S-AGE-001）。这是活动报名口径，不代表普适的市场规律。 仅代表该主办方/该场活动的报名口径，不是当地人的普遍标准。（来源：月老鳌烨·长沙优秀青年局活动。）"
+          }
+        ],
+        "note": "claimType=event-rule：仅代表该主办方/该场活动的报名口径。 来源标签：月老鳌烨·长沙优秀青年局活动。"
+      },
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7650118291364764794",
+          "quote": "男生呢，我们依旧会卡下家境，然后收入。女生呢，卡30岁以下。"
+        }
+      ],
+      "standardRefs": [
+        "S-AGE-001"
+      ],
+      "claimType": "event-rule",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-006",
+      "scope": "demographic",
+      "title": "精英群产品线口径（跨区域）：女生 98 后 / 男生 90 后高净值",
+      "when": "常住山东/东三省/福州/山西/南宁等已开精英群区域；仅产品线报名口径",
+      "then": "主办方的精英群产品线覆盖 5 个区域、12 个城市（山东：济南/青岛/淄博/泰安；东三省：沈阳/哈尔滨/大连；福州；山西：长治/大同；南宁），模板一致：女生 98 后（部分地区写\"28 周岁以内\"），男生 90 后高净值（各地另加年收入 10-50 万或房车全）。这是**产品线的场次覆盖口径**（claimType=event-rule），同一主办方复用同一模板，不代表当地市场规律。",
+      "confidence": "low",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "field": "subject.city",
+          "op": "matches",
+          "value": "济南|青岛|淄博|泰安|沈阳|哈尔滨|大连|福州|太原|长治|大同|南宁"
+        },
+        "then": [
+          {
+            "kind": "text",
+            "text": "该区域精英群的产品线口径：女生 98 后（部分地区写\"28 周岁以内\"），男生 90 后高净值（另加年收入 10-50 万或房车全等条件，各地不同）。仅代表该主办方的产品线报名规则，不是当地市场的普遍门槛（来源：月老鳌烨·精英群产品线）。"
+          }
+        ],
+        "note": "claimType=event-rule（产品线级，跨城市复用同一模板）。来源标签：月老鳌烨·精英群产品线（山东/东三省/福州/山西/南宁）。"
+      },
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644248802190870890",
+          "quote": "我准备建一个东三省的精英群，男生的门槛是90后高净值，女生的门槛是98后，在颜值高、形象好的前提下。家境殷实、高学历、工作体面，三者择一，您就能进这个群。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7643773318034843603",
+          "quote": "在我接的所有咨询里，山东人最能接受本省异地恋……就比方说我接河北的咨询，张家口的人是指定不乐意找保定的……然后咱山东可不是啊，就是济南也行，青岛也行，烟台也行。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7632721945680113299",
+          "quote": "我们在福州是有个前400人免费的精英群的，男生的门槛是90后，年收入50万以上，或者家庭A8，女生的门槛还是98后，在颜值高、形象好的前提下，家境殷实、高学历、工作体面，三者择一，您就能进福州精英群。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7648968810115943686",
+          "quote": "门槛一样，男生是年收入10万以上、房车全，您就能进这个群；女生的门槛是98后，在28周岁以内、形象好的前提下，本科、有稳定工作。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7650535677314762085",
+          "quote": "男生的门槛是90后，年收入15万以上，房车全；女生的门槛是98后，形象好的前提下，本科和稳定工作。"
+        }
+      ],
+      "standardRefs": [
+        "S-AGE-006"
+      ],
+      "claimType": "event-rule",
+      "sources": {
+        "transcripts": 4,
+        "accounts": 1
+      },
+      "coverageScope": {
+        "regions": 5,
+        "cities": [
+          "济南",
+          "青岛",
+          "淄博",
+          "泰安",
+          "沈阳",
+          "哈尔滨",
+          "大连",
+          "福州",
+          "太原",
+          "长治",
+          "大同",
+          "南宁"
+        ],
+        "note": "产品线覆盖 5 个区域（山东/东三省/福州/山西/南宁）、12 个城市；这是同一主办方产品线的场次覆盖，不是跨账号互证。"
+      },
+      "sourcesNote": "D29.1：event-rule 可保留覆盖面，但须标注为\"产品线覆盖 5 个区域/12 个城市\"，账号数按权威口径计为 1（矩阵同稿复用）。"
+    },
+    {
+      "id": "R-DEMO-007",
+      "scope": "demographic",
+      "title": "太原/山西：编制偏好与收入标尺",
+      "when": "来访者常住太原或山西城市；用于本地化提示",
+      "then": "太原/山西当地口径（market-norm，多源：5 条转写 / 3 个账号）：编制类岗位整体最受认可（S-OCC-002）；收入标尺低于一线——月收入 5000 元已属合格、年收入 10 万属中上（S-INCOME-004）；非招募场景补充：当地普遍工资 2000-4000 元、房价 1-2 万/平、500-600 万可买到不错的房子。",
+      "confidence": "medium",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "field": "subject.city",
+          "op": "matches",
+          "value": "太原|山西"
+        },
+        "then": [
+          {
+            "kind": "text",
+            "text": "太原/山西当地口径：编制类岗位整体最受认可（依据 S-OCC-002）；收入标尺低于一线——月收入 5000 元已属合格，年收入 10 万属于中上（依据 S-INCOME-004）。"
+          }
+        ],
+        "note": "claimType=market-norm，sources={transcripts:2, accounts:1}（单源，已公示来源数）。"
+      },
+      "evidence": [
+        {
+          "account": "25845559030",
+          "aweme_id": "7367266582898183439",
+          "quote": "在山西，特别像在太原这样的城市，最受欢迎的、最香的，那肯定还是编制。有行政编、事业编、企业编。"
+        },
+        {
+          "account": "25845559030",
+          "aweme_id": "7370263231828495656",
+          "quote": "在太原，月收入五千的男生已经是一个非常合格的水准了……不要觉得十万在太原是一个地板砖。"
+        },
+        {
+          "account": "79612800869",
+          "aweme_id": "7354305317645176104",
+          "quote": "太原遍地就是两三千三四千，招不到人。"
+        },
+        {
+          "account": "79612800869",
+          "aweme_id": "7251583941105208576",
+          "quote": "2000万在山西，我感觉算有钱人了，因为山西的房价也就是个1万到2万之间……你就要有个五六百万，就能买一个不错的。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7648968810115943686",
+          "quote": "门槛一样，男生是年收入10万以上、房车全，您就能进这个群。"
+        }
+      ],
+      "standardRefs": [
+        "S-OCC-002",
+        "S-INCOME-004"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 5,
+        "accounts": 3
+      }
+    },
+    {
+      "id": "R-DEMO-008",
+      "scope": "demographic",
+      "title": "一线城市：收入口径提示（单源，不进硬判定）",
+      "when": "一线城市（context.cityTier=1，系统枚举）且男性、已填收入；10 万为单源口径，仅作文本提示",
+      "then": "男生硬件评分表把\"税后年收入 10 万以上\"列为加分项（S-INCOME-001，定义型·单源）。这是**全国基准线在一线城市的体感**（解释性外推），不是语料里的一线专属标准；本规则只提示口径，不做数值判定。",
+      "confidence": "low",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "context.cityTier",
+              "op": "eq",
+              "value": 1
+            },
+            {
+              "field": "subject.gender",
+              "op": "eq",
+              "value": "male"
+            },
+            {
+              "field": "subject.income_wan",
+              "op": "exists"
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "text": "全国基准线在一线城市的体感：男生评分表把「税后年收入 10 万以上」列为加分项（S-INCOME-001，定义型·单源）。这只是口径提示，不参与打分或筛选。"
+          }
+        ],
+        "note": "城市编码为系统枚举（S-DEMO-007，derived）：1=一线 / 2=新一线 / 3=三四线及县域；它是引擎 schema，不是语料数字。10 万来自单源定义型表格（D21 允许单源 hard，但按 claim-fix-list 处理原则只作文本提示，不进数值判定）。"
+      },
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "第六，新一线以上有稳定工作或者是本市人的再加10分。"
+        },
+        {
+          "account": "20090777434",
+          "aweme_id": "7509097036177902863",
+          "quote": "在中国，一年能赚二三十万的，无论你在中国哪个城市的相亲市场上，都能秒杀到90%以上的竞争者。"
+        }
+      ],
+      "standardRefs": [
+        "S-INCOME-001",
+        "S-DEMO-007"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-009",
+      "scope": "demographic",
+      "title": "太原/山西：当地收入标尺（城市系数样板）",
+      "when": "常住太原或山西城市、男性、年收入 10-20 万（地方口径，不外推）",
+      "then": "太原/山西当地标尺：年收入 10 万属中上，月收入 5000 元已被当地视为合格（S-INCOME-004）；这是地方口径，不能套用到其他三四线城市。",
+      "confidence": "medium",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "subject.city",
+              "op": "matches",
+              "value": "太原|山西"
+            },
+            {
+              "field": "subject.gender",
+              "op": "eq",
+              "value": "male"
+            },
+            {
+              "field": "subject.income_wan",
+              "op": "between",
+              "value": [
+                10,
+                20
+              ]
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "text": "在太原/山西，年收入 10 万已属中上水平（S-INCOME-004：当地口径为月收入 5000 元即合格）。注意这是太原口径，不代表其他三四线城市。"
+          }
+        ],
+        "note": "口径限定：S-INCOME-004 的样本是太原/山西（2 条转写 / 2 个账号，含非招募播客口径），不外推到 tier-3 全域。"
+      },
+      "evidence": [
+        {
+          "account": "25845559030",
+          "aweme_id": "7370263231828495656",
+          "quote": "在太原，月收入五千的男生已经是一个非常合格的水准了……不要觉得十万在太原是一个地板砖。"
+        },
+        {
+          "account": "25845559030",
+          "aweme_id": "7367266582898183439",
+          "quote": "在山西，特别像在太原这样的城市，最受欢迎的、最香的，那肯定还是编制。有行政编、事业编、企业编。"
+        },
+        {
+          "account": "79612800869",
+          "aweme_id": "7354305317645176104",
+          "quote": "太原遍地就是两三千三四千，招不到人。"
+        }
+      ],
+      "standardRefs": [
+        "S-INCOME-004"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 2,
+        "accounts": 2
+      }
+    },
+    {
+      "id": "R-DEMO-010",
+      "scope": "demographic",
+      "title": "（advisory）收入档：年收入 20-30 万（单源全国断言）",
+      "when": "男性用户；数字来自单条直播的全国性断言，仅作背景",
+      "then": "两条独立口径：① 单条直播称\"二三十万在任何城市都秒杀 90% 以上竞争者\"（20090777434）；② 深圳内容号引用 2024 官方统计——私营单位平均年薪 9.5 万、非私营 17.4 万，20 万属中层入门，并称\"20 万在中国任何一个城市都能超过 90% 的人\"（aoye82）。属经验型，S-INCOME-002 已降 soft，不进任何判定。",
+      "confidence": "medium",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "20090777434",
+          "aweme_id": "7509097036177902863",
+          "quote": "在中国，一年能赚二三十万的，无论你在中国哪个城市的相亲市场上，都能秒杀到90%以上的竞争者。"
+        },
+        {
+          "account": "aoye82",
+          "aweme_id": "7652709606325879995",
+          "quote": "根据深圳24年的官方数据统计，私营单位平均年薪9.5万，20万远超了私企的平均值……非私营像国企、大厂、事业单位平均年薪17.4万……你在中国任何一个城市都能超过90%的人。"
+        }
+      ],
+      "standardRefs": [
+        "S-INCOME-002"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 2,
+        "accounts": 2
+      },
+      "advisory": true
+    },
+    {
+      "id": "R-DEMO-011",
+      "scope": "demographic",
+      "title": "（advisory）收入档：年收入 30 万以上（单源全国断言）",
+      "when": "男性用户；数字来自单条直播的全国性断言，仅作背景",
+      "then": "单条直播口径：年收入 30 万以上可放宽外貌/年龄/身高/家境/工作要求（S-INCOME-003 已降 soft）。属经验型单源断言，不进任何判定。",
+      "confidence": "low",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "20090777434",
+          "aweme_id": "7509097036177902863",
+          "quote": "如果你的男朋友一年能赚30万以上，你就真的不要再对他的外貌、年龄、身高、家境、工作、脾气有太多的要求。"
+        }
+      ],
+      "standardRefs": [
+        "S-INCOME-003"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      },
+      "advisory": true
+    },
+    {
+      "id": "R-DEMO-012",
+      "scope": "demographic",
+      "title": "年龄差上限：约 7-8 岁",
+      "when": "期望对象比本人年长的年龄差超过 8 岁（want.age_gap_older > 8）",
+      "then": "语料可接受的年龄差上限约 7-8 岁（S-AGE-008，hard；来源以北京案例为主，3 条证据/1 个账号，矩阵同源）；但完整语料中存在 12 岁与 20 岁的正反两类案例（有人明确拒绝大 20 岁，也有人表示能接受），因此本规则只作提示，不作为硬门槛。",
+      "confidence": "low",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "field": "want.age_gap_older",
+          "op": "gt",
+          "value": 8
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "text": "年龄差提示：语料中较常见的接受区间约 7-8 岁（S-AGE-008），但 12 岁、20 岁都有正反案例，跨地域适用性未验证，本条只作提示。"
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640076462543867176",
+          "quote": "年龄大个7岁，老北京人不要要求成六区（城六区）的，找个就是比方说门头沟的，有户口的。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7518504314550095155",
+          "quote": "大20岁可以吗？正常女生哪可能接受比自己大20岁了。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7525558794294775049",
+          "quote": "能接受大二十岁。"
+        }
+      ],
+      "standardRefs": [
+        "S-AGE-008"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 3,
+        "accounts": 1
+      },
+      "sourcesNote": "按 D29 权威口径：3 条证据同属鳌烨矩阵（含 aoye28 镜像），独立账号数=1。"
+    },
+    {
+      "id": "R-DEMO-013",
+      "scope": "demographic",
+      "title": "年龄差拒绝线：10 岁及以上",
+      "when": "期望对象比本人年长的年龄差达到 10 岁（want.age_gap_older >= 10）",
+      "then": "10 岁及以上的年龄差在语料里口径冲突（有明确拒绝的单条，也有\"可以谈\"的说法，S-AGE-009 已降为 soft）；v2 改为只给提示，不做硬性排除。",
+      "confidence": "low",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "field": "want.age_gap_older",
+          "op": "gte",
+          "value": 10
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "text": "10 岁及以上的年龄差在语料里口径冲突：有人认为不可接受，也有人表示可以谈（S-AGE-009 为 soft）。这里只作提示，不构成硬性门槛。"
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636347304823360806",
+          "quote": "他们年纪又太大了，就是会比我大10岁左右，我也不太能接受。"
+        }
+      ],
+      "standardRefs": [
+        "S-AGE-009"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      },
+      "sourcesNote": "按 D29 权威口径：仅 1 条证据、1 个账号（aoye98）。"
+    },
+    {
+      "id": "R-DEMO-014",
+      "scope": "demographic",
+      "title": "（advisory）女性 30+ 的年龄门槛与补位策略",
+      "when": "女性用户；年龄门槛的数字不可硬判定，仅作报告提示",
+      "then": "语料以 22 岁与 32 岁作单条对照（S-AGE-004，soft，来自获客视频），且与\"活动 30 岁以下 / 精英群 98 后 / 个人意愿 28-29\"三种口径并存；因此 32 岁不作为 machine 门槛，只在报告中给中性提示。",
+      "confidence": "low",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7653740377044021105",
+          "quote": "一个22岁的美女哪怕身无分文，找对渠道依然有巨大的可能可以找到高净值的伴侣。但她呢到了32岁，即使找门当户对也有可能被挑挑拣拣。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7588992827170802984",
+          "quote": "女生33岁来相亲市场上已经很吃亏了，没有男生会大费地去追33岁的女生了，除非是大美女。"
+        }
+      ],
+      "advisory": true,
+      "standardRefs": [
+        "S-AGE-004"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 2,
+        "accounts": 2
+      }
+    },
+    {
+      "id": "R-DEMO-015",
+      "scope": "demographic",
+      "title": "（advisory）男性年龄口径：\"90 后\"门槛与来源",
+      "when": "男性用户；只作\"90 后\"口径提示，无年龄门槛",
+      "then": "语料只给\"男生 90 后\"的出生年口径（S-AGE-006，soft；山东与东三省精英群两条互证），没有给出年龄上限或换算年龄；报告只使用\"90 后\"这一原话口径，不做任何年份换算（原推算句已按 claim-fix-list 整句删除）。",
+      "confidence": "low",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "30578719968",
+          "aweme_id": "7552245295359216905",
+          "quote": "但是您需要拿别的筹码来补，男人的年龄虽然说权重，没有女生那么重，但也一样很重要。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7636347718041881866",
+          "quote": "一个男生如果说他的社会能量……能打进到你的框架之内，他其实不可能能接受三十一二岁的女生，就撑死也就是二十八九。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7644248802190870890",
+          "quote": "我准备建一个东三省的精英群，男生的门槛是90后高净值，女生的门槛是98后。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7643773318034843603",
+          "quote": "男生的门槛还是90后高净值，女生的门槛还是98后，在颜值高、形象好的前提下。"
+        }
+      ],
+      "advisory": true,
+      "standardRefs": [
+        "S-AGE-006"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 2,
+        "accounts": 2
+      }
+    },
+    {
+      "id": "R-DEMO-016",
+      "scope": "demographic",
+      "title": "女性视角：市场首看维度（博主口径）",
+      "when": "女性用户；用于报告中的市场对标说明",
+      "then": "市场对女性的常见首看维度是年龄、外貌、性格，以及原生家庭是否有负担（S-MATCH-006）；这是市场观察，不是对个人价值的判断。",
+      "confidence": "high",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "field": "subject.gender",
+          "op": "eq",
+          "value": "female"
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "text": "市场对你这个性别常见的首看维度是年龄、外貌、性格，以及原生家庭是否有负担（S-MATCH-006，博主口径）。"
+          },
+          {
+            "kind": "text",
+            "text": "这是市场观察，不是对你个人价值的判断；可变项（呈现、沟通、生活能力）才是可优化的部分。"
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638942595967683875",
+          "quote": "男女在婚恋市场，他的这个价值参照表不一样。女生排第一的可能还是年龄，是外貌，是性格，然后家里面不拖累就行。男生排第一的还是他的社会能量，跟他的社会价值。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7684483743582637331",
+          "quote": "男生相亲的门槛呢，是收入，女生相亲的门槛是颜值。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7668215556251634959",
+          "quote": "叫男生要的是舒适性，女生要的是实惠性。"
+        }
+      ],
+      "standardRefs": [
+        "S-MATCH-006"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 3,
+        "accounts": 2
+      }
+    },
+    {
+      "id": "R-DEMO-017",
+      "scope": "demographic",
+      "title": "男性视角：市场首看维度（博主口径）",
+      "when": "男性用户；用于报告中的市场对标说明",
+      "then": "市场对男性的常见首看维度是社会价值与收入（S-MATCH-006）；相亲市场常见的表述是\"男方看收入、女方看颜值\"。",
+      "confidence": "high",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "field": "subject.gender",
+          "op": "eq",
+          "value": "male"
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "text": "市场对你这个性别常见的首看维度是社会价值与收入（S-MATCH-006，博主口径）；常见的说法是\"男方看收入、女方看颜值\"。"
+          },
+          {
+            "kind": "text",
+            "text": "这是市场观察，不是对你个人价值的判断；收入、呈现与沟通都是可优化项。"
+          }
+        ]
+      },
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638942595967683875",
+          "quote": "男女在婚恋市场，他的这个价值参照表不一样。女生排第一的可能还是年龄，是外貌，是性格，然后家里面不拖累就行。男生排第一的还是他的社会能量，跟他的社会价值。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7684483743582637331",
+          "quote": "男生相亲的门槛呢，是收入，女生相亲的门槛是颜值。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7668215556251634959",
+          "quote": "叫男生要的是舒适性，女生要的是实惠性。"
+        }
+      ],
+      "standardRefs": [
+        "S-MATCH-006"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 3,
+        "accounts": 2
+      }
+    },
+    {
+      "id": "R-DEMO-018",
+      "scope": "demographic",
+      "title": "彩礼：一线/新一线更偏象征性",
+      "when": "一线或新一线城市（context.cityTier <= 2）",
+      "then": "一线/新一线城市彩礼更常被当作小家庭的启动资金、象征性处理（单源口径）。",
+      "confidence": "medium",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "subject.city",
+              "op": "exists"
+            },
+            {
+              "field": "context.cityTier",
+              "op": "lte",
+              "value": 2
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "text",
+            "text": "在一线/新一线城市，彩礼更常被双方家庭当作小家庭的启动资金、象征性处理。"
+          }
+        ],
+        "note": "城市编码为系统枚举（S-DEMO-007，derived）：1=一线 / 2=新一线 / 3=三四线及县域；它是引擎 schema，不是语料数字。"
+      },
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7669651629650646267",
+          "quote": "就算女生有陪嫁，男生有彩礼，应该是差不多的，相当于说给一个小家的启动资金，也没有说什么带不带回这种东西，象征性的。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7687565236722879790",
+          "quote": "就是越大的城市，反而彩礼看得越淡，像北上广深那边，他们结婚可能彩礼就是意思一下就行。"
+        }
+      ],
+      "standardRefs": [
+        "S-DEMO-007"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 2,
+        "accounts": 2
+      }
+    },
+    {
+      "id": "R-DEMO-019",
+      "scope": "demographic",
+      "title": "彩礼：三四线/县域更被当作保障",
+      "when": "非新一线/三四线城市（context.cityTier = 3）",
+      "then": "三四线/县域彩礼更常被当作现实保障被强调；经济条件越弱，彩礼议题越突出（单源口径）。",
+      "confidence": "medium",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "subject.city",
+              "op": "exists"
+            },
+            {
+              "field": "context.cityTier",
+              "op": "eq",
+              "value": 3
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "text",
+            "text": "在三四线及县域，彩礼更常被当作现实保障来讨论；双方家庭经济条件越弱，这个议题越突出。"
+          }
+        ],
+        "note": "城市编码为系统枚举（S-DEMO-007，derived）：1=一线 / 2=新一线 / 3=三四线及县域；它是引擎 schema，不是语料数字。"
+      },
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7669651629650646267",
+          "quote": "就算女生有陪嫁，男生有彩礼，应该是差不多的，相当于说给一个小家的启动资金，也没有说什么带不带回这种东西，象征性的。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7687565236722879790",
+          "quote": "就是越大的城市，反而彩礼看得越淡，像北上广深那边，他们结婚可能彩礼就是意思一下就行。"
+        }
+      ],
+      "standardRefs": [
+        "S-DEMO-007"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 2,
+        "accounts": 2
+      }
+    },
+    {
+      "id": "R-DEMO-020",
+      "scope": "demographic",
+      "title": "城市能级加分：新一线以上且本市户籍",
+      "when": "新一线以上（context.cityTier <= 2）且（本市户籍 或 稳定体制/国企工作）",
+      "then": "城市能级本身是加分项：新一线以上有稳定工作或本市人 +10 分（S-DEMO-006）；machine 用 occupation∈{gov,soe} 近似\"稳定工作\"。",
+      "confidence": "medium",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "context.cityTier",
+              "op": "lte",
+              "value": 2
+            },
+            {
+              "any": [
+                {
+                  "field": "subject.hukou",
+                  "op": "eq",
+                  "value": "local"
+                },
+                {
+                  "field": "subject.occupation",
+                  "op": "in",
+                  "value": [
+                    "gov",
+                    "soe"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "text",
+            "text": "新一线以上城市：本市户籍，或从事体制内/国企等稳定工作，城市能级本身构成加分项（依据 S-DEMO-006）。"
+          }
+        ],
+        "note": "城市编码为系统枚举（S-DEMO-007，derived）：1=一线 / 2=新一线 / 3=三四线及县域；它是引擎 schema，不是语料数字。 \"稳定工作\"用 occupation∈{gov,soe} 近似。"
+      },
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "第六，新一线以上有稳定工作或者是本市人的再加10分。"
+        }
+      ],
+      "standardRefs": [
+        "S-DEMO-006",
+        "S-DEMO-007"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-021",
+      "scope": "demographic",
+      "title": "（advisory）年龄劣势的统一策略：用其他筹码补位",
+      "when": "存在年龄压力时；触发条件依赖不可靠的年龄阈值，仅作报告提示",
+      "then": "语料一致的策略是用其他筹码补位（稳定职业、家庭支持、生活与沟通能力），而不是单点硬扛；但\"从几岁开始算劣势\"没有可硬判定的数字（S-AGE-004 soft / S-AGE-012 derived），故不设 machine 门槛。",
+      "confidence": "low",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638583110027824447",
+          "quote": "那这个女生拿什么来补这个年龄呢？就是我希望就是有一份正式的工作，就是交五险一金的那种。"
+        },
+        {
+          "account": "30578719968",
+          "aweme_id": "7552245295359216905",
+          "quote": "但是您需要拿别的筹码来补……我不知道您未来几年，您能不能评个职称，能不能拿到一些成就，有没有一些更有溢价的地方。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7588992827170802984",
+          "quote": "女生33岁来相亲市场上已经很吃亏了，没有男生会大费地去追33岁的女生了，除非是大美女。"
+        }
+      ],
+      "advisory": true,
+      "standardRefs": [
+        "S-AGE-004",
+        "S-AGE-012"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 2,
+        "accounts": 2
+      }
+    },
+    {
+      "id": "R-DEMO-030",
+      "scope": "demographic",
+      "title": "（advisory）高社会能量男性的可接受年龄上限 28-29",
+      "when": "女性目标对象的\"社会能量\"较强时",
+      "then": "语料口径：社会能量强的男性通常把可接受年龄上限压到 28-29 岁；但这需要知道目标对象的社会能量，表单没有对应字段，故不自动执行。",
+      "confidence": "low",
+      "conflict": true,
+      "conflictNote": "同一段还出现\"二婚市场年龄感差 6-8 年\"，与 31-32 / 28-29 的举例数字不自洽。",
+      "advisory": true,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636347718041881866",
+          "quote": "就是男女啊，在二婚市场上的这个年龄感之差大概存在六到八年……咱们基本上在94、95年，三十一二岁……他其实不可能能接受三十一二岁的女生，就撑死也就是二十八九。"
+        }
+      ],
+      "standardRefs": [
+        "S-AGE-003",
+        "S-AGE-010"
+      ],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-031",
+      "scope": "demographic",
+      "title": "（advisory）男性颜值的稀缺度",
+      "when": "评估男性颜值溢价时",
+      "then": "语料口径：100 个女生中约有 30 个\"好看\"（靠化妆打扮），100 个男生中只有约 5 个\"帅\"；但\"帅\"没有可判定的阈值，不能绑定照片分，故不自动执行。",
+      "confidence": "low",
+      "conflict": false,
+      "advisory": true,
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7660054519484591217",
+          "quote": "你像100个女生，你起码能找到30个好看的女生……但是100个男生中5个长得〔帅〕，看得过去的都很不容易了……我觉得男生的颜值比女生的颜值真的真的更重要的多。"
+        }
+      ],
+      "standardRefs": [],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-032",
+      "scope": "demographic",
+      "title": "（advisory）高个男性的稀缺度",
+      "when": "讨论身高稀缺性时",
+      "then": "语料称 1 米 8 以上男性占 5%、1 米 85 以上不足 1%；该数字不在 standards.json 的 hard 项内，不得进入硬判定，仅作背景说明。",
+      "confidence": "low",
+      "conflict": false,
+      "advisory": true,
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7625984741712386426",
+          "quote": "1米8以上的就只占全国人数的5%，这比女生〔1米65以上〕的4.2%的占比还要少。1米85以上的更少，连1%都不到。所以说高个子的男生和身材好的女生相比真的稀缺很多。"
+        }
+      ],
+      "standardRefs": [],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-033",
+      "scope": "demographic",
+      "title": "（advisory）杭州：电商/直播产业结构与外来人口",
+      "when": "来访者常住杭州；作背景说明",
+      "then": "单源观察：杭州电商、直播、MCN 产业密集，外来人口多、破圈难；该结论只有 1 条语料，不自动渲染，等语料补全后再升级。",
+      "confidence": "low",
+      "conflict": false,
+      "advisory": true,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7668215556251634959",
+          "quote": "首先我认为杭州几乎可以说是中国小美最多的一个城市，几乎没有质疑。因为大家都知道杭州的电商啊、带货、直播、MCN娱乐相关的产业、这种自媒体都非常发达，所以吸引了大量的这种小美女。"
+        }
+      ],
+      "standardRefs": [],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-034",
+      "scope": "demographic",
+      "title": "（advisory）郑州：结婚意愿与稳定性优先",
+      "when": "来访者常住郑州；作背景说明",
+      "then": "单源观察：郑州报名者更常问\"想不想结婚、稳不稳定\"；只有 1 条语料，不自动渲染。",
+      "confidence": "low",
+      "conflict": false,
+      "advisory": true,
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7682641580730634225",
+          "quote": "深圳虽然是很包容，但大家很看重你的个人能力，以及未来的一个能力规划……但郑州问的最多的人就是：他想不想结婚？有没有步入家庭建设的意愿？他这个人稳不稳定？"
+        }
+      ],
+      "standardRefs": [],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-035",
+      "scope": "demographic",
+      "title": "（advisory）青岛/山东：稳定与生活掌控感优先",
+      "when": "来访者常住青岛或山东城市；作背景说明",
+      "then": "单源观察：山东偏传统稳定，更看重组建家庭后的生活掌控感；只有 1 条语料，不自动渲染。",
+      "confidence": "low",
+      "conflict": false,
+      "advisory": true,
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7688079473736914609",
+          "quote": "可能我们这边的男生女生不会想要说你有一个多么光鲜的这个工作，或者超高的收入。大家更希望跟对方去组建家庭的时候，我们的生活是有掌控性的。"
+        }
+      ],
+      "standardRefs": [],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-036",
+      "scope": "demographic",
+      "title": "（advisory）珠海：高新园区与外贸结构",
+      "when": "来访者常住珠海；作背景说明",
+      "then": "单源观察：珠海男生集中在高新园区技术岗与外贸（离澳门近），女生偏稳定；只有 1 条语料，不自动渲染。",
+      "confidence": "low",
+      "conflict": false,
+      "advisory": true,
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7672727361784562609",
+          "quote": "像珠海这边的男生呢，除了珠海高新园区这边的〔集成电路〕这些技术岗之外，因为他离澳门非常近，所以他做外贸的也比较多……像珠海这边的女生，他普遍偏稳定一些。"
+        }
+      ],
+      "standardRefs": [],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-037",
+      "scope": "demographic",
+      "title": "（advisory）南京：新一线三甲医生职业溢价",
+      "when": "来访者常住南京且从事医疗行业；作背景说明",
+      "then": "单源观察：新一线城市三甲医院医生职业溢价明显；只有 1 条语料，不自动渲染。",
+      "confidence": "low",
+      "conflict": false,
+      "advisory": true,
+      "evidence": [
+        {
+          "account": "30578719968",
+          "aweme_id": "7552245295359216905",
+          "quote": "新一线城市，三甲医院的大夫，你们不知道有多吃香？……南京三甲医院的主治大夫，起码您的黄金周期最少还有三年，次黄金周期也有三年。"
+        }
+      ],
+      "standardRefs": [],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-038",
+      "scope": "demographic",
+      "title": "（advisory）宁波/江浙沪：恋爱成本与综合价值",
+      "when": "来访者常住宁波；作背景说明",
+      "then": "单源观察：当地恋爱时间与金钱成本高，更看综合价值；只有 1 条语料，不自动渲染。",
+      "confidence": "low",
+      "conflict": false,
+      "advisory": true,
+      "evidence": [
+        {
+          "account": "33349790582",
+          "aweme_id": "7685430909835876837",
+          "quote": "不是宁波没有爱情，而是爱情在这里多多少少有点像奢侈品……江浙沪谈恋爱普遍还是比较看综合价值的。对方迟迟不愿意跟你确定关系，大概就应该不是〔慢热〕，而是他觉得你目前展现出来的这个价值还没有高到让他愿意马上做决定。"
+        }
+      ],
+      "standardRefs": [],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-039",
+      "scope": "demographic",
+      "title": "（advisory）语料缺口：8 座矩阵城市暂无实质规则",
+      "when": "需要广州/成都/重庆/西安/武汉/苏州/温州/福州的城市规则时",
+      "then": "本批语料中这 8 城只有活动招募或顺带提及，无法产出可追溯的地域规则；不得用常识补全，等语料补全后再补。",
+      "confidence": "low",
+      "conflict": false,
+      "advisory": true,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640368833395494180",
+          "quote": "5月20号，专属硕博线上一元交友活动来啦。本次活动面向全日制硕士、海归本科以及高学历的优质小伙伴们。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7668215556251634959",
+          "quote": "我最近也经常出差嘛，我像去了西安呀，然后平时我自己也在上海，包括我们北京。"
+        }
+      ],
+      "standardRefs": [],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 0,
+        "accounts": 0
+      },
+      "sourcesNote": "缺口声明，非市场主张"
+    },
+    {
+      "id": "R-DEMO-040",
+      "scope": "demographic",
+      "title": "（advisory）同名条件在男女身上不是同一个生态位",
+      "when": "男女提出同一条要求（例如\"要求对方独生\"）时",
+      "then": "语料口径：女生要求独生子与男生要求独生女不是同一个生态位；男生提这类要求看似门槛低，实际成本很高。只有 1 条语料，不自动执行。",
+      "confidence": "low",
+      "conflict": false,
+      "advisory": true,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638160736476286234",
+          "quote": "女生要求独生子跟男生要求独生女，它不是一个生态位，你知道吧？男生如果但凡要求独生女，但凡要求体制内，这都是其实看似没门槛，看似没有多高要求，但实际要求很高。"
+        }
+      ],
+      "standardRefs": [],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-041",
+      "scope": "demographic",
+      "title": "（advisory）25 岁以上母胎单身比例约三成",
+      "when": "评估单身基数时；作背景说明",
+      "then": "语料称 25 岁以上完全没有恋爱经历者在其样本中至少三成；属单条统计口径，不进入任何计算。",
+      "confidence": "low",
+      "conflict": false,
+      "advisory": true,
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7683835218330963200",
+          "quote": "完全没有谈过恋爱的母胎单身solo的人，比你想象的要多的多的多。我们接触的这个样本里面至少说在三成。注意我说的是25岁以上的。"
+        }
+      ],
+      "standardRefs": [],
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      }
+    },
+    {
+      "id": "R-DEMO-042",
+      "scope": "demographic",
+      "claimType": "marketing",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      },
+      "title": "（advisory/marketing）西安：城市号的内容断言（男性择偶天堂）",
+      "when": "常住西安；该说法来自西安城市号的内容视频，无第二来源",
+      "then": "西安城市号口径：\"西安是男性择偶天堂，男女比例失衡，年薪 50-100 万+有房有车选择多，来相亲的女生多为 985/211、家庭 A7.5-A7.9\"。按 D27，城市矩阵号单条内容默认按 marketing 处理，不得作为市场规律输出。",
+      "confidence": "low",
+      "conflict": false,
+      "advisory": true,
+      "standardRefs": [],
+      "evidence": [
+        {
+          "account": "58784526906",
+          "aweme_id": "7684537860749302181",
+          "quote": "西安绝对是男性择偶的天堂，没有之一。只要你在西安年薪50-100万，有房有车，选择那叫一个多……西安这个地方，男女比例严重失衡。"
+        }
+      ]
+    },
+    {
+      "id": "R-DEMO-043",
+      "scope": "demographic",
+      "claimType": "marketing",
+      "sources": {
+        "transcripts": 2,
+        "accounts": 2
+      },
+      "title": "（advisory/marketing）广州/广东：城市号的内容断言（五个现实）",
+      "when": "常住广州/广东；说法来自广州城市号的内容视频，无跨机构第二来源",
+      "then": "广州城市号口径：\"广东男生平均身高 1 米 75（不少 1 米 73）；广州平均月薪 8000 出头；有房有车无负债已是顶级；大湾区跨城通勤常见\"；另一条高净值圈层内容称\"优质男看的是风险与情绪稳定，不是颜值\"。两条都出自鳌烨广州城市号，按 D27 默认按 marketing 处理，未验证前不得作为市场规律。",
+      "confidence": "low",
+      "conflict": false,
+      "advisory": true,
+      "standardRefs": [],
+      "evidence": [
+        {
+          "account": "aoye020",
+          "aweme_id": "7654925000151815592",
+          "quote": "广东这边找对象一定要接受的五个现实……在广州的平均月薪真的只有8000出头……有房有车、能够现成结婚、没有负债的男生真的都已经是顶级了。"
+        },
+        {
+          "account": "43827813879",
+          "aweme_id": "7686820101744883886",
+          "quote": "在广州高净值圈层，相亲市场高颜值就等于高风险……优质男人看的是风险。"
+        }
+      ]
+    },
+    {
+      "id": "R-DEMO-044",
+      "scope": "demographic",
+      "claimType": "market-norm",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1
+      },
+      "title": "深圳：收入标尺（引用官方统计的城市口径）",
+      "when": "常住深圳且已填收入；单源转引官方统计，仅作文本提示",
+      "then": "深圳内容号引用 2024 官方统计：私营单位平均年薪 9.5 万、非私营（国企/大厂/事业单位）17.4 万，年收入 20 万属该群体入门中层。这是目前唯一一条**引用官方统计**的城市收入口径（单源、未二次核验），只作背景提示。",
+      "confidence": "low",
+      "conflict": false,
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "subject.city",
+              "op": "matches",
+              "value": "深圳"
+            },
+            {
+              "field": "subject.income_wan",
+              "op": "exists"
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "text": "深圳收入参考（转引 2024 官方统计，单源未复核）：私营单位平均年薪约 9.5 万、非私营约 17.4 万；年收入 20 万已属非私营群体的入门中层。仅作背景提示，不参与打分。"
+          }
+        ],
+        "note": "claimType=market-norm（数据型口径，单源转引官方统计）。与其他城市的收入标尺（太原、一线 10 万线）并列，用于城市系数参考。"
+      },
+      "standardRefs": [],
+      "evidence": [
+        {
+          "account": "aoye82",
+          "aweme_id": "7652709606325879995",
+          "quote": "根据深圳24年的官方数据统计，私营单位平均年薪9.5万，20万远超了私企的平均值……非私营像国企、大厂、事业单位平均年薪17.4万，20万比体制内大厂的平均工资还要高一点。"
+        }
+      ]
+    }
+  ],
+  "bands": [],
+  "glossary": [
+    {
+      "term": "婚恋画像",
+      "meaning": "博主为来访者画的择偶定位结论：TA 是谁的\"心智首选\"；也可指某一类目标对象的条件模板（\"找女人的画像\"≠\"找老婆的画像\"）。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7649728311765060883",
+          "quote": "画像我给您画的，你是他的心智首选。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7657819230796181371",
+          "quote": "找女人的这个画像和找老婆的这个画像也是完全不一样。"
+        }
+      ]
+    },
+    {
+      "term": "心智首选",
+      "meaning": "在某类目标对象心里，来访者是第一顺位选择。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7649728311765060883",
+          "quote": "画像我给您画的，你是他的心智首选。"
+        }
+      ]
+    },
+    {
+      "term": "婚恋生态位",
+      "meaning": "一个人在择偶市场里真实可匹配的层级；标准超过它即为\"标准远超自己的婚恋生态位\"。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "30578719968",
+          "aweme_id": "7552245295359216905",
+          "quote": "没有摸清楚自己的位置，不知道自己能调动哪些资源，所有标准远超于自己的婚恋生态位。"
+        }
+      ]
+    },
+    {
+      "term": "生态位分层（黄金/白银/青铜）",
+      "meaning": "博主对生态位的三档命名；丁克女生\"降两个生态位\"：黄金→白银→青铜。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636347544313793830",
+          "quote": "直接〔降〕下两个生态位，黄金直接掉的白银都找不了，再往下掉一个生态位，找青铜。"
+        }
+      ]
+    },
+    {
+      "term": "梯队",
+      "meaning": "与生态位同义的市场层级说法，如\"准第一梯队\"。",
+      "asrVariants": [
+        "准地一梯队"
+      ],
+      "evidence": [
+        {
+          "account": "30578719968",
+          "aweme_id": "7552245295359216905",
+          "quote": "依然是准地一梯队。"
+        }
+      ]
+    },
+    {
+      "term": "错位美女",
+      "meaning": "颜值与自己其他条件（或与对方的社会价值模块）不匹配的美女，通常只能从亲密关系期待与情绪价值切入。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "30578719968",
+          "aweme_id": "7552245295359216905",
+          "quote": "如果要找的话，她肯定是个错位美女。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7635976663062433034",
+          "quote": "如果生理性喜欢，那错位美女，先谈谈恋爱。"
+        }
+      ]
+    },
+    {
+      "term": "供需错位",
+      "meaning": "自己想要的价码与自己能提供的价值不匹配。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7686470369087130932",
+          "quote": "你手上的本钱跟自己心里的这个价码对标不上。这个事有个词吧，叫做供需错位。"
+        }
+      ]
+    },
+    {
+      "term": "反向匹配",
+      "meaning": "用自己最强的一张牌去换对方最缺的一张牌（外形换生活包装、学历换本地关系网等）。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7684132475311820084",
+          "quote": "找对象啊，你就记住四个字。反向匹配。"
+        },
+        {
+          "account": "33349790582",
+          "aweme_id": "7682794252489811045",
+          "quote": "在宁波找对象就记住四个字。反向匹配。"
+        }
+      ]
+    },
+    {
+      "term": "上限 / 下限",
+      "meaning": "可达的最优对象 / 保底对象。",
+      "asrVariants": [
+        "上嫌",
+        "下宣"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7648625116548533547",
+          "quote": "我直接一口气就给你把上嫌和下宣化出来。"
+        }
+      ]
+    },
+    {
+      "term": "天花板",
+      "meaning": "能匹配到的最好的人；\"同学是 99% 的人一生当中的天花板\"。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7637831090509466906",
+          "quote": "同学是99%的人一生当中的天花板，尤其是高中同学。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7642227200130179195",
+          "quote": "难道这个人就是我的天花板了吗？"
+        }
+      ]
+    },
+    {
+      "term": "兜底",
+      "meaning": "关系或家庭的最后保障与托底能力。",
+      "asrVariants": [
+        "拖底",
+        "兜体"
+      ],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7684132475311820084",
+          "quote": "找一个长相普通，家里能够给你拖底的。"
+        },
+        {
+          "account": "33349790582",
+          "aweme_id": "7682794252489811045",
+          "quote": "关键时候能够兜体的人。"
+        }
+      ]
+    },
+    {
+      "term": "价值参照表",
+      "meaning": "男女各自默认的那套打分维度（女=年龄/外貌/性格；男=社会能量/社会价值）。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638942595967683875",
+          "quote": "男女在婚恋市场，他的这个价值参照表不一样。"
+        }
+      ]
+    },
+    {
+      "term": "价码 / 对标",
+      "meaning": "自己给自己定的市场价，以及与现实的对标结果。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7686470369087130932",
+          "quote": "你手上的本钱跟自己心里的这个价码对标不上。"
+        }
+      ]
+    },
+    {
+      "term": "能调动的资源",
+      "meaning": "家庭、学历、工作、人脉等可以拿出来交换的筹码。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "30578719968",
+          "aweme_id": "7552245295359216905",
+          "quote": "没有摸清楚自己的位置，不知道自己能调动哪些资源。"
+        }
+      ]
+    },
+    {
+      "term": "复制粘贴的你",
+      "meaning": "条件与你类似但每项略优一档的同性竞争者。",
+      "asrVariants": [
+        "腹制粘贴"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638942595967683875",
+          "quote": "找复制粘贴的你，可以找他们家的家庭是你们家100%到200%的。"
+        }
+      ]
+    },
+    {
+      "term": "劣币驱逐良币",
+      "meaning": "条件略差但更主动的人先拿走机会。",
+      "asrVariants": [
+        "劣币驱住两密"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638942595967683875",
+          "quote": "我叫劣币驱住两密嘛。"
+        }
+      ]
+    },
+    {
+      "term": "门当户对",
+      "meaning": "双方家庭条件相当；博主口径：对方家庭资产 = 自家 100%–200%。",
+      "asrVariants": [
+        "门当户队"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7653740377044021105",
+          "quote": "找门当户队也有可能被挑挑剪剪。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7682641580730634225",
+          "quote": "咱们畅导的价值主要一直是门当户对。"
+        }
+      ]
+    },
+    {
+      "term": "上嫁",
+      "meaning": "女方嫁到更高一层；博主立场是\"上嫁的门已经关了\"。",
+      "asrVariants": [
+        "上架"
+      ],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7686470369087130932",
+          "quote": "想要靠结婚，一步登天，这扇门基本上是关闭了。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7682641580730634225",
+          "quote": "咱们这个行业，上架是一个避不开的话题。"
+        }
+      ]
+    },
+    {
+      "term": "高攀",
+      "meaning": "博主对爱的定义：\"爱是高攀\"——爱上的必然是目光所及里更好的。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7681616361696595209",
+          "quote": "我认为爱就四个字。爱是高攀。"
+        }
+      ]
+    },
+    {
+      "term": "向下兼容 / 下娶 / 下嫁",
+      "meaning": "接受条件更低的配偶。",
+      "asrVariants": [],
+      "evidence": [],
+      "note": "本批 26.5% 语料 0 命中（见 OPEN-QUESTIONS）"
+    },
+    {
+      "term": "硬件 / 软件",
+      "meaning": "硬件=房车收入家境等可量化项；软件=性格、三观、情绪等不可量化项。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7672727361784562609",
+          "quote": "因为硬性的东西，我们帮您稍微把关了……剩下的软性的大家就在互相认识的过程当中慢慢了解。"
+        }
+      ],
+      "note": "\"硬件\"本批 0 命中，语料用\"硬性的东西/软性的\""
+    },
+    {
+      "term": "成色",
+      "meaning": "条件的新旧程度（如房车成色）。",
+      "asrVariants": [],
+      "evidence": [],
+      "note": "本批 26.5% 语料 0 命中（见 OPEN-QUESTIONS）"
+    },
+    {
+      "term": "颜值分",
+      "meaning": "1–9 分制、0.5 分一档的颜值档位分，男女两套标尺。",
+      "asrVariants": [
+        "文（如 5.5 文 = 5.5 分，见 CONTRACT）"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7643013486221593897",
+          "quote": "颜值6分，再看摄像头。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "我说一个文字版的颜值男生5.5分吧。"
+        }
+      ]
+    },
+    {
+      "term": "班草 / 班花",
+      "meaning": "5.5 分档：班集体里没有公认第一、但有争议最好看的人。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7656724726068301062",
+          "quote": "5.5分就是有争议的班草、无争议的社草。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "就是群雄割据的班集体里面，没有公认的那个班花班草在那。"
+        }
+      ]
+    },
+    {
+      "term": "校草 / 舍草 / 宿舍花",
+      "meaning": "5.5 分档的男生/宿舍尺度版本；\"无争议的校草\"。",
+      "asrVariants": [
+        "社草",
+        "摄草",
+        "色草",
+        "社会"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7656724726068301062",
+          "quote": "5.5分就是有争议的班草、无争议的社草。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7634855569622338826",
+          "quote": "宿舍摄草的长相，没问题。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7635582435148696859",
+          "quote": "5分就是宿舍色草。"
+        }
+      ]
+    },
+    {
+      "term": "顶美",
+      "meaning": "颜值天花板级美女；看皮肤、体态、身材比例、穿衣审美与整体状态，不只看五官。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7682020548599172403",
+          "quote": "一个女生呢，只要说颜值达到顶美级别……顶美也不是说只是你的五官漂亮，还是要看皮肤状态、体态、还有说身材的比例、穿衣的审美。"
+        }
+      ]
+    },
+    {
+      "term": "小美",
+      "meaning": "比顶美低一档的漂亮程度；语料用该词描述外貌区间，本表不对城市或人群作优劣排序。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7668215556251634959",
+          "quote": "杭州几乎可以说是中国小美最多的一个城市。"
+        }
+      ]
+    },
+    {
+      "term": "颜值红利",
+      "meaning": "5.5 分起能吃到外貌带来的市场收益。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "41252723284",
+          "aweme_id": "7550417741316934962",
+          "quote": "能找，颜值5.5分就是已经能吃到颜值红利了。"
+        }
+      ]
+    },
+    {
+      "term": "原生 / 纯天然",
+      "meaning": "脸未整容，是 7 分档的前置条件（\"脸没动过\"）。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644902230331542826",
+          "quote": "你的脸有动过吗？是原生的吗？你要说纯天然的，真的是有7分，差不多。"
+        }
+      ]
+    },
+    {
+      "term": "硬伤",
+      "meaning": "五官/比例的明显缺陷（三庭分布、眉眼唇、牙弓比例、头肩比、面部折叠度）。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "五官不能有硬伤……就是三庭分布，比方说它的眉眼唇、它的牙弓比例、头肩比、面部折叠度。"
+        }
+      ]
+    },
+    {
+      "term": "微胖",
+      "meaning": "体重高于画像常见区间；语料强调男女对这一区间的认知不同（中性描述，不构成对任何人的评判）。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7637831090509466906",
+          "quote": "男女对微胖的认知不一样。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7639676121834851593",
+          "quote": "男女对微胖的理解可不一样，姑娘。"
+        }
+      ]
+    },
+    {
+      "term": "生理性喜欢",
+      "meaning": "身体层面真的能接受/心动，是相亲里比钱更硬的底线。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7682641580730634225",
+          "quote": "能够生理性喜欢的，会大过于金钱。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7635976663062433034",
+          "quote": "如果生理性喜欢，那错位美女，先谈谈恋爱。"
+        }
+      ]
+    },
+    {
+      "term": "颜值打分局",
+      "meaning": "匿名男女互评的打分活动（常见 40 男 / 40 女），用来定位颜值位次。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7648625116548533547",
+          "quote": "你去参加一个山东当地同行办的这种颜值打分局，匿名的男生给女生打，女生给男生打。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7661913986539739057",
+          "quote": "哈喽哈喽欢迎来到匿名颜值打分局。"
+        }
+      ]
+    },
+    {
+      "term": "硬性门槛",
+      "meaning": "报名/见面前置筛选的客观条件（家境、收入、颜值等）。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7672727361784562609",
+          "quote": "因为硬性的东西，我们帮您稍微把关了。"
+        }
+      ]
+    },
+    {
+      "term": "软性的",
+      "meaning": "见面后靠相处了解的性格、三观、生活理念。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7672727361784562609",
+          "quote": "剩下的软性的大家就在互相认识的过程当中慢慢了解。"
+        }
+      ]
+    },
+    {
+      "term": "家境殷实",
+      "meaning": "家庭经济条件好（精英群女生三选一门槛之一）。",
+      "asrVariants": [
+        "家境英识"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7643773318034843603",
+          "quote": "家境英识、高学历、工作体面，三者择一，您就能进这个群。"
+        }
+      ]
+    },
+    {
+      "term": "工作体面",
+      "meaning": "职业社会评价高（精英群三选一门槛之一）。",
+      "asrVariants": [
+        "工作体验"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7650118291364764794",
+          "quote": "家境英识、高学历、工作体验，满足其中一项就可以。"
+        }
+      ]
+    },
+    {
+      "term": "体制内",
+      "meaning": "公务员/事业编/国企等体制岗位。",
+      "asrVariants": [
+        "体质内"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7639325798792482102",
+          "quote": "体质内跟颜值你选一个。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7638160736476286234",
+          "quote": "但凡要求体质内，这都是看似没门槛，实际要求很高。"
+        }
+      ]
+    },
+    {
+      "term": "编制",
+      "meaning": "行政编、事业编、企业编；在太原等城市是最受欢迎的硬通货。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "25845559030",
+          "aweme_id": "7367266582898183439",
+          "quote": "最受欢迎的、最香的，那肯定还是编制。有行政编、事业编、企业编。"
+        }
+      ]
+    },
+    {
+      "term": "铁饭碗",
+      "meaning": "稳定的体制内工作。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7684132475311820084",
+          "quote": "你考上了铁饭碗，但是工资低，那你找一个经商的家里。"
+        }
+      ]
+    },
+    {
+      "term": "国企",
+      "meaning": "国有企业岗位。",
+      "asrVariants": [
+        "国阳气",
+        "国企里"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638583110027824447",
+          "quote": "不要求体面的话，我觉得普通国阳气也行吧？"
+        }
+      ]
+    },
+    {
+      "term": "五险一金",
+      "meaning": "正式工作的标志（连麦男生的择偶要求）。",
+      "asrVariants": [
+        "五险一斤"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638583110027824447",
+          "quote": "希望就是有一份正式的工作，就是交五险一斤的那种。"
+        }
+      ]
+    },
+    {
+      "term": "考公",
+      "meaning": "考公务员。",
+      "asrVariants": [
+        "考工"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7688079473736914609",
+          "quote": "其实这次活动来说虽然考工大神〔多〕。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7655262631128796450",
+          "quote": "我目前在想考工或者考研。"
+        }
+      ]
+    },
+    {
+      "term": "土著 / 本地人",
+      "meaning": "本地出生、本地长大的人；北上深专场都以本地身份为门槛。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420395706862889",
+          "quote": "北京土著找土著有执念。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7668215556251634959",
+          "quote": "来活动的更多是土著比较多，就本地人找本地人。"
+        }
+      ]
+    },
+    {
+      "term": "户口 / 身份证开头",
+      "meaning": "本地身份的判定方式：上海 310、深圳 4403；北京看户口落在哪个区。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636699793313598729",
+          "quote": "只要您身份证开头是310。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640036505334877491",
+          "quote": "身份证号4403开头，或者是在深圳买房。"
+        }
+      ]
+    },
+    {
+      "term": "城六区",
+      "meaning": "北京东城/西城/朝阳/海淀/丰台/石景山；老北京人的要求可放宽到门头沟等地。",
+      "asrVariants": [
+        "成六区"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640076462543867176",
+          "quote": "老北京人不要要求成六区（城六区）的，找个就是比方说门头沟的。"
+        }
+      ]
+    },
+    {
+      "term": "房车全 / 全款房",
+      "meaning": "有房有车且无贷款。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7649728311765060883",
+          "quote": "找个土著、独生子、1米72、140斤、形象一般、房车全。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "房子在100平以上或者是全款的可以再加10分。"
+        }
+      ]
+    },
+    {
+      "term": "高净值",
+      "meaning": "资产/收入达到高门槛；活动中\"高净值局\"需要验资。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7669651629650646267",
+          "quote": "每次一聊到高净值局的门槛，大家老会妖魔化。"
+        }
+      ]
+    },
+    {
+      "term": "A7 / A8 / A9",
+      "meaning": "资产量级黑话：A8=净资产 1000 万以上（含车房股票基金现金）；A9=亿级圈子，普通人进不去；A7 被部分女生认为\"太普通\"。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7625983656905404337",
+          "quote": "什么是A8男呢？就是净资产有1000万以上的男生，包括车子、房子、股票、基金、现金什么的。因为A9的圈子普通人根本进不去，A7很多女生就觉得太普通。"
+        }
+      ]
+    },
+    {
+      "term": "独生子女 / 独生女",
+      "meaning": "家中唯一孩子；男生评分表\"独生子女 +10 分\"，且\"女生要求独生子 ≠ 男生要求独生女\"。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638160736476286234",
+          "quote": "女生要求独生子跟男生要求独生女，它不是一个生态位。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "第九，独生子女加10分。"
+        }
+      ]
+    },
+    {
+      "term": "原生家庭",
+      "meaning": "父母的婚姻、经济、资源与人脉；\"父母优秀比孩子优秀更重要\"。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7683097195286429625",
+          "quote": "在整个婚恋市场上，父母优秀是要比孩子优秀更加重要的。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "原生家庭幸福的再加10分。"
+        }
+      ]
+    },
+    {
+      "term": "双职工",
+      "meaning": "父母双方都有正式工作（常见于体制内家庭描述）。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7635976663062433034",
+          "quote": "不要要求这女生就比方说什么C9本硕、热门行业、什么父母体制内双职工、有编制呀。"
+        }
+      ]
+    },
+    {
+      "term": "彩礼 / 陪嫁",
+      "meaning": "结婚时双方家庭给的钱；博主口径为\"给小家的启动资金\"。",
+      "asrVariants": [
+        "财礼"
+      ],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7687565236722879790",
+          "quote": "越大的城市，反而财礼看得越淡。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7669651629650646267",
+          "quote": "相当于说给一个小家的启动资金。"
+        }
+      ]
+    },
+    {
+      "term": "情绪价值",
+      "meaning": "提供情绪支持与照顾；\"不会给女生提供情绪价值\"是常见短板。",
+      "asrVariants": [
+        "情下值",
+        "情价",
+        "情依价值"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7639325798792482102",
+          "quote": "年龄跟情下值你选一个。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7635580597229849866",
+          "quote": "不会给女生提供情价值。"
+        }
+      ]
+    },
+    {
+      "term": "眼缘",
+      "meaning": "第一眼看对眼、看得顺眼，是相亲 pass 与否的第一关。",
+      "asrVariants": [
+        "演员"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7662251316924347067",
+          "quote": "两个人见面之后，没有演员的直接pass，有演员的约见个三次五次。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7672727361784562609",
+          "quote": "勾不勾演员啊。"
+        }
+      ]
+    },
+    {
+      "term": "同频 / 灵魂共振",
+      "meaning": "三观、节奏一致。",
+      "asrVariants": [
+        "屯频"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7668567854677735369",
+          "quote": "就是为了让大家找到共同的话题，能够快速找到屯频的人。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7662829534970837157",
+          "quote": "只希望说灵魂共振，然后双向奔赴。"
+        }
+      ]
+    },
+    {
+      "term": "双向奔赴",
+      "meaning": "双方都主动、不单方面追。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7662251316924347067",
+          "quote": "我要的就是一个双向奔赴。"
+        }
+      ]
+    },
+    {
+      "term": "验证成本",
+      "meaning": "核实对方真实条件（体检报告、学历、车房、资产、未婚证明）的成本。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7672727361784562609",
+          "quote": "这是最重要的。就少了很多验证成本。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7637107374934838571",
+          "quote": "就是这个验证成本比较高，我知道。"
+        }
+      ]
+    },
+    {
+      "term": "破圈",
+      "meaning": "跳出自己现有的社交圈去认识优质异性。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7668215556251634959",
+          "quote": "其实最大的问题就是他们没办法去破圈。"
+        }
+      ]
+    },
+    {
+      "term": "性格好",
+      "meaning": "不等于老实温顺：= 高认知 + 懂分寸 + 拎得清 + 有边界 + 能管控情绪。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7682344440727375158",
+          "quote": "真正的性格好不单是说会管控好自己的情绪，而是说有想法、懂分寸、拎得清、有边界。"
+        }
+      ]
+    },
+    {
+      "term": "短择 / 长择",
+      "meaning": "短择=只短期相处；长择=以结婚为前提的长期选择。",
+      "asrVariants": [
+        "短则"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7660424044294390137",
+          "quote": "除非你只是想成为人家的一个短则对象。"
+        }
+      ]
+    },
+    {
+      "term": "认识渠道质量",
+      "meaning": "博主的渠道排序：抖音私信、街头要微信、社交软件为最差三类。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7684238650061671743",
+          "quote": "什么渠道认识的男生最差呢？第一，就是那种在抖音私信你的……还有那种就是在街上上来要微信的……第三，社交软件天天刷来刷去。"
+        }
+      ]
+    },
+    {
+      "term": "剩女",
+      "meaning": "（警示：该词为污名化标签，仅作术语溯源与纠错用；对外一律使用「未婚」。）语料中出现在\"相亲幻觉\"清单里被反驳。",
+      "asrVariants": [
+        "圣女",
+        "僧女",
+        "生女"
+      ],
+      "evidence": [
+        {
+          "account": "33349790582",
+          "aweme_id": "7684288804563398629",
+          "quote": "那么多圣女嫁不出去，等他们后悔了。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7685367765254933811",
+          "quote": "那么多的僧女嫁不出去。"
+        }
+      ]
+    },
+    {
+      "term": "入赘",
+      "meaning": "男方到女方家生活。",
+      "asrVariants": [
+        "入罪"
+      ],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7685367765254933811",
+          "quote": "那我就娶个白富美，到时候我去她家里入罪了。"
+        }
+      ]
+    },
+    {
+      "term": "倒贴",
+      "meaning": "女方反向下嫁贴钱。",
+      "asrVariants": [
+        "倒帖"
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7681565594039597691",
+          "quote": "都要倒帖嫁我。"
+        }
+      ]
+    },
+    {
+      "term": "白富美",
+      "meaning": "条件极好的女性（多出现在\"男性幻觉\"清单里）。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "33349790582",
+          "aweme_id": "7684288804563398629",
+          "quote": "实在娶不到老婆，就找个白富美去当上门女婿。"
+        }
+      ]
+    },
+    {
+      "term": "上门女婿",
+      "meaning": "入赘的男方。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7681565594039597691",
+          "quote": "咱们就找个白富美，我就当上门女婿。"
+        }
+      ]
+    },
+    {
+      "term": "喜恶同因",
+      "meaning": "别人喜欢你和讨厌你的理由往往是同一个。",
+      "asrVariants": [
+        "喜悟同音",
+        "习无同音"
+      ],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7685714679477439754",
+          "quote": "有一个词叫做喜悟同音。别人喜欢你的理由和别人讨厌你的理由很可能就是同一个。"
+        }
+      ]
+    },
+    {
+      "term": "母胎单身 solo",
+      "meaning": "一次恋爱都没谈过的人；博主称 25+ 人群中至少三成。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7683835218330963200",
+          "quote": "完全没有谈过恋爱的母胎单身solo的人，比你想象的要多的多的多。我们接触的这个样本里面至少说在三成。"
+        }
+      ]
+    },
+    {
+      "term": "二婚市场",
+      "meaning": "离异人群的再婚市场，年龄容忍度与初婚不同。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636347718041881866",
+          "quote": "男女啊，在二婚市场上的这个年龄感之差大概存在六到八年。"
+        }
+      ]
+    },
+    {
+      "term": "黄金周期 / 次黄金周期",
+      "meaning": "男性在婚恋市场的高价值年限（语料例：31 岁三甲主治 = 黄金 3 年 + 次黄金 3 年）。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "30578719968",
+          "aweme_id": "7552245295359216905",
+          "quote": "起码您的黄金周期最少还有三年，次黄金周期也有三年。"
+        }
+      ]
+    },
+    {
+      "term": "脱单率",
+      "meaning": "活动成功配对的比率。",
+      "asrVariants": [
+        "托担率"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7639306639819951395",
+          "quote": "它托担率是非常高的，而且针对性也非常的强。"
+        }
+      ]
+    },
+    {
+      "term": "婚恋市场",
+      "meaning": "择偶市场的统称。",
+      "asrVariants": [
+        "混练市场",
+        "婚事长"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636347544313793830",
+          "quote": "女生丁克来混练市场。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7638942595967683875",
+          "quote": "就男女来婚事长，她的这个价值参照表不一样。"
+        }
+      ]
+    },
+    {
+      "term": "镇宅之宝",
+      "meaning": "稳定、体面、能给家里撑场面的女婿/媳妇。",
+      "asrVariants": [
+        "正宅之宝"
+      ],
+      "evidence": [
+        {
+          "account": "33349790582",
+          "aweme_id": "7682794252489811045",
+          "quote": "是家里的正宅之宝。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7684132475311820084",
+          "quote": "人家还把你当作正宅之宝呢。"
+        }
+      ]
+    },
+    {
+      "term": "打分制 / 加分制",
+      "meaning": "相亲市场按项加分；男生版 10 项每项 10 分，60 分及格 80 分优秀。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7617107297344810085",
+          "quote": "相亲市场上男生的评分及格先来咯。60分及格80分优秀。"
+        }
+      ]
+    },
+    {
+      "term": "土著有房专场",
+      "meaning": "只收本地身份（如 310/4403）或本地有房者的专场活动。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7636699793313598729",
+          "quote": "在黄浦区为大家准备了土著有房专场。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640036505334877491",
+          "quote": "今天是举办的深圳土著有房场。"
+        }
+      ]
+    },
+    {
+      "term": "精英群 / 高净值局",
+      "meaning": "按门槛验资/验资质的群体或活动。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644248802190870890",
+          "quote": "我准备建一个东三省的精英群。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7669651629650646267",
+          "quote": "本周六〔我〕们会在江西南昌办一场高净值男生局。"
+        }
+      ]
+    },
+    {
+      "term": "上嫁的门已经关了",
+      "meaning": "博主的市场论断：靠婚姻一步登天的通道基本关闭，中产找的是共同抵御下滑风险的人。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7686470369087130932",
+          "quote": "想要靠结婚，一步登天，这扇门基本上是关闭了。"
+        }
+      ]
+    },
+    {
+      "term": "两头都在挑 / 双向筛选",
+      "meaning": "女挑男的同时男方也在挑女方。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7686470369087130932",
+          "quote": "挑人这个事不是说女生单方面在挑，是两头都在挑。"
+        }
+      ]
+    },
+    {
+      "term": "男女等价对表（潜规则）",
+      "meaning": "网传的男女条件等价换算（该表 ASR 严重残缺，仅个别项可辨读；原始等价表述保留在证据层，不进入任何用户可见文本）。",
+      "asrVariants": [],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7638546961003941285",
+          "quote": "35+女性等于月薪3k男性。"
+        }
+      ],
+      "note": "该条转写严重残缺，除 35+ 一条外不建议引用"
+    },
+    {
+      "term": "ASR 纠错层",
+      "meaning": "对机器转写错字做检索/阅读时归一化的只读层；对照表见 knowledge/asr-fixes.json，工具见 tools/asr_normalize.mjs。原始转写不改写（D8）。",
+      "asrVariants": [],
+      "evidence": []
+    }
+  ]
+}

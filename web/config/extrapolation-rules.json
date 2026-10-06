@@ -1,0 +1,98 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-10-05T00:00:00Z",
+  "meta": {
+    "origin": "web-config",
+    "note": "D12 外推规则：语料不足的人群组合不拒答、不静默降级；用最相近人群规则外推并显式声明。外推结论只作参考区间，不参与 level。enabled=false 的场景缺少表单字段，等 Lead 扩字段后开启。"
+  },
+  "message": "「{{label}}」在我们的语料里样本不足，以下结论由「{{basis}}」的规则外推得到，误差不可估计；外推结论只作参考，不参与综合分。",
+  "scenarios": [
+    {
+      "id": "exp.female-40plus", "label": "40+ 女性", "enabled": true,
+      "trigger": { "all": [ { "field": "subject.gender", "op": "eq", "value": "female" }, { "field": "subject.age", "op": "gte", "value": 40 } ] },
+      "basis": "35–39 岁女性人群规则",
+      "affectedGroups": ["hardware", "soft", "family", "appearance", "matching"]
+    },
+    {
+      "id": "exp.female-35plus", "label": "35–39 岁女性", "enabled": true,
+      "trigger": { "all": [ { "field": "subject.gender", "op": "eq", "value": "female" }, { "field": "subject.age", "op": "between", "value": [35, 39.99] } ] },
+      "basis": "30–34 岁女性人群规则",
+      "affectedGroups": ["hardware", "soft", "matching"]
+    },
+    {
+      "id": "exp.male-40plus", "label": "40+ 男性", "enabled": true,
+      "trigger": { "all": [ { "field": "subject.gender", "op": "eq", "value": "male" }, { "field": "subject.age", "op": "gte", "value": 40 } ] },
+      "basis": "35–39 岁男性人群规则",
+      "affectedGroups": ["hardware", "soft", "matching"]
+    },
+    {
+      "id": "exp.low-education-male", "label": "低学历男性（高中 / 大专）", "enabled": true,
+      "trigger": { "all": [ { "field": "subject.gender", "op": "eq", "value": "male" }, { "field": "subject.education", "op": "in", "value": ["highschool", "college"] } ] },
+      "basis": "全日制本科及以上男性人群规则",
+      "affectedGroups": ["hardware", "matching"]
+    },
+    {
+      "id": "exp.tier3-city", "label": "三线及以下城市", "enabled": true,
+      "trigger": { "field": "context.cityTier", "op": "gte", "value": 3 },
+      "basis": "二线及以上城市人群规则",
+      "affectedGroups": ["hardware", "matching"]
+    },
+    {
+      "id": "exp.no-assets", "label": "无房且无车", "enabled": true,
+      "trigger": { "all": [ { "field": "subject.has_house", "op": "eq", "value": "none" }, { "field": "subject.has_car", "op": "eq", "value": "none" } ] },
+      "basis": "有房或有车人群规则",
+      "affectedGroups": ["hardware", "matching"]
+    },
+    {
+      "id": "exp.rural-origin", "label": "农村家庭出身", "enabled": true,
+      "trigger": { "field": "subject.family_origin", "op": "eq", "value": "rural" },
+      "basis": "县城及以上家庭出身人群规则",
+      "affectedGroups": ["family", "hardware", "matching"]
+    },
+    {
+      "id": "exp.divorced-with-child", "label": "离异有孩", "enabled": true,
+      "trigger": { "field": "subject.marital", "op": "eq", "value": "divorced_kid" },
+      "basis": "离异无孩人群规则",
+      "affectedGroups": ["hardware", "family", "matching"]
+    },
+    {
+      "id": "exp.height-edge-male", "label": "男性身高边界（≤165cm 或 ≥190cm）", "enabled": true,
+      "trigger": { "all": [ { "field": "subject.gender", "op": "eq", "value": "male" }, { "any": [ { "field": "subject.height_cm", "op": "lte", "value": 165 }, { "field": "subject.height_cm", "op": "gte", "value": 190 } ] } ] },
+      "basis": "身高 166–189cm 男性人群规则",
+      "affectedGroups": ["hardware", "appearance", "matching"]
+    },
+    {
+      "id": "exp.height-edge-female", "label": "女性身高边界（≤152cm 或 ≥178cm）", "enabled": true,
+      "trigger": { "all": [ { "field": "subject.gender", "op": "eq", "value": "female" }, { "any": [ { "field": "subject.height_cm", "op": "lte", "value": 152 }, { "field": "subject.height_cm", "op": "gte", "value": 178 } ] } ] },
+      "basis": "身高 153–177cm 女性人群规则",
+      "affectedGroups": ["hardware", "appearance", "matching"]
+    },
+    {
+      "id": "exp.non-local-tier1", "label": "一线城市非本地户籍", "enabled": true,
+      "trigger": { "all": [ { "field": "context.cityTier", "op": "eq", "value": 1 }, { "field": "subject.hukou", "op": "neq", "value": "local" } ] },
+      "basis": "一线城市本地户籍人群规则",
+      "affectedGroups": ["hardware", "matching"]
+    },
+    {
+      "id": "exp.single-parent-family", "label": "单亲 / 重组家庭", "enabled": false,
+      "trigger": null,
+      "needField": "原生家庭结构（单亲 / 重组），当前表单只有家庭出身与经济档",
+      "basis": "双亲家庭人群规则",
+      "affectedGroups": ["family", "matching"]
+    },
+    {
+      "id": "exp.disability", "label": "残障 / 健康状况", "enabled": false,
+      "trigger": null,
+      "needField": "健康状况（涉及伦理，需先定用户可见措辞策略）",
+      "basis": "—",
+      "affectedGroups": ["hardware", "matching"]
+    },
+    {
+      "id": "exp.male-dink", "label": "男性丁克", "enabled": false,
+      "trigger": null,
+      "needField": "生育意愿（丁克 / 要孩子 / 都可）",
+      "basis": "有生育意愿男性人群规则",
+      "affectedGroups": ["matching"]
+    }
+  ]
+}

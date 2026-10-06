@@ -1,0 +1,166 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-10-05",
+  "why": "案例回归校准（knowledge/CASE-CALIBRATION.md）量化出 4 个高影响缺口，其中 3 个需要新字段。这些字段先落在知识侧（避免与正在改 web/ 的 worker 冲突），由 tools/build_facts.mjs 合并进 knowledge/facts.json 供规则引用；网页表单后续再吸收。",
+  "fields": [
+    {
+      "id": "siblings_detail",
+      "label": "手足情况（含性别与排序）",
+      "group": "family",
+      "type": "select",
+      "required": false,
+      "options": [
+        {
+          "value": "only_child",
+          "label": "独生子女"
+        },
+        {
+          "value": "sister_only",
+          "label": "有姐姐（无弟弟）"
+        },
+        {
+          "value": "brother_only",
+          "label": "有哥哥（无弟弟）"
+        },
+        {
+          "value": "has_younger_brother",
+          "label": "有弟弟"
+        },
+        {
+          "value": "has_younger_sister",
+          "label": "有妹妹（无弟弟）"
+        },
+        {
+          "value": "mixed",
+          "label": "兄弟姐妹都有"
+        },
+        {
+          "value": "unknown",
+          "label": "不详 / 不愿说"
+        }
+      ],
+      "gapImpact": 10,
+      "note": "案例校准缺口 #2。v1 只有 siblings=独生/非独生，无法区分「弟弟」与「姐姐」，而语料显示两者对女性婚恋定位的影响相反。"
+    },
+    {
+      "id": "want_occupation",
+      "label": "期望对方职业性质",
+      "group": "want",
+      "type": "select",
+      "required": false,
+      "options": [
+        {
+          "value": "any",
+          "label": "不限"
+        },
+        {
+          "value": "gov",
+          "label": "体制内（公务员 / 事业编）"
+        },
+        {
+          "value": "soe",
+          "label": "国企"
+        },
+        {
+          "value": "private",
+          "label": "私企 / 外企"
+        },
+        {
+          "value": "startup",
+          "label": "创业 / 个体"
+        },
+        {
+          "value": "freelance",
+          "label": "自由职业"
+        }
+      ],
+      "gapImpact": 9,
+      "note": "案例校准缺口 #3。「要求对方体制内」是语料里最常见的要求之一，v1 的 want_* 无对应字段。"
+    },
+    {
+      "id": "family_wealth",
+      "label": "家庭资产档",
+      "group": "family",
+      "type": "select",
+      "required": false,
+      "options": [
+        {
+          "value": "a6",
+          "label": "A6 及以下（无房或仅自住刚需）"
+        },
+        {
+          "value": "a7",
+          "label": "A7（千万以下，高不成低不就）"
+        },
+        {
+          "value": "a8",
+          "label": "A8（净资产 1000 万+）"
+        },
+        {
+          "value": "a9",
+          "label": "A9（亿级）"
+        },
+        {
+          "value": "unknown",
+          "label": "不详"
+        }
+      ],
+      "gapImpact": 9,
+      "note": "案例校准缺口 #4。语料用 A7/A8/A9 与陪嫁金额作硬指标；v1 的 family_origin 只有四档定性。档位定义取自 standards.json 的 S-ASSET 系列（其中 A7 定义为反推值，标 derived，引擎不得作硬判定）。"
+    },
+    {
+      "id": "parents_pension",
+      "label": "父母退休金",
+      "group": "family",
+      "type": "select",
+      "required": false,
+      "options": [
+        {
+          "value": "both",
+          "label": "双方都有退休金"
+        },
+        {
+          "value": "one",
+          "label": "一方有"
+        },
+        {
+          "value": "none",
+          "label": "都没有"
+        },
+        {
+          "value": "unknown",
+          "label": "不详"
+        }
+      ],
+      "gapImpact": 0,
+      "note": "男十项评分表的一项（「父母退休金」+10）。缺此字段会让满分者只能拿到 81.8/100。"
+    },
+    {
+      "id": "family_atmosphere",
+      "label": "原生家庭氛围",
+      "group": "family",
+      "type": "select",
+      "required": false,
+      "options": [
+        {
+          "value": "harmonious",
+          "label": "和睦、父母关系好"
+        },
+        {
+          "value": "ordinary",
+          "label": "一般"
+        },
+        {
+          "value": "conflict",
+          "label": "有明显矛盾/离异"
+        },
+        {
+          "value": "unknown",
+          "label": "不详"
+        }
+      ],
+      "gapImpact": 0,
+      "note": "男十项评分表的一项（「原生家庭幸福」+10）。缺此字段会让满分者只能拿到 81.8/100。"
+    }
+  ]
+}

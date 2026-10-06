@@ -1,0 +1,205 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://aoye.local/knowledge/rules.schema.json",
+  "title": "鳌烨择偶定位体系 · 机器可读规则集",
+  "type": "object",
+  "required": ["version", "generatedAt", "scales", "dimensions", "rules", "bands"],
+  "additionalProperties": true,
+  "definitions": {
+    "evidence": {
+      "type": "object",
+      "required": ["account", "aweme_id", "quote"],
+      "properties": {
+        "account": { "type": "string", "description": "抖音账号 unique_id，必须存在于 data/meta/manifests/" },
+        "aweme_id": { "type": "string", "pattern": "^[0-9]{15,}$" },
+        "quote": { "type": "string", "minLength": 4, "description": "必须是转写口语原文片段；仅当无转写时才可用视频标题，并标 quoteSource: desc" },
+        "quoteSource": { "type": "string", "enum": ["transcript", "desc"] },
+        "srt_ref": { "type": "string", "description": "可选，如 00:01:23 便于回溯" }
+      }
+    },
+    "confidence": { "type": "string", "enum": ["high", "medium", "low"] },
+    "condition": {
+      "type": "object",
+      "description": "规则条件 DSL（与 web/lib/engine.mjs 一致）",
+      "properties": {
+        "field": { "type": "string" },
+        "op": { "type": "string", "enum": ["eq", "neq", "gt", "gte", "lt", "lte", "in", "nin", "between", "exists", "missing", "includes", "matches"] },
+        "value": {},
+        "all": { "type": "array", "items": { "$ref": "#/definitions/condition" } },
+        "any": { "type": "array", "items": { "$ref": "#/definitions/condition" } },
+        "not": { "$ref": "#/definitions/condition" }
+      }
+    },
+    "band": {
+      "type": "object",
+      "required": ["label", "score", "min"],
+      "properties": {
+        "label": { "type": "string" },
+        "score": { "type": "number" },
+        "min": { "type": ["number", "null"] },
+        "max": { "type": ["number", "null"] },
+        "observable": { "type": "array", "items": { "type": "string" }, "description": "可观察特征，供 AI 看图/填表判定" }
+      }
+    }
+  },
+  "properties": {
+    "version": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "corpus": {
+      "type": "object",
+      "properties": {
+        "transcribed": { "type": "number" },
+        "planned": { "type": "number" },
+        "coveragePct": { "type": "number" },
+        "accountsUsed": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "scales": {
+      "type": "array",
+      "description": "有序评分标尺（颜值分、综合分…）",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "min", "max", "anchors", "evidence"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "min": { "type": "number" },
+          "max": { "type": "number" },
+          "step": { "type": "number" },
+          "appliesTo": { "type": "array", "items": { "type": "string", "enum": ["male", "female", "all"] } },
+          "description": { "type": "string" },
+          "anchors": { "type": "array", "items": { "$ref": "#/definitions/band" } },
+          "evidence": { "type": "array", "items": { "$ref": "#/definitions/evidence" }, "minItems": 1 }
+        }
+      }
+    },
+    "dimensions": {
+      "type": "array",
+      "description": "评估维度：硬件/软性/家庭/颜值细分项",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "group", "type", "evidence"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "group": { "type": "string", "enum": ["hardware", "soft", "family", "appearance", "other"] },
+          "appliesTo": { "type": "array", "items": { "type": "string", "enum": ["male", "female", "all"] } },
+          "type": { "type": "string", "enum": ["numeric", "ordinal", "categorical", "boolean", "text", "photo"] },
+          "unit": { "type": "string" },
+          "weight": { "type": ["number", "null"], "description": "相对权重 0-1，无则 null" },
+          "options": { "type": "array", "items": { "type": "string" }, "description": "ordinal/categorical 的取值" },
+          "bands": { "type": "array", "items": { "$ref": "#/definitions/band" } },
+          "notes": { "type": "string" },
+          "evidence": { "type": "array", "items": { "$ref": "#/definitions/evidence" }, "minItems": 1 }
+        }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "scope", "when", "then", "confidence", "evidence"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^R-[A-Z][A-Z0-9]*(-[A-Z0-9]+)*-[0-9]{3}$", "description": "支持多命名段，如 R-DIM-001 / R-LOOKS-APPEAR-001 / R-BASE-001" },
+          "scope": { "type": "string", "enum": ["scoring", "matching", "band", "demographic", "advice"] },
+          "title": { "type": "string" },
+          "when": { "description": "触发条件：自然语言或结构化对象", "type": ["string", "object", "array"] },
+          "then": { "description": "结论：自然语言或结构化对象", "type": ["string", "object", "array"] },
+          "confidence": { "$ref": "#/definitions/confidence" },
+          "advisory": { "type": "boolean", "default": false, "description": "true = 该规则仅供人工阅读/报告展示，引擎不执行。每条规则必须二选一：要么给 machine，要么 advisory: true。" },
+          "machine": {
+            "type": "object",
+            "description": "机器可执行层。给了它，网页引擎才能真的跑这条规则；不给则必须 advisory: true。",
+            "required": ["when"],
+            "properties": {
+              "when": {
+                "oneOf": [
+                  { "$ref": "#/definitions/condition" },
+                  { "type": "array", "items": { "$ref": "#/definitions/condition" } }
+                ]
+              },
+              "then": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["kind"],
+                  "properties": {
+                    "kind": { "type": "string", "enum": ["clampScale", "setBand", "advice", "giveUp", "text", "flag", "requireEvidence"] },
+                    "scale": { "type": "string" },
+                    "min": { "type": "number" },
+                    "max": { "type": "number" },
+                    "band": { "type": "string" },
+                    "text": { "type": "string" },
+                    "note": { "type": "string" }
+                  }
+                }
+              },
+              "note": { "type": "string" }
+            }
+          },
+          "conflict": { "type": "boolean" },
+          "conflictNote": { "type": "string" },
+          "evidence": { "type": "array", "items": { "$ref": "#/definitions/evidence" }, "minItems": 1 }
+        }
+      }
+    },
+    "bands": {
+      "type": "array",
+      "description": "择偶市场梯队 / 上下限定位",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "definition", "evidence"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "definition": { "type": "string" },
+          "entryCriteria": { "type": "array", "items": { "type": "string" } },
+          "reachableMatch": { "type": "string" },
+          "typicalObstacle": { "type": "string" },
+          "targetProfile": {
+            "type": "object",
+            "description": "「心智首选画像」的结构化版本，供网页直接渲染",
+            "properties": {
+              "summary": { "type": "string" },
+              "whoFindsYouFirstChoice": { "type": "array", "items": { "type": "string" } },
+              "whoYouCanReach": { "type": "array", "items": { "type": "string" } },
+              "whoWillNotConsiderYou": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+          "evidence": { "type": "array", "items": { "$ref": "#/definitions/evidence" }, "minItems": 1 }
+        }
+      }
+    },
+    "composites": {
+      "type": "array",
+      "description": "组合分标尺（硬件分/软性分/家庭分/综合分）。提供与颜值分同构的分档锚点，供网页直接给出档位标签；缺此项时网页只能用演示基线，请优先补齐。",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "appliesTo", "anchors", "evidence"],
+        "properties": {
+          "id": { "type": "string", "description": "如 hardware / soft / family / overall" },
+          "name": { "type": "string" },
+          "appliesTo": { "type": "array", "items": { "type": "string", "enum": ["male", "female", "all"] } },
+          "min": { "type": "number" },
+          "max": { "type": "number" },
+          "description": { "type": "string" },
+          "composedOf": { "type": "array", "items": { "type": "string" }, "description": "参与该组合分的维度 id 列表" },
+          "anchors": { "type": "array", "items": { "$ref": "#/definitions/band" } },
+          "evidence": { "type": "array", "items": { "$ref": "#/definitions/evidence" }, "minItems": 1 }
+        }
+      }
+    },
+    "glossary": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["term", "meaning"],
+        "properties": {
+          "term": { "type": "string" },
+          "meaning": { "type": "string" },
+          "asrVariants": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

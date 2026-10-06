@@ -1,0 +1,17 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-10-06T00:00:00Z",
+  "meta": {
+    "origin": "web-config",
+    "note": "composite 归一化分 → 现有 1–9 标尺的映射口径（本项目自定义，不散落在代码里）。锚点依据 composite.anchors：80+ 优秀、60–79 及格、<60 未及格。"
+  },
+  "scale": "hardware",
+  "disclosure": "男生硬件分：语料十项加分表原分（rawMax 110）→ 按 composite.normalize 归一到 100 → 按下表映射到 1–9 标尺；映射口径为本项目自定义（web/config/composite-mapping.json）。",
+  "bands": [
+    { "label": "未及格（<60）", "max": 59.99, "score": 3 },
+    { "label": "及格（60–69.99）", "min": 60, "max": 69.99, "score": 4.5 },
+    { "label": "及格偏好（70–79.99）", "min": 70, "max": 79.99, "score": 5.5 },
+    { "label": "优秀（80–89.99）", "min": 80, "max": 89.99, "score": 7 },
+    { "label": "优秀+（90–100）", "min": 90, "max": 100, "score": 8.5 }
+  ]
+}

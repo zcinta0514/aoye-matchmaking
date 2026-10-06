@@ -1,0 +1,12 @@
+{
+  "name": "aoye-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "鳌烨择偶定位系统 · 独立网页骨架（零依赖，Node 标准库）",
+  "engines": { "node": ">=20.11" },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test test/*.test.mjs"
+  }
+}

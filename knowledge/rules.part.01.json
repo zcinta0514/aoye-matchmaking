@@ -1,0 +1,2266 @@
+{
+  "version": "3.2",
+  "generatedAt": "2026-10-06T04:11:40.510Z",
+  "corpus": {
+    "transcribed": 439,
+    "planned": 1511,
+    "coveragePct": 29.1,
+    "accountsUsed": [
+      "aoye98",
+      "47590488570",
+      "41252723284",
+      "48854385344",
+      "33349790582"
+    ]
+  },
+  "scales": [
+    {
+      "id": "appearance",
+      "name": "颜值分",
+      "min": 1,
+      "max": 9,
+      "step": 0.5,
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "description": "博主对来访者外貌的主观分档（1-9 分、0.5 分一档，男/女两套口径）。判分语义是「100 个同龄人池」里的位次；对外一律以区间口径呈现（约前 5%-20%），禁止输出单点名次。低于 5 分为普通区间，5.5 分是第一个「好看」门槛，6 分为班草级/百里挑一；7 分要求原生脸（可达性存在跨账号冲突，见锚点）；7.5-8.4 无锚点，8.5 为国花国草。",
+      "anchors": [
+        {
+          "label": "普通人",
+          "score": 3.5,
+          "min": 3,
+          "max": 4,
+          "observable": [
+            "人群中无记忆点；博主直接说「咱就是正常人的长相」",
+            "4 分 = 同龄人池的中位数（S-LOOKS-002）",
+            "自称「四分左右」时博主会说「四分往右一点点」"
+          ]
+        },
+        {
+          "label": "普通偏上",
+          "score": 4.2,
+          "min": 4.2,
+          "max": 4.5,
+          "observable": [
+            "「比普通人给您强」",
+            "略高于中位数，尚未进入小群体「公认好看」层",
+            "干净、收拾过；身高偏矮会小幅减分"
+          ]
+        },
+        {
+          "label": "宿舍花/舍草（有争议）",
+          "score": 4.8,
+          "min": 4.6,
+          "max": 4.9,
+          "observable": [
+            "一个宿舍 8 个人里约 7 个人会认",
+            "4.7-4.8 为「标标准准的小舍花」",
+            "该段位次口径不稳，只按区间呈现"
+          ]
+        },
+        {
+          "label": "无争议的宿舍花 ≈ 有争议的班花/班草",
+          "score": 5.25,
+          "min": 5,
+          "max": 5.3,
+          "observable": [
+            "「5 分出头」",
+            "该段位次在语料中有多套口径，对外只用区间（约前 5%-20%）",
+            "五官开始被要求无明显短板"
+          ]
+        },
+        {
+          "label": "有争议的班花班草 / 无争议的校草",
+          "score": 5.5,
+          "min": 5.5,
+          "max": 5.5,
+          "observable": [
+            "五官无明显短板：三庭/眉眼唇/牙弓/头肩比/面部折叠度组合无短缺（单项不必出色）",
+            "男生：光脚 1 米 80、会穿搭、身材与皮肤状态良好（S-HEIGHT-002）",
+            "位次按区间口径使用（约前 5%-20%），禁止单点名次"
+          ]
+        },
+        {
+          "label": "准 6 分（女生）",
+          "score": 5.8,
+          "min": 5.7,
+          "max": 5.8,
+          "observable": [
+            "女性口径约前 3%-5%（区间，S-LOOKS-007）",
+            "男生受身高封印，不进入 6 分档（S-HEIGHT-003；不设统一数值上限）"
+          ]
+        },
+        {
+          "label": "班草级 / 百里挑一",
+          "score": 6,
+          "min": 6,
+          "max": 6.4,
+          "observable": [
+            "「百里挑一」为语料语义口径，未给精确百分比（S-LOOKS-008）",
+            "直播「露脸连麦（开摄像头）」的准入门槛",
+            "有争议的宿舍花≈8 人里 7 人认，标准班花为 6 分出头"
+          ]
+        },
+        {
+          "label": "极高档位（要求原生脸）",
+          "score": 7,
+          "min": 7,
+          "max": 7.5,
+          "observable": [
+            "7 分档要求纯天然：博主会捏鼻、追问是否动过（S-LOOKS-011）",
+            "可达性存在跨账号冲突：aoye98 认为几乎不可能（「全中国就你一个男生，你也不可能是 7 分」），aoye28 多例直接给 7 分",
+            "三庭比例、脸型大小、鼻型被逐项核验"
+          ]
+        },
+        {
+          "label": "国花国草",
+          "score": 8.5,
+          "min": 8.5,
+          "max": 9,
+          "observable": [
+            "娱乐圈级别：aoye98 口径「8.5 = 国花国草」",
+            "aoye28 新增定义：「一千万个人里出一个的颜值」（S-LOOKS-013）"
+          ]
+        }
+      ],
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7664928566988175995",
+          "quote": "1-9分的外表男生评价提起来咯。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7651589852420427048",
+          "quote": "4分是中位数，这你能知道吧，颜值偏态分布。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7661209960478444827",
+          "quote": "娱乐圈女明星谁能上8.5？8.5就是国花国草。"
+        }
+      ]
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "face.three_courts",
+      "name": "三庭比例",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "博主判分时逐项点名的第一结构指标（ASR 常写作三屏/三平/三挺）。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "不能有硬伤，就是三庭分布，比方说它的眉眼唇，它的牙弓比例，头肩比，面部折叠度。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7647499397491674404",
+          "quote": "面相挺好的，就三庭分布，眉眼唇，五官比例，颅面比例，五官的量感也挺足。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7638930281780596006",
+          "quote": "你们看这个女生，不论是三庭分布，还是她的头肩比，还是她的颅面比例，对吧？……牙弓比例，都很好。"
+        }
+      ]
+    },
+    {
+      "id": "looks.features_balance",
+      "name": "眉眼唇 / 五官比例与量感",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "单项不需要出色，“组合起来没问题”即无硬伤。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "不需要多么出色，都组合起来没问题，这就叫5.5了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7647499397491674404",
+          "quote": "五官比例、颅面比例，五官的量感也挺足。"
+        }
+      ]
+    },
+    {
+      "id": "looks.dental_arch",
+      "name": "牙弓比例",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "ASR 常写作牙工比例；低折叠度的牙弓在镜头前会放大缺陷。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "它的牙弓比例……都组合起来没问题，这就叫5.5了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420044572282158",
+          "quote": "比方说你有个低折叠度的牙弓，比方说你的颧骨外扩。"
+        }
+      ]
+    },
+    {
+      "id": "looks.head_shoulder_ratio",
+      "name": "头肩比",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": null,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638930281780596006",
+          "quote": "不论是三庭分布，还是她的头肩比，还是她的颅面比例，对吧？"
+        }
+      ]
+    },
+    {
+      "id": "looks.facial_fold",
+      "name": "面部折叠度",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "与牙弓、颧骨并列的结构指标；被用来判断“像不像/扛不扛镜头”。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644119736887938347",
+          "quote": "我也觉得咱们俩有五官的轮廓呀，鼻子的高低呀，包括这种眼睛的比例……咱们这种面部的折叠度，包括发型都很像。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420044572282158",
+          "quote": "你的五官的缺点全部会放大，比方说大小眼高低眉，比方说你有个低折叠度的牙弓。"
+        }
+      ]
+    },
+    {
+      "id": "looks.craniofacial_ratio",
+      "name": "颅面比例",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": null,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638930281780596006",
+          "quote": "还是她的头肩比，还是她的颅面比例，对吧？"
+        }
+      ]
+    },
+    {
+      "id": "looks.face_size",
+      "name": "脸型 / 脸面大小",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "ASR 写作“容面大小”；与三庭、鼻子同批核验。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644902230331542826",
+          "quote": "细看还行，就您的三庭比例，脸型大小，你的鼻子是你自己的吗？"
+        }
+      ]
+    },
+    {
+      "id": "looks.nose",
+      "name": "鼻型 / 山根（含是否原生）",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "博主会要求来访者捏鼻子以核验是否原生；侧脸山根挺是加分描述。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644902230331542826",
+          "quote": "你的鼻子是你自己的吗？对啊。你捏一下，我看一下。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7646730995613355327",
+          "quote": "但侧脸有，侧脸有，山根很挺。"
+        }
+      ]
+    },
+    {
+      "id": "looks.profile",
+      "name": "侧脸轮廓（下颌线/侧脸形态）",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "原文“侧脸是一个平行四边形”“下颌线也很清晰”（ASR：价格线，存疑）。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7646730995613355327",
+          "quote": "而且你看，他的侧脸是一个平行四边形。侧脸好看啊，下颌线也很清晰。"
+        }
+      ]
+    },
+    {
+      "id": "looks.height",
+      "name": "身高（男性硬上限 / 女性优势或小幅减分）",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "numeric",
+      "unit": "cm",
+      "weight": null,
+      "notes": "男性：身高封印颜值上限，面部美学分再高也受限（1 米 75 就被排除在 6 分以上）。女性：1 米 79 被称“超模身高、百分之百优势”；1 米 62 被说“身高稍微一丢丢减分”。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7639291023436369190",
+          "quote": "1米75咱就不敢说6分以上了……就每个人的颜值都会被身高所封印。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7627766660082953083",
+          "quote": "不论你的面部美学分数有多高，上限永远逃不掉身高的一个制裁。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7661209960478444827",
+          "quote": "1米79是超模身高呀？……优势，绝对是优势，百分之百是优势，别胖就行。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7647499397491674404",
+          "quote": "身高稍微一丢丢减分，干净五分不错啊。"
+        }
+      ]
+    },
+    {
+      "id": "looks.weight",
+      "name": "体重 / 胖瘦",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "numeric",
+      "unit": "kg",
+      "weight": null,
+      "notes": "“别胖就行”是高分者的红线；男女对“微胖”的理解不同。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7661209960478444827",
+          "quote": "1米79是超模身高呀？……优势，绝对是优势，百分之百是优势，别胖就行。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7639676121834851593",
+          "quote": "1米62，145斤。男女对微胖的理解可不一样，姑娘。"
+        }
+      ]
+    },
+    {
+      "id": "looks.skin",
+      "name": "皮肤状态",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "男生 5.5 分 checklist 明文项；皮肤好会被单独表扬。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "光脚1米80，五官不能有硬伤，会穿搭，身材好，皮肤好，基本上就算5.5分了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7667915732088556841",
+          "quote": "是好看的啊，有6分左右有，差不多。皮肤也很好呀。"
+        }
+      ]
+    },
+    {
+      "id": "looks.grooming",
+      "name": "穿搭 / 发型 / 妆容 / 干净度",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "categorical",
+      "weight": null,
+      "options": [
+        "干净清爽",
+        "会穿搭",
+        "发型适配",
+        "化妆/眉毛修饰",
+        "不修边幅（头油/体味/口臭）"
+      ],
+      "notes": "可分项：穿搭是 5.5 checklist 明文项；干净是底线，不修边幅大幅减分；女性妆容/眉毛直接参与判分。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "会穿搭，身材好，皮肤好，基本上就算5.5分了。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7681986355500453158",
+          "quote": "出门最好建议大家可以洗个头洗个澡……避免头油、体味、口臭这些，这样的话会大幅度的减分。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7648982262922382646",
+          "quote": "我如果不化妆的话，我可能就是三分三挺五，因为我没有眉毛。我眉毛是化的。"
+        }
+      ]
+    },
+    {
+      "id": "looks.posture_presence",
+      "name": "体态 / 气质 / 精神状态",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "女性口径权重 40% 自信与体态；性格/气质可在面部美学分上叠加（5.8-5.9 → 6.2-6.3）。",
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7682010628554231090",
+          "quote": "40%靠的是自信和体态，20%靠的是身材比例和穿衣的搭配，15%是来自于我们的发型还有妆容，剩下的才轮得到自己的五官。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7645562474632056127",
+          "quote": "您的性格很好，性格加分的，纯面部美学5.8、5.9……加上性格我觉得有6.2、6.3。"
+        }
+      ]
+    },
+    {
+      "id": "looks.figure_ratio",
+      "name": "身材比例",
+      "group": "appearance",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "photo",
+      "weight": null,
+      "notes": "含头肩比之外的“身材比例”，顶美也要求身材比例与穿衣审美。",
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7682020548599172403",
+          "quote": "顶美也不是说只是你的五官漂亮，还是要看皮肤状态、体态、身材的比例、穿衣的审美，以及整个人呈现出来的状态。"
+        }
+      ]
+    },
+    {
+      "id": "photo.capture_conditions",
+      "name": "拍摄条件（灯光/美颜/上镜度）",
+      "group": "other",
+      "appliesTo": [
+        "all"
+      ],
+      "type": "categorical",
+      "weight": null,
+      "options": [
+        "自然光/关美颜",
+        "顶光",
+        "美颜过度"
+      ],
+      "notes": "非颜值维度，但会直接改变判分结果：上镜放大五官缺点，美颜/顶光会让博主先调整再定分；视频评分通常低于真人。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420044572282158",
+          "quote": "全地球人都不上镜，只要上镜，你的五官的缺点全部会放大。……这个美颜把人会感觉弄得会畸形。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7641867771478822185",
+          "quote": "你把头顶的光关了，然后的话把美颜调对，5.2、5.3有了。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7682020548599172403",
+          "quote": "会拍照，找角度，会开美颜，你觉得自己就是顶美了吗？"
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "id": "R-LOOKS-001",
+      "scope": "scoring",
+      "title": "颜值分是 1-9 分制、0.5 分一档的位次分",
+      "when": "任何时候需要给出颜值分",
+      "then": "按 1-9 分、步长 0.5 输出区间；分数语义是「100 个同龄人池」里的位次。对外一律用区间口径（约前 5%-20%），禁止输出单点名次；比较池必须写明（同性别、同年龄段）。",
+      "confidence": "medium",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7664928566988175995",
+          "quote": "1-9分的外表男生评价提起来咯。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7651589852420427048",
+          "quote": "4分是中位数，这你能知道吧，颜值偏态分布。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7654913599751654708",
+          "quote": "咱就是说95年，不要和年轻人比啊……95年里100个人里，这样不是前30，没问题。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7627766660082953083",
+          "quote": "一个男生1米88，140斤，五官端正，他给打了个5.3分，5.3分差不多就是100个男生里面前20的水平。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "field": "subject.self_appearance",
+          "op": "exists"
+        },
+        "then": [
+          {
+            "kind": "clampScale",
+            "scale": "appearance",
+            "min": 1,
+            "max": 9
+          },
+          {
+            "kind": "text",
+            "text": "颜值分按 1-9 分、0.5 分一档输出；对外只展示区间，不展示单点名次。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-001",
+        "S-LOOKS-010"
+      ],
+      "claimFlags": [
+        {
+          "claim": "分数语义是「100 个人池」里的位次（折成分数）",
+          "level": "cross-account",
+          "action": "evidence-added",
+          "note": "新增 47590488570/7627766660082953083 作互证（该条明说「100 个男生里面前 20 的水平」）；现为 2 账号支持。"
+        },
+        {
+          "claim": "比较池限定为「同龄人」",
+          "level": "single-source",
+          "action": "text-only",
+          "singleAccount": true,
+          "note": "仅 aoye98/7654913599751654708（「95年里100个人里」）一条；只作比较池说明，不用于任何数值换算。"
+        }
+      ],
+      "claimType": "market-norm",
+      "claimTypeNote": "定义型/方法论：1-9 分制与位次语义是博主自述的评分框架，不是官方或市场公认标准。",
+      "sources": {
+        "transcripts": 4,
+        "accounts": 2,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "cross-account",
+      "matrixRepetition": {
+        "accounts": [
+          "aoye28"
+        ],
+        "evidence": [
+          {
+            "account": "aoye28",
+            "aweme_id": "7519977102901316873",
+            "quote": "5.5分是100个女生以前10，比90个女生都好看。"
+          }
+        ],
+        "note": "V3 追加的 aoye28 证据属同品牌矩阵来源，不计独立账号；本条的 cross-account 来自 aoye98 + 47590488570（非本次新增）。"
+      }
+    },
+    {
+      "id": "R-LOOKS-002",
+      "scope": "scoring",
+      "title": "3-4 分是普通人区间，4 分是中位数",
+      "when": "评估对象没有明显外形优势时",
+      "then": "3-4 分判为普通人区间；4 分等于同龄人池的中位数（S-LOOKS-002），4 分以上才脱离普通。",
+      "confidence": "medium",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7648982262922382646",
+          "quote": "三到四分是普通人吗？对。四分往右一点点。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7651589852420427048",
+          "quote": "4分是中位数，这你能知道吧，颜值偏态分布。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7639325798792482102",
+          "quote": "敢颜值怎样？正常人吧，3.5左右吧。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "field": "appearance.final.mid",
+          "op": "between",
+          "value": [
+            3,
+            4
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-002",
+            "severity": "info",
+            "text": "当前区间对应「普通人」档：处于同龄人池的中位数附近，属于人群中不突出的常态区间，提升空间主要在可改变的呈现项。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-002",
+        "S-LOOKS-003"
+      ],
+      "claimType": "market-norm",
+      "claimTypeNote": "当场判分口径（3-4 分=普通人、4 分=中位数），博主在多次连麦中重复给出。",
+      "sources": {
+        "transcripts": 3,
+        "accounts": 1,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account",
+      "matrixRepetition": {
+        "accounts": [
+          "aoye28"
+        ],
+        "evidence": [
+          {
+            "account": "aoye28",
+            "aweme_id": "7519240483915238665",
+            "quote": "颜值的中位数就是4分。"
+          }
+        ],
+        "note": "D29 对账：以下来源为月老鳌烨矩阵内复述/同一博主的第二账号（非独立来源），不计入 sources.accounts，也不得用于提级；仅记录\"该表述在机构内被复用\"。"
+      }
+    },
+    {
+      "id": "R-LOOKS-003",
+      "scope": "scoring",
+      "title": "4.2-4.9 = 普通偏上到宿舍花/舍草",
+      "when": "分数落在 4.2-4.9",
+      "then": "4.6-4.9 = 宿舍花/舍草层（S-LOOKS-004）：4.7-4.8 标标准准的小舍花；4.8-4.9 有争议的宿舍花（8 人里约 7 人认）。4.2-4.5 的「比普通人强」为 soft 口径（S-LOOKS-003），只作参考，不作硬触发。该段位次口径不稳，只按区间呈现。",
+      "confidence": "medium",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7661209960478444827",
+          "quote": "再上身高，我能给您打4出头，就比普通人给您强……4.2差不多有了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7650475626062810422",
+          "quote": "这就叫标标准准的小舍花。一个宿舍里有争议的那个舍花。4.7、4.8差不多。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7656400717271354624",
+          "quote": "有争议的宿舍舍花差不多就是8个人里7个人里出一个，就4.8、4.9。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7653425487565360436",
+          "quote": "4.2，差不多有了……100个女生里前40名，没问题。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "field": "appearance.final.mid",
+          "op": "between",
+          "value": [
+            4.6,
+            4.9
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-003",
+            "severity": "info",
+            "text": "当前区间属于「普通偏上到小群体层面的好看」：比中位数高一档，在宿舍/小组这类小圈子里开始被注意到。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-003",
+        "S-LOOKS-004"
+      ],
+      "internalNote": "回听记录（2026-10-05）：本条使用的 4.8 / 4.9 已被重转写确认（「就4.8 4.9」「4.9 4.8」）。同条开头的「我1米6390斤」属 noise 名单 height_merge，但本规则不使用身高/体重数字。",
+      "claimType": "market-norm",
+      "claimTypeNote": "宿舍花/舍草层的当场判分口径，多次直播重复。",
+      "sources": {
+        "transcripts": 4,
+        "accounts": 1,
+        "matrixAccounts": 0,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account"
+    },
+    {
+      "id": "R-LOOKS-004",
+      "scope": "scoring",
+      "title": "5.0-5.3 = 无争议的宿舍花 ≈ 有争议的班花/班草",
+      "when": "分数落在 5.0-5.3",
+      "then": "5.0-5.3 = 无争议的宿舍花 ≈ 有争议的班花/班草；该段位次在语料中有多套口径，对外统一按区间呈现（约前 5%-20%），禁止输出单点名次。",
+      "confidence": "medium",
+      "conflict": true,
+      "conflictNote": "「有争议的班花」在语料里有 5.2-5.3 与 5.5 两种口径（同一账号、不同场次）；本条按 5.0-5.3 采用，另一口径由 R-LOOKS-005 承载，未强行统一。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7656400717271354624",
+          "quote": "没争议的就是5分出头了……没争议的宿舍舍花，基本上就跟有争议的班花就是一个水平了，就是5.2到5.3。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7627766660082953083",
+          "quote": "一个男生1米88，140斤，五官端正，他给打了个5.3分，5.3分差不多就是100个男生里面前20的水平。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "差不多，5.2、5.3。100个男生里第18、19。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "field": "appearance.final.mid",
+          "op": "between",
+          "value": [
+            5,
+            5.3
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-004",
+            "severity": "info",
+            "text": "当前区间属于「小群体公认好看」档。该分数段在语料中存在口径差异，对外统一按区间呈现，不输出单点名次。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-005",
+        "S-LOOKS-010"
+      ],
+      "internalNote": "回听记录（2026-10-05）：本条使用的 5.2-5.3 已被重转写确认（「基本上就跟有争议的班花就是一个水平了，就是5.2到5.3」）。同条开头的「我1米6390斤」属 noise 名单 height_merge，但本规则不使用身高/体重数字。",
+      "claimType": "market-norm",
+      "claimTypeNote": "5.0-5.3 段位的当场判分口径；位次冲突已在规则内登记。",
+      "sources": {
+        "transcripts": 3,
+        "accounts": 2,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "cross-account",
+      "matrixRepetition": {
+        "accounts": [
+          "aoye28"
+        ],
+        "evidence": [
+          {
+            "account": "aoye28",
+            "aweme_id": "7518504314550095155",
+            "quote": "5.3 5.4 100个女生里第15。"
+          }
+        ],
+        "note": "V3 追加的 aoye28 证据属同品牌矩阵来源；本条 cross-account 来自 aoye98 + 47590488570（非本次新增）。"
+      }
+    },
+    {
+      "id": "R-LOOKS-005",
+      "scope": "scoring",
+      "title": "5.5 分 = 有争议的班花班草 / 无争议的校草；首个“颜值红利”门槛",
+      "when": "分数达到 5.5",
+      "then": "5.5 = 第一个「好看」门槛（有争议的班花班草 / 无争议的校草），开始能吃到颜值红利；男生拿到 5.5 的硬前提之一：光脚 1 米 80（S-HEIGHT-002），且五官无明显短板、会穿搭、身材与皮肤状态良好。",
+      "confidence": "medium",
+      "conflict": true,
+      "conflictNote": "「有争议的班花」另有 5.2-5.3 口径；5.5 的百人位次在语料中也有多套说法且「保八成五」语义存疑，未采用为百分位。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "5.5分就是有争议的班花班草。……光脚1米80，五官不能有硬伤，会穿搭，身材好，皮肤好，基本上就算5.5分了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7656724726068301062",
+          "quote": "5.5分就是有争议的班草、无争议的校草。100个人里保八成五吧。"
+        },
+        {
+          "account": "41252723284",
+          "aweme_id": "7550417741316934962",
+          "quote": "能找，颜值5.5分就是已经能吃到颜值红利了。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "field": "appearance.final.mid",
+          "op": "gte",
+          "value": 5.5
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-005",
+            "severity": "info",
+            "text": "已进入语料口径的「好看」门槛区间。男生 5.5 档的硬条件（光脚身高 1 米 80、五官无明显短板、穿搭/身材/皮肤状态良好）来自博主·机构的评分表口径，不是市场定律；这些条件需要照片轨道数据逐项核验，未接入前不自动判定。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-006",
+        "S-HEIGHT-002"
+      ],
+      "claimFlags": [
+        {
+          "claim": "5.5 = 第一个「好看」门槛（有争议的班花班草 / 无争议的校草）",
+          "level": "supported-multi",
+          "action": "unchanged",
+          "note": "3 个内容单元、2 个账号（aoye98/7640777429912538409、aoye98/7656724726068301062、41252723284/7550417741316934962）。"
+        },
+        {
+          "claim": "5.5 = 已能吃到「颜值红利」（首个红利门槛）",
+          "level": "single-source",
+          "action": "text-only",
+          "singleAccount": true,
+          "note": "仅 41252723284/7550417741316934962 一条；保留为博主口径描述，用户可见文案只说「好看门槛」，不把「红利」当判定条件。"
+        },
+        {
+          "claim": "\"100个人里保八成五\"（原文，5.5 的百人位次说法）",
+          "level": "unsupported",
+          "action": "permanent-uncertain",
+          "note": "V3 全库复检：该短语为孤例（仅 aoye98/7656724726068301062 一见），无第二处出现，ASR 语义无法确定（可能是「保八成」或「保八、成五」）。**永久存疑，不用于任何位次换算**；跨账号可得的新旁证是 aoye28/7519977102901316873「5.5分是100个女生以前10」与 aoye28/7518504314550095155「5.3 5.4 100个女生里第15」——对外仍只按 D6 区间（约前 5%-20%）呈现。"
+        }
+      ],
+      "claimType": "market-norm",
+      "claimTypeNote": "5.5 门槛成立；其中「男生 5.5 checklist（光脚 180/五官/穿搭/身材/皮肤）」是博主/机构自制的**评分表口径**，不是市场定律，用户可见文案需注明由谁给出。",
+      "sources": {
+        "transcripts": 3,
+        "accounts": 2,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "cross-account",
+      "matrixRepetition": {
+        "accounts": [
+          "aoye184"
+        ],
+        "evidence": [
+          {
+            "account": "aoye184",
+            "aweme_id": "7691940350286474943",
+            "quote": "姐妹，咱这不止5分啊。咱这5.5分有了。"
+          }
+        ],
+        "note": "V3 追加的 aoye184 证据属同品牌矩阵来源；本条 cross-account 来自 aoye98 + 41252723284（非本次新增）。"
+      }
+    },
+    {
+      "id": "R-LOOKS-006",
+      "scope": "scoring",
+      "title": "6 分 = 百里挑一 / 班草级，且是露脸连麦门槛",
+      "when": "分数达到 6",
+      "then": "6 = 班草级 / 百里挑一（S-LOOKS-008）；在博主直播里也是「露脸连麦（开摄像头）」的准入线（**event-rule：仅代表月老鳌烨直播间这一产品线的规则，不代表市场通行门槛**）。「百里挑一」为语料语义口径，未给精确百分比。",
+      "confidence": "medium",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420044572282158",
+          "quote": "兄弟咱这可达不到料。六叫班草叫百里挑一。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7646730995613355327",
+          "quote": "6分就是全班比你是最帅的那个，百里挑一。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7653425487565360436",
+          "quote": "原来只是6分能开摄像头。"
+        },
+        {
+          "account": "aoye28",
+          "aweme_id": "7528329406286662950",
+          "quote": "6分就是百里挑一，就是生活当中较为常见的美女。"
+        },
+        {
+          "account": "aoye020",
+          "aweme_id": "7628250558563308921",
+          "quote": "6分是啥概念的？6分就是你从小到大就基本不缺女生追。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "field": "appearance.final.mid",
+          "op": "gte",
+          "value": 6
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-006",
+            "severity": "info",
+            "text": "当前区间达到「班草级 / 百里挑一」档位描述（语料原词，未给精确百分比）。注：「6 分可开摄像头」的连麦门槛仅代表月老鳌烨直播间（该机构矩阵号复用同一规则），不代表市场通行标准。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-008"
+      ],
+      "claimType": "event-rule",
+      "claimSource": "月老鳌烨直播间（aoye98 / aoye28 / aoye020 矩阵号复用同一规则）·「露脸连麦（开摄像头）」准入",
+      "claimTypeNote": "仅代表该博主/该产品线的直播间规则（申报 6 分才能开摄像头），不是市场颜值门槛；按 D29.1，矩阵复述对 event-rule 构成实例覆盖（非独立验证），文案已标注机构口径。",
+      "sources": {
+        "transcripts": 5,
+        "accounts": 3,
+        "matrixAccounts": 0,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "cross-account"
+    },
+    {
+      "id": "R-LOOKS-007",
+      "scope": "scoring",
+      "title": "5.7-5.8 = 女生的“保五争三”档",
+      "when": "女性评估对象分数落在 5.7-5.8",
+      "then": "女生 5.7-5.8 = 语料所称「保五争三」档（S-LOOKS-007）；对外只按区间呈现（约前 3%-5%），不得输出单点名次。男生受身高封印通常止步于 5.5-5.7（上界数字见 R-LOOKS-012 的回听说明）。",
+      "confidence": "medium",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7650107302800018724",
+          "quote": "二三线城市的高中里面，100个女生里前三名了，5.7、5.8真的有了，100个女生里保五争三。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7643415586243906822",
+          "quote": "5.8、5.7，100个女生里保五争三，我给的1米74成了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7639291023436369190",
+          "quote": "1米75咱就不敢说6分以上了。……就每个人的颜值都会被身高所封印。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7629317858966752531",
+          "quote": "5.7，100个男生里保五争三。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "subject.gender",
+              "op": "eq",
+              "value": "female"
+            },
+            {
+              "field": "appearance.final.mid",
+              "op": "between",
+              "value": [
+                5.7,
+                5.8
+              ]
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-007",
+            "severity": "info",
+            "text": "当前区间属于女性准 6 分档：在同龄人中属于靠前的小比例人群（区间口径约前 3%-5%）。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-007"
+      ],
+      "claimType": "market-norm",
+      "claimTypeNote": "女 5.7-5.8 的当场判分口径；对外只出区间。",
+      "sources": {
+        "transcripts": 4,
+        "accounts": 1,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account",
+      "matrixRepetition": {
+        "accounts": [
+          "aoye28"
+        ],
+        "evidence": [
+          {
+            "account": "aoye28",
+            "aweme_id": "7532408578411760942",
+            "quote": "评论区的有效最低分大概在4分，最高有效分大概在5.7、5.8。"
+          }
+        ],
+        "note": "D29 对账：以下来源为月老鳌烨矩阵内复述/同一博主的第二账号（非独立来源），不计入 sources.accounts，也不得用于提级；仅记录\"该表述在机构内被复用\"。"
+      }
+    },
+    {
+      "id": "R-LOOKS-008",
+      "scope": "scoring",
+      "title": "6.5 分目前只有申报口径，博主当场否认",
+      "when": "来访者申报“素颜6分、状态好有6.5”",
+      "then": "博主不认可：现有语料中没有 6.5 档的锚点描述，需等新语料补齐后再定义。",
+      "confidence": "low",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7646730995613355327",
+          "quote": "咱俩卖的理由是素颜6分状态好有6.5。应该是吧？哥，咱俩可没6.5啊，素颜6分也没有。"
+        }
+      ],
+      "advisory": true,
+      "advisoryReason": "6.5 分只有来访者申报、博主当场否认（S-LOOKS-009 为 soft、op=none），既无锚点也无判定条件，不能进引擎。",
+      "claimType": "market-norm",
+      "claimTypeNote": "缺口记录而非断言：6.5 只有申报、无锚点。",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1,
+        "matrixAccounts": 0,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account"
+    },
+    {
+      "id": "R-LOOKS-009",
+      "scope": "scoring",
+      "title": "7 分 = 极高且必须原生未整",
+      "when": "申报值 >= 7",
+      "then": "申报 7 分时先核验原生脸：脸是否动过、要求捏鼻查看；确认纯天然后才认可 7 分档。语料没有给出「非原生时下调多少分」的数值，因此只做核验要求，不自动扣分。注意：7 分的**定义**（万里挑一/职业级/靠脸吃饭）在月老鳌烨矩阵内一致（aoye98 + aoye28 同品牌账号）；**是否给出 7 分**属博主即席口径，本条不采用任一口径做门槛。",
+      "confidence": "medium",
+      "conflict": true,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644902230331542826",
+          "quote": "全中国就你一个男生，你也不可能是7分。……你的脸有动过吗？是原生的吗？……你要说纯天然的，真的是有7分。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "subject.self_appearance",
+              "op": "gte",
+              "value": 7
+            },
+            {
+              "field": "subject.face_natural",
+              "op": "neq",
+              "value": "yes"
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "requireEvidence",
+            "text": "7 分档需要「原生脸」核验：当前申报为 7 分及以上，但面部状态不是原生未整，缺少支撑该档位的核验证据。"
+          },
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-009",
+            "severity": "warning",
+            "text": "该档位在语料中要求纯天然（未做过医美/整形）：如面部非原生，请补充原生状态照片，或按实际呈现重新评估；本项不自动下调分数。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-011"
+      ],
+      "conflictNote": "7 分可达性的口径差异（V3 全量统计，**同品牌两账号**，非独立双源）：aoye98 基本不给 7 分（「全中国就你一个男生，你也不可能是 7 分」）；aoye28 全库 1059 条转写中提到 7 分/七分 36 条，其中含给分表述 16 条（如 7524418845382151451「确实有差不多 7 分」、7533706165239205155「6.9 到 7」）、明确否定或压价 2 条（7532956052703153423「到不了七分」、7542225319797738778「你说你 7 分。6.5 比较好」）、把 7 分定义为职业级/万里挑一 6 条；同账号还说「办这活动上过 7 分的都很少」「7 分以后是无人区」。结论：7 分=万里挑一·职业级是机构内共识；某账号给不给 7 分属即席口径，本规则不判断可达性。",
+      "claimFlags": [
+        {
+          "claim": "7 分几乎不可达",
+          "level": "single-source",
+          "action": "text-only",
+          "singleAccount": true,
+          "note": "V3 全量统计后由「单例」修正为「机构内口径差异」：aoye98 几乎不给 7 分；aoye28（同品牌第二账号）36 条提及中 16 条含给分表述、2 条压价/否定、6 条定义型。定义（万里挑一/职业级）为机构内共识（非独立验证）；可达性不进入任何判定。"
+        }
+      ],
+      "claimType": "market-norm",
+      "claimTypeNote": "博主核验原生脸的判分流程（反复出现）；7 分可达性跨账号冲突不采用任一口径。",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account",
+      "matrixRepetition": {
+        "accounts": [
+          "aoye28"
+        ],
+        "evidence": [
+          {
+            "account": "aoye28",
+            "aweme_id": "7533706165239205155",
+            "quote": "就是颜值7分啥概念了？这是你的职业，这是你的饭碗，你靠脸吃饭的。"
+          }
+        ],
+        "note": "D29 对账：以下来源为月老鳌烨矩阵内复述/同一博主的第二账号（非独立来源），不计入 sources.accounts，也不得用于提级；仅记录\"该表述在机构内被复用\"。"
+      }
+    },
+    {
+      "id": "R-LOOKS-010",
+      "scope": "scoring",
+      "title": "8.5 分 = 国花国草",
+      "when": "讨论分数上限/明星颜值",
+      "then": "8.5 = 国花国草（娱乐圈级别，S-LOOKS-013）；aoye28 入库后新增定义「一千万个人里出一个的颜值」。单条直播闲聊语境 + 定义型表述，本规则不参与计算，只作参考条目。",
+      "confidence": "low",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7661209960478444827",
+          "quote": "娱乐圈女明星谁能上8.5？8.5就是国花国草。"
+        }
+      ],
+      "advisory": true,
+      "advisoryReason": "8.5 只有直播闲聊语境（aoye98「国花国草」+ aoye28「一千万个人里出一个」），属定义型/修辞型表述，无可计算阈值；不参与判定。",
+      "confidenceNote": "审计 P0-5/P0-6：单例/单条语境，降为 low 并转为 advisory，不参与计算。",
+      "claimType": "market-norm",
+      "claimTypeNote": "8.5 定义为博主口径（单条闲聊 + aoye28 定义型表述），非行业标准。",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account",
+      "matrixRepetition": {
+        "accounts": [
+          "aoye28"
+        ],
+        "evidence": [
+          {
+            "account": "aoye28",
+            "aweme_id": "7657152085863058734",
+            "quote": "8.5上就是国花嘛，就一千万个人里出一个的颜值。"
+          }
+        ],
+        "note": "D29 对账：以下来源为月老鳌烨矩阵内复述/同一博主的第二账号（非独立来源），不计入 sources.accounts，也不得用于提级；仅记录\"该表述在机构内被复用\"。"
+      }
+    },
+    {
+      "id": "R-LOOKS-011",
+      "scope": "scoring",
+      "title": "男女两套标尺：等效待遇相差约 0.8 分",
+      "when": "判断某分数对男女意味着什么",
+      "then": "男女两套标尺：女生 4.5 以上、干净就能收到搭讪；男生要同等待遇需高约 0.8 分（≈5.3，S-LOOKS-014）。「0.8 分差」在语料中只有 1 条直接支撑，属参考口径，不用于自动加减分。",
+      "confidence": "medium",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7641867771478822185",
+          "quote": "女生我觉得4.5以上干净一点就能收到搭讪（原文：按理按时）。男生起码得高0.8分。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7639325798792482102",
+          "quote": "男女对颜值的要求不一样，咱俩不要带情绪说话。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7660054519484591217",
+          "quote": "100个女生，你起码能找到30个好看的女生……但是100个男生中5个（看到帅的）……帅个就是20里面的挑一个。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "field": "appearance.final.mid",
+          "op": "between",
+          "value": [
+            4.5,
+            5.3
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-011",
+            "severity": "info",
+            "text": "男女颜值标尺不同：同等市场反馈（被主动搭讪/示好）下，男性通常需要比女性高约 0.8 分；跨性别比较时不要直接换算。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-014",
+        "S-LOOKS-015"
+      ],
+      "internalNote": "触发窗口 [4.5, 5.3] 是「女生 4.5 搭讪线（S-LOOKS-014）+ 0.8 单源差值」的推算合成窗口，不是颜值分档边界；本条只出 advice，不参与分档与 clamp。S-LOOKS-014 已降 soft。",
+      "claimFlags": [
+        {
+          "claim": "男生要同等待遇需高约 0.8 分（≈5.3）",
+          "level": "single-source",
+          "action": "text-only",
+          "singleAccount": true,
+          "note": "仅 aoye98/7641867771478822185 一条；S-LOOKS-014 已降 soft。只出现在 advice 与解释文案里，不参与分档/clamp。"
+        },
+        {
+          "claim": "女 4.6≈前 36-37%、男 4.6≈前 22-23%",
+          "level": "unsupported-by-own-evidence",
+          "action": "deleted",
+          "note": "该断言不在本规则引文内（库内出处 aoye98/7647499397491674404、aoye98/7655981256437517602，均为 aoye98 单账号）；且 D6 禁止单点精确名次——故选择删除而非补引。位次一律区间口径（约前 5%-20%）。"
+        }
+      ],
+      "claimType": "market-norm",
+      "claimTypeNote": "男女标尺差异的当场口径；0.8 单源，只作 advice。",
+      "sources": {
+        "transcripts": 3,
+        "accounts": 2,
+        "matrixAccounts": 0,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "cross-account"
+    },
+    {
+      "id": "R-LOOKS-012",
+      "scope": "scoring",
+      "title": "身高低于 1 米 75 的男性不得进入 6 分档（概念口径，不设数值上限）",
+      "when": "男性评估对象身高偏矮",
+      "then": "男性身高低于 1 米 75 时，语料口径不让其进入 6 分档（「1 米 75 咱就不敢说 6 分以上了」，S-HEIGHT-003）。**不设统一数值上限**：审计已证「5.7 封顶」是单例落点，且被反例「1 米 7 男拿 5.8」直接反驳（S-HEIGHT-009）。引擎只输出「不得 ≥6 分档」的 flag 与提示，区间上下界仍由自评 + 照片轨道综合决定。",
+      "confidence": "high",
+      "conflict": true,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7639291023436369190",
+          "quote": "1米75咱就不敢说6分以上了……就每个人的颜值都会被身高所封印。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7627766660082953083",
+          "quote": "不论你的面部美学分数有多高，上限永远逃不掉身高的一个制裁。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7652318711637970239",
+          "quote": "你五官挺好打的，上镜丑三分呀，就是身高一点拖后腿。",
+          "note": "回听确认：该来访者实际身高 1.69-1.71 米（原始转写的身高数字粘连，属 noise 名单 height_merge），本条只取「身高拖后腿」的概念，不取该条的分数与数字。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "subject.gender",
+              "op": "eq",
+              "value": "male"
+            },
+            {
+              "field": "subject.height_cm",
+              "op": "lt",
+              "value": 175
+            },
+            {
+              "field": "appearance.final.high",
+              "op": "gte",
+              "value": 6
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "flag",
+            "text": "男性身高低于 1 米 75：按语料口径不得输出 6 分及以上档位描述（身高封印封的是 6 分档，不是某个固定上限分）。"
+          },
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-012",
+            "severity": "info",
+            "text": "男性身高低于 1 米 75 时，语料口径不进入 6 分档；具体区间仍按自评与照片综合给出，不设统一数值上限。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-HEIGHT-003",
+        "S-HEIGHT-009",
+        "S-LOOKS-008"
+      ],
+      "confidenceNote": "封顶概念有 2 个账号支持；数值上限已在 v2.1 移除（原 5.7 单例、原保守值 5.5 亦为推算），改为概念 flag。",
+      "internalNote": "回听记录（2026-10-05，mlx-whisper large-v3-turbo 重转写 /tmp/relisten）：(1)「1米75咱就不敢说6分以上了」在两次转写中稳定复现；(2) 分数区首次为「我给你打5,5,5,5,5.7」、回听为「我给你打5.6 / 5.7」，数字不稳定；(3) 结合审计反例（1 米 7 拿 5.8），5.7 与 5.5 均不得作为封顶值：最终改为 flag「不得 ≥6 分档」。",
+      "conflictNote": "S-HEIGHT-009：5.7 是单例落点且被「1 米 7 男拿 5.8」反驳；S-HEIGHT-003 只给「<175cm → 6 分封印」的概念口径。两者并存，本条只用概念、不用数值上限。",
+      "claimFlags": [
+        {
+          "claim": "上界按 5.7 收敛（单例）",
+          "level": "single-source",
+          "action": "deleted",
+          "note": "5.7 为单例落点，来源转写存在数字粘连（回听两次分别得「5,5,5,5,5.7」与「5.6/5.7」），且被「1 米 7 男拿 5.8」反驳（S-HEIGHT-009）。v2.1 已删除全部数值 clamp，改为 flag「不得输出 ≥6 分档」；当前 machine 内无任何封顶数字。 V3 全库复检：5.7 没有新的支持来源（全库仅 47902271366/7670127518922390592 一条来访者自述「最多5.5.6，5.7分」），确认继续删除数值上限。"
+        }
+      ],
+      "claimType": "market-norm",
+      "claimTypeNote": "身高封印的当场口径（「1 米 75 不给 6 分以上」）；不设数值上限。",
+      "sources": {
+        "transcripts": 3,
+        "accounts": 2,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "cross-account",
+      "matrixRepetition": {
+        "accounts": [
+          "aoye28"
+        ],
+        "evidence": [
+          {
+            "account": "aoye28",
+            "aweme_id": "7562185009072115002",
+            "quote": "咱每个人的颜值都会被身高封印。……我办了17场颜值打分局，男生第一名没有1米85以下的，女生第一名没有1米70以下的。"
+          }
+        ],
+        "note": "V3 追加的 aoye28 证据属同品牌矩阵来源；本条 cross-account 来自 aoye98 + 47590488570（非本次新增）。"
+      }
+    },
+    {
+      "id": "R-LOOKS-013",
+      "scope": "scoring",
+      "title": "女性身高：多套口径并存，不作为独立门槛",
+      "when": "女性评估对象身高明显偏高或偏矮",
+      "then": "女性身高在完整语料里仍是多口径并存，无法收敛为单一门槛——各口径与语境：168（高个子专场报名线，event-rule 口径）、170 以上（aoye28「办了 17 场颜值打分局，女生第一名没有 1 米 70 以下的」）、172/173/174（aoye28 与矩阵号 aoye184 称「黄金身高」，属机构内复述）、179（aoye98 单例「超模身高、优势」）、162（aoye98 单例「稍微一丢丢减分」）。结论：继续**不设身高门槛**，只作中性提示；若产品需要，只能按活动口径（event-rule）单独展示 168 这条活动线。",
+      "confidence": "medium",
+      "conflict": true,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7661209960478444827",
+          "quote": "1米79是超模身高呀？……优势，绝对是优势，百分之百是优势，别胖就行。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7647499397491674404",
+          "quote": "身高稍微一丢丢减分，干净五分不错啊。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "field": "subject.gender",
+          "op": "eq",
+          "value": "female"
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-013",
+            "severity": "info",
+            "text": "女性身高的语料口径分散（小幅减分 / 期待线 / 黄金身高 / 优势线等多个版本并存且互相冲突），本系统不把身高当作女性颜值的独立门槛，只作为整体呈现的一部分参考。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-HEIGHT-008"
+      ],
+      "conflictNote": "S-HEIGHT-008 冲突（V3 复核后仍无法收敛）：162 / 165 / 168 / 170 / 172 / 173 / 174 / 179 多口径并存，其中 168 是活动报名线（event-rule）、172-174 为机构矩阵内复述（非独立来源）、162 与 179 为 aoye98 单例。按 D22 第 2 条不进入硬判定。",
+      "internalNote": "D22 第 2 条：命中的 S-HEIGHT-008 有未解决冲突，故从「162/179 双阈值」改为仅按性别触发的 advice，数字只出现在解释文案里，不做门槛。",
+      "claimType": "market-norm",
+      "claimTypeNote": "女性身高多口径并存，本规则只作中性提示。",
+      "sources": {
+        "transcripts": 2,
+        "accounts": 1,
+        "matrixAccounts": 2,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account",
+      "matrixRepetition": {
+        "accounts": [
+          "aoye28",
+          "aoye184"
+        ],
+        "evidence": [
+          {
+            "account": "aoye28",
+            "aweme_id": "7518504314550095155",
+            "quote": "1米72女生真的是黄金身高。"
+          },
+          {
+            "account": "aoye28",
+            "aweme_id": "7562185009072115002",
+            "quote": "女生第一名没有1米70以下的。"
+          },
+          {
+            "account": "aoye184",
+            "aweme_id": "7691940350286474943",
+            "quote": "170，105。哇，黄金身高，黄金体重。"
+          }
+        ],
+        "note": "D29 对账：以下来源为月老鳌烨矩阵内复述/同一博主的第二账号（非独立来源），不计入 sources.accounts，也不得用于提级；仅记录\"该表述在机构内被复用\"。"
+      }
+    },
+    {
+      "id": "R-LOOKS-014",
+      "scope": "scoring",
+      "title": "判分按结构清单逐项看：三庭/眉眼唇/牙弓/头肩比/折叠度/颅面/脸型/鼻",
+      "when": "对着照片或直播画面打分",
+      "then": "判分按结构清单逐项核验：三庭、眉眼唇、牙弓、头肩比、面部折叠度、颅面比例；口径是「单项不必出色、组合无短板」。语料未给单项扣分数值，只登记复核项，不自动扣分。",
+      "confidence": "medium",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "不能有硬伤，就是三庭分布，比方说它的眉眼唇，它的牙弓比例，头肩比，面部折叠度，不需要多么出色，都组合起来没问题，这就叫5.5了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7638930281780596006",
+          "quote": "不论是三庭分布，还是她的头肩比，还是她的颅面比例……牙弓比例，都很好。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7647499397491674404",
+          "quote": "面相挺好的，就三庭分布，眉眼唇，五官比例，颅面比例，五官的量感也挺足。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7644902230331542826",
+          "quote": "细看还行，就您的三庭比例，脸型大小，你的鼻子是你自己的吗？"
+        }
+      ],
+      "machine": {
+        "when": {
+          "any": [
+            {
+              "field": "photo.face.three_courts",
+              "op": "nin",
+              "value": [
+                "三段均衡",
+                "无法判断"
+              ]
+            },
+            {
+              "field": "photo.face.features_balance",
+              "op": "nin",
+              "value": [
+                "眉眼唇组合协调",
+                "无法判断"
+              ]
+            },
+            {
+              "field": "photo.face.dental_arch",
+              "op": "nin",
+              "value": [
+                "牙列整齐",
+                "无法判断"
+              ]
+            },
+            {
+              "field": "photo.face.head_shoulder_ratio",
+              "op": "nin",
+              "value": [
+                "头肩比例协调",
+                "无法判断"
+              ]
+            },
+            {
+              "field": "photo.face.facial_fold",
+              "op": "nin",
+              "value": [
+                "折叠度中等",
+                "无法判断"
+              ]
+            },
+            {
+              "field": "photo.face.craniofacial_ratio",
+              "op": "nin",
+              "value": [
+                "颅面比例适中",
+                "无法判断"
+              ]
+            },
+            {
+              "field": "subject.photo_quality",
+              "op": "in",
+              "value": [
+                "light",
+                "heavy"
+              ]
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "flag",
+            "text": "五官结构或照片条件出现需要人工复核的信号（结构短板，或照片经美颜/调光处理）。"
+          },
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-014",
+            "severity": "info",
+            "text": "五官结构按博主自定评分表的口径逐项核验：三庭、眉眼唇、牙弓、头肩比、面部折叠度、颅面比例（「单项不必出色、组合无短板」）。语料没有给出单项扣分数值，因此只登记复核项，不自动扣分。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-006"
+      ],
+      "note": "photo.* 字段已在 facts.json 声明，但截至本批 pipeline.buildFacts 尚未注入 photo.*；本规则额外挂了 subject.photo_quality（已接线）作为兜底分支，保证当前也可触发；photo 维度接入后可移除兜底分支。全部触发条件不使用任何自造数字阈值。",
+      "claimType": "market-norm",
+      "claimTypeNote": "判分结构清单是博主自定的**评分表口径**（三庭/眉眼唇/牙弓/头肩比/折叠度/颅面），不是市场定律。",
+      "sources": {
+        "transcripts": 4,
+        "accounts": 1,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account",
+      "matrixRepetition": {
+        "accounts": [
+          "aoye28"
+        ],
+        "evidence": [
+          {
+            "account": "aoye28",
+            "aweme_id": "7644496627729829174",
+            "quote": "五分的折叠度、皮肉的贴合度、三屏分布、眉眼唇。"
+          }
+        ],
+        "note": "D29 对账：以下来源为月老鳌烨矩阵内复述/同一博主的第二账号（非独立来源），不计入 sources.accounts，也不得用于提级；仅记录\"该表述在机构内被复用\"。"
+      }
+    },
+    {
+      "id": "R-LOOKS-015",
+      "scope": "scoring",
+      "title": "侧脸是独立加分项",
+      "when": "能看到侧脸角度时",
+      "then": "山根挺、下颌线清晰、侧脸呈“平行四边形”会被单独表扬，作为正面之外的加分证据。",
+      "confidence": "low",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7646730995613355327",
+          "quote": "但侧脸有，侧脸有，山根很挺。而且你看，他的侧脸是一个平行四边形。侧脸好看啊，下颌线（原文：价格线）也很清晰。"
+        }
+      ],
+      "advisory": true,
+      "advisoryReason": "侧脸/山根是照片观察项（photo.face.profile / photo.face.nose），语料只有正向描述、没有加分值；且 photo.* 未接入 facts，无法执行。",
+      "claimType": "market-norm",
+      "claimTypeNote": "单条正向描述（侧脸/山根），只作观察项。",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1,
+        "matrixAccounts": 0,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account"
+    },
+    {
+      "id": "R-LOOKS-016",
+      "scope": "scoring",
+      "title": "皮肤、身材、穿搭是 5.5 档的并列条件",
+      "when": "五官已达“无硬伤”但其他项缺失",
+      "then": "会穿搭、身材好、皮肤好缺一不可，否则达不到 5.5；皮肤好会被单独表扬。",
+      "confidence": "medium",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "光脚1米80，五官不能有硬伤，会穿搭，身材好，皮肤好，基本上就算5.5分了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7667915732088556841",
+          "quote": "是好看的啊，有6分左右有，差不多。皮肤也很好呀。"
+        }
+      ],
+      "advisory": true,
+      "advisoryReason": "该条是三个照片维度的合取（photo.face.skin / photo.body.figure / photo.style.grooming），需要照片轨道数据；语料未给各项分值，只作 5.5 档并列条件说明（与 R-LOOKS-005 同源，建议 Lead 决定是否合并）。",
+      "confidenceNote": "两段引文来自同一账号同一场直播（list 里 5.5 checklist 与皮肤表扬），按“同场次不重复计数”从 medium 保守处理。",
+      "claimType": "market-norm",
+      "claimTypeNote": "5.5 档并列条件属**评分表口径**（皮肤/身材/穿搭）。",
+      "sources": {
+        "transcripts": 2,
+        "accounts": 1,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account",
+      "matrixRepetition": {
+        "accounts": [
+          "aoye184"
+        ],
+        "evidence": [
+          {
+            "account": "aoye184",
+            "aweme_id": "7691940350286474943",
+            "quote": "哇，身材也很好呀。姐妹，咱这不止5分啊。"
+          }
+        ],
+        "note": "D29 对账：以下来源为月老鳌烨矩阵内复述/同一博主的第二账号（非独立来源），不计入 sources.accounts，也不得用于提级；仅记录\"该表述在机构内被复用\"。"
+      }
+    },
+    {
+      "id": "R-LOOKS-017",
+      "scope": "scoring",
+      "title": "女性颜值权重：40% 体态自信 + 20% 身材穿衣 + 15% 发型妆容，五官排最后",
+      "when": "评估女性颜值、给提升建议时",
+      "then": "女性颜值权重（S-LOOKS-016）：自信与体态 40%、身材比例与穿衣搭配 20%、发型与妆容 15%，其余才轮到五官。注意：「可改变项合计 75%」是 40+20+15 的派生推算（S-LOOKS-017 标 derived），禁止进入判定与对外文案。",
+      "confidence": "low",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7682010628554231090",
+          "quote": "40%靠的是自信和体态，20%靠的是身材比例和穿衣的搭配，15%是来自于我们的发型还有妆容，剩下的才轮得到自己的五官。……五官呢，它是天生的，但是我们的体态还有审美啊、精神面貌都是可以通过后天来改变的。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "field": "subject.gender",
+          "op": "eq",
+          "value": "female"
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-017",
+            "severity": "info",
+            "text": "女性颜值的权重口径：自信与体态 40%、身材比例与穿衣搭配 20%、发型与妆容 15%，其余才轮到五官——权重最高的几项都在可通过打理改善的范围内。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-016"
+      ],
+      "claimType": "market-norm",
+      "claimTypeNote": "机构自制框架（40/20/15 权重），来自南昌矩阵号单条视频、未互证；显示为「评分表口径」，不得表述为市场定律。判定理由：内容是审美权重定义而非招募话术，故不归 marketing，但因单源只作展示性 advice。",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1,
+        "matrixAccounts": 0,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account"
+    },
+    {
+      "id": "R-LOOKS-018",
+      "scope": "scoring",
+      "title": "素颜只作申报口径，判分以画面实际呈现为准",
+      "when": "来访者以“素颜X分”申报",
+      "then": "博主按画面里的实际状态复核并给出分数，“素颜”不自动加分；化妆（含画眉毛）会被计入女性的呈现状态。",
+      "confidence": "medium",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638137159593053486",
+          "quote": "咱是素颜5.5分。对。咱这素颜可不是5.5分，姐妹。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7646730995613355327",
+          "quote": "咱俩可没6.5啊，素颜6分也没有。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7648982262922382646",
+          "quote": "我如果不化妆的话，我可能就是三分到三点五分，因为我没有眉毛。我眉毛是化的。"
+        }
+      ],
+      "advisory": true,
+      "advisoryReason": "素颜是申报口径而非判定条件；照片侧对应 photo.style.makeup（未接入 facts），且语料没有素颜与上妆的分值差，无法执行。",
+      "claimType": "market-norm",
+      "claimTypeNote": "素颜申报 ≠ 判分依据，属评分流程说明。",
+      "sources": {
+        "transcripts": 3,
+        "accounts": 1,
+        "matrixAccounts": 0,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account"
+    },
+    {
+      "id": "R-LOOKS-019",
+      "scope": "scoring",
+      "title": "照片/镜头条件会系统性改变判分结果",
+      "when": "在直播或视频里评分",
+      "then": "镜头会放大五官细节，灯光与滤镜会让判分失真：博主会先要求关顶光、调美颜再定分。低估量级有两个账号口径：aoye28 直播明文「给所有开摄像头的人加 0.5」；aoye98 单例调整后回弹约 0.2（5.0-5.1 → 5.2-5.3）。综合区间约 0.2-0.5（博主自述口径，soft，**不进入任何自动计算**）。",
+      "confidence": "high",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420044572282158",
+          "quote": "全地球人都不上镜，只要上镜，你的五官的缺点全部会放大……明星为什么能当明星了，人家能扛得住电影镜头。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7641867771478822185",
+          "quote": "你把头顶的光关了，然后的话把美颜调对，5.2、5.3有了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7649352622561824019",
+          "quote": "上镜丑三分。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7682020548599172403",
+          "quote": "会拍照，找角度，会开美颜，你觉得自己就是顶美了吗？"
+        }
+      ],
+      "machine": {
+        "when": {
+          "field": "subject.photo_quality",
+          "op": "in",
+          "value": [
+            "light",
+            "heavy"
+          ]
+        },
+        "then": [
+          {
+            "kind": "flag",
+            "text": "照片经过美颜处理，判分可能低估真实呈现。"
+          },
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-019",
+            "severity": "info",
+            "text": "照片/镜头可能低估真实呈现：建议提供自然光下的正脸原相机照后再复核；本项不自动加减分。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-020"
+      ],
+      "claimFlags": [
+        {
+          "claim": "镜头/照片低估真实呈现的幅度（原稿曾写 0.2-0.3 后删除）",
+          "level": "single-brand",
+          "action": "evidence-added",
+          "note": "V3 新证据：aoye28/7533355062840610082「反正给所有开摄像头的人加0.5」（已回听复核）；与 aoye98 单例回弹 0.2 属**同一品牌两个账号**的口径，不构成独立双源。量级 0.2-0.5 只作定性参考，不进 machine 阈值。"
+        }
+      ],
+      "claimType": "market-norm",
+      "claimTypeNote": "镜头/灯光/美颜影响判分的观察（2 账号），属评估方法学断言。",
+      "sources": {
+        "transcripts": 4,
+        "accounts": 2,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "cross-account",
+      "matrixRepetition": {
+        "accounts": [
+          "aoye28"
+        ],
+        "evidence": [
+          {
+            "account": "aoye28",
+            "aweme_id": "7533355062840610082",
+            "quote": "反正给所有开摄像头的人加0.5，开摄像头怼脸会把人变丑。"
+          }
+        ],
+        "note": "V3 追加的 aoye28「加0.5」证据属同品牌矩阵来源（已回听复核数字，但不计独立账号）；本条 cross-account 来自 aoye98 + 48854385344（非本次新增）。"
+      }
+    },
+    {
+      "id": "R-LOOKS-020",
+      "scope": "scoring",
+      "title": "性格/气质可在面部美学分上叠加为综合分",
+      "when": "来访者面部分已定、性格气质突出",
+      "then": "“纯面部美学”分之外可叠加性格/气质加成——这是单例示例（面部 5.8-5.9 叠成综合 6.2-6.3），**只作展示、不作公式**，也不进入任何自动计算。",
+      "confidence": "low",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7645562474632056127",
+          "quote": "您的性格很好，性格加分的，纯面部美学5.8、5.9……加上性格我觉得有6.2、6.3。"
+        },
+        {
+          "account": "47590488570",
+          "aweme_id": "7615490775874664571",
+          "quote": "在相亲市场上最受欢迎的永远是外在形象好的男生和那些温柔的能够给别人带来好的情感体验的女生。"
+        }
+      ],
+      "advisory": true,
+      "advisoryReason": "性格/气质的叠加只有单例（S-LOOKS-018 为 soft，面部 5.8-5.9 → 综合 6.2-6.3），属个案外推，不能进引擎。",
+      "confidenceNote": "审计 P0-5/P0-6：单例/单条语境，降为 low 并转为 advisory，不参与计算。",
+      "claimFlags": [
+        {
+          "claim": "面部 5.8-5.9 叠成综合 6.2-6.3",
+          "level": "single-source",
+          "action": "text-only",
+          "singleAccount": true,
+          "note": "仅 aoye98/7645562474632056127 一条（S-LOOKS-018 soft）；规则为 advisory、只作示例展示，明确不作叠加公式（不改写为任何算式）。"
+        }
+      ],
+      "claimType": "market-norm",
+      "claimTypeNote": "单例示例（面部 5.8-5.9 → 6.2-6.3），advisory、不作公式。",
+      "sources": {
+        "transcripts": 2,
+        "accounts": 2,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "cross-account",
+      "matrixRepetition": {
+        "accounts": [
+          "38744562015"
+        ],
+        "evidence": [
+          {
+            "account": "38744562015",
+            "aweme_id": "7686875132316632689",
+            "quote": "我觉得有4.5，面相很好。……性格不错，加分。"
+          }
+        ],
+        "note": "D29 对账：以下来源为月老鳌烨矩阵内复述/同一博主的第二账号（非独立来源），不计入 sources.accounts，也不得用于提级；仅记录\"该表述在机构内被复用\"。"
+      }
+    },
+    {
+      "id": "R-LOOKS-021",
+      "scope": "matching",
+      "title": "顶美级颜值可突破其他维度的门槛",
+      "when": "女性颜值达到顶美级",
+      "then": "原本要求家境/全日制学历的对象会主动降低门槛（A8 男生愿意放宽家境与学历要求）；但顶美不只看五官，还看皮肤、体态、身材比例、穿衣审美与整体状态。",
+      "confidence": "low",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7682020548599172403",
+          "quote": "不少A8的男生，他是愿意为了真正的顶美，主动去降低原来的择偶门槛……原来要求女方必须是全日制本科，遇到顶美以后，就算你是专科本也是没有关系的。……顶美也不是说只是你的五官漂亮，还是要看皮肤状态、体态、身材的比例、穿衣的审美，以及整个人呈现出来的状态。"
+        }
+      ],
+      "advisory": true,
+      "advisoryReason": "单条语料 + 与 R-DIM-012 / R-MATCH-021 同义重复（审计 P0-4 顶美豁免三重复），S-LOOKS-021 为 soft 且无阈值；本规则只作参考条目，建议由 Lead 合并为单 id。",
+      "confidenceNote": "审计 P0-5/P0-6：单例/单条语境，降为 low 并转为 advisory，不参与计算。",
+      "claimType": "marketing",
+      "claimSource": "鳌烨传媒·南昌矩阵号（48854385344）《顶美确实能突破择偶门槛》",
+      "claimTypeNote": "判定理由：① 单条、来自城市矩阵号；② 内容为「顶美可让 A8 男生降低门槛」，天然鼓励用户为颜值投入，无法排除获客动机（D27 第 1 条默认 marketing）；③ 已为 advisory、不参与计算，符合 D25「marketing 不得作为规律输出」。",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1,
+        "matrixAccounts": 0,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account"
+    },
+    {
+      "id": "R-LOOKS-022",
+      "scope": "advice",
+      "title": "低分者提升路径：先修可改变项（干净/穿搭/发型/皮肤/体态）",
+      "when": "颜值分偏低、需要提升建议",
+      "then": "低分侧可提升项：干净整洁（洗头洗澡、避免头油体味口臭）、穿搭、发型、皮肤、体态与精神状态；女性口径下体态/穿搭/发型妆容的合计权重高于五官（S-LOOKS-016）。「干净→穿搭→皮肤→体态」的先后顺序是人工合成，非语料原话。",
+      "confidence": "medium",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "33349790582",
+          "aweme_id": "7685706222226330085",
+          "quote": "长相一般的，我可以靠打理，靠收拾，衣服换一换，头发理一理，见面那一刻都是可以加分的。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7681986355500453158",
+          "quote": "出门最好建议大家可以洗个头洗个澡……避免头油、体味、口臭这些，这样的话会大幅度的减分。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7682010628554231090",
+          "quote": "五官呢，它是天生的，但是我们的体态还有审美啊、精神面貌都是可以通过后天来改变的。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "any": [
+            {
+              "field": "subject.photo_quality",
+              "op": "in",
+              "value": [
+                "light",
+                "heavy"
+              ]
+            },
+            {
+              "field": "subject.admiration_freq",
+              "op": "eq",
+              "value": "rare"
+            },
+            {
+              "field": "subject.feedback_gap",
+              "op": "eq",
+              "value": "worse"
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-022",
+            "severity": "info",
+            "text": "提升优先级放在可改变项：干净整洁、穿搭、发型、皮肤管理、体态与精神状态；这些项在任何档位都能改善观感，且不依赖先天条件。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-016"
+      ],
+      "claimFlags": [
+        {
+          "claim": "可改变项权重占 75%",
+          "level": "unsupported",
+          "action": "deleted",
+          "note": "40%+20%+15% 的算术推导（S-LOOKS-017 标 derived），已在 v2 删除；现表述为「体态/穿搭/发型妆容合计权重高于五官」，不出现任何百分比。 V3 全库复检：仍未发现任何「75%」或可支撑该百分比的原话，确认删除。"
+        }
+      ],
+      "claimType": "market-norm",
+      "claimTypeNote": "可改变项提升建议（2 账号），非获客话术。",
+      "sources": {
+        "transcripts": 3,
+        "accounts": 2,
+        "matrixAccounts": 0,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "cross-account"
+    },
+    {
+      "id": "R-LOOKS-023",
+      "scope": "advice",
+      "title": "高分者的维持项：体重区间、发型适配、拍摄条件",
+      "when": "颜值分已达 5 分以上、要维持分数",
+      "then": "高分者维持项：体重区间管理、发型与脸型适配、拍摄条件（灯光/滤镜）。语料没有给出对应扣分数值，仅作为提醒项。",
+      "confidence": "medium",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7661209960478444827",
+          "quote": "1米79是超模身高呀？……优势，绝对是优势，百分之百是优势，别胖就行。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7646730995613355327",
+          "quote": "对，帅。这发型不适合你，帅。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7641867771478822185",
+          "quote": "你头顶是顶光，看我们专业的，你看我，我头顶从来都没光。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "all": [
+            {
+              "field": "appearance.final.high",
+              "op": "gte",
+              "value": 5
+            },
+            {
+              "field": "subject.photo_quality",
+              "op": "in",
+              "value": [
+                "light",
+                "heavy"
+              ]
+            }
+          ]
+        },
+        "then": [
+          {
+            "kind": "advice",
+            "id": "ADV-LOOKS-023",
+            "severity": "info",
+            "text": "高分档的维持项：体重区间与作息管理、发型与脸型适配、拍摄条件（自然光 + 原相机）。这三项会直接影响判分时的呈现效果。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-005"
+      ],
+      "claimType": "market-norm",
+      "claimTypeNote": "高分档维持项建议，来自当场点评。",
+      "sources": {
+        "transcripts": 3,
+        "accounts": 1,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account",
+      "matrixRepetition": {
+        "accounts": [
+          "78949694532"
+        ],
+        "evidence": [
+          {
+            "account": "78949694532",
+            "aweme_id": "7658960500626600441",
+            "quote": "男生太胖了，没人要，真的没人要。"
+          }
+        ],
+        "note": "D29 对账：以下来源为月老鳌烨矩阵内复述/同一博主的第二账号（非独立来源），不计入 sources.accounts，也不得用于提级；仅记录\"该表述在机构内被复用\"。"
+      }
+    },
+    {
+      "id": "R-LOOKS-024",
+      "scope": "demographic",
+      "title": "同一张脸有“广义分”与“地方分”两套口径",
+      "when": "给非一线城市的人打分",
+      "then": "存在“广义场（全国）6 分”与“狭义场（当地城市）6 分”两条线：同一人可能达不到广义 6 分，但达到珠海的 6 分。细则归 04-demographics.md。",
+      "confidence": "low",
+      "conflict": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7661210006183824678",
+          "quote": "兄弟我就这么说，广义场的6分他没达到，狭义场在珠海的6分能达到。"
+        }
+      ],
+      "advisory": true,
+      "advisoryReason": "「广义分 / 地方分」只有 1 条珠海语料（S-LOOKS-019 为 soft、无阈值）；审计建议每城 ≥5 例后再做，当前不参与计算。",
+      "claimType": "market-norm",
+      "claimTypeNote": "单条地方口径（珠海）未互证：advisory、不参与计算；因非招募场景且非「当地特点」卖点，暂不归 marketing，若后续出现城市差异卖点内容再改判。",
+      "sources": {
+        "transcripts": 1,
+        "accounts": 1,
+        "matrixAccounts": 0,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account"
+    },
+    {
+      "id": "R-LOOKS-025",
+      "scope": "scoring",
+      "title": "打分看排名不看绝对值，且用同龄人作比较池",
+      "when": "给出任意分数",
+      "then": "分数语义 = 同龄人池里的位次；所有位次结论一律按区间口径输出（约前 5%-20%），写明比较池（同性别、同龄段），并禁止输出单点名次与「保八成五」这类未解文本。",
+      "confidence": "medium",
+      "conflict": true,
+      "conflictNote": "5.3-5.5 的位次在不同场次口径不一（前 6-8 / 前 18-20），详见 md §10。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7654913599751654708",
+          "quote": "咱就是说95年，不要和年轻人比啊……95年里100个人里，这样不是前30，没问题。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7655981256437517602",
+          "quote": "4.6，100个男生里，第23，第22。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7643013486221593897",
+          "quote": "5.3、5.4，100个男生里第6，第7。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "差不多，5.2、5.3。100个男生里第18、19。"
+        }
+      ],
+      "machine": {
+        "when": {
+          "field": "appearance.final.mid",
+          "op": "exists"
+        },
+        "then": [
+          {
+            "kind": "text",
+            "text": "位次一律按区间口径输出（约前 5%-20%），禁止输出单点名次；比较池必须写明（同性别、同龄段）。"
+          }
+        ]
+      },
+      "standardRefs": [
+        "S-LOOKS-010"
+      ],
+      "claimType": "market-norm",
+      "claimTypeNote": "位次/比较池的评估方法学口径（D6 区间化）。",
+      "sources": {
+        "transcripts": 4,
+        "accounts": 1,
+        "matrixAccounts": 1,
+        "updatedAt": "2026-10-06"
+      },
+      "claimLevel": "single-account",
+      "matrixRepetition": {
+        "accounts": [
+          "aoye28"
+        ],
+        "evidence": [
+          {
+            "account": "aoye28",
+            "aweme_id": "7519977102901316873",
+            "quote": "5.5分是100个女生以前10，比90个女生都好看。"
+          }
+        ],
+        "note": "D29 对账：以下来源为月老鳌烨矩阵内复述/同一博主的第二账号（非独立来源），不计入 sources.accounts，也不得用于提级；仅记录\"该表述在机构内被复用\"。"
+      }
+    }
+  ],
+  "bands": [],
+  "glossary": [
+    {
+      "term": "颜值分",
+      "meaning": "博主对来访者外貌的 1-9 分档评分；判分本质是“100 个人里的位次”，男女各一套口径。",
+      "asrVariants": []
+    },
+    {
+      "term": "三庭",
+      "meaning": "面部上庭/中庭/下庭的比例，是判分清单里的第一项结构指标。",
+      "asrVariants": [
+        "三屏分布",
+        "三平分布",
+        "三挺比例"
+      ]
+    },
+    {
+      "term": "牙弓比例",
+      "meaning": "牙齿与前牙弓的排列比例，与眉眼唇并列被核验；低折叠度的牙弓会在镜头前放大缺陷。",
+      "asrVariants": [
+        "牙工比例"
+      ]
+    },
+    {
+      "term": "面部折叠度",
+      "meaning": "面部立体度的指标，与头肩比、颅面比例并列为博主的结构核验项。",
+      "asrVariants": []
+    },
+    {
+      "term": "原生脸",
+      "meaning": "未做过整容/医美、纯天然的脸；7 分档必须先通过“捏鼻+追问是否动过”的核验。",
+      "asrVariants": [
+        "纯天然"
+      ]
+    },
+    {
+      "term": "宿舍花/宿舍舍花",
+      "meaning": "小范围（一个宿舍 8 人）里有争议的漂亮程度，对应 4.7-4.9；无争议为 5 分出头。",
+      "asrVariants": [
+        "小舍花",
+        "宿舍设花",
+        "宿舍社会"
+      ]
+    },
+    {
+      "term": "舍草",
+      "meaning": "男生版的宿舍级帅哥，对应 4.7-4.9（约 100 个男生前 21-30）。",
+      "asrVariants": [
+        "宿舍色草",
+        "宿舍涉草"
+      ]
+    },
+    {
+      "term": "班花/班草",
+      "meaning": "班级级别的最高颜值：有争议的为 5.2-5.5，标准/无争议的为 6 分出头（百里挑一）。",
+      "asrVariants": [
+        "斑花",
+        "斑草"
+      ]
+    },
+    {
+      "term": "校花/校草",
+      "meaning": "校级级别：无争议的班花≈有争议的校花；无争议的校草对应 5.5 以上口径（存冲突）。",
+      "asrVariants": [
+        "社草",
+        "涉草",
+        "晓草"
+      ]
+    },
+    {
+      "term": "国花/国草",
+      "meaning": "8.5 分，娱乐圈女明星级别。",
+      "asrVariants": [
+        "国花国草"
+      ]
+    },
+    {
+      "term": "颜值红利",
+      "meaning": "颜值达到 5.5 分后在择偶/社交中获得的额外优势（“5.5 分就是已经能吃到颜值红利了”）。",
+      "asrVariants": []
+    },
+    {
+      "term": "上镜丑三分",
+      "meaning": "直播/视频画面会放大五官缺点，压低观感；博主据此提示“本人比镜头里更好看”。",
+      "asrVariants": []
+    },
+    {
+      "term": "广义分/地方分",
+      "meaning": "“广义场”指全国口径，“狭义场”指当地城市口径；同一张脸可能达不到广义 6 分但达到当地 6 分。",
+      "asrVariants": [
+        "侠义场"
+      ]
+    },
+    {
+      "term": "偏态分布 / 中位数",
+      "meaning": "博主对颜值分布的口径：4 分是中位数，多数人集中在 3-4 分。",
+      "asrVariants": []
+    },
+    {
+      "term": "顶光 / 美颜",
+      "meaning": "直播画面中的两大判分干扰项：顶光毁比例、过度美颜“把人弄得畸形”。",
+      "asrVariants": []
+    }
+  ],
+  "composites": []
+}

@@ -1,0 +1,1812 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-10-05T16:10:00Z",
+  "purpose": "照片维度化分析规范（双轨评分第一轨）：视觉模型只输出可观察维度取值，禁止输出任何绝对颜值分；分数由确定性规则映射为区间，并与用户自评交叉校准。",
+  "corpus": {
+    "transcribed": 439,
+    "planned": 1511,
+    "coveragePct": 29.1,
+    "accountsUsed": [
+      "aoye98",
+      "47590488570",
+      "48854385344",
+      "33349790582"
+    ]
+  },
+  "shape": {
+    "note": "本文件为『对象』形式；每张照片的维度结果在 dimensions[] 中一条，字段见下。",
+    "dimensionFields": [
+      "id",
+      "name",
+      "appliesTo",
+      "photoRequirement",
+      "ask",
+      "values",
+      "valueMeaning",
+      "weight",
+      "bucket",
+      "observability",
+      "mapToScale",
+      "cannotJudgeFromPhoto",
+      "evidence"
+    ],
+    "outputContract": {
+      "description": "视觉模型每次只返回每个维度的 value（必须取自 values 枚举）+ confidence + reason；不得返回分数。区间由 rangeAssembly 计算。",
+      "modelOutput": {
+        "id": "face.three_courts",
+        "value": "均衡",
+        "confidence": "high",
+        "reason": "正脸照中三段长度目测接近"
+      },
+      "engineOutput": {
+        "id": "face.three_courts",
+        "value": "均衡",
+        "deltaToAppearance": 0,
+        "confidence": "medium"
+      }
+    }
+  },
+  "redLines": [
+    "禁止对种族、民族、地域出身、残障、疾病、体型进行任何评判或推测。",
+    "禁止输出绝对颜值分、禁止做人身评价（如‘丑/难看/没救’），只描述可观察的呈现项与可改善项。",
+    "禁止把『疑似医美/整容』当作贬损或事实断言；该字段仅用于提示“建议提供原生状态照片”，且必须标注‘存疑’。",
+    "涉及体重、皮肤、发量等敏感项时，只输出中性描述 + 可改善建议，禁止羞辱性措辞。",
+    "所有分数只能以区间 + 依据 + 置信度的形式出现，且必须注明“区间来自规则映射，不是绝对评分”。"
+  ],
+  "photoRequirements": {
+    "recommended": [
+      {
+        "id": "front_neutral",
+        "name": "正脸无表情照",
+        "purpose": "三庭、五官比例、脸型、眉眼对称、牙列",
+        "note": "原相机、无滤镜、镜头与眼同高、距脸 1 米以上"
+      },
+      {
+        "id": "side_45",
+        "name": "45°侧脸照",
+        "purpose": "鼻型、侧脸轮廓、下颌线",
+        "note": "自然光从侧面来，避免顶光"
+      },
+      {
+        "id": "half_body",
+        "name": "半身正面照",
+        "purpose": "头肩比、身材比例、穿搭、体态",
+        "note": "含肩到胯，避免俯拍"
+      },
+      {
+        "id": "full_body",
+        "name": "全身照（可选）",
+        "purpose": "身高观感、身材比例、体态",
+        "note": "平视、距 2.5 米以上"
+      }
+    ],
+    "rules": [
+      "同一组照片必须是同一时期、同一体型状态（避免体重变化混判）。",
+      "优先原相机直出；使用滤镜/美颜的照片只能作为降级证据。",
+      "戴眼镜者可保留（不影响眼型判断时），但需额外提供一张摘镜照用于眉眼对称判断。"
+    ],
+    "selfReportFields": [
+      "身高(cm)",
+      "体重(kg)",
+      "年龄段",
+      "性别",
+      "是否近期体重有明显变化",
+      "是否做过医美/正畸（可选，允许拒答）"
+    ]
+  },
+  "qualityGates": [
+    {
+      "id": "QG-01",
+      "name": "重度美颜/滤镜（磨皮、瘦脸、大眼、漂白失真）",
+      "detect": "皮肤纹理消失、脸型边缘扭曲、五官比例异常、白到无层次",
+      "action": "reject",
+      "handling": "拒绝据此给区间；只输出“画面失真、无法可靠判断”的维度 + 提示重传原相机照片。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420044572282158",
+          "quote": "这个美颜把人会感觉弄得会畸形。"
+        }
+      ]
+    },
+    {
+      "id": "QG-02",
+      "name": "光源异常/顶光/逆光/过曝/欠曝",
+      "detect": "头顶强光、阴阳脸、绿光/蓝光、面部高光溢出或全黑",
+      "action": "downgrade",
+      "handling": "降级：仅保留不受光影响的维度（发型、穿搭、体态）；提示调光后重传；语料中博主会先要求关灯/调光再定分（5.0-5.1 → 5.2-5.3）。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638930281780596006",
+          "quote": "你这个光不好，怎么一道绿光在你脸上？蓝光。电脑。把电脑的光关一下，这光不好。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7641867771478822185",
+          "quote": "你把头顶的光关了，然后的话把美颜调对，5.2、5.3有了。"
+        }
+      ]
+    },
+    {
+      "id": "QG-03",
+      "name": "面部遮挡（口罩、墨镜、手/手机挡脸、刘海遮眉眼）",
+      "detect": "眉眼/鼻/口任一区域被遮住超过 1/3",
+      "action": "retake",
+      "handling": "被遮部位对应维度一律返回“无法判断”，其余维度可继续；提示撩起刘海/摘口罩重拍。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7646730995613355327",
+          "quote": "对。哎，你把刘海撩起来吗？"
+        }
+      ]
+    },
+    {
+      "id": "QG-04",
+      "name": "多人合影",
+      "detect": "画面内有 ≥2 张可识别人脸",
+      "action": "reject",
+      "handling": "拒判：无法确定评估对象；提示上传单人照。（工程约束，语料无对应条目）",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638544427358653715",
+          "quote": "朋友和朋友时期有时候会有相对的滤镜，所以这个时候把陌生人对你颜值的评价更真实更客观一点。"
+        }
+      ]
+    },
+    {
+      "id": "QG-05",
+      "name": "角度过大（俯仰角 >30° 或侧转 >45°）",
+      "detect": "俯拍/仰拍明显、只剩侧脸轮廓",
+      "action": "downgrade",
+      "handling": "角度相关维度（三庭、脸型、头肩比）返回“无法判断”；仅侧脸照只能判侧脸轮廓与鼻型。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7635582435148696859",
+          "quote": "5分就是宿舍的草（原文：宿舍色草）。某一个角度看是好看的，宿舍的草。"
+        }
+      ]
+    },
+    {
+      "id": "QG-06",
+      "name": "画面过远/分辨率过低/人脸占比过小",
+      "detect": "人脸像素 < 200×200 或五官细节不可辨",
+      "action": "retake",
+      "handling": "提示重传；仅保留穿搭、体态、整体状态的粗略描述。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7641522903011314987",
+          "quote": "哦，本人应该会比这个更好看点。"
+        }
+      ]
+    },
+    {
+      "id": "QG-07",
+      "name": "镜头压低观感（上镜放大缺陷）",
+      "detect": "无特定画面特征；属于拍摄媒介的固有偏差",
+      "action": "downgrade",
+      "handling": "不拒判，但区间必须加宽并注明“视频/照片会放大五官缺点，真人通常优于镜头”。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7649352622561824019",
+          "quote": "上镜丑三分。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7636296553589706030",
+          "quote": "上镜丑三分啊，还是稍微善良一点啊。全地球人只要开摄像头就会变丑，是个地球人就会啊。"
+        }
+      ]
+    },
+    {
+      "id": "QG-08",
+      "name": "妆容/涂覆遮盖（厚妆、面具感、粉底反光）",
+      "detect": "肤色与颈部/手部差异明显、无毛孔纹理",
+      "action": "downgrade",
+      "handling": "降级：皮肤类维度改判“无法判断”，其余维度保留并标注“妆容影响”。",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7653065951604133154",
+          "quote": "看一下摄像头，脸上涂了那个东西，所以说看起来有点那个什么。"
+        }
+      ]
+    },
+    {
+      "id": "QG-09",
+      "name": "表情夸张（大笑、皱眉、做鬼脸）",
+      "detect": "面部肌肉明显牵拉、比例无法目测",
+      "action": "retake",
+      "handling": "仅保留“五官轮廓”的粗略描述；提示补一张无表情正脸。（工程约束）",
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420044572282158",
+          "quote": "全地球人都不上镜，只要上镜，你的五官的缺点全部会放大。"
+        }
+      ]
+    },
+    {
+      "id": "QG-10",
+      "name": "图片非本人/替照（无法技术判定）",
+      "detect": "—",
+      "action": "risk_flag",
+      "handling": "由人工抽检处理，不下结论。（工程约束）",
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7682020548599172403",
+          "quote": "会拍照，找角度，会开美颜，你觉得自己就是顶美了吗？"
+        }
+      ]
+    }
+  ],
+  "weightModel": {
+    "note": "语料只给出一套明确的女性权重，男性没有权重分解（男性用的是 checklist 门槛）。未列出的维度权重一律为 null，不做拍脑袋分配。",
+    "female": [
+      {
+        "bucket": "体态 / 自信 / 精神面貌",
+        "weight": 0.4,
+        "evidence": [
+          {
+            "account": "48854385344",
+            "aweme_id": "7682010628554231090",
+            "quote": "40%靠的是自信和体态，20%靠的是身材比例和穿衣的搭配，15%是来自于我们的发型还有妆容，剩下的才轮得到自己的五官。"
+          }
+        ]
+      },
+      {
+        "bucket": "身材比例 + 穿衣搭配",
+        "weight": 0.2,
+        "evidence": [
+          {
+            "account": "48854385344",
+            "aweme_id": "7682010628554231090",
+            "quote": "40%靠的是自信和体态，20%靠的是身材比例和穿衣的搭配，15%是来自于我们的发型还有妆容，剩下的才轮得到自己的五官。"
+          }
+        ]
+      },
+      {
+        "bucket": "发型 + 妆容",
+        "weight": 0.15,
+        "evidence": [
+          {
+            "account": "48854385344",
+            "aweme_id": "7682010628554231090",
+            "quote": "40%靠的是自信和体态，20%靠的是身材比例和穿衣的搭配，15%是来自于我们的发型还有妆容，剩下的才轮得到自己的五官。"
+          }
+        ]
+      },
+      {
+        "bucket": "五官（三庭/眉眼唇/牙弓/头肩比/折叠度/颅面/脸型/鼻）",
+        "weight": 0.25,
+        "evidence": [
+          {
+            "account": "48854385344",
+            "aweme_id": "7682010628554231090",
+            "quote": "40%靠的是自信和体态，20%靠的是身材比例和穿衣的搭配，15%是来自于我们的发型还有妆容，剩下的才轮得到自己的五官。"
+          }
+        ]
+      }
+    ],
+    "male": {
+      "status": "无语料权重分解",
+      "gates": [
+        "五官不能有硬伤（三庭/眉眼唇/牙弓/头肩比/面部折叠度组合无短板）",
+        "会穿搭",
+        "身材好",
+        "皮肤好",
+        "光脚 1 米 80（身高是硬上限）"
+      ],
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "光脚1米80，五官不能有硬伤，会穿搭，身材好，皮肤好，基本上就算5.5分了。"
+        }
+      ]
+    }
+  },
+  "rangeAssembly": {
+    "rule": "AI 不给分。区间由『自评起点 + 阈值门 + 身高封顶 + 画面条件加宽 + 低置信加成』五步确定性计算，禁止输出单个数字。",
+    "steps": [
+      "1) 起点区间：自评分 ± 0.5（自评本身是主观估计）。无自评则不输出区间，只输出维度描述。",
+      "2) 阈值门（gates）：5.5 checklist 全部满足（五官无硬伤、会穿搭、身材好、皮肤好；（男）光脚 1 米 80）时，上界可抬到 5.5-6.0。",
+      "3) 身高封顶（cap）：男性身高 <175cm 时上界 = min(上界, 5.7)（单例低置信）；封顶优先于自评申报值（语料：1 米 75 申报 6 分被否）。",
+      "4) 画面条件加宽：命中 QG-02/07/08 时，下界 -0.3、置信度降一档，并在报告注明『镜头/妆容可能低估』。",
+      "5) 低置信加成：仅当体态挺拔 + 状态鲜活被明确观察到时，上界 +0.3~+0.4（语料单例）。",
+      "6) 兜底：区间宽度 <0.5 时强制扩展到 0.5；所有无法判断的维度不参与计算，只计入 unresolved 列表。"
+    ],
+    "precedence": [
+      "硬红线（redLines）",
+      "拒判（QG-01/04）",
+      "身高封顶",
+      "画面条件加宽",
+      "阈值门",
+      "自评起点",
+      "低置信加成"
+    ],
+    "hardConstraints": [
+      "禁止输出单个数字分数",
+      "区间宽度默认 >=0.5 分",
+      "低置信维度不得单独推动区间移动",
+      "任一次输出必须带 basis 和 confidence",
+      "自评与封顶冲突时以封顶为准并明确告知"
+    ]
+  },
+  "divergencePolicy": {
+    "note": "自评分与规则区间的分歧处理；行为证据（被搭讪/被推荐资源）优先于自评分。",
+    "rules": [
+      {
+        "id": "DV-1",
+        "when": "自评分 > 区间上界 + 1.0",
+        "action": "标记 self_overestimate，输出『自评偏高，可能与滤镜/镜头或参照系偏差有关』，区间不变；建议补充原相机照片后复核。"
+      },
+      {
+        "id": "DV-2",
+        "when": "自评分 < 区间下界 − 1.0",
+        "action": "标记 self_underestimate，输出『自评偏低，可能受素颜/灯光/状态影响』，区间不变；建议在正常光线下补拍。"
+      },
+      {
+        "id": "DV-3",
+        "when": "|自评分 − 区间中值| ≤ 1.0",
+        "action": "视为一致，区间收窄为 自评分±0.25（不低于 0.5 宽），置信度上调一档。"
+      },
+      {
+        "id": "DV-4",
+        "when": "自评位次与『被搭讪频率/朋友是否推荐过异性资源』矛盾",
+        "action": "以行为证据为准，输出行为侧结论；提示自评参照系可能偏差。"
+      },
+      {
+        "id": "DV-5",
+        "when": "photoQuality = reject",
+        "action": "不输出区间；只输出可判断维度 + 重传指引；自评分仅原样展示。"
+      }
+    ],
+    "behaviorEvidence": [
+      {
+        "account": "aoye98",
+        "aweme_id": "7635582435148696859",
+        "quote": "就通过着装打扮，已经开始，朋友会给你推荐异性资源了。三四分没有人会给你推荐异性资源。"
+      }
+    ]
+  },
+  "selfAssessment": [
+    {
+      "id": "SA-1",
+      "question": "如果 1-9 分、0.5 分一档，你给自己打几分？",
+      "type": "number",
+      "options": null,
+      "use": "作为区间起点"
+    },
+    {
+      "id": "SA-2",
+      "question": "在你的同龄同性里，按 100 个人算，你大概排在第几档？",
+      "type": "enum",
+      "options": [
+        "前 3",
+        "前 10",
+        "前 20",
+        "前 40",
+        "中段（40-60）",
+        "后 40"
+      ],
+      "use": "与行为证据交叉验证"
+    },
+    {
+      "id": "SA-3",
+      "question": "过去一年，被陌生人或异性主动搭讪/明显示好的次数？",
+      "type": "enum",
+      "options": [
+        "0 次",
+        "1-2 次",
+        "3-5 次",
+        "5 次以上"
+      ],
+      "use": "对应『4.5 分以上就能收到搭讪』的女性口径"
+    },
+    {
+      "id": "SA-4",
+      "question": "别人主动夸你外形好看的频率？",
+      "type": "enum",
+      "options": [
+        "经常",
+        "偶尔",
+        "很少",
+        "基本没有（只被建议收拾一下）"
+      ],
+      "use": "他人反馈频率"
+    },
+    {
+      "id": "SA-5",
+      "question": "朋友/同事有没有主动给你推荐过异性资源？",
+      "type": "enum",
+      "options": [
+        "有，多次",
+        "有过 1-2 次",
+        "没有"
+      ],
+      "use": "语料：3-4 分没人推荐，5 分以上朋友会开始推荐"
+    },
+    {
+      "id": "SA-6",
+      "question": "你平时拍照的常态是？",
+      "type": "enum",
+      "options": [
+        "原相机、无滤镜",
+        "会用滤镜/美颜",
+        "很少拍照"
+      ],
+      "use": "决定照片可信度与是否要求重传"
+    },
+    {
+      "id": "SA-7",
+      "question": "你的身高体重（按最近一次测量）？",
+      "type": "text",
+      "options": null,
+      "use": "男性身高封顶判定；女性身高优势/减分提示"
+    },
+    {
+      "id": "SA-8",
+      "question": "你最想改善的一项是？",
+      "type": "enum",
+      "options": [
+        "穿搭",
+        "发型",
+        "皮肤",
+        "体态",
+        "体重",
+        "五官（不承诺可改）",
+        "没有"
+      ],
+      "use": "生成提升优先级"
+    }
+  ],
+  "dimensionIndex": {},
+  "dimensions": [
+    {
+      "id": "face.three_courts",
+      "name": "三庭比例",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "正脸无表情照（镜头与眼同高）",
+      "ask": "在正脸无表情照中比较三段长度：发际线到眉心、眉心到鼻底、鼻底到下巴。判断三段大致相等、哪一段明显偏长或偏短。若被刘海/手遮挡或侧转超过 30°，回答“无法判断”。",
+      "values": [
+        "上庭偏长",
+        "中庭偏长",
+        "下庭偏长",
+        "下庭偏短",
+        "三段均衡",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "上庭偏长": "发际线到眉心一段明显长于其余两段",
+        "中庭偏长": "眉心到鼻底一段明显长于其余两段",
+        "下庭偏长": "鼻底到下巴一段明显长于其余两段",
+        "下庭偏短": "鼻底到下巴明显短于其余两段",
+        "三段均衡": "三段目测接近相等",
+        "无法判断": "遮挡、角度过大或画面失真"
+      },
+      "weight": null,
+      "bucket": "五官",
+      "observability": "high",
+      "mapToScale": [
+        {
+          "value": "三段均衡",
+          "deltaToAppearance": 0,
+          "confidence": "medium",
+          "basis": "语料：五官单项不需要出色，组合起来没问题即可（不扣分、也未给出加分）"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "不能有硬伤，就是三庭分布，比方说它的眉眼唇，它的牙弓比例，头肩比，面部折叠度。",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "语料未给出该取值的分数增减，禁止拍脑袋"
+        },
+        {
+          "value": "上庭偏长",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料给出扣分数值；明显失衡按“硬伤候选”人工复核"
+        },
+        {
+          "value": "中庭偏长",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "同上"
+        },
+        {
+          "value": "下庭偏长",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "同上"
+        },
+        {
+          "value": "下庭偏短",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "同上"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "不能有硬伤，就是三庭分布，比方说它的眉眼唇，它的牙弓比例，头肩比，面部折叠度，不需要多么出色，都组合起来没问题，这就叫5.5了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7647499397491674404",
+          "quote": "面相挺好的，就三庭分布，眉眼唇，五官比例，颅面比例，五官的量感也挺足。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7638930281780596006",
+          "quote": "你们看这个女生，不论是三庭分布，还是她的头肩比，还是她的颅面比例，对吧？"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7644902230331542826",
+          "quote": "细看还行，就您的三庭比例，脸型大小，你的鼻子是你自己的吗？"
+        }
+      ]
+    },
+    {
+      "id": "face.features_balance",
+      "name": "眉眼唇 / 五官比例与量感",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "正脸无表情照",
+      "ask": "观察眉眼唇的组合与五官在脸上的占比：五官量感充足还是整体偏平？眉眼唇之间是否协调，还是存在单一部位明显拖后腿？只描述组合关系，不评价美丑。",
+      "values": [
+        "五官量感足",
+        "五官偏平",
+        "眉眼唇组合协调",
+        "眉眼唇有单一明显短板",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "五官量感足": "五官在面部的占比大、对比明显",
+        "五官偏平": "起伏与对比度低、量感偏小",
+        "眉眼唇组合协调": "三者间距与大小关系目测平衡",
+        "眉眼唇有单一明显短板": "单一部位与其余部位不匹配",
+        "无法判断": "遮挡或失真"
+      },
+      "weight": null,
+      "bucket": "五官",
+      "observability": "medium",
+      "mapToScale": [
+        {
+          "value": "眉眼唇组合协调",
+          "deltaToAppearance": 0,
+          "confidence": "medium",
+          "basis": "语料：单项不必出色，组合没问题即达标（不加分）"
+        },
+        {
+          "value": "五官量感足",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "语料仅作正向描述，无分值"
+        },
+        {
+          "value": "五官偏平",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "眉眼唇有单一明显短板",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "按“硬伤候选”人工复核，无语料分值"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "不需要多么出色，都组合起来没问题，这就叫5.5了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7647499397491674404",
+          "quote": "五官比例、颅面比例，五官的量感也挺足。"
+        }
+      ]
+    },
+    {
+      "id": "face.dental_arch",
+      "name": "牙弓 / 牙列（可见部分）",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "微笑正脸照或自然露齿照（可选补充）",
+      "ask": "在自然露齿的照片里观察：牙齿排列是否整齐、前牙是否明显前突、嘴部闭合时是否有明显凸出。不评价牙齿美观，只记录可观察排列。无露齿照时回答“无法判断”。",
+      "values": [
+        "牙列整齐",
+        "牙列轻度不齐",
+        "前牙明显前突/嘴凸可见",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "牙列整齐": "前牙排列大体平齐",
+        "牙列轻度不齐": "可见轻微错位但无明显突度",
+        "前牙明显前突/嘴凸可见": "正面或侧面可见明显前突",
+        "无法判断": "无露齿照或画面失真"
+      },
+      "weight": null,
+      "bucket": "五官",
+      "observability": "low",
+      "mapToScale": [
+        {
+          "value": "牙列整齐",
+          "deltaToAppearance": 0,
+          "confidence": "medium",
+          "basis": "语料把牙弓比例列为“无硬伤”检查项（不加分）"
+        },
+        {
+          "value": "牙列轻度不齐",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "前牙明显前突/嘴凸可见",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "语料仅指出低折叠度牙弓在镜头前会被放大，无分值"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": true,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "不能有硬伤，就是三庭分布，比方说它的眉眼唇，它的牙弓比例，头肩比，面部折叠度。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420044572282158",
+          "quote": "比方说大小眼高低眉，比方说你有个低折叠度的牙弓，比方说你的颧骨外扩。"
+        }
+      ]
+    },
+    {
+      "id": "face.head_shoulder_ratio",
+      "name": "头肩比",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "半身正面照（含双肩）",
+      "ask": "比较头部宽度（颧骨间距）与肩宽：肩宽大约为头宽的几倍？判断头肩比例协调、肩明显偏窄（头显大）还是肩宽明显大于头宽。",
+      "values": [
+        "肩宽约为头宽2倍以上（肩宽明显）",
+        "头肩比例协调",
+        "肩偏窄/头显大",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "肩宽约为头宽2倍以上（肩宽明显）": "肩线明显展开",
+        "头肩比例协调": "头宽与肩宽目测比例平衡",
+        "肩偏窄/头显大": "肩线窄、头部相对显大",
+        "无法判断": "非半身照或角度过大"
+      },
+      "weight": null,
+      "bucket": "五官",
+      "observability": "medium",
+      "mapToScale": [
+        {
+          "value": "头肩比例协调",
+          "deltaToAppearance": 0,
+          "confidence": "medium",
+          "basis": "语料列为结构检查项，无加分"
+        },
+        {
+          "value": "肩宽约为头宽2倍以上（肩宽明显）",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "肩偏窄/头显大",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638930281780596006",
+          "quote": "还是她的头肩比，还是她的颅面比例，对吧？"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "它的牙弓比例，头肩比，面部折叠度，不需要多么出色，都组合起来没问题。"
+        }
+      ]
+    },
+    {
+      "id": "face.facial_fold",
+      "name": "面部折叠度",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "45°侧脸照 + 正脸照（用侧光/半侧光）",
+      "ask": "在侧脸或半侧脸照里判断面部起伏：颧骨-面颊-下颌之间的立体层次明显（折叠度高）、中等，还是整体偏平（折叠度低）？只描述立体程度。",
+      "values": [
+        "折叠度偏高（立体）",
+        "折叠度中等",
+        "折叠度偏低（偏平）",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "折叠度偏高（立体）": "侧向起伏明显、面部分区清晰",
+        "折叠度中等": "有起伏但不强烈",
+        "折叠度偏低（偏平）": "侧向起伏弱、面部显平",
+        "无法判断": "纯正面照或无侧光"
+      },
+      "weight": null,
+      "bucket": "五官",
+      "observability": "medium",
+      "mapToScale": [
+        {
+          "value": "折叠度中等",
+          "deltaToAppearance": 0,
+          "confidence": "medium",
+          "basis": "语料作为结构检查项，未给分值"
+        },
+        {
+          "value": "折叠度偏高（立体）",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "折叠度偏低（偏平）",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "语料仅说镜头会放大低折叠度缺陷，无分值"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644119736887938347",
+          "quote": "咱们这种面部的折叠度，包括发型都很像。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420044572282158",
+          "quote": "比方说你有个低折叠度的牙弓，比方说你的颧骨外扩。"
+        }
+      ]
+    },
+    {
+      "id": "face.craniofacial_ratio",
+      "name": "颅面比例",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "正脸照（含完整发际线与颅顶）",
+      "ask": "观察颅顶高度与面部长度、头部整体与面部的比例：颅顶偏低（发际线到头顶距离短）、适中，还是颅骨相对面部显小/显大？",
+      "values": [
+        "颅顶偏低",
+        "颅面比例适中",
+        "颅骨相对面部偏小",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "颅顶偏低": "发际线到头顶的视觉高度偏短",
+        "颅面比例适中": "头部与面部目测比例平衡",
+        "颅骨相对面部偏小": "头型显小、面部占比大",
+        "无法判断": "被头发造型或角度干扰"
+      },
+      "weight": null,
+      "bucket": "五官",
+      "observability": "medium",
+      "mapToScale": [
+        {
+          "value": "颅面比例适中",
+          "deltaToAppearance": 0,
+          "confidence": "medium",
+          "basis": "语料列为结构检查项，未给分值"
+        },
+        {
+          "value": "颅顶偏低",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "颅骨相对面部偏小",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7638930281780596006",
+          "quote": "还是她的头肩比，还是她的颅面比例，对吧？"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7647499397491674404",
+          "quote": "五官比例、颅面比例，五官的量感也挺足。"
+        }
+      ]
+    },
+    {
+      "id": "face.face_size",
+      "name": "脸型 / 脸面大小",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "正脸无表情照（可与肩宽做参照）",
+      "ask": "结合头肩参照判断脸部整体尺寸偏小、中等还是偏大；并描述脸型轮廓（偏圆/偏方/偏长/鹅蛋）。只做尺寸与形状描述。",
+      "values": [
+        "脸型偏小（小脸）",
+        "脸型中等",
+        "脸型偏大",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "脸型偏小（小脸）": "相对肩宽/头宽视觉上偏小",
+        "脸型中等": "尺寸感知居中",
+        "脸型偏大": "相对参照视觉上偏大",
+        "无法判断": "无参照或角度过大"
+      },
+      "weight": null,
+      "bucket": "五官",
+      "observability": "medium",
+      "mapToScale": [
+        {
+          "value": "脸型中等",
+          "deltaToAppearance": 0,
+          "confidence": "medium",
+          "basis": "语料列为核验项，未给分值"
+        },
+        {
+          "value": "脸型偏小（小脸）",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "脸型偏大",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644902230331542826",
+          "quote": "细看还行，就您的三庭比例，脸型大小，你的鼻子是你自己的吗？"
+        }
+      ]
+    },
+    {
+      "id": "face.nose",
+      "name": "鼻型 / 山根",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "45°侧脸照 + 正脸照",
+      "ask": "从侧面看山根高度（高/中/低）与鼻尖形态；从正面看鼻翼宽度相对内眼角间距（偏宽/适中/偏窄）。另标注“形态是否自然协调”，若判定不自然必须加“存疑”二字，不得断言是否做过医美。",
+      "values": [
+        "山根高、鼻梁挺拔",
+        "山根中等、形态自然",
+        "鼻翼偏宽/鼻头偏大",
+        "鼻部形态与面部不协调（存疑）",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "山根高、鼻梁挺拔": "侧面山根起点高、鼻背线条挺",
+        "山根中等、形态自然": "高度适中、与面部协调",
+        "鼻翼偏宽/鼻头偏大": "正面鼻翼相对内眼角间距偏宽",
+        "鼻部形态与面部不协调（存疑）": "比例或线条突兀，仅作提示，不作事实判断",
+        "无法判断": "无侧脸照或失真"
+      },
+      "weight": null,
+      "bucket": "五官",
+      "observability": "medium",
+      "mapToScale": [
+        {
+          "value": "山根中等、形态自然",
+          "deltaToAppearance": 0,
+          "confidence": "medium",
+          "basis": "语料中“鼻子是自己的/天然”只在 7 分档被追问，非扣分项"
+        },
+        {
+          "value": "山根高、鼻梁挺拔",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "语料作为正向描述（侧脸加分描述），无分值"
+        },
+        {
+          "value": "鼻翼偏宽/鼻头偏大",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "鼻部形态与面部不协调（存疑）",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "仅触发“补充原生状态照片”提示，不扣分（无语料）"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7644902230331542826",
+          "quote": "你的鼻子是你自己的吗？对啊。你捏一下，我看一下。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7646730995613355327",
+          "quote": "但侧脸有，侧脸有，山根很挺。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7655981256437517602",
+          "quote": "但是细看不止啊，你鼻子是你自己的吗？"
+        }
+      ]
+    },
+    {
+      "id": "face.profile",
+      "name": "侧脸轮廓 / 下颌线",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "45°或 90°侧脸照",
+      "ask": "看侧脸轮廓：下颌线与颈部交界是否清晰、下巴与下颌的连线是否利落、侧脸整体是“平行四边形/线条清晰”还是偏平、下颌线模糊。",
+      "values": [
+        "下颌线清晰、侧脸线条利落",
+        "侧脸中等",
+        "下颌线不清晰/下颌偏平",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "下颌线清晰、侧脸线条利落": "下颌缘与颈部界线清楚、下巴轮廓分明",
+        "侧脸中等": "有轮廓但不突出",
+        "下颌线不清晰/下颌偏平": "下颌与颈部分界模糊",
+        "无法判断": "无侧脸照"
+      },
+      "weight": null,
+      "bucket": "五官",
+      "observability": "high",
+      "mapToScale": [
+        {
+          "value": "下颌线清晰、侧脸线条利落",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "语料明确表扬（侧脸好看、山根挺），但未给出加分值"
+        },
+        {
+          "value": "侧脸中等",
+          "deltaToAppearance": 0,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "下颌线不清晰/下颌偏平",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7646730995613355327",
+          "quote": "而且你看，他的侧脸是一个平行四边形。侧脸好看啊，下颌线（原文：价格线）也很清晰。"
+        }
+      ]
+    },
+    {
+      "id": "face.eye_brow_symmetry",
+      "name": "眉眼对称度（大小眼/高低眉）",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "正脸无表情照（必要时加摘镜照）",
+      "ask": "比较双眼的大小与水平高度、双侧眉毛的水平高度与形状：是否对称？只描述对称性，不评价眼睛好不好看。",
+      "values": [
+        "双眼与眉毛对称",
+        "轻度不对称（可见但不明显）",
+        "明显大小眼或高低眉",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "双眼与眉毛对称": "双眼大小、水平一致，眉毛高度一致",
+        "轻度不对称（可见但不明显）": "需要仔细观察才能发现",
+        "明显大小眼或高低眉": "第一眼可见的不对称",
+        "无法判断": "镜片反光、遮挡或角度过大"
+      },
+      "weight": null,
+      "bucket": "五官",
+      "observability": "high",
+      "mapToScale": [
+        {
+          "value": "双眼与眉毛对称",
+          "deltaToAppearance": 0,
+          "confidence": "medium",
+          "basis": "语料把“大小眼高低眉”列为上镜被放大项，即非扣分点而是画面失真提示"
+        },
+        {
+          "value": "轻度不对称（可见但不明显）",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "明显大小眼或高低眉",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值；提示此为镜头放大的常见项"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640420044572282158",
+          "quote": "比方说大小眼高低眉，比方说你有个低折叠度的牙弓，比方说你的颧骨外扩。"
+        }
+      ]
+    },
+    {
+      "id": "face.skin",
+      "name": "皮肤状态",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "正脸照（原相机、自然光、无粉底或薄粉底）",
+      "ask": "观察皮肤质感与均匀度：细腻有光泽 / 一般 / 可见明显痘印、痘痘、泛红、暗沉。只做中性描述。厚妆或强美颜时回答“无法判断”。",
+      "values": [
+        "皮肤细腻有光泽",
+        "皮肤状态一般",
+        "可见明显痘印/泛红/暗沉",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "皮肤细腻有光泽": "纹理细、肤色均匀、有自然光泽",
+        "皮肤状态一般": "无明显瑕疵也无可感知亮点",
+        "可见明显痘印/泛红/暗沉": "存在肉眼可见的皮肤问题",
+        "无法判断": "厚妆或重度美颜"
+      },
+      "weight": null,
+      "bucket": "五官",
+      "observability": "high",
+      "mapToScale": [
+        {
+          "value": "皮肤细腻有光泽",
+          "deltaToAppearance": 0,
+          "confidence": "medium",
+          "basis": "语料把“皮肤好”列为 5.5 档必要条件（达标不加分，不达标则够不到 5.5）"
+        },
+        {
+          "value": "皮肤状态一般",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "可见明显痘印/泛红/暗沉",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值；建议纳入改善优先级"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7667915732088556841",
+          "quote": "是好看的啊，有6分左右有，差不多。皮肤也很好呀。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "光脚1米80，五官不能有硬伤，会穿搭，身材好，皮肤好，基本上就算5.5分了。"
+        }
+      ]
+    },
+    {
+      "id": "body.height",
+      "name": "身高（自评优先，照片仅作参考）",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "全身照（可选）；准确值走自评/资料卡",
+      "ask": "照片仅能给出粗略观感（相对参照物或身材比例），不得由照片推算具体厘米数。若提供了真实身高，直接使用自报数据。",
+      "values": [
+        "明显低于同龄均值",
+        "略低于同龄均值",
+        "同龄均值",
+        "高于同龄均值",
+        "明显高于同龄均值",
+        "未提供"
+      ],
+      "valueMeaning": {
+        "明显低于同龄均值": "低于同性别同龄常见区间",
+        "略低于同龄均值": "略低于常见区间",
+        "同龄均值": "处于常见区间",
+        "高于同龄均值": "高于常见区间",
+        "明显高于同龄均值": "显著高于常见区间",
+        "未提供": "自评未填且照片无法判断"
+      },
+      "weight": null,
+      "bucket": "身高",
+      "observability": "low",
+      "mapToScale": [
+        {
+          "value": "未提供",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "无法计算身高封顶"
+        },
+        {
+          "value": "明显低于同龄均值",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "女性偏矮语料为“身高稍微一丢丢减分”，无具体数值；男性见下方 cap"
+        },
+        {
+          "value": "略低于同龄均值",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "同上"
+        },
+        {
+          "value": "同龄均值",
+          "deltaToAppearance": 0,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "高于同龄均值",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "女性 1 米 79 被称“超模身高、100% 优势”，但无分值；男性身高有利但同样无绝对值"
+        },
+        {
+          "value": "明显高于同龄均值",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "同上"
+        }
+      ],
+      "caps": {
+        "male": [
+          {
+            "condition": "身高 < 175cm",
+            "capToAppearance": null,
+            "confidence": "low",
+            "basis": "语料：1 米 75 时博主明确不给 6 分以上（回听原始音频两次稳定复现，aoye98/7639291023436369190）。原写 5.7 与后来一度改成 5.5 均为推断值，现按 D22 取消数值上限，只保留“不得进 6 分档”的定性约束。",
+            "evidence": [
+              {
+                "account": "aoye98",
+                "aweme_id": "7639291023436369190",
+                "quote": "1米75咱就不敢说6分以上了。……就每个人的颜值都会被身高所封印。",
+                "note": "回听原始音频：分数区两次转写不一致（5,5,5,5,5.7 vs 5.6/5.7），5.7 不可靠已剔除；“1米75不给6分以上”两次均稳定复现。"
+              }
+            ],
+            "flagInsteadOfCap": "男性身高 <175cm 时不得输出 6 分档及以上描述；不设统一数值上限（语料只说“不给6分以上”，未给出具体上界）。"
+          },
+          {
+            "condition": "身高 >= 180cm（光脚）",
+            "capToAppearance": null,
+            "confidence": "medium",
+            "basis": "语料把“光脚 1 米 80”列为男生 5.5 档 checklist 项（不封顶）",
+            "evidence": [
+              {
+                "account": "aoye98",
+                "aweme_id": "7640777429912538409",
+                "quote": "光脚1米80，五官不能有硬伤，会穿搭，身材好，皮肤好，基本上就算5.5分了。"
+              }
+            ]
+          }
+        ],
+        "female": [
+          {
+            "condition": "身高明显高于同龄均值（如 175cm+）",
+            "capToAppearance": null,
+            "confidence": "low",
+            "basis": "“超模身高、绝对优势”，不封顶也不直接加分区间的语料支撑",
+            "evidence": [
+              {
+                "account": "aoye98",
+                "aweme_id": "7661209960478444827",
+                "quote": "1米79是超模身高呀？……优势，绝对是优势，百分之百是优势，别胖就行。"
+              }
+            ]
+          }
+        ]
+      },
+      "cannotJudgeFromPhoto": true,
+      "evidence": [
+        {
+          "account": "47590488570",
+          "aweme_id": "7627766660082953083",
+          "quote": "不论你的面部美学分数有多高，上限永远逃不掉身高的一个制裁。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7647499397491674404",
+          "quote": "身高稍微一丢丢减分，干净五分不错啊。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7661209960478444827",
+          "quote": "1米79是超模身高呀？……优势，绝对是优势，百分之百是优势，别胖就行。"
+        }
+      ]
+    },
+    {
+      "id": "body.weight",
+      "name": "体重 / 胖瘦观感",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "半身照 + 全身照（平视）",
+      "ask": "按中性描述判断：偏瘦 / 匀称 / 偏胖（微胖）/ 明显超重。只描述体型观感，禁止任何羞辱性措辞，禁止由照片推断疾病或健康状态。",
+      "values": [
+        "偏瘦",
+        "匀称",
+        "偏胖（微胖）",
+        "明显超重",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "偏瘦": "整体明显偏瘦",
+        "匀称": "与身高比例协调",
+        "偏胖（微胖）": "有可见的脂肪堆积但整体协调",
+        "明显超重": "体型对观感有显著影响",
+        "无法判断": "厚衣遮挡、角度过大或仅头部照"
+      },
+      "weight": null,
+      "bucket": "体重",
+      "observability": "medium",
+      "mapToScale": [
+        {
+          "value": "匀称",
+          "deltaToAppearance": 0,
+          "confidence": "medium",
+          "basis": "语料把“身材好”列为 5.5 档必要条件（达标不加分）"
+        },
+        {
+          "value": "偏瘦",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "偏胖（微胖）",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "语料只给出红线提示“别胖就行”，无分值；男女对“微胖”理解不同"
+        },
+        {
+          "value": "明显超重",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值；只作为改善优先级"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7661209960478444827",
+          "quote": "优势，绝对是优势，百分之百是优势，别胖就行。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7639676121834851593",
+          "quote": "1米62，145斤。男女对微胖的理解可不一样，姑娘。"
+        }
+      ]
+    },
+    {
+      "id": "body.figure",
+      "name": "身材比例",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "半身照 + 全身照（平视、非俯拍）",
+      "ask": "观察身材比例：肩腰比/上下身比例是否协调、体态是否挺拔（不含身高本身）。只描述比例与线条。",
+      "values": [
+        "比例协调",
+        "比例一般",
+        "比例失衡（如腿身比或肩腰比明显不协调）",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "比例协调": "肩腰腿比例目测匀称",
+        "比例一般": "无明显短板也无明显优势",
+        "比例失衡（如腿身比或肩腰比明显不协调）": "单一比例关系明显偏离",
+        "无法判断": "衣着遮挡或角度过大"
+      },
+      "weight": 0.1,
+      "bucket": "身材比例 + 穿衣搭配",
+      "observability": "medium",
+      "mapToScale": [
+        {
+          "value": "比例协调",
+          "deltaToAppearance": 0,
+          "confidence": "low",
+          "basis": "语料把“身材好/身材比例”列为 5.5 档与顶美的条件项，无分值"
+        },
+        {
+          "value": "比例一般",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "比例失衡（如腿身比或肩腰比明显不协调）",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值；仅作呈现项描述"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7682010628554231090",
+          "quote": "40%靠的是自信和体态，20%靠的是身材比例和穿衣的搭配，15%是来自于我们的发型还有妆容，剩下的才轮得到自己的五官。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7682020548599172403",
+          "quote": "顶美也不是说只是你的五官漂亮，还是要看皮肤状态、体态、身材的比例、穿衣的审美，以及整个人呈现出来的状态。"
+        }
+      ]
+    },
+    {
+      "id": "style.grooming",
+      "name": "穿搭",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "半身/全身照（日常状态）",
+      "ask": "按中性描述判断：穿搭得体在线（有搭配意识、颜色协调）/ 整洁普通 / 明显随意或不利落（皱、旧、不合身）。只描述着装呈现，不评价价格与品牌。",
+      "values": [
+        "穿搭得体在线",
+        "整洁普通",
+        "明显随意或不利落",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "穿搭得体在线": "有搭配意识、版型合身、颜色协调",
+        "整洁普通": "干净但无搭配意识",
+        "明显随意或不利落": "不合身、褶皱、搭配混乱",
+        "无法判断": "仅头部照或画面过暗"
+      },
+      "weight": 0.1,
+      "bucket": "身材比例 + 穿衣搭配",
+      "observability": "medium",
+      "mapToScale": [
+        {
+          "value": "穿搭得体在线",
+          "deltaToAppearance": 0,
+          "confidence": "medium",
+          "basis": "语料把“会穿搭”列为男生 5.5 档必要条件之一（达标不加分）"
+        },
+        {
+          "value": "整洁普通",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "语料称“长相一般的可以靠打理、收拾、衣服在见面那一刻加分”，无分值"
+        },
+        {
+          "value": "明显随意或不利落",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "无语料分值；纳入改善优先级"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7640777429912538409",
+          "quote": "光脚1米80，五官不能有硬伤，会穿搭，身材好，皮肤好，基本上就算5.5分了。"
+        },
+        {
+          "account": "48854385344",
+          "aweme_id": "7681986355500453158",
+          "quote": "出门最好建议大家可以洗个头洗个澡……避免头油、体味、口臭这些，这样的话会大幅度的减分。"
+        },
+        {
+          "account": "33349790582",
+          "aweme_id": "7685706222226330085",
+          "quote": "长相一般的，我可以靠打理，靠收拾，衣服换一换，头发理一理，见面那一刻都是可以加分的。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7635582435148696859",
+          "quote": "就通过着装打扮，已经开始，朋友会给你推荐异性资源了。三四分没有人会给你推荐异性资源。"
+        }
+      ]
+    },
+    {
+      "id": "style.hair",
+      "name": "发型",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "正脸照（露出完整发际线与眉眼）",
+      "ask": "观察发型与脸型的适配度：是否修饰脸型、是否遮挡眉眼、发量观感（饱满/一般/稀疏）。只描述发型与呈现效果。",
+      "values": [
+        "发型适配脸型",
+        "发型普通但不影响",
+        "发型不适配（遮挡眉眼或显头大）",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "发型适配脸型": "发型对脸型有正向修饰",
+        "发型普通但不影响": "无修饰也无明显拖累",
+        "发型不适配（遮挡眉眼或显头大）": "刘海遮眉眼或轮廓与脸型冲突",
+        "无法判断": "帽子/遮挡"
+      },
+      "weight": null,
+      "bucket": "发型 + 妆容",
+      "observability": "high",
+      "mapToScale": [
+        {
+          "value": "发型普通但不影响",
+          "deltaToAppearance": 0,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "发型适配脸型",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "语料仅作建议（“这发型不适合你”），无加减分"
+        },
+        {
+          "value": "发型不适配（遮挡眉眼或显头大）",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "博主当场指出但不改分（同一条仍给原分），故 delta=null"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7646730995613355327",
+          "quote": "对，帅。这发型不适合你，帅。"
+        }
+      ]
+    },
+    {
+      "id": "style.makeup",
+      "name": "妆容（女性；男性仅记录是否上妆）",
+      "appliesTo": [
+        "female",
+        "male"
+      ],
+      "photoRequirement": "正脸照（标注是否上妆）",
+      "ask": "判断画面中是否上妆、妆容程度（无妆/淡妆/浓妆），以及是否因妆容影响面部结构判断。只描述，不评价浓淡好坏。",
+      "values": [
+        "无妆（素颜）",
+        "淡妆",
+        "浓妆",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "无妆（素颜）": "无明显化妆品痕迹",
+        "淡妆": "有修饰感但仍能看清五官结构",
+        "浓妆": "遮盖明显、结构判断受影响",
+        "无法判断": "滤镜叠加无法区分"
+      },
+      "weight": null,
+      "bucket": "发型 + 妆容",
+      "observability": "high",
+      "mapToScale": [
+        {
+          "value": "淡妆",
+          "deltaToAppearance": 0,
+          "confidence": "low",
+          "basis": "语料以画面实际呈现判分，妆容不额外加减分"
+        },
+        {
+          "value": "无妆（素颜）",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "“素颜X分”只是申报口径，博主按画面复核，不加分"
+        },
+        {
+          "value": "浓妆",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "语料：脸上涂了东西会让结构判断受影响；无分值"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "aoye98",
+          "aweme_id": "7648982262922382646",
+          "quote": "我如果不化妆的话，我可能就是三分到三点五分，因为我没有眉毛。我眉毛是化的。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7654524526163758351",
+          "quote": "我今天没化妆，然后我熬夜了。身高158，然后体重88。有5分以上，有了。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7653065951604133154",
+          "quote": "看一下摄像头，脸上涂了那个东西，所以说看起来有点那个什么。"
+        }
+      ]
+    },
+    {
+      "id": "presence.posture",
+      "name": "体态 / 气质 / 精神状态",
+      "appliesTo": [
+        "male",
+        "female"
+      ],
+      "photoRequirement": "半身/全身照（站姿，自然光）",
+      "ask": "观察体态与呈现状态：是否挺拔（无明显含胸/驼背/探头）、精神状态是否鲜活有活力、整体气场如何。只描述姿态与状态。",
+      "values": [
+        "体态挺拔、状态鲜活",
+        "体态正常、状态一般",
+        "含胸驼背或状态疲惫",
+        "无法判断"
+      ],
+      "valueMeaning": {
+        "体态挺拔、状态鲜活": "肩背打开、姿态舒展、眼神与面部有生气",
+        "体态正常、状态一般": "无明显问题也无亮点",
+        "含胸驼背或状态疲惫": "可见的姿态或状态问题",
+        "无法判断": "仅头部照或坐姿遮挡"
+      },
+      "weight": 0.4,
+      "bucket": "体态 / 自信 / 精神面貌",
+      "observability": "medium",
+      "mapToScale": [
+        {
+          "value": "体态正常、状态一般",
+          "deltaToAppearance": 0,
+          "confidence": "low",
+          "basis": "无语料分值"
+        },
+        {
+          "value": "体态挺拔、状态鲜活",
+          "deltaToAppearance": [
+            0.3,
+            0.4
+          ],
+          "confidence": "low",
+          "basis": "语料单例：纯面部美学 5.8-5.9，加上性格/鲜活感后 6.2-6.3（+0.3~0.4）"
+        },
+        {
+          "value": "含胸驼背或状态疲惫",
+          "deltaToAppearance": null,
+          "confidence": "low",
+          "basis": "语料只给建议（走路不要含胸驼背），无扣分分值"
+        },
+        {
+          "value": "无法判断",
+          "deltaToAppearance": null,
+          "confidence": "high",
+          "basis": "不参与区间计算"
+        }
+      ],
+      "cannotJudgeFromPhoto": false,
+      "evidence": [
+        {
+          "account": "48854385344",
+          "aweme_id": "7682010628554231090",
+          "quote": "40%靠的是自信和体态，20%靠的是身材比例和穿衣的搭配，15%是来自于我们的发型还有妆容，剩下的才轮得到自己的五官。"
+        },
+        {
+          "account": "aoye98",
+          "aweme_id": "7645562474632056127",
+          "quote": "您的性格很好，性格加分的，纯面部美学5.8、5.9……加上性格我觉得有6.2、6.3。"
+        }
+      ]
+    }
+  ],
+  "selfCheckAggregation": {
+    "note": "自评题 → 校准信号（供 divergencePolicy 使用）",
+    "signals": [
+      {
+        "from": "SA-2 位次",
+        "mapping": {
+          "前 3": "约 6 分档",
+          "前 10": "约 5.5-5.8 档",
+          "前 20": "约 5.0-5.3 档",
+          "前 40": "约 4.2-4.6 档",
+          "中段（40-60）": "约 4 分档",
+          "后 40": "约 3-3.5 档"
+        },
+        "confidence": "medium"
+      },
+      {
+        "from": "SA-5 朋友是否推荐过异性资源",
+        "mapping": {
+          "有，多次": "行为证据指向 5 分以上",
+          "有过 1-2 次": "行为证据指向 4.5-5 分档",
+          "没有": "行为证据不高于 4 分档"
+        },
+        "confidence": "medium",
+        "evidence": [
+          {
+            "account": "aoye98",
+            "aweme_id": "7635582435148696859",
+            "quote": "就通过着装打扮，已经开始，朋友会给你推荐异性资源了。三四分没有人会给你推荐异性资源。"
+          }
+        ]
+      },
+      {
+        "from": "SA-3 被搭讪频率",
+        "mapping": {
+          "5 次以上": "行为证据指向 4.5 分以上（女性口径）",
+          "3-5 次": "行为证据指向 4.5 左右",
+          "1-2 次": "行为证据不高于 4.5",
+          "0 次": "不足以单独推断"
+        },
+        "confidence": "low",
+        "evidence": [
+          {
+            "account": "aoye98",
+            "aweme_id": "7641867771478822185",
+            "quote": "女生我觉得4.5以上干净一点就能收到搭讪（原文：按理按时）。男生起码得高0.8分。"
+          }
+        ]
+      }
+    ]
+  },
+  "openQuestions": [
+    "9 个面部维度内部如何分配女性 25% 的五官权重——语料无细分，当前全部为 null，需产品侧定夺。",
+    "男性权重模型：语料只有 checklist 门槛，没有权重；当前男性维度权重全部为 null。",
+    "『上镜丑三分』没有直接量化；当前按“加宽区间 + 注明镜头低估”处理，估计低估幅度 0.1-0.3（低置信）。",
+    "体重/胖瘦对分数的量化影响：语料只有红线提示“别胖就行”。",
+    "男性身高 <170cm 的封顶值：语料无数据，需人工规则或后续语料补齐。",
+    "多人合影、非本人照片等工程类拒判条件语料无对应，属工程约束。"
+  ]
+}
