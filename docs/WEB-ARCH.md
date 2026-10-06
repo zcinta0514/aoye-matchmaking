@@ -159,6 +159,7 @@ machine.then[].kind: clampScale | setBand | advice | giveUp | text | flag | requ
 - 复用引擎：`engine.mjs` 零 Node 依赖；其余库只依赖「读 JSON」。静态版把读文件换成 `web/lib/load-browser.mjs`：`preloadData([...])` 先用 fetch 填模块级缓存，`readJson(file)` 保持**同步签名**从缓存取（引擎/流水线一行未改）。
 - 构建（`tools/build-static.mjs`，零依赖）：拷贝 lib/HTML/CSS/data → 改写 import：`node:fs` → `fsShim`、`node:path` → `pathShim`、`node:crypto` → `cryptoShim`、`node:url` → `fileURLToPath`；`pipeline.mjs` 的模块级路径常量按行替换为 `data/*.json`；`util.mjs` 换成浏览器版（readJson→缓存、writeJsonAtomic→localStorage、newId→Math）；`provider.mjs` 按 `--photos=off|byok` 选择 off（无任何 fetch）或浏览器 BYOK 版。
 - HTML 资源路径改为相对（`assets/...`）、`href="/"` → `index.html`，保证 GitHub Pages 子路径可用。
+- 第三种模式 `--photos=proxy`：前端把同一请求体 POST 到 `{proxyUrl}/analyze`（构建时把 `--proxy-url` 注入 provider），由 `worker/index.js`（Cloudflare Workers，零依赖）在服务端注入密钥并转发；Worker 侧限制 2 张图 / 6MB 图 / 8MB 体 / 每 IP 每小时 3 次（内存、isolate 级、**非可靠限流**），CORS 仅允许 `ALLOWED_ORIGIN`。防护边界如实写在 `worker/README.md`：key 不泄漏可保证，但**成本只能靠服务商后台的月度额度上限**。
 - 安全闸：构建结束扫描产物，命中 `sk-` / `.env` / `data/video|transcripts` 直接失败；测试 `web/test/static-build.test.mjs` 对 off/byok 各构建一次并断言以上不变式 + off 模式 provider 无 fetch + 产物无 `node:` import。
 - 报告页复用同一渲染器：`web/public/report.js` 的渲染部分原样拷贝，只把 `main()` 换成 localStorage 版本（`web/static/report-main.js`），并带 `?selftest=1` 自检入口。
 

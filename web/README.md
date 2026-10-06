@@ -135,7 +135,7 @@ node web/server.mjs
 
 `node tools/build-static.mjs --photos=off`（默认）生成 `dist/`：零构建、零 npm 依赖、纯静态（表单 → 本机跑引擎 → 报告存 localStorage，无后端）。
 
-- 照片模式：`--photos=off`（默认，公开版：照片输入禁用并提示「公开版未开放照片分析」）｜`--photos=byok`（用户在本页填 base_url/key/model，存 localStorage、直连其服务商，页面有明确安全警告）。**任何模式下构建产物都不含 key**（构建末会扫描 sk- / .env / data/video|transcripts，命中即失败）。
+- 照片模式三选一：`--photos=off`（默认，公开版：照片输入禁用并提示）｜`--photos=byok`（用户在本页填 base_url/key/model，存 localStorage、直连其服务商，含安全警告）｜`--photos=proxy --proxy-url=https://<worker 域名>`（图片分析由 Cloudflare Worker 代理完成，前端不接触 key；Worker 见 `worker/`，部署步骤见 `worker/README.md`）。**任何模式下构建产物都不含 key**（构建末扫描 sk- / .env / data/video|transcripts，命中即失败；proxy 模式还会断言前端不出现 `AOYE_LLM_API_KEY` 变量名与 Authorization 头）。
 - 数据目录：`?data=./data/` 可指定（默认 `./data/`）；报告页支持 `?id=` 或读 `aoye:lastReportId`。
 - 本地预览：`python3 -m http.server 8080 --directory dist` 然后打开 `http://127.0.0.1:8080/`。
 - 构建自检：`report.html?selftest=1` 会就地跑一份示例报告并渲染（构建验证用）。

@@ -178,3 +178,27 @@ data/ → ../aoye-data   语料（软链到仓库外，避免被 worker savepoin
 > 这一句是某场活动的报名门槛，不是市场规律；
 > 这一句是我们编的，没有依据；
 > **而这个系统的结论对不对，我们测不出来——需要你自己看。**
+
+---
+
+## 部署（2026-10-06）
+
+| 项 | 值 |
+|---|---|
+| 仓库 | https://github.com/zcinta0514/aoye-matchmaking （public） |
+| 线上地址 | **https://zcinta0514.github.io/aoye-matchmaking/** |
+| 站点分支 | `gh-pages`（由 `tools/build-static.mjs` 生成，与源码分支分离） |
+| 当前照片模式 | `byok` —— 访客自填自己的模型 key（存本地浏览器，直连其服务商） |
+| 待升级 | `proxy` —— Cloudflare Worker 代理（访客免填 key），代码在 `worker/` |
+
+### 推送前发现并解决的两个问题
+
+1. **git 历史 2.47 GB**：来自 `refs/cindy/savepoints/*` 自动快照，内含 `data/audio/**/*.wav`
+   （博主语音）。GitHub 单次推送上限 2 GB、单文件 100 MB，直推会失败且会公开音频。
+   → **解法**：只推一个全新的单提交树（孤儿分支），不推历史。本地仓库保持原样。
+2. **`git rm -r --cached .` 失败被 `2>/dev/null` 吞掉**，导致索引未清空、
+   `.gitignore` 对已跟踪文件不生效，`dist/` 一度被暂存。→ 显式 `git rm -r --cached dist`。
+
+### 环境注意
+`github.com` 被解析到 `198.18.0.24`（保留地址段）——本机代理在做 fake-ip DNS 劫持，
+GitHub 连接间歇性 `SSL_ERROR_SYSCALL`。所有 GitHub 操作需带重试。
