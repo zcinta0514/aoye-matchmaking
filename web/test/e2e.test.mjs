@@ -22,8 +22,8 @@ const stub = http.createServer((req, res) => {
     res.writeHead(200, { "content-type": "application/json" });
     res.end(JSON.stringify({ choices: [{ message: { content: JSON.stringify({
       dimensions: [
-        { id: "face.three_courts", observed: "三庭大致均等", level: "average", confidence: "medium" },
-        { id: "face.shape", observed: "脸型偏鹅蛋", level: "above", confidence: "medium" }
+        { id: "looks.three_courts", observed: "三庭大致均等", level: "average", confidence: "medium" },
+        { id: "looks.nose", observed: "鼻梁线条较直", level: "above", confidence: "medium" }
       ],
       anchorFits: [{ label: "普通人", fit: 0.8, reason: "无强记忆点" }],
       dataQuality: { usable: true, issues: [] },
@@ -108,7 +108,8 @@ test("HTTP 端到端：配 Key + 照片走模型轨道（P0-1），表单/魔数
     assert.equal(typeof report.appearance.divergence, "number");
     assert.ok(report.rulesApplied.length >= 1);
     assert.ok(report.rulesApplied.some((rule) => rule.via === "machine"));
-    assert.ok(report.appearance.photoTrack.dimensions.find((dim) => dim.id === "face.shape").observed === "脸型偏鹅蛋");
+    assert.ok(report.appearance.photoTrack.dimensions.find((dim) => dim.id === "looks.nose").observed === "鼻梁线条较直");
+    assert.equal(report.appearance.photoTrack.dimensions.some((dim) => dim.id === "face.shape"), false, "降本筛掉的演示基线维度不得出现在报告里");
 
     assert.ok(report.evidenceSummary.scoredItems > 0);
     assert.equal(report.evidenceSummary.withEvidence + report.evidenceSummary.withoutEvidence, report.evidenceSummary.scoredItems);

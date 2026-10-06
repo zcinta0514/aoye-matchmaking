@@ -1,8 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import worker, { LIMITS, countImages, rateLimit, resetRateBuckets } from "./index.js";
+import worker, { LIMITS, countImages, rateLimit, resetRateBuckets, secureCompare } from "./index.js";
 
 const FAKE_KEY = "sk-test-DEADBEEF-1234567890";
+const ACCESS_CODE = "test-access-code-NOT-A-SECRET";
 const ORIGIN = "https://aoye-pages.pages.dev";
 
 function envOf(extra) {
@@ -10,6 +11,7 @@ function envOf(extra) {
     AOYE_LLM_API_KEY: FAKE_KEY,
     AOYE_LLM_BASE_URL: "https://api.example-provider.test/v1",
     AOYE_LLM_MODEL: "env-model",
+    AOYE_ACCESS_CODE: ACCESS_CODE,
     ALLOWED_ORIGIN: ORIGIN
   }, extra || {});
 }
@@ -21,7 +23,7 @@ function requestOf(pathname, init) {
 function analyzeRequest(body, headers) {
   return requestOf("/analyze", {
     method: "POST",
-    headers: Object.assign({ "content-type": "application/json", "CF-Connecting-IP": "203.0.113.7", origin: ORIGIN }, headers || {}),
+    headers: Object.assign({ "content-type": "application/json", "CF-Connecting-IP": "203.0.113.7", origin: ORIGIN, "x-aoye-code": ACCESS_CODE }, headers || {}),
     body: JSON.stringify(body)
   });
 }
@@ -74,11 +76,12 @@ test("正常转发：URL / Authorization / 模型覆盖 / 请求体透传 / 响�
   }
 });
 
-test("超限：3 张图 / 图片总量 >6MB / 请求体 >8MB → 413", async () => {
+test("超限：2 张图（上限已降为 1 张）/ 图片总量 >6MB / 请求体 >8MB → 413", async () => {
   resetRateBuckets();
-  const three = await worker.fetch(analyzeRequest(chatBody(3, 16)), envOf());
-  assert.equal(three.status, 413);
-  assert.equal((await three.json()).error, "too_many_images");
+  assert.equal(LIMITS.MAX_IMAGES, 1, "图片上限必须为 1 张（降本）");
+  const two = await worker.fetch(analyzeRequest(chatBody(2, 16)), envOf());
+  assert.equal(two.status, 413);
+  assert.equal((await two.json()).error, "too_many_images");
 
   const bigImageBody = chatBody(1, Math.ceil((LIMITS.MAX_IMAGE_BYTES + 1024) / 0.75));
   assert.ok(countImages(bigImageBody).bytes > LIMITS.MAX_IMAGE_BYTES, "构造的图片总量必须超过图片上限");
@@ -164,11 +167,15 @@ test("泄漏检查：错误路径与 console 输出都不包含 key", async () =
   }
 });
 
-test("未配置模型 → 503；未知路由 → 404；countImages 统计正确", async () => {
+test("未配置访问码或模型 → 503（fail-closed）；未知路由 → 404；countImages 统计正确", async () => {
   resetRateBuckets();
-  const unconfigured = await worker.fetch(analyzeRequest(chatBody(1)), { ALLOWED_ORIGIN: ORIGIN });
-  assert.equal(unconfigured.status, 503);
-  assert.equal((await unconfigured.json()).error, "not_configured");
+  const noCodeEnv = await worker.fetch(analyzeRequest(chatBody(1)), { AOYE_LLM_API_KEY: FAKE_KEY, AOYE_LLM_BASE_URL: "https://api.example-provider.test/v1", AOYE_LLM_MODEL: "m", ALLOWED_ORIGIN: ORIGIN });
+  assert.equal(noCodeEnv.status, 503, "未配访问码必须拒绝一切");
+  assert.equal((await noCodeEnv.json()).error, "not_configured");
+
+  const noModel = await worker.fetch(analyzeRequest(chatBody(1), { "CF-Connecting-IP": "203.0.113.21" }), { AOYE_ACCESS_CODE: ACCESS_CODE, ALLOWED_ORIGIN: ORIGIN });
+  assert.equal(noModel.status, 503, "未配模型必须拒绝");
+  assert.equal((await noModel.json()).error, "not_configured");
 
   const notFound = await worker.fetch(requestOf("/nope", { method: "GET" }), envOf());
   assert.equal(notFound.status, 404);
@@ -176,4 +183,49 @@ test("未配置模型 → 503；未知路由 → 404；countImages 统计正确"
   const stats = countImages(chatBody(2, 100));
   assert.equal(stats.count, 2);
   assert.ok(stats.bytes > 0);
+});
+
+test("secureCompare：正确 / 错误 / 不同长度 / 空值", async () => {
+  assert.equal(await secureCompare("abc", "abc"), true);
+  assert.equal(await secureCompare("abc", "abd"), false);
+  assert.equal(await secureCompare("abc", "abcd"), false, "长度不同也必须不等");
+  assert.equal(await secureCompare("", ""), true);
+});
+
+test("访问码门禁：无码/错码 401、对码放行、回包与日志不含码", async () => {
+  resetRateBuckets();
+  const stub = stubFetch(async () => new Response(JSON.stringify({ choices: [{ message: { content: "{}" } }] }), { status: 200 }));
+  const logs = [];
+  const originals = { log: console.log, error: console.error, warn: console.warn };
+  console.log = (...args) => logs.push(args.join(" "));
+  console.error = (...args) => logs.push(args.join(" "));
+  console.warn = (...args) => logs.push(args.join(" "));
+  try {
+    const rawBody = JSON.stringify(chatBody(1));
+    const bare = (ip, headers) => requestOf("/analyze", { method: "POST", headers: Object.assign({ "content-type": "application/json", "CF-Connecting-IP": ip, origin: ORIGIN }, headers || {}), body: rawBody });
+
+    const noCode = await worker.fetch(bare("203.0.113.31"), envOf());
+    assert.equal(noCode.status, 401, "无码必须 401");
+    const noCodeBody = await noCode.text();
+    assert.ok(noCodeBody.indexOf("访问码不正确") !== -1, "必须给可读原因");
+    assert.equal(noCodeBody.indexOf(ACCESS_CODE), -1, "不得回显正确码");
+
+    const wrong = await worker.fetch(bare("203.0.113.32", { "x-aoye-code": "wrong-code" }), envOf());
+    assert.equal(wrong.status, 401, "错码必须 401");
+    const wrongBody = await wrong.text();
+    assert.equal(wrongBody.indexOf(ACCESS_CODE), -1);
+    assert.equal(wrongBody.indexOf("wrong-code"), -1, "不得回显用户提交的码");
+
+    const right = await worker.fetch(bare("203.0.113.33", { "x-aoye-code": ACCESS_CODE }), envOf());
+    assert.equal(right.status, 200, "对码必须放行");
+    assert.equal(stub.calls.length, 1, "只有对码才会发起上游调用");
+
+    assert.equal(logs.join(" ").indexOf(ACCESS_CODE), -1, "日志不得包含访问码");
+    assert.equal(logs.join(" ").indexOf("wrong-code"), -1, "日志不得包含用户提交的码");
+  } finally {
+    stub.restore();
+    console.log = originals.log;
+    console.error = originals.error;
+    console.warn = originals.warn;
+  }
 });

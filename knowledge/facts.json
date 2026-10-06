@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generatedAt": "2026-10-05T16:29:07.293Z",
+  "generatedAt": "2026-10-06T06:08:57.311Z",
   "purpose": "规则中 machine.when.field 的唯一合法取值来源。写规则前先查这里；缺字段就往这里加，不要在规则里发明字段名。",
   "counts": {
     "subjectFields": 39,
@@ -672,7 +672,7 @@
       "label": "颜值自评",
       "group": "calibration",
       "type": "number",
-      "required": true,
+      "required": false,
       "unit": "分",
       "min": 1,
       "max": 9,
@@ -935,245 +935,148 @@
   ],
   "photoFacts": [
     {
-      "field": "photo.face.three_courts",
-      "id": "face.three_courts",
+      "field": "photo.looks.three_courts",
+      "id": "looks.three_courts",
       "label": "三庭比例",
       "type": "enum",
-      "values": [
-        "上庭偏长",
-        "中庭偏长",
-        "下庭偏长",
-        "下庭偏短",
-        "三段均衡",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
     },
     {
-      "field": "photo.face.features_balance",
-      "id": "face.features_balance",
+      "field": "photo.looks.features_balance",
+      "id": "looks.features_balance",
       "label": "眉眼唇 / 五官比例与量感",
       "type": "enum",
-      "values": [
-        "五官量感足",
-        "五官偏平",
-        "眉眼唇组合协调",
-        "眉眼唇有单一明显短板",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
     },
     {
-      "field": "photo.face.dental_arch",
-      "id": "face.dental_arch",
-      "label": "牙弓 / 牙列（可见部分）",
+      "field": "photo.looks.dental_arch",
+      "id": "looks.dental_arch",
+      "label": "牙弓比例",
       "type": "enum",
-      "values": [
-        "牙列整齐",
-        "牙列轻度不齐",
-        "前牙明显前突/嘴凸可见",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
     },
     {
-      "field": "photo.face.head_shoulder_ratio",
-      "id": "face.head_shoulder_ratio",
+      "field": "photo.looks.head_shoulder_ratio",
+      "id": "looks.head_shoulder_ratio",
       "label": "头肩比",
       "type": "enum",
-      "values": [
-        "肩宽约为头宽2倍以上（肩宽明显）",
-        "头肩比例协调",
-        "肩偏窄/头显大",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
     },
     {
-      "field": "photo.face.facial_fold",
-      "id": "face.facial_fold",
+      "field": "photo.looks.facial_fold",
+      "id": "looks.facial_fold",
       "label": "面部折叠度",
       "type": "enum",
-      "values": [
-        "折叠度偏高（立体）",
-        "折叠度中等",
-        "折叠度偏低（偏平）",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
     },
     {
-      "field": "photo.face.craniofacial_ratio",
-      "id": "face.craniofacial_ratio",
+      "field": "photo.looks.craniofacial_ratio",
+      "id": "looks.craniofacial_ratio",
       "label": "颅面比例",
       "type": "enum",
-      "values": [
-        "颅顶偏低",
-        "颅面比例适中",
-        "颅骨相对面部偏小",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
     },
     {
-      "field": "photo.face.face_size",
-      "id": "face.face_size",
+      "field": "photo.looks.face_size",
+      "id": "looks.face_size",
       "label": "脸型 / 脸面大小",
       "type": "enum",
-      "values": [
-        "脸型偏小（小脸）",
-        "脸型中等",
-        "脸型偏大",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
     },
     {
-      "field": "photo.face.nose",
-      "id": "face.nose",
-      "label": "鼻型 / 山根",
+      "field": "photo.looks.nose",
+      "id": "looks.nose",
+      "label": "鼻型 / 山根（含是否原生）",
       "type": "enum",
-      "values": [
-        "山根高、鼻梁挺拔",
-        "山根中等、形态自然",
-        "鼻翼偏宽/鼻头偏大",
-        "鼻部形态与面部不协调（存疑）",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
     },
     {
-      "field": "photo.face.profile",
-      "id": "face.profile",
-      "label": "侧脸轮廓 / 下颌线",
+      "field": "photo.looks.profile",
+      "id": "looks.profile",
+      "label": "侧脸轮廓（下颌线/侧脸形态）",
       "type": "enum",
-      "values": [
-        "下颌线清晰、侧脸线条利落",
-        "侧脸中等",
-        "下颌线不清晰/下颌偏平",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
     },
     {
-      "field": "photo.face.eye_brow_symmetry",
-      "id": "face.eye_brow_symmetry",
-      "label": "眉眼对称度（大小眼/高低眉）",
+      "field": "photo.looks.height",
+      "id": "looks.height",
+      "label": "身高（男性硬上限 / 女性优势或小幅减分）",
       "type": "enum",
-      "values": [
-        "双眼与眉毛对称",
-        "轻度不对称（可见但不明显）",
-        "明显大小眼或高低眉",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
     },
     {
-      "field": "photo.face.skin",
-      "id": "face.skin",
+      "field": "photo.looks.weight",
+      "id": "looks.weight",
+      "label": "体重 / 胖瘦",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.skin",
+      "id": "looks.skin",
       "label": "皮肤状态",
       "type": "enum",
-      "values": [
-        "皮肤细腻有光泽",
-        "皮肤状态一般",
-        "可见明显痘印/泛红/暗沉",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
     },
     {
-      "field": "photo.body.height",
-      "id": "body.height",
-      "label": "身高（自评优先，照片仅作参考）",
+      "field": "photo.looks.grooming",
+      "id": "looks.grooming",
+      "label": "穿搭 / 发型 / 妆容 / 干净度",
       "type": "enum",
-      "values": [
-        "明显低于同龄均值",
-        "略低于同龄均值",
-        "同龄均值",
-        "高于同龄均值",
-        "明显高于同龄均值",
-        "未提供"
-      ],
-      "source": "knowledge/photo-dimensions.json"
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
     },
     {
-      "field": "photo.body.weight",
-      "id": "body.weight",
-      "label": "体重 / 胖瘦观感",
-      "type": "enum",
-      "values": [
-        "偏瘦",
-        "匀称",
-        "偏胖（微胖）",
-        "明显超重",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
-    },
-    {
-      "field": "photo.body.figure",
-      "id": "body.figure",
-      "label": "身材比例",
-      "type": "enum",
-      "values": [
-        "比例协调",
-        "比例一般",
-        "比例失衡（如腿身比或肩腰比明显不协调）",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
-    },
-    {
-      "field": "photo.style.grooming",
-      "id": "style.grooming",
-      "label": "穿搭",
-      "type": "enum",
-      "values": [
-        "穿搭得体在线",
-        "整洁普通",
-        "明显随意或不利落",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
-    },
-    {
-      "field": "photo.style.hair",
-      "id": "style.hair",
-      "label": "发型",
-      "type": "enum",
-      "values": [
-        "发型适配脸型",
-        "发型普通但不影响",
-        "发型不适配（遮挡眉眼或显头大）",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
-    },
-    {
-      "field": "photo.style.makeup",
-      "id": "style.makeup",
-      "label": "妆容（女性；男性仅记录是否上妆）",
-      "type": "enum",
-      "values": [
-        "无妆（素颜）",
-        "淡妆",
-        "浓妆",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
-    },
-    {
-      "field": "photo.presence.posture",
-      "id": "presence.posture",
+      "field": "photo.looks.posture_presence",
+      "id": "looks.posture_presence",
       "label": "体态 / 气质 / 精神状态",
       "type": "enum",
-      "values": [
-        "体态挺拔、状态鲜活",
-        "体态正常、状态一般",
-        "含胸驼背或状态疲惫",
-        "无法判断"
-      ],
-      "source": "knowledge/photo-dimensions.json"
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.looks.figure_ratio",
+      "id": "looks.figure_ratio",
+      "label": "身材比例",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.dim.face_score",
+      "id": "dim.face_score",
+      "label": "颜值（长相）",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.dim.body_shape",
+      "id": "dim.body_shape",
+      "label": "身材/体态",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
+    },
+    {
+      "field": "photo.dim.grooming",
+      "id": "dim.grooming",
+      "label": "形象打理/干净度",
+      "type": "enum",
+      "values": null,
+      "source": "knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>"
     }
   ],
   "ops": [
@@ -1205,6 +1108,7 @@
     "context.gender（与 subject.gender 重复——两条路径指向同一事实是陷阱，已要求 webapp 移除）"
   ],
   "warnings": [
-    "appearance.selfTrack / photoTrack 是对象（{raw, adjusted, low, high, reasons}），只能用其标量子路径（.raw/.adjusted/.low/.high）做数值比较。"
+    "appearance.selfTrack / photoTrack 是对象（{raw, adjusted, low, high, reasons}），只能用其标量子路径（.raw/.adjusted/.low/.high）做数值比较。",
+    "photo 维度以 knowledge/rules.json 的 appearance 维度为准（运行期注入键）；knowledge/photo-dimensions.json 中未在 ruleset 定义的 face.eye_brow_symmetry / style.hair / style.makeup 不会注入，已从字典剔除。"
   ]
 }

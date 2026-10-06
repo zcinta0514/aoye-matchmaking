@@ -231,7 +231,7 @@ async function main() {
   state.groups = doc.groups;
   renderForm();
   document.getElementById("photo-input").addEventListener("change", (event) => {
-    state.files = Array.from(event.target.files).slice(0, 3);
+    state.files = Array.from(event.target.files).slice(0, 1);
     renderPhotoPreviews();
   });
   document.getElementById("fill-sample").addEventListener("click", fillSample);

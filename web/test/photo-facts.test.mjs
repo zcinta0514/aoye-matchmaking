@@ -21,12 +21,12 @@ const FORM = { gender: "female", age: 29, city: "杭州", height_cm: 163, educat
 
 test("photo.* 注入：观测到才注入，未观测保持 undefined", () => {
   const facts = buildPhotoFacts({ dimensions: [
-    { id: "face.three_courts", observed: "三段均衡" },
+    { id: "looks.three_courts", observed: "三段均衡" },
     { id: "face.nose", observed: null },
     { id: "looks.skin", observed: "   " },
     { id: "face.shape", observed: "鹅蛋脸" }
   ] });
-  assert.equal(facts["face.three_courts"], "三段均衡");
+  assert.equal(facts["looks.three_courts"], "三段均衡");
   assert.equal(facts["face.shape"], "鹅蛋脸");
   assert.equal("face.nose" in facts, false, "未观测到不得注入键（更不得是 null/0/空串）");
   assert.equal("looks.skin" in facts, false);
@@ -34,9 +34,9 @@ test("photo.* 注入：观测到才注入，未观测保持 undefined", () => {
 });
 
 test("buildFacts：photo 与 appearance.photoTrack 标量子路径", () => {
-  const photoTrack = { mode: "model", dimensions: [{ id: "face.three_courts", observed: "三段均衡" }], mappedInterval: { low: 3, high: 4 } };
+  const photoTrack = { mode: "model", dimensions: [{ id: "looks.three_courts", observed: "三段均衡" }], mappedInterval: { low: 3, high: 4 } };
   const facts = buildFacts(FORM, { cityTier: 2 }, { final: null, divergence: null, divergenceAbs: null, selfTrack: null, photoTrack }, { items: [], score: null }, { items: [], score: null });
-  assert.equal(facts.photo["face.three_courts"], "三段均衡");
+  assert.equal(facts.photo["looks.three_courts"], "三段均衡");
   assert.equal(facts.appearance.photoTrack.low, 3);
   assert.equal(facts.appearance.photoTrack.high, 4);
 
@@ -114,10 +114,10 @@ test("端到端：引用 photo.* 的 machine.when 真的会触发（并有启动
     version: "9.9",
     generatedAt: "2026-10-06T00:00:00Z",
     scales: [{ id: "appearance", name: "颜值分", min: 1, max: 9, anchors: [{ label: "普通人", score: 3.5, min: 3, max: 4, observable: [] }], evidence }],
-    dimensions: [{ id: "face.three_courts", name: "三庭比例", group: "appearance", type: "photo", evidence }],
+    dimensions: [{ id: "looks.three_courts", name: "三庭比例", group: "appearance", type: "photo", evidence }],
     rules: [{
       id: "R-PHOTO-001", scope: "advice", title: "三庭均衡提示", when: "三庭均衡", then: "记录",
-      machine: { when: { field: "photo.face.three_courts", op: "eq", value: "三段均衡" }, then: [{ kind: "advice", text: "照片维度命中：三庭均衡。" }] },
+      machine: { when: { field: "photo.looks.three_courts", op: "eq", value: "三段均衡" }, then: [{ kind: "advice", text: "照片维度命中：三庭均衡。" }] },
       confidence: "medium", evidence
     }],
     bands: [],
@@ -134,7 +134,7 @@ test("端到端：引用 photo.* 的 machine.when 真的会触发（并有启动
     ok: true,
     status: 200,
     text: async () => JSON.stringify({ choices: [{ message: { content: JSON.stringify({
-      dimensions: [{ id: "face.three_courts", observed: "三段均衡", level: "average", confidence: "medium" }],
+      dimensions: [{ id: "looks.three_courts", observed: "三段均衡", level: "average", confidence: "medium" }],
       anchorFits: [{ label: "普通人", fit: 0.8, reason: "无强记忆点" }],
       dataQuality: { usable: true, issues: [] },
       caveats: []

@@ -8,6 +8,7 @@ import { loadBandCriteria, evaluateBands } from "./bands.mjs";
 import { newId, roundTo, formatNumber } from "./util.mjs";
 import { STRENGTH, loadIndependence, loadQualityFlags, classifyEvidence, strengthOfDimension, strengthOfRule, strengthMeta, isCountable, summarize, claimBadgeForRule } from "./strength.mjs";
 import { loadExtrapolationRules, evaluateExtrapolations } from "./extrapolation.mjs";
+import { displayValue, scopeLabel, viaLabel, PHOTO_MODE_LABELS, APPEARANCE_BASIS_LABELS, CONFIDENCE_LABELS, PHOTO_LEVEL_LABELS } from "./labels.mjs";
 
 const WEB_DIR = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const REPO_ROOT = path.dirname(WEB_DIR);
@@ -111,6 +112,13 @@ export async function generateReport(options) {
 
   const appearanceScale = getScale(ruleset, "appearance");
   const appearanceDims = ruleset.dimensions.filter((dim) => dim.group === "appearance");
+  /* 照片维度前置筛选（降本）：只把知识库维度送进模型，24 → 18（测试锁定见 web/test/photo-dims.test.mjs）。
+     依据（全库扫描）：6 个演示基线维度（face.shape / face.nose / face.harmony / body.posture / vibe.style /
+     grooming.hair_makeup）没有任何规则引用（machine/then 里的 photo.<id> 无命中）、不参与 level 与锚点映射，
+     属纯描述且与知识库同类维度重复 → 从 prompt 里去掉了；知识库 18 维全部保留（语料定义的可观察维度集，
+     也是锚点评估与报告展示的上下文）。注：R-LOOKS-014 引用的 5 个 photo.face.* 字段与知识库维度 id（looks.*）
+     不一致，属知识侧历史遗留，本任务不处理。 */
+  const photoModelDims = appearanceDims.filter((dim) => dim._origin !== "web-baseline");
   const hardwareDims = ruleset.dimensions.filter((dim) => dim.group === "hardware" || dim.group === "family");
   const softDims = ruleset.dimensions.filter((dim) => dim.group === "soft");
   const dimById = new Map(ruleset.dimensions.map((dim) => [dim.id, dim]));
@@ -121,7 +129,7 @@ export async function generateReport(options) {
 
   /* 1) 照片轨道 */
   const photoTrackRaw = appearanceScale
-    ? await analyzePhotos({ photos, dimensions: appearanceDims, anchors: appearanceScale.anchors || [], config, fetchImpl })
+    ? await analyzePhotos({ photos, dimensions: photoModelDims, anchors: appearanceScale.anchors || [], config, fetchImpl })
     : { mode: "none", dimensions: [], anchorFits: [], caveats: ["规则集缺少 appearance 标尺。"], dataQuality: { usable: null, issues: [] }, model: null };
   const photoInterval = appearanceScale ? mapAnchorsToInterval(photoTrackRaw.anchorFits, appearanceScale.anchors || [], appearanceScale, photoTuning) : null;
 
@@ -157,6 +165,7 @@ export async function generateReport(options) {
       weightSource: dim.weightSource || (dim._origin === "web-baseline" ? "engineering" : null),
       evidenceStatus: (item.evidence || []).length ? "corpus" : "none",
       evidenceNote: (item.evidence || []).length ? null : NO_EVIDENCE_NOTE,
+      inputText: displayValue(item.field, item.input),
       counted: scored && hasWeight,
       countableForLevel
     });
@@ -185,7 +194,7 @@ export async function generateReport(options) {
   const useComposite = Boolean(hardwareComposite && hardwareComposite.available);
   const hardware = {
     basis: useComposite ? "corpus-composite" : "engineering-weights",
-    basisLabel: useComposite ? "语料复合表（corpus composite）" : "工程权重（engineering weights）",
+    basisLabel: useComposite ? "语料十项表（博主原表加分制）" : "工程权重（系统默认权重）",
     basisStrength: useComposite ? compositeStrength.level : STRENGTH.ENGINEERING_DEFAULT,
     basisStrengthLabel: strengthMeta(useComposite ? compositeStrength.level : STRENGTH.ENGINEERING_DEFAULT).label,
     score: useComposite ? hardwareComposite.scaleScore : engineeringScore,
@@ -256,6 +265,7 @@ export async function generateReport(options) {
     final: finalAppearance,
     finalLabel: appearanceLabel,
     basis: appearanceBasis,
+    basisLabel: APPEARANCE_BASIS_LABELS[appearanceBasis] || "—",
     selfMissing: selfTrack === null,
     strength: appearanceStrength,
     strengthLabel: appearanceMeta.label,
@@ -267,7 +277,13 @@ export async function generateReport(options) {
     evidenceNote: appearanceStrengthBase.count > 0 ? null : NO_EVIDENCE_NOTE,
     clampsApplied: clamped.applied,
     selfTrack,
-    photoTrack: Object.assign({}, photoTrackRaw, { mappedInterval: photoInterval, dimensions: photoTrackRaw.dimensions || [] }),
+    photoTrack: Object.assign({}, photoTrackRaw, {
+      mappedInterval: photoInterval,
+      dimensions: (photoTrackRaw.dimensions || []).map((dim) => Object.assign({}, dim, {
+        confidenceLabel: dim.confidence ? (CONFIDENCE_LABELS[dim.confidence] || null) : null,
+        levelLabel: dim.level ? (PHOTO_LEVEL_LABELS[dim.level] || null) : null
+      }))
+    }),
     divergence,
     divergenceAbs
   };
@@ -373,7 +389,7 @@ export async function generateReport(options) {
   if (!band && bandEvaluation.matched.length) {
     const hit = bandEvaluation.matched[0];
     band = { id: hit.id, name: hit.name, bandType: hit.bandType, origin: "knowledge" };
-    bandSource = "按表单字段对应博主档位（corpus band）";
+    bandSource = "按表单字段对应博主档位（语料档位）";
   }
   if (!band && !bandNote) {
     bandNote = bandEvaluation.missingFields.length
@@ -511,6 +527,28 @@ export async function generateReport(options) {
     ? ((matchedBandRecord.targetProfile && matchedBandRecord.targetProfile.summary) || matchedBandRecord.reachableMatch || null)
     : null;
 
+  /* 结论先行（A1/D32）：一句话定位 + 上限/下限 + 2–3 句概况；工程账本一律下沉。 */
+  const scoredForHero = hardwareBreakdown.concat(softBreakdown).filter((item) => item.countableForLevel && typeof item.score === "number");
+  const strengths = scoredForHero.slice().sort((a, b) => b.score - a.score).filter((item) => item.score >= 6).slice(0, 2);
+  const blockers = scoredForHero.slice().sort((a, b) => a.score - b.score).filter((item) => item.score <= 5).slice(0, 2);
+  const heroText = [];
+  if (strengths.length) heroText.push("相对占优的是：" + strengths.map((item) => item.name + "（" + formatNumber(item.score) + " 分）").join("、"));
+  if (blockers.length) heroText.push("相对偏弱的是：" + blockers.map((item) => item.name + "（" + formatNumber(item.score) + " 分）").join("、"));
+  if (extrapolation.active) heroText.push("你的组合在该机构语料里样本不足，部分结论由相近人群外推，误差不可估计");
+  if (excludedItems.length) heroText.push("另有 " + excludedItems.length + " 项因证据不足未计入，整体确定性有限");
+  if (!heroText.length) heroText.push("现有信息里没有足够的长板或短板项可以概括");
+  const hero = {
+    positioning: band
+      ? "按该机构公开内容的口径，你大致落在「" + band.name + "」这一档附近（综合约 " + formatNumber(level) + " 分）"
+      : (typeof level === "number"
+        ? "按该机构公开内容的口径，你的综合水平约 " + formatNumber(level) + " 分，当前没有对应的档位词汇"
+        : "本次可用的信息不足以给出综合分"),
+    analysis: heroText.slice(0, 3).map((text) => text.replace(/[；;]$/, "") + "。"),
+    upper: matchWindow ? matchWindow.upper.score : null,
+    stable: matchWindow ? { low: matchWindow.stable.low, high: matchWindow.stable.high } : null,
+    lower: matchWindow ? matchWindow.lower.score : null,
+    note: "上限与下限是按该机构表述口径与工程窗口参数算出的参考区间，不是预测。"
+  };
   /* 12) caveats */
   const caveats = [
     { type: "disclosure", text: DISCLOSURE.text },
@@ -530,7 +568,7 @@ export async function generateReport(options) {
   if (independence.provisional) {
     caveats.push({ type: "independence-provisional", text: independence.note });
   }
-  caveats.push({ type: "band-vocabulary", text: bandEvaluation.disclaimer + " baseline 的 S/A/B/C 刻度属 engineering-default，只作参照、不作为结论。" });
+  caveats.push({ type: "band-vocabulary", text: bandEvaluation.disclaimer + " 自创的 S/A/B/C 刻度无语料依据，只作参照、不作为结论。" });
   if (context.cityMatched === false) {
     caveats.push({ type: "city-tier-fallback", text: "城市「" + String(form.city) + "」不在演示分档表中，收入等按默认档（三线）处理：该档位无语料依据。" });
   }
@@ -539,22 +577,22 @@ export async function generateReport(options) {
   if (evidenceSummary.withoutEvidence > 0) {
     caveats.push({ type: "no-evidence-items", text: "有 " + evidenceSummary.withoutEvidence + " 个计分项无语料依据（工程默认/基线），已排除出综合分。" });
   }
-  caveats.push({ type: "weight-source", text: "计分权重当前全部为工程默认（dimension.weightSource=engineering）：分值排序对权重敏感，知识库给出权重依据后需重算。" });
-  caveats.push({ type: "photo-track", text: "照片轨道：" + photoTrackRaw.mode + "。" + (photoTrackRaw.caveats || []).join(" ") });
+  caveats.push({ type: "weight-source", text: "计分权重当前为系统默认设置：分值排序对权重敏感，知识库给出权重依据后需重算。" });
+  caveats.push({ type: "photo-track", text: "照片分析：" + (PHOTO_MODE_LABELS[photoTrackRaw.mode] || photoTrackRaw.mode) + "。" + (photoTrackRaw.caveats || []).join(" ") });
   if (ruleset.supersededDimensions.length) {
-    caveats.push({ type: "superseded", text: "演示基线中有 " + ruleset.supersededDimensions.length + " 个字段已被知识库维度接管（如 " + ruleset.supersededDimensions[0].id + " → " + ruleset.supersededDimensions[0].supersededBy + "），不再重复计分。" });
+    caveats.push({ type: "superseded", text: "演示基线中有 " + ruleset.supersededDimensions.length + " 个字段已被知识库维度接管，不再重复计分。" });
   }
   if (compositeMissingCriteria) {
-    caveats.push({ type: "composite-no-criteria", text: "知识库提供了 " + compositeMissingCriteria + "，但 web/config/composite-criteria.json 还没有逐项条件：本次仍按工程权重法（engineering-default，D17）。" });
+    caveats.push({ type: "composite-no-criteria", text: "知识库里有对应的语料表，但配套的逐项条件还没有接入：本次仍按权重法（系统默认）计算。" });
   }
   if (hardware.basis === "corpus-composite" && hardware.composite) {
-    caveats.push({ type: "composite-basis", text: "男生硬件分采用语料十项加分表（composites.hardware.male）：原分上限 " + hardware.composite.rawMax + " 归一化到 " + hardware.composite.toMax + " 再映射 1–9，并作为综合分的硬件槽位（定义型单源，1 条转写 / 1 个账号，D21 允许为 hard）；工程权重表仅作参考展示（权重为工程默认，D17）。" });
+    caveats.push({ type: "composite-basis", text: "男生硬件分采用语料十项加分表（博主原表）：原分上限 " + hardware.composite.rawMax + " 归一化到 " + hardware.composite.toMax + " 再映射 1–9，并作为综合分的硬件槽位（定义型单源：1 条转写 / 1 个账号，按项目规则允许作为硬性依据）；权重法表格仅作参考（权重为系统默认）。" });
     if (hardware.composite.gaps.length) {
       caveats.push({ type: "composite-form-gaps", level: "warning", text: "复合表有 " + hardware.composite.gaps.length + " 项因表单缺字段暂不计分（" + hardware.composite.gaps.map((gap) => gap.needField).join("、") + "）：当前可计算满分 " + hardware.composite.computableMax + "/" + hardware.composite.rawMax + " → 归一化上限 " + hardware.composite.computableMaxNormalized + "。" });
     }
   }
   if (!useComposite) {
-    caveats.push({ type: "hardware-basis-engineering", level: "warning", text: "硬件分采用工程权重法：评分表的维度证据可用，但权重为工程默认（weightSource=engineering，D17）；数字仅供参照。" });
+    caveats.push({ type: "hardware-basis-engineering", level: "warning", text: "硬件分采用权重法：维度证据可用，但权重为系统默认设置；数字仅供参照。" });
   }
   const dataQuality = photoTrackRaw.dataQuality || {};
   if (Array.isArray(dataQuality.issues) && dataQuality.issues.length) {
@@ -601,7 +639,8 @@ export async function generateReport(options) {
       coverage: ruleset.coverage,
       warnings: ruleset.warnings,
       model: photoTrackRaw.model,
-      photoMode: photoTrackRaw.mode
+      photoMode: photoTrackRaw.mode,
+      photoModeLabel: PHOTO_MODE_LABELS[photoTrackRaw.mode] || "未启用"
     },
     confidence: {
       method: "D11 分层可信度",
@@ -623,6 +662,7 @@ export async function generateReport(options) {
     appearance,
     hardware,
     soft,
+    summary: hero,
     level,
     levelIfAllCounted,
     portrait: {
@@ -664,7 +704,7 @@ export async function generateReport(options) {
       const measured = strengthOfRule(source || { id: rule.ruleId, evidence: rule.evidence }, independence);
       const strength = strengthMeta(measured.level);
       return {
-        ruleId: rule.ruleId, scope: rule.scope, title: rule.title, origin: rule.origin, mirrors: rule.mirrors, via: rule.via,
+        ruleId: rule.ruleId, scope: rule.scope, scopeLabel: scopeLabel(rule.scope), title: rule.title, origin: rule.origin, mirrors: rule.mirrors, via: rule.via, viaLabel: viaLabel(rule.via),
         strength: strength.label, strengthColor: strength.color, strengthMethod: measured.method || null, strengthReason: measured.reason, strengthProvisional: measured.provisional === true,
         qualityDowngraded: measured.qualityDowngraded === true, qualityFlagged: measured.qualityFlagged || [],
         evidence: collectEvidence(rule.evidence, "rule:" + rule.ruleId, measured.level)

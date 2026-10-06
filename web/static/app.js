@@ -9,6 +9,7 @@ import { buildSample } from "../lib/sample.mjs";
 import { providerConfig } from "../lib/provider.mjs";
 
 const BUILD_PHOTOS_MODE = "__PHOTOS_MODE__";
+const ACCESS_CODE_KEY = "aoye:access_code";
 
 const DATA_FILES = [
   "data/rules.json", "data/baseline-rules.json", "data/form-fields.json", "data/cities.json",
@@ -151,6 +152,7 @@ function applyPhotoModeUi() {
     ensureNote("公开版未开放照片分析：本页只跑表单自评 + 规则引擎。自建部署可用 --photos=byok / --photos=proxy 重新构建。");
   } else if (BUILD_PHOTOS_MODE === "proxy") {
     ensureNote("图像分析由本站代理完成，无需自备 key；每日总量有限，失败请稍后重试。照片只用于本次分析，不保存在服务器。");
+    setupAccessCode();
   } else {
     ensureNote("BYOK：直接在浏览器里调用你自己填写的服务商。你的 key 存在本浏览器本地，请求直连你填的服务商；本静态站无后端，无法保护它的安全。");
     const panel = ensureByokPanel();
@@ -161,6 +163,62 @@ function applyPhotoModeUi() {
     panel.classList.remove("hidden");
   }
 }
+/* 访问码：只存在本浏览器（localStorage），不写进产物 / 日志 / 链接。 */
+function getAccessCode() {
+  try { return window.localStorage.getItem(ACCESS_CODE_KEY) || ""; } catch { return ""; }
+}
+function setAccessCode(value) {
+  try {
+    const text = String(value || "").trim();
+    if (text) window.localStorage.setItem(ACCESS_CODE_KEY, text);
+    else window.localStorage.removeItem(ACCESS_CODE_KEY);
+  } catch { /* 隐私模式等：忽略 */ }
+}
+function refreshAccessButtons() {
+  const clear = document.getElementById("access-code-clear");
+  if (clear) clear.classList.toggle("hidden", !getAccessCode());
+}
+function openAccessPanel(message) {
+  const panel = document.getElementById("access-code-panel");
+  if (!panel) return;
+  panel.classList.remove("hidden");
+  const status = document.getElementById("access-code-status");
+  if (status) status.textContent = message || "";
+  const input = document.getElementById("access-code-input");
+  if (input) { input.value = getAccessCode(); input.focus(); }
+  refreshAccessButtons();
+}
+function closeAccessPanel() {
+  const panel = document.getElementById("access-code-panel");
+  if (panel) panel.classList.add("hidden");
+  const status = document.getElementById("access-code-status");
+  if (status) status.textContent = "";
+}
+function setupAccessCode() {
+  const panel = document.getElementById("access-code-panel");
+  if (!panel) return;
+  const link = document.getElementById("access-code-link");
+  if (link) {
+    link.classList.remove("hidden");
+    link.addEventListener("click", (event) => { event.preventDefault(); openAccessPanel(""); });
+  }
+  document.getElementById("access-code-save").addEventListener("click", () => {
+    setAccessCode(document.getElementById("access-code-input").value);
+    const saved = Boolean(getAccessCode());
+    document.getElementById("access-code-status").textContent = saved
+      ? "已保存在本浏览器（localStorage），生成报告时会自动带上。"
+      : "已清除访问码。";
+    refreshAccessButtons();
+    if (saved) setTimeout(closeAccessPanel, 1200);
+  });
+  document.getElementById("access-code-clear").addEventListener("click", () => {
+    setAccessCode("");
+    openAccessPanel("已清除访问码，请重新输入。");
+  });
+  if (!getAccessCode()) openAccessPanel("首次使用：这个工具是私人的，请先填写访问码。");
+  else { refreshAccessButtons(); closeAccessPanel(); }
+}
+
 function saveByok() {
   const settings = {
     baseUrl: document.getElementById("llm-base-url").value.trim(),
@@ -205,6 +263,12 @@ async function submit(event) {
       button.disabled = false;
       return;
     }
+    if (BUILD_PHOTOS_MODE === "proxy" && state.files.length && !getAccessCode()) {
+      openAccessPanel("照片分析需要访问码，请先填写后再生成。");
+      status.textContent = "";
+      button.disabled = false;
+      return;
+    }
     status.textContent = "本地计算中（规则引擎 + 交叉校准）…";
     const photos = BUILD_PHOTOS_MODE !== "off" && state.files.length ? await Promise.all(state.files.map(readAsFile)) : [];
     const report = await runReport(form, photos);
@@ -238,7 +302,7 @@ async function main() {
   renderForm();
   applyPhotoModeUi();
   document.getElementById("photo-input").addEventListener("change", (event) => {
-    state.files = Array.from(event.target.files).slice(0, 3);
+    state.files = Array.from(event.target.files).slice(0, 1);
     const box = document.getElementById("photo-previews");
     box.innerHTML = "";
     state.files.forEach((file) => {

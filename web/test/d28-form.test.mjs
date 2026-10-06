@@ -61,7 +61,7 @@ test("D28：颜值三条轨道的留空语义（无自评无照片 / 仅照片 /
   const fetchImpl = async () => ({
     ok: true, status: 200,
     text: async () => JSON.stringify({ choices: [{ message: { content: JSON.stringify({
-      dimensions: [{ id: "face.three_courts", observed: "三段均衡", level: "average", confidence: "medium" }],
+      dimensions: [{ id: "looks.three_courts", observed: "三段均衡", level: "average", confidence: "medium" }],
       anchorFits: [{ label: "普通人", fit: 0.8, reason: "无强记忆点" }],
       dataQuality: { usable: true, issues: [] }, caveats: []
     }) } }] })

@@ -83,7 +83,9 @@ test("启动日志：不回显 key 与 base_url 路径", async () => {
     const timer = setTimeout(() => { child.kill(); finish(); }, 8000);
     child.stdout.on("data", (chunk) => {
       buffer += chunk.toString();
-      if (buffer.indexOf("http://127.0.0.1:") !== -1) { clearTimeout(timer); child.kill(); finish(); }
+      // 等启动 banner 完整（地址行 + 模型行）再杀子进程：地址行先于模型行输出，
+      // 过早 kill 会偶发丢行，让「只回显域名」断言随机失败（本用例实测三次一红）。
+      if (buffer.indexOf("http://127.0.0.1:") !== -1 && buffer.indexOf("模型") !== -1) { clearTimeout(timer); child.kill(); finish(); }
     });
     child.stderr.on("data", (chunk) => { buffer += chunk.toString(); });
     child.on("exit", () => { clearTimeout(timer); finish(); });

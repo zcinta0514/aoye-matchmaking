@@ -121,3 +121,40 @@ th { font-size: 12px; color: var(--muted); font-weight: 600; }
 .caveat { font-size: 13px; color: var(--muted); }
 @media print { .topbar, .report-actions { display: none; } body { background: #fff; } .card { break-inside: avoid; } }
 @media (max-width: 620px) { .field { grid-template-columns: 1fr; } .field .help { grid-column: 1; } }
+
+/* 结论先行（D32）：hero 卡 + 默认折叠的分区卡 */
+.hero-card h1 { margin: 0 0 4px; font-size: 24px; }
+.hero-positioning { font-size: 17px; line-height: 1.6; margin: 6px 0 16px; }
+.hero-numbers { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-num { flex: 1 1 220px; background: #fbfaf7; border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; }
+.hero-num .hero-label { font-size: 13px; color: var(--muted); }
+.hero-num .hero-value { font-size: 34px; font-weight: 700; color: var(--accent); line-height: 1.25; }
+.hero-stable { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
+.hero-analysis { margin: 12px 0 0; padding-left: 20px; }
+.hero-analysis li { margin: 4px 0; }
+.hero-note { margin: 12px 0 0; font-size: 12px; color: var(--muted); }
+.card-fold { margin: 12px 0; }
+.card-fold > summary { list-style: none; cursor: pointer; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 20px; font-size: 16px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+.card-fold > summary::-webkit-details-marker { display: none; }
+.card-fold > summary::after { content: "▸"; color: var(--muted); font-weight: 400; margin-left: 10px; }
+.card-fold[open] > summary::after { content: "▾"; }
+.card-fold[open] > summary { border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.card-fold > .card { margin: 0; border-top: 0; border-top-left-radius: 0; border-top-right-radius: 0; }
+.card-fold.giveup-fold > summary { border-color: #f0c9bf; background: #fffaf8; color: #8c2f18; }
+@media print { .card-fold > summary { border-radius: 12px; } }
+
+/* 打印/存 PDF 时把折叠内容全部展开（浏览器 UA 对 closed details 只是 display:none，可覆盖） */
+@media print {
+  details > *:not(summary) { display: block !important; }
+  .card-fold > summary::after { content: ""; }
+}
+
+/* 档位表里「未评估的档位」折叠行（默认一行，点开看明细） */
+.inline-details { display: inline; }
+.inline-details > summary { display: inline; cursor: pointer; color: var(--muted); font-size: 13px; }
+.inline-details > ul { margin: 6px 0 0; padding-left: 18px; }
+
+/* 照片明细折叠（嵌在颜值分区里） */
+.photo-detail { margin-top: 14px; }
+.photo-detail > summary { cursor: pointer; font-weight: 600; }
+h4 { font-size: 14px; margin: 16px 0 6px; }

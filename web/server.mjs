@@ -35,7 +35,7 @@ const EXTRAPOLATION_PATH = env.AOYE_EXTRAPOLATION_PATH || path.join(WEB_DIR, "co
 const FACTS_PATH = env.AOYE_FACTS_PATH || path.join(REPO_ROOT, "knowledge", "facts.json");
 const MAX_PHOTO_BYTES = Number(env.AOYE_MAX_PHOTO_MB || 10) * 1024 * 1024;
 const MAX_JSON_BYTES = 512 * 1024;
-const MAX_PHOTOS = 3;
+const MAX_PHOTOS = 1;
 const LOOPBACK_HOSTS = new Set(["127.0.0.1", "localhost", "::1", "[::1]"]);
 
 const MIME_TYPES = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".json": "application/json; charset=utf-8", ".svg": "image/svg+xml", ".png": "image/png", ".ico": "image/x-icon" };

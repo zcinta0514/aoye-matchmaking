@@ -35,6 +35,7 @@ test("静态构建（--photos=off）：产物完整、零密钥、无服务端�
     assert.equal(/data[/](video|transcripts)/.test(rel), false, "不得包含语料目录：" + rel);
     const text = fs.readFileSync(file, "utf8");
     assert.equal(/sk-[A-Za-z0-9_-]{8,}/.test(text), false, "不得包含疑似 key：" + rel);
+    assert.equal(text.indexOf("AOYE_ACCESS_CODE"), -1, "不得包含服务端访问码变量名：" + rel);
   });
 
   const appSource = fs.readFileSync(path.join(out, "assets/app.js"), "utf8");
@@ -59,6 +60,7 @@ test("静态构建（--photos=byok）：包含 BYOK 面板与安全警告，仍�
   const files = walk(out);
   files.forEach((file) => {
     assert.equal(/sk-[A-Za-z0-9_-]{8,}/.test(fs.readFileSync(file, "utf8")), false, "构建产物不得含 key：" + path.relative(out, file));
+    assert.equal(fs.readFileSync(file, "utf8").indexOf("AOYE_ACCESS_CODE"), -1, "构建产物不得含访问码变量名：" + path.relative(out, file));
   });
 });
 test("静态构建（--photos=proxy）：必须给 --proxy-url；前端不接触任何 key", () => {

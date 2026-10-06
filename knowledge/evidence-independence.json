@@ -1046,8 +1046,8 @@
       "title": "颜值分是 1-9 分制、0.5 分一档的位次分",
       "scope": "scoring",
       "currentConfidence": "medium",
-      "rawEvidence": 5,
-      "uniqueAfterDedup": 5,
+      "rawEvidence": 4,
+      "uniqueAfterDedup": 4,
       "independentUnits": 4,
       "accountsAfterDedup": [
         "47590488570",
@@ -1099,8 +1099,8 @@
       "title": "5.0-5.3 = 无争议的宿舍花 ≈ 有争议的班花/班草",
       "scope": "scoring",
       "currentConfidence": "medium",
-      "rawEvidence": 4,
-      "uniqueAfterDedup": 4,
+      "rawEvidence": 3,
+      "uniqueAfterDedup": 3,
       "independentUnits": 3,
       "accountsAfterDedup": [
         "47590488570",
@@ -1118,8 +1118,8 @@
       "title": "5.5 分 = 有争议的班花班草 / 无争议的校草；首个“颜值红利”门槛",
       "scope": "scoring",
       "currentConfidence": "medium",
-      "rawEvidence": 4,
-      "uniqueAfterDedup": 4,
+      "rawEvidence": 3,
+      "uniqueAfterDedup": 3,
       "independentUnits": 3,
       "accountsAfterDedup": [
         "41252723284",
@@ -1241,8 +1241,8 @@
       "title": "身高低于 1 米 75 的男性不得进入 6 分档（概念口径，不设数值上限）",
       "scope": "scoring",
       "currentConfidence": "high",
-      "rawEvidence": 4,
-      "uniqueAfterDedup": 4,
+      "rawEvidence": 3,
+      "uniqueAfterDedup": 3,
       "independentUnits": 3,
       "accountsAfterDedup": [
         "47590488570",
@@ -1363,8 +1363,8 @@
       "title": "照片/镜头条件会系统性改变判分结果",
       "scope": "scoring",
       "currentConfidence": "high",
-      "rawEvidence": 5,
-      "uniqueAfterDedup": 5,
+      "rawEvidence": 4,
+      "uniqueAfterDedup": 4,
       "independentUnits": 4,
       "accountsAfterDedup": [
         "48854385344",
@@ -2341,7 +2341,7 @@
       "ruleId": "R-MATCH-003",
       "title": "心智首选（第一选择 / plan A）：定义、边界与确定性",
       "scope": "matching",
-      "currentConfidence": "high",
+      "currentConfidence": "medium",
       "rawEvidence": 8,
       "uniqueAfterDedup": 7,
       "independentUnits": 7,
@@ -2357,7 +2357,7 @@
       "ruleId": "R-MATCH-004",
       "title": "竞争池检验：镜像版与小7-8岁对手",
       "scope": "matching",
-      "currentConfidence": "high",
+      "currentConfidence": "medium",
       "rawEvidence": 5,
       "uniqueAfterDedup": 5,
       "independentUnits": 5,
@@ -2727,7 +2727,7 @@
       "ruleId": "R-MATCH-026",
       "title": "30+事业有成男性择偶第一=性格好",
       "scope": "matching",
-      "currentConfidence": "high",
+      "currentConfidence": "medium",
       "rawEvidence": 3,
       "uniqueAfterDedup": 1,
       "independentUnits": 1,
@@ -2739,9 +2739,9 @@
     },
     {
       "ruleId": "R-MATCH-027",
-      "title": "女性对男性的排序：身高优先（多账号口径）",
+      "title": "女性对男性的排序：身高优先（同稿多账号，独立来源≈1）",
       "scope": "matching",
-      "currentConfidence": "high",
+      "currentConfidence": "low",
       "rawEvidence": 5,
       "uniqueAfterDedup": 5,
       "independentUnits": 5,
@@ -4412,11 +4412,12 @@
       }
     },
     "finalSnapshot": {
-      "md5": "07051056fdc490b81b6471412a4442a1",
+      "md5": "7506cfb48ad2ab48ab99a3e1ae605fce",
       "verified": 42,
       "crossAccount": 22,
       "singleSource": 95,
-      "note": "终版冻结快照；含全部层：镜像剔除→内容去重→模板同源→共创同aweme→场次切片→matrixRepetition 排除。"
+      "note": "终版冻结快照：含全部层（镜像剔除→内容去重→模板同源→共创同aweme→场次切片→matrixRepetition 排除）；2026-10-06 可达性修复后 md5 更新为本值（evidence[] 中 5 条矩阵复述项改由 matrixRepetition.evidence 承载，强度不变）。merge 会重写 generatedAt，每次都需以当次 md5 为准。",
+      "reachabilityFix": "R-LOOKS-014 的 5 个死字段已修复（photo.face.*→photo.looks.*）；check_rules 取消 photo.* 白名单；新增 tools/reachability.mjs + reachable-fields.json；48/48 可执行规则零死条件。"
     }
   },
   "downgradedRules": [
@@ -4443,14 +4444,16 @@
     "TD-C01：R-DEMO-006 专项核查补充的引文级跨账号模板实例（aoye28/7643767312504035215 与 aoye98/7644248802190870890）。",
     "V3 全量重扫（2026-10-06）：语料 3346 篇（loader 口径，corpus.mjs=3513）/ 54 账号；严格口径下的真实提级=0（矩阵脚本重发不是独立来源）；桶级变化全部来自 rules.json 编辑（见 summary.v3ChangedRules）。模板：文档级模板簇 102 个、跨账号证据-模板对 0 → 模板降级 0 条。断言级：规则证据未变，45 条断言/12 条归属修正保持。",
     "V3.1（2026-10-06）：按当前 159 条版重算严格强度（内容同源+同aweme共创+同稿骨架+作者组）；25 条规则与作者 sources/sourceCounts 声称的 ≥2 账号冲突，逐条判定见 independence-reconciliation.md。",
-    "V3.2（2026-10-06）：按当前 159 条版做严格重算（只按同内容/同稿骨架/同 aweme/同模板簇合并；同 author 标签只作上下文不合并）；作者声称≥2账号的规则逐条判定，见 independence-reconciliation.md。"
+    "V3.2（2026-10-06）：按当前 159 条版做严格重算（只按同内容/同稿骨架/同 aweme/同模板簇合并；同 author 标签只作上下文不合并）；作者声称≥2账号的规则逐条判定，见 independence-reconciliation.md。",
+    "D31（2026-10-06）：可达性审计——修正前 48 可执行/1 含死条件（R-LOOKS-014 5 字段）/0 完全不可达；修正后 48/0/0。rules.json md5 7506cfb48ad2ab48ab99a3e1ae605fce（merge 会重写 generatedAt）；证据未动。"
   ],
   "rulesSnapshot": {
     "path": "knowledge/rules.json",
-    "md5": "07051056fdc490b81b6471412a4442a1",
+    "md5": "7506cfb48ad2ab48ab99a3e1ae605fce",
     "rules": 159,
-    "ruleEvidence": 415,
-    "frozenAt": "2026-10-06T04:10:16.754Z"
+    "ruleEvidence": 410,
+    "frozenAt": "2026-10-06T06:12:39.655Z",
+    "note": "可达性修复（photo.looks.* 统一）后的规则版本；evidence 410（含 5 条矩阵复述项移入 matrixRepetition.evidence）；强度与 claimIndex 计数不变。注：check_rules --merge 会重写 generatedAt，每次 merge 后 md5 会变，以当次值为准。"
   },
   "templateClusters": [
     {

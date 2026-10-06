@@ -80,7 +80,7 @@ function renderBreakdown(items) {
     const cell = (item.strength === "verified" || item.strength === "cross-account")
       ? badge(item.strength, item.strengthLabel, item.strengthProvisional)
       : "<details class='basis-details'><summary></summary>" + detail + "</details>";
-    return "<tr><td>" + esc(item.name) + "</td><td>" + esc(String(item.input === undefined ? "—" : item.input)) + "</td><td>"
+    return "<tr><td>" + esc(item.name) + "</td><td>" + esc(item.inputText === undefined ? "—" : item.inputText) + "</td><td>"
       + (typeof item.score === "number" ? fmt(item.score) : esc(item.note || "—")) + "</td><td>" + cell + "</td></tr>";
   }).join("");
   const summary = "<p class='conf-line'>本表 " + items.length + " 项：" + strong + " 项机构内一致（绿/蓝标直接可见），"
@@ -148,7 +148,7 @@ function render(report) {
     : badge("engineering-default", "工程默认");
   const hwSub = (hw.basisLabel || "") + "　计入 " + hardwareCounted + " 项　家庭分 " + fmt(hw.familyScore) + hardwareRef;
   const compositeCard = hwComposite && hwComposite.available
-    ? "<div class='card'><h2>男生硬件十项表（语料原话加分制）</h2>" +
+    ? "" +
       "<p class='muted'>" + esc(hwComposite.name || "") + "　" + badge(hw.basisStrength, hw.basisStrengthLabel) +
       "　原分 " + fmt(hwComposite.raw) + "/" + fmt(hwComposite.rawMax) + " → 归一化 " + fmt(hwComposite.normalized) + " → 1–9 标尺 " + fmt(hwComposite.scaleScore) + "（" + esc(hwComposite.scaleLabel || "") + "）</p>" +
       "<table><thead><tr><th>项</th><th>语料条件</th><th>是否达标</th><th>得分</th></tr></thead><tbody>" +
@@ -159,24 +159,24 @@ function render(report) {
       "</tbody></table>" +
       (hwComposite.mapping && hwComposite.mapping.disclosure ? "<p class='muted'>" + esc(hwComposite.mapping.disclosure) + "</p>" : "") +
       ((hwComposite.gaps || []).length ? "<p class='caveat-warning'>表单缺口：" + hwComposite.gaps.map((gap) => esc(gap.needField || gap.item)).join("、") + "（暂不计分，归一化分母按 " + fmt(hwComposite.rawMax) + " 计）</p>" : "") +
-      "</div>"
+      ""
     : "";
   const behavior = report.behaviorCheck || null;
   const behaviorCard = behavior
-    ? "<div class='card'><h2>相亲现场行为自查（不接入分数）</h2>" +
+    ? "" +
       "<p class='muted'>" + esc(behavior.name) + "　" + badge(behavior.strength, behavior.strengthLabel) + "　" + esc(behavior.note || "") + "</p>" +
       "<p>" + esc(behavior.description || "") + "</p>" +
       "<table><thead><tr><th>档位</th><th>分数区间</th><th>可观察</th></tr></thead><tbody>" +
       (behavior.anchors || []).map((anchor) => "<tr><td>" + esc(anchor.label) + "</td><td>" + fmt(anchor.min) + "–" + fmt(anchor.max) + "</td><td>" + esc((anchor.observable || []).join("；")) + "</td></tr>").join("") +
       "</tbody></table>" +
-      "<p class='muted'>证据：" + (behavior.evidence || []).map((item) => esc(item.account) + "/" + esc(item.aweme_id)).join("、") + "</p></div>"
+      "<p class='muted'>证据：" + (behavior.evidence || []).map((item) => esc(item.account) + "/" + esc(item.aweme_id)).join("、") + "</p>"
     : "";
 
   const cards = [
     scoreCard(
       "颜值分（规则映射区间）",
       appearance.final ? (fmt(final.low) + " – " + fmt(final.high)) : "未提供",
-      appearance.final ? ((appearance.finalLabel || "无锚点命中") + "　依据：" + (appearance.basis || "—")) : "未填颜值自评（或数值越界）：不按 0 分计算",
+      appearance.final ? ((appearance.finalLabel || "无锚点命中") + "　依据：" + (appearance.basisLabel || appearance.basis || "—")) : "未填颜值自评（或数值越界）：不按 0 分计算",
       appearance.strength, appearance.strengthLabel, appearance.strengthProvisional
     ),
     scoreCard("硬件分", fmt(hw.score) + (hw.basis === "corpus-composite" ? "（语料表）" : ""), hwSub, "computed", hw.basisLabel || "计入项加权"),
@@ -185,13 +185,13 @@ function render(report) {
       "综合水平 / 梯队",
       fmt(report.level) + "　" + bandCell,
       "全量参考 " + fmt(report.levelIfAllCounted) + "　" + bandSub +
-        (hw.basis === "corpus-composite" ? "　硬件槽位：语料复合表（定义型单源，D21）" : ""),
+        (hw.basis === "corpus-composite" ? "　硬件槽位：语料十项表（定义型单源）" : ""),
       "computed", "仅计入机构内一致项", conf.independence && conf.independence.provisional
     )
   ].join("");
 
   const extrapolationBanner = extrapolation.active
-    ? "<div class='card extrapolation-card'><h2>外推声明（D12）</h2>" + (extrapolation.applied || []).map((item) => "<p>⚠ " + esc(item.message) + "</p>").join("") + "</div>"
+    ? "<div class='card extrapolation-card'><h2>外推说明</h2>" + (extrapolation.applied || []).map((item) => "<p>⚠ " + esc(item.message) + "</p>").join("") + "</div>"
     : "";
 
   const giveUps = (report.giveUps || []).map((item) => "<li>" + esc(item.displayText || item.text) + tag(item.origin) + claimMark(item) + "</li>").join("")
@@ -204,11 +204,64 @@ function render(report) {
   ).join("") || "<tr><td colspan='4' class='muted'>没有因证据不足被排除的计分项。</td></tr>";
 
   const photoDims = (photo.dimensions || []).map((dim) =>
-    "<tr><td>" + esc(dim.name) + "</td><td>" + esc(dim.observed || dim.note || "未分析") + "</td><td>" + esc(dim.level || "—") + "</td><td>" + esc(dim.confidence || "—") + "</td></tr>"
+    "<tr><td>" + esc(dim.name) + "</td><td>" + esc(dim.observed || dim.note || "未分析") + "</td><td>" + esc(dim.levelLabel || "—") + "</td><td>" + esc(dim.confidenceLabel || "—") + "</td></tr>"
   ).join("") || "<tr><td colspan='4' class='muted'>未启用照片分析。</td></tr>";
   const anchorFits = (photo.anchorFits || []).map((fit) =>
     "<tr><td>" + esc(fit.label) + "</td><td>" + fmt(fit.fit, 2) + "</td><td>" + esc(fit.reason) + "</td></tr>"
   ).join("");
+  const photoAnalyzed = (photo.dimensions || []).some((dim) => dim.observed);
+  /* 照片区只做展示减法：默认 3 行摘要；18 维表 / 全部 caveats / 全部质量提示折进同一个折叠区，一行不删。 */
+  const photoJudged = (photo.dimensions || []).filter((dim) => dim.observed && (dim.confidence === "high" || dim.confidence === "medium"));
+  const photoUndecided = (photo.dimensions || []).filter((dim) => photoJudged.indexOf(dim) === -1);
+  const photoIssues = (photo.dataQuality && Array.isArray(photo.dataQuality.issues) ? photo.dataQuality.issues : []).filter(Boolean);
+  const photoCaveatList = photo.caveats || [];
+  /* 6+ 条质量提示归约成一句人话：按关键词归纳，归纳不出来就不展开细节（细节在折叠区里）。 */
+  const condensePhotoIssues = (issues) => {
+    const rules = [
+      [/侧脸|侧视|侧面/, "缺侧脸视角"],
+      [/全身|下肢|腰部|下身|腿|半身/, "缺全身视角"],
+      [/光/, "光照不均"],
+      [/遮挡|遮/, "有遮挡"],
+      [/修图|美颜|滤镜|修饰/, "疑似有修饰"],
+      [/角度|机位|姿势|坐姿|前倾/, "机位角度单一"],
+      [/截断|裁剪|取景|边缘|出画/, "取景不完整"],
+      [/单张|一张|仅一/, "只有一张照片"],
+      [/背景|环境/, "背景信息少"],
+      [/清晰|分辨率|模糊|像素/, "清晰度有限"]
+    ];
+    const hits = [];
+    issues.forEach((issue) => {
+      const hit = rules.find((item) => item[0].test(String(issue)));
+      if (hit && hits.indexOf(hit[1]) === -1) hits.push(hit[1]);
+    });
+    if (!hits.length) return "照片条件有限（" + issues.length + " 条提示，展开可看明细）";
+    return hits.slice(0, 3).join("；");
+  };
+  /* 摘要只写「看出来的部分」：观察文本里夹带的「无法判断 / 未知」半句留在折叠明细里，不进摘要。 */
+  const NEGATIVE_CLAUSE = /无法判断|不可见|未入镜|截断|未知|不明|受限|看不到|难确认|难以确认/;
+  const positiveClauses = (text) => String(text || "").split(/[；;。]/).map((part) => part.trim()).filter((part) => part && !NEGATIVE_CLAUSE.test(part)).join("；");
+  const photoHeadlineSorted = photoJudged
+    .map((dim) => ({ dim, text: positiveClauses(dim.observed) }))
+    .filter((item) => item.text)
+    .sort((a, b) => (b.dim.confidence === "high" ? 1 : 0) - (a.dim.confidence === "high" ? 1 : 0));
+  const photoHeadline = photoHeadlineSorted.length
+    ? "照片能看出来：" + photoHeadlineSorted.slice(0, 3).map((item) => esc(item.dim.name) + "：" + esc(item.text.replace(/。+$/, ""))).join("；") + "。"
+    : "照片能看出来：本次照片里可明确判定的项不多。";
+  const photoUndecidedLine = photoUndecided.length
+    ? "<div class='muted'>另有 " + photoUndecided.length + " 项因角度或光线所限，本次不作判断：<details class='inline-details'><summary>展开查看</summary><ul>" + photoUndecided.map((dim) => "<li>" + esc(dim.name) + "：" + esc(dim.observed || dim.note || "无描述") + "</li>").join("") + "</ul></details></div>"
+    : "";
+  const photoQualityLine = photoIssues.length ? "<p class='muted'>照片质量提醒：" + esc(condensePhotoIssues(photoIssues)) + "</p>" : "";
+  const photoDetailFold = "<details class='section-details photo-detail'><summary>照片能看到什么、看不到什么</summary>" +
+    "<h4>逐项描述（" + (photo.dimensions || []).length + " 项，模型只描述不打分）</h4>" +
+    "<table><thead><tr><th>维度</th><th>可观察描述</th><th>描述倾向</th><th>描述置信度</th></tr></thead><tbody>" + photoDims + "</tbody></table>" +
+    (anchorFits ? "<h4>锚点符合度（规则映射依据）</h4><table><thead><tr><th>锚点</th><th>fit</th><th>依据</th></tr></thead><tbody>" + anchorFits + "</tbody></table>" : "") +
+    (photoCaveatList.length ? "<h4>需要说明的局限（" + photoCaveatList.length + " 条）</h4><ul>" + photoCaveatList.map((text) => "<li>" + esc(text) + "</li>").join("") + "</ul>" : "") +
+    (photoIssues.length ? "<h4>照片质量提示（" + photoIssues.length + " 条）</h4><ul>" + photoIssues.map((text) => "<li>" + esc(text) + "</li>").join("") + "</ul>" : "") +
+    "</details>";
+  const photoSkipReason = photo.mode === "error"
+    ? "本次未做照片分析：照片分析调用失败，已降级为纯表单模式。"
+    : (/未上传照片/.test(photo.reason || "") ? "本次未做照片分析。上传照片可启用照片维度描述。" : "本次未做照片分析。");
+  const photoSummaryLine = "<p class='muted'>" + esc(photoSkipReason) + "</p>";
 
   const window = report.matchWindow || {};
   const windowHtml = report.matchWindow ? [
@@ -228,7 +281,7 @@ function render(report) {
   ).join("") || "<tr><td colspan='4' class='muted'>本次没有引用知识库证据。</td></tr>";
 
   const rulesApplied = (report.rulesApplied || []).map((rule) =>
-    "<tr><td>" + esc(rule.ruleId) + "</td><td>" + esc(rule.title) + "</td><td>" + esc(rule.scope) + "</td><td>" + esc(rule.via) + "</td><td>" + strengthMark(levelFromLabel(rule.strength), rule.strength, rule.strengthProvisional) + "</td></tr>"
+    "<tr><td>" + esc(rule.ruleId) + "</td><td>" + esc(rule.title) + "</td><td>" + esc(rule.scopeLabel || rule.scope) + "</td><td>" + esc(rule.viaLabel || rule.via) + "</td><td>" + strengthMark(levelFromLabel(rule.strength), rule.strength, rule.strengthProvisional) + "</td></tr>"
   ).join("") || "<tr><td colspan='5' class='muted'>本次没有规则命中。</td></tr>";
 
   const advisory = (report.advisoryRules || []).map((rule) =>
@@ -245,71 +298,125 @@ function render(report) {
     "<li>" + esc(item.text) + (item.satisfied ? " <span class='tag tag-knowledge'>证据已附</span>" : " <span class='tag tag-nonevidence'>规则自身无语料证据</span>") + "</li>"
   ).join("");
   const ruleErrors = (report.ruleErrors || []).map((item) => "<li>" + esc(item.ruleId) + "：" + esc(item.message) + "</li>").join("");
-  const bandStatus = { "matched": "✅ 命中", "not-matched": "—", "input-missing": "输入未提供" };
+  const bandStatus = { "matched": "✅ 命中", "not-matched": "—" };
   const ladderRows = (report.portrait.ladder || []).filter((item) => !item.referenceOnly);
   const referenceRows = (report.portrait.ladder || []).filter((item) => item.referenceOnly);
-  const ladder = ladderRows.map((item) =>
-    "<tr class='" + (item.active ? "row-active" : "") + "'><td>" + (item.active ? "▶ " : "") + esc(item.name) + tag(item.origin) + strengthMark(item.strength) + "</td><td>" + esc(item.definition) + "</td><td>" + esc((item.entryCriteria || []).join("；")) + "</td><td>" + esc(item.reachableMatch || "—") + "</td><td>" + esc(bandStatus[item.matchStatus] || (item.matchStatus === null ? "—" : item.matchStatus)) + (item.needsField ? "（" + esc(item.needsField) + "）" : "") + "</td></tr>"
+  /* 同一句「活动口径」在渠道类档位里重复出现：抽出来统一声明一次，避免每行都挂一遍。 */
+  const sharedNotice = { channel: 0 };
+  const stripChannelNotice = (text) => {
+    const source = String(text === undefined || text === null ? "" : text);
+    const match = source.match(/（[^（）]*仅代表该主办方[^（）]*）\s*$/);
+    if (!match) return source;
+    sharedNotice.channel++;
+    return source.slice(0, match.index).trim();
+  };
+  const evaluableRows = ladderRows.filter((item) => item.matchStatus !== "input-missing");
+  const missingRows = ladderRows.filter((item) => item.matchStatus === "input-missing");
+  const ladder = evaluableRows.map((item) =>
+    "<tr class='" + (item.active ? "row-active" : "") + "'><td>" + (item.active ? "▶ " : "") + esc(item.name) + tag(item.origin) + strengthMark(item.strength) + "</td><td>" + esc(stripChannelNotice(item.definition)) + "</td><td>" + esc((item.entryCriteria || []).join("；")) + "</td><td>" + esc(item.reachableMatch || "—") + "</td><td>" + esc(bandStatus[item.matchStatus] || (item.matchStatus === null ? "—" : item.matchStatus)) + "</td></tr>"
   ).join("") || "<tr><td colspan='5' class='muted'>无语料档位可映射。</td></tr>";
+  const ladderFootnotes =
+    (missingRows.length ? "<div class='muted'>另有 " + missingRows.length + " 档因你未提供相关输入而未评估：<details class='inline-details'><summary>展开查看</summary><ul>" + missingRows.map((item) => "<li>" + esc(item.name) + "：需要「" + esc(item.needsField || "—") + "」</li>").join("") + "</ul></details></div>" : "") +
+    (sharedNotice.channel ? "<p class='muted'>标注“机构活动”的档位只代表该主办方 / 该场活动的口径，不外推为市场普遍门槛。</p>" : "");
   const referenceScale = referenceRows.map((item) => "<tr><td>" + esc(item.name) + badge("engineering-default") + "</td><td>" + esc(item.definition || "—") + "</td><td>" + esc(JSON.stringify(item.range || item.level || "—")) + "</td></tr>").join("");
   const caveats = (report.caveats || []).map((item) => "<li" + (item.level === "warning" ? " class='caveat-warning'" : "") + ">" + esc(item.text) + "</li>").join("");
   const selfReasons = (self.reasons || []).map((reason) => "<li>" + esc(reason) + "</li>").join("");
   const clamps = (appearance.clampsApplied || []).map((item) => esc(item.ruleId) + "（" + esc(item.action) + "）").join("、");
-  const photoCaveats = (photo.caveats || []).map(esc).join("　");
   const pendingExtrapolation = (extrapolation.pending || []).map((item) => "<li>" + esc(item.label) + "：缺少表单字段（" + esc(item.needField || "—") + "）</li>").join("");
 
-  document.getElementById("report-root").innerHTML = [
-    (report.disclosure && report.disclosure.text ? "<p class='disclosure'>" + esc(report.disclosure.text) + "</p>" : ""),
-    "<div class='card'><h1>择偶定位报告</h1>" +
-      "<p class='muted'>报告 " + esc(report.id) + "　生成时间 " + esc(report.createdAt) + "　规则集 v" + esc(report.engine.mainRules.version) + "　照片轨道：" + esc(report.engine.photoMode || "none") + "</p>" +
-      "<p class='conf-line'>本次 " + (summary.scoredItems === undefined ? "—" : summary.scoredItems) + " 个计分项：" + strongCount + " 项机构内一致（多源/2 源），" + refCount + " 项仅参考（单源 / 外推 / 工程默认）</p>" +
-      "<p class='muted'>规则强度来源：" + (conf.independence && conf.independence.source === "audit-rules" ? ("audit-rules 已审计 " + (conf.independenceCoverage ? conf.independenceCoverage.auditedRules : "?") + " 条 / 未覆盖 " + (conf.independenceCoverage ? conf.independenceCoverage.heuristicRules : "?") + " 条走启发式（带 *）") : "启发式（独立性数据未就绪，带 *）") + "；维度强度为启发式（带 *）</p>" +
-      "<p class='muted'>" + esc(report.portrait.text) + "<br>" + esc(report.portrait.targetProfile || "") + "</p>" +
-      "<div class='legend'>" + ["verified", "cross-account", "single-source", "extrapolated", "engineering-default", "advisory"].map((level) => badge(level)).join("") + "</div></div>",
-    extrapolationBanner,
-    "<div class='score-grid'>" + cards + "</div>",
-    "<div class='card giveup-card'><h2>该放弃的幻想项（先看这个）</h2><ul class='giveup-list'>" + giveUps + "</ul></div>",
-    compositeCard,
-    behaviorCard,
-    "<div class='card'><h2>颜值分：双轨与交叉校准</h2>",
+  const hero = report.summary || {};
+  const heroUpper = hero.upper === undefined ? (report.matchWindow ? report.matchWindow.upper.score : null) : hero.upper;
+  const heroLower = hero.lower === undefined ? (report.matchWindow ? report.matchWindow.lower.score : null) : hero.lower;
+  const heroStable = hero.stable || (report.matchWindow ? { low: report.matchWindow.stable.low, high: report.matchWindow.stable.high } : null);
+  const heroAnalysis = (hero.analysis || []).map((line) => "<li>" + esc(line) + "</li>").join("");
+  const heroCard = "<div class='card hero-card'>" +
+    "<h1>择偶定位报告</h1>" +
+    "<p class='hero-positioning'>" + esc(hero.positioning || "本次可用的信息不足以给出综合分") + "</p>" +
+    "<div class='hero-numbers'>" +
+      "<div class='hero-num'><div class='hero-label'>择偶上限（参考）</div><div class='hero-value'>" + fmt(heroUpper) + "</div></div>" +
+      "<div class='hero-num'><div class='hero-label'>需要妥协的下限（参考）</div><div class='hero-value'>" + fmt(heroLower) + "</div></div>" +
+    "</div>" +
+    (heroStable ? "<p class='hero-stable'>稳妥区间（参考）：" + fmt(heroStable.low) + " – " + fmt(heroStable.high) + "</p>" : "") +
+    (heroAnalysis ? "<ul class='hero-analysis'>" + heroAnalysis + "</ul>" : "") +
+    "<p class='hero-note'>" + esc(hero.note || "") + "</p>" +
+    "</div>";
+
+  const fold = (title, body, extraClass) =>
+    "<details class='section-details card-fold" + (extraClass ? " " + extraClass : "") + "'><summary>" + esc(title) + "</summary><div class='card'>" + body + "</div></details>";
+
+  const giveupFold = fold("该放弃的幻想项（先看这个）", "<ul class='giveup-list'>" + giveUps + "</ul>", "giveup-fold");
+  const scoreFold = fold("分项得分（颜值 / 硬件 / 软性 / 综合）", "<div class='score-grid'>" + cards + "</div>");
+  const appearanceFold = fold("颜值分：双轨与交叉校准",
     "<p>自评 " + fmt(self.raw) + " 分 → 校准后 " + fmt(self.adjusted) + " 分（区间 " + fmt(self.low) + "–" + fmt(self.high) + "）" +
       (appearance.divergence === null
         ? "；照片轨道未启用，无法交叉校准。"
-        : "；照片维度映射区间 " + (mapped ? fmt(mapped.low) + "–" + fmt(mapped.high) : "无锚点命中") + "，分歧 " + fmt(appearance.divergence) + " 分。") + "</p>",
-    "<p class='muted'>区间依据：" + esc(appearance.basis || "—") + "　" + badge(appearance.strength, appearance.strengthLabel, appearance.strengthProvisional) + " " + esc(appearance.strengthReason || "") + "</p>",
-    selfReasons ? "<ul>" + selfReasons + "</ul>" : "",
-    clamps ? "<p class='muted'>规则闸门：" + clamps + "</p>" : "",
-    "<h3>照片维度描述（模型只描述，不打分）</h3>",
-    "<table><thead><tr><th>维度</th><th>可观察描述</th><th>档位</th><th>置信度</th></tr></thead><tbody>" + photoDims + "</tbody></table>",
-    anchorFits ? "<h3>锚点符合度（规则映射依据）</h3><table><thead><tr><th>锚点</th><th>fit</th><th>依据</th></tr></thead><tbody>" + anchorFits + "</tbody></table>" : "",
-    photoCaveats ? "<p class='muted'>照片轨道说明：" + photoCaveats + "</p>" : "",
-    "</div>",
-    "<div class='card'><h2>择偶上 / 下限与稳妥区间</h2>" +
-      (report.matchWindow && report.matchWindow.strength === "engineering-default"
-        ? "<p class='caveat-warning'>" + badge("engineering-default") + " " + esc(report.matchWindow.disclaimer || "") + "</p>"
-        : "") +
-      "<table><thead><tr><th>档位</th><th>分数</th><th>梯队</th><th>说明</th></tr></thead><tbody>" + windowHtml + "</tbody></table></div>",
-    "<div class='card'><h2>博主档位阶梯（语料词汇）</h2>" +
-      "<p class='conf-line'>" + esc(report.portrait.scaleDisclaimer || "梯队阶梯使用博主本人的分类词汇；本系统不输出自创的 S/A/B/C 档位。") + "</p>" +
-      (report.portrait.bandNote ? "<p class='caveat-warning'>" + esc(report.portrait.bandNote) + "</p>" : "<p class='muted'>当前档位描述：" + esc(report.portrait.band ? report.portrait.band.name : "—") + "（" + esc(report.portrait.bandSource || "—") + "）</p>") +
-      "<table><thead><tr><th>档位</th><th>定义</th><th>进入条件</th><th>可触达对象</th><th>你的输入</th></tr></thead><tbody>" + ladder + "</tbody></table>" +
-      (referenceScale ? "<h3>参照刻度（engineering-default，不作为结论）</h3><p class='muted'>S/A/B/C 是本系统早期自创刻度，语料没有该体系；仅作粗略参照，已不参与任何档位判定。</p><table><thead><tr><th>刻度</th><th>定义</th><th>区间</th></tr></thead><tbody>" + referenceScale + "</tbody></table>" : "") +
-      "</div>",
-    "<div class='card'><h2>建议</h2>" + claimSummaryLine(report.claimsSummary) + "<ul class='advice-list'>" + advice + "</ul>" +
-      (flags ? "<h3>规则标记</h3><ul class='advice-list'>" + flags + "</ul>" : "") +
-      (requirements ? "<h3>证据要求（requireEvidence）</h3><ul class='advice-list'>" + requirements + "</ul>" : "") + "</div>",
-    "<div class='card'><h2>硬件 / 软性明细</h2><h3>" + (hw.basis === "corpus-composite" ? "工程权重参考（D17：权重为工程默认，仅作对照）" : "硬件（工程权重法，含家庭）") + "</h3>" + renderBreakdown(report.hardware.breakdown) + "<h3>软性（工程权重法）</h3>" + renderBreakdown(report.soft.breakdown) + "</div>",
-    "<div class='card'><h2>因证据不足未计入分数</h2><p class='muted'>这些项有得分，但证据强度不够（单条语料 / 外推 / 工程默认），只作参考，不进入综合分。</p>" +
-      "<table><thead><tr><th>维度</th><th>得分</th><th>强度</th><th>原因</th></tr></thead><tbody>" + excluded + "</tbody></table>" +
-      (pendingExtrapolation ? "<h3>待扩字段的外推场景（D12）</h3><ul class='advice-list'>" + pendingExtrapolation + "</ul>" : "") + "</div>",
-    "<div class='card'><h2>提升路径</h2><ul class='advice-list'>" + improvements + "</ul></div>",
-    "<div class='card'><h2>命中规则</h2><table><thead><tr><th>规则</th><th>标题</th><th>scope</th><th>via</th><th>强度</th></tr></thead><tbody>" + rulesApplied + "</tbody></table></div>",
-    "<div class='card'><details class='section-details'><summary>证据引用（可追溯）</summary><table><thead><tr><th>账号</th><th>aweme_id</th><th>强度</th><th>用于</th></tr></thead><tbody>" + evidence + "</tbody></table></details></div>",
-    "<div class='card'><details class='section-details'><summary>体系参考（未自动执行）</summary><p class='muted'>规则标注 advisory：引擎不执行，内容与证据照常列出，供人工参考。</p><ul class='ref-list'>" + advisory + "</ul></details></div>",
-    "<div class='card'><details class='section-details'><summary>未结构化规则（需要补 machine）</summary><p class='muted'>按契约 §5.0，规则应二选一：给 machine.when 让引擎执行，或标 advisory:true 声明只给人看。以下规则两者都没有。</p><ul class='ref-list'>" + unstructured + "</ul></details>" + (ruleErrors ? "<h3>求值出错的规则</h3><ul class='advice-list'>" + ruleErrors + "</ul>" : "") + "</div>",
-    "<div class='card'><h2>局限与置信度</h2><ul class='caveat'>" + caveats + "</ul></div>",
-    "<div class='report-actions'><button class='btn' id='toggle-basis'>展开全部依据</button><button class='btn' id='print-btn'>打印 / 存 PDF</button><a class='btn' href='/'>再测一份</a></div>"
+        : "；照片维度映射区间 " + (mapped ? fmt(mapped.low) + "–" + fmt(mapped.high) : "无锚点命中") + "，分歧 " + fmt(appearance.divergence) + " 分。") + "</p>" +
+    "<p class='muted'>区间依据：" + esc(appearance.basisLabel || appearance.basis || "—") + "　" + badge(appearance.strength, appearance.strengthLabel, appearance.strengthProvisional) + " " + esc(appearance.strengthReason || "") + "</p>" +
+    (selfReasons ? "<ul>" + selfReasons + "</ul>" : "") +
+    (clamps ? "<p class='muted'>规则闸门：" + clamps + "</p>" : "") +
+    (photoAnalyzed
+      ? "<p>" + photoHeadline + "</p>" + photoUndecidedLine + photoQualityLine + photoDetailFold
+      : photoSummaryLine));
+  const windowFold = fold("择偶上 / 下限与稳妥区间",
+    (report.matchWindow && report.matchWindow.strength === "engineering-default"
+      ? "<p class='caveat-warning'>" + badge("engineering-default") + " " + esc(report.matchWindow.disclaimer || "") + "</p>"
+      : "") +
+    "<table><thead><tr><th>档位</th><th>分数</th><th>梯队</th><th>说明</th></tr></thead><tbody>" + windowHtml + "</tbody></table>");
+  const ladderFold = fold("博主档位阶梯（语料词汇）",
+    "<p class='conf-line'>" + esc(report.portrait.text) + (report.portrait.targetProfile ? "　" + esc(report.portrait.targetProfile) : "") + "</p>" +
+    "<p class='muted'>" + esc(report.portrait.scaleDisclaimer || "梯队阶梯使用博主本人的分类词汇；本系统不输出自创的 S/A/B/C 档位。") + "</p>" +
+    (report.portrait.bandNote ? "<p class='caveat-warning'>" + esc(report.portrait.bandNote) + "</p>" : "<p class='muted'>当前档位描述：" + esc(report.portrait.band ? report.portrait.band.name : "—") + "（" + esc(report.portrait.bandSource || "—") + "）</p>") +
+    "<table><thead><tr><th>档位</th><th>定义</th><th>进入条件</th><th>可触达对象</th><th>是否命中</th></tr></thead><tbody>" + ladder + "</tbody></table>" +
+    ladderFootnotes);
+  const adviceFold = fold("建议", claimSummaryLine(report.claimsSummary) + "<ul class='advice-list'>" + advice + "</ul>" +
+    (flags ? "<h3>规则标记</h3><ul class='advice-list'>" + flags + "</ul>" : "") +
+    (requirements ? "<h3>证据要求</h3><ul class='advice-list'>" + requirements + "</ul>" : ""));
+  const breakdownFold = fold("硬件 / 软性明细",
+    "<h3>" + (hw.basis === "corpus-composite" ? "另一套算法参考（权重为系统默认，仅作对照）" : "硬件项明细（权重为系统默认）") + "</h3>" +
+    renderBreakdown(report.hardware.breakdown) + "<h3>软性项明细</h3>" + renderBreakdown(report.soft.breakdown));
+  const compositeFold = compositeCard ? fold("男生硬件十项表（语料原话加分制）", compositeCard) : "";
+  const behaviorFold = behaviorCard ? fold("相亲现场行为自查（不接入分数）", behaviorCard) : "";
+  const excludedFold = fold("因证据不足未计入分数", "<p class='muted'>这些项有得分，但证据强度不够（单条语料 / 外推 / 工程默认），只作参考，不进入综合分。</p>" +
+    "<table><thead><tr><th>维度</th><th>得分</th><th>强度</th><th>原因</th></tr></thead><tbody>" + excluded + "</tbody></table>" +
+    (pendingExtrapolation ? "<h3>缺少输入、暂未评估的场景</h3><ul class='advice-list'>" + pendingExtrapolation + "</ul>" : ""));
+  const improvementsFold = fold("提升路径", "<ul class='advice-list'>" + improvements + "</ul>");
+  const rulesFold = fold("命中规则", "<table><thead><tr><th>编号</th><th>说明</th><th>范围</th><th>执行方式</th><th>证据强度</th></tr></thead><tbody>" + rulesApplied + "</tbody></table>");
+  const evidenceFold = fold("证据引用（可追溯）", "<table><thead><tr><th>账号</th><th>aweme_id</th><th>强度</th><th>用于</th></tr></thead><tbody>" + evidence + "</tbody></table>");
+  const advisoryFold = fold("体系参考（未自动执行）", "<p class='muted'>这些条目只作人工参考、不参与自动执行；内容与证据照常列出。</p><ul class='ref-list'>" + advisory + "</ul>");
+  const unstructuredFold = fold("尚未结构化的规则", "<p class='muted'>每条规则应二选一：写明可自动执行的条件，或声明为仅供人工参考。以下规则两者都没有。</p><ul class='ref-list'>" + unstructured + "</ul>" +
+    (ruleErrors ? "<h3>求值出错的规则</h3><ul class='advice-list'>" + ruleErrors + "</ul>" : ""));
+  const caveatsFold = fold("局限与置信度", "<ul class='caveat'>" + caveats + "</ul>");
+  const ledgerFold = fold("关于本报告",
+    "<p class='muted'>报告 " + esc(report.id) + "　生成时间 " + esc(report.createdAt) + "　规则集 v" + esc(report.engine.mainRules.version) + "　照片轨道：" + esc(report.engine.photoModeLabel || report.engine.photoMode || "未启用") + "</p>" +
+    "<p class='conf-line'>本次 " + (summary.scoredItems === undefined ? "—" : summary.scoredItems) + " 个计分项：" + strongCount + " 项机构内一致（多源/2 源），" + refCount + " 项仅参考（单源 / 外推 / 工程默认）</p>" +
+    "<p class='muted'>规则强度来源：" + (conf.independence && conf.independence.source === "audit-rules" ? ("audit-rules 已审计 " + (conf.independenceCoverage ? conf.independenceCoverage.auditedRules : "?") + " 条 / 未覆盖 " + (conf.independenceCoverage ? conf.independenceCoverage.heuristicRules : "?") + " 条走启发式（带 *）") : "启发式（独立性数据未就绪，带 *）") + "；维度强度为启发式（带 *）</p>" +
+    "<div class='legend'>" + ["verified", "cross-account", "single-source", "extrapolated", "engineering-default", "advisory"].map((level) => badge(level)).join("") + "</div>" +
+    (referenceScale ? "<h3>参照刻度（本系统早期自创，语料没有该体系，不参与判定）</h3><p class='muted'>本系统早期自创的 S/A/B/C 刻度，语料里没有该体系；仅作历史参照，不参与任何判定。</p><table><thead><tr><th>刻度</th><th>定义</th><th>区间</th></tr></thead><tbody>" + referenceScale + "</tbody></table>" : ""));
+
+  document.getElementById("report-root").innerHTML = [
+    (report.disclosure && report.disclosure.text ? "<p class='disclosure'>" + esc(report.disclosure.text) + "</p>" : ""),
+    heroCard,
+    extrapolationBanner,
+    "<div class='report-actions'><button class='btn' id='toggle-basis'>展开全部依据</button><button class='btn' id='print-btn'>打印 / 存 PDF</button><a class='btn' href='/'>再测一份</a></div>",
+    giveupFold,
+    scoreFold,
+    appearanceFold,
+    windowFold,
+    ladderFold,
+    adviceFold,
+    breakdownFold,
+    compositeFold,
+    behaviorFold,
+    excludedFold,
+    improvementsFold,
+    rulesFold,
+    evidenceFold,
+    advisoryFold,
+    unstructuredFold,
+    caveatsFold,
+    ledgerFold
   ].join("");
+
   const printButton = document.getElementById("print-btn");
   if (printButton) printButton.addEventListener("click", () => window.print());
   const toggleBasis = document.getElementById("toggle-basis");

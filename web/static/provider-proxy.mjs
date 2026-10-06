@@ -4,6 +4,12 @@
 import { parseJsonLoose, clamp, roundTo } from "./util.mjs";
 
 const PROXY_URL = "__PROXY_URL__";
+const ACCESS_CODE_KEY = "aoye:access_code";
+
+/* 访问码只从本机 localStorage 读；不回显、不落产物、不进日志。 */
+function accessCode() {
+  try { return window.localStorage.getItem(ACCESS_CODE_KEY) || ""; } catch { return ""; }
+}
 
 export function providerConfig(env) {
   const settings = Object.assign({}, env || {});
@@ -90,16 +96,25 @@ export async function analyzePhotos(options) {
     }
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), config.timeoutMs);
+    const headers = { "content-type": "application/json" };
+    const code = accessCode();
+    if (code) headers["x-aoye-code"] = code;
     let response;
     try {
       response = await fetch(config.baseUrl + "/analyze", {
         method: "POST",
-        headers: { "content-type": "application/json" },
+        headers,
         body: JSON.stringify({ model: config.model, temperature: 0.2, response_format: { type: "json_object" }, messages: [{ role: "system", content: prompt.system }, { role: "user", content }] }),
         signal: controller.signal
       });
     } finally {
       clearTimeout(timer);
+    }
+    if (response.status === 401) {
+      return Object.assign(placeholder(dimensions, "访问码不正确或已失效：请回首页「访问码」里重新填写后再生成。"), { mode: "error", errorCode: "unauthorized" });
+    }
+    if (response.status === 503) {
+      return Object.assign(placeholder(dimensions, "代理暂不可用（未启用访问码或未配置模型），请稍后重试。"), { mode: "error", errorCode: "not_configured" });
     }
     if (!response.ok) return Object.assign(placeholder(dimensions, "模型调用失败（HTTP " + response.status + "）：已降级为纯表单模式。"), { mode: "error" });
     const envelope = await response.json();

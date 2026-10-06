@@ -176,7 +176,6 @@ function isValidField(field) {
   if (!validFields) return true; // 字典缺失时不阻断
   if (validFields.has(field)) return true;
   if (/^(hardware|soft)\.breakdown\./.test(field)) return true; // 动态维度 id
-  if (/^photo\./.test(field)) return true;
   return false;
 }
 

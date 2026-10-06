@@ -4,13 +4,15 @@
  *      由 Worker 在服务端注入密钥并转发到 {AOYE_LLM_BASE_URL}/chat/completions。
  *
  * 安全边界（务必如实告知部署者）：
+ *  - /analyze 需带 x-aoye-code（AOYE_ACCESS_CODE Secret）；未配置时 fail-closed 拒绝一切；
+ *  - 访问码只是「私人小工具」的门锁，不防暴力破解（配合限流）；
  *  - Worker 能藏住 key（不进仓库、不进前端），但**挡不住有人刷**；
  *  - 这里的内存限流是「尽力而为」：isolate 级、重启即失效，不是可靠限流；
  *  - 唯一可靠的保护是「在模型服务商后台设置月度额度上限」。
  */
 
 const LIMITS = {
-  MAX_IMAGES: 2,               // 比本机版（3 张）更少，降本
+  MAX_IMAGES: 1,               // 单张照片：成本优先（一次分析约 4300 token，多图不会提升结论质量）
   MAX_IMAGE_BYTES: 6 * 1024 * 1024, // 所有图片解码后总量
   MAX_BODY_BYTES: 8 * 1024 * 1024,  // 单请求体
   RATE_LIMIT_PER_HOUR: 3,      // 每 IP 每小时（尽力而为）
@@ -90,14 +92,42 @@ function resetRateBuckets() {
   rateBuckets.clear();
 }
 
+/* 定时安全比较：两边各做 SHA-256 再定长逐字节异或累积——
+   长度差异与内容差异都不体现在耗时上，也不回显任何一段码。 */
+async function secureCompare(input, expected) {
+  const encoder = new TextEncoder();
+  const [left, right] = await Promise.all([
+    crypto.subtle.digest("SHA-256", encoder.encode(String(input === undefined || input === null ? "" : input))),
+    crypto.subtle.digest("SHA-256", encoder.encode(String(expected === undefined || expected === null ? "" : expected)))
+  ]);
+  const a = new Uint8Array(left);
+  const b = new Uint8Array(right);
+  let diff = 0;
+  for (let i = 0; i < a.length; i += 1) diff |= a[i] ^ b[i];
+  return diff === 0;
+}
+
 async function handleAnalyze(request, env, now) {
   const origin = request.headers.get("origin") || "";
   const cors = corsHeaders(origin, env);
+
+  /* 访问码门禁（fail-closed）：
+     - 没配 AOYE_ACCESS_CODE → 拒绝一切 /analyze（503），不得默认放行；
+     - 配了 → 必须带对 x-aoye-code，否则 401（不回显码、不提示长度）。 */
+  const accessCode = String((env && env.AOYE_ACCESS_CODE) || "");
+  if (!accessCode) {
+    return json({ error: "not_configured", reason: "代理未启用访问码，已拒绝请求。" }, 503, cors);
+  }
 
   const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("x-forwarded-for") || "unknown";
   const limit = rateLimit(ip, now);
   if (limit.limited) {
     return json({ error: "rate_limited", reason: "同一来源每小时最多 " + LIMITS.RATE_LIMIT_PER_HOUR + " 次，请稍后重试。", retryAfterSec: limit.retryAfterSec }, 429, Object.assign({ "retry-after": String(limit.retryAfterSec) }, cors));
+  }
+
+  const providedCode = request.headers.get("x-aoye-code") || "";
+  if (!(await secureCompare(providedCode, accessCode))) {
+    return json({ error: "unauthorized", reason: "访问码不正确。" }, 401, cors);
   }
 
   const declared = Number(request.headers.get("content-length") || 0);
@@ -185,4 +215,4 @@ export default {
   }
 };
 
-export { LIMITS, countImages, rateLimit, resetRateBuckets, corsHeaders, handleAnalyze };
+export { LIMITS, countImages, rateLimit, resetRateBuckets, corsHeaders, handleAnalyze, secureCompare };

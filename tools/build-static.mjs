@@ -27,7 +27,7 @@ if (PHOTOS === "proxy" && !/^https:[/][/]/.test(PROXY_URL)) {
   process.exit(2);
 }
 
-const LIB_FILES = ["engine.mjs", "load-browser.mjs", "city.mjs", "ruleset.mjs", "strength.mjs", "bands.mjs", "composite.mjs", "extrapolation.mjs", "facts-coverage.mjs", "sample.mjs", "validate.mjs", "pipeline.mjs"];
+const LIB_FILES = ["engine.mjs", "load-browser.mjs", "city.mjs", "ruleset.mjs", "strength.mjs", "bands.mjs", "composite.mjs", "extrapolation.mjs", "facts-coverage.mjs", "sample.mjs", "validate.mjs", "labels.mjs", "pipeline.mjs"];
 const DATA_FILES = [
   ["knowledge", "rules.json"], ["knowledge", "facts.json"], ["knowledge", "evidence-independence.json"],
   ["knowledge", "evidence-quality-flags.json"], ["knowledge", "cases.json"], ["knowledge", "standards.json"],
@@ -111,7 +111,9 @@ function main() {
   const mainIndex = reportSource.indexOf("function main() {");
   if (mainIndex === -1) throw new Error("report.js 未找到 main()");
   const staticMain = fs.readFileSync(path.join(WEB, "static", "report-main.js"), "utf8");
-  write("assets/report.js", reportSource.slice(0, mainIndex) + staticMain);
+  // 与 HTML 的 href="/" 改写同因：GitHub Pages 子路径下 "/" 会跳到站点根。
+  // 本地版走 /r/<id> 路由必须保留 "/"；仅静态产物改写为 index.html。
+  write("assets/report.js", (reportSource.slice(0, mainIndex) + staticMain).replace(/href='[/]'/g, "href='index.html'"));
 
   // data
   DATA_FILES.forEach(([from, name]) => {
@@ -131,6 +133,9 @@ function main() {
       const rel = path.relative(OUT, full);
       if (/(^|[/]).env/.test(rel)) problems.push("包含环境文件：" + rel);
       if (/^sk-[A-Za-z0-9_-]{8,}/m.test(fs.readFileSync(full, "utf8"))) problems.push("疑似包含 key（sk- 前缀）：" + rel);
+      const content = fs.readFileSync(full, "utf8");
+      if (content.indexOf("AOYE_ACCESS_CODE") !== -1) problems.push("包含服务端访问码变量名： " + rel);
+      if (process.env.AOYE_ACCESS_CODE && content.indexOf(process.env.AOYE_ACCESS_CODE) !== -1) problems.push("包含真实访问码值：" + rel);
       if (/data[/](video|transcripts)/.test(rel)) problems.push("包含语料目录：" + rel);
     });
   })(OUT);
@@ -146,7 +151,7 @@ function main() {
     problems.forEach((item) => console.error("    - " + item));
     process.exit(1);
   }
-  console.log("  安全检查 : ✓ 无 sk- 字符串 / 无 .env / 无语料目录");
+  console.log("  安全检查 : ✓ 无 sk- 字符串 / 无 .env / 无语料目录 / 无访问码");
 }
 
 main();

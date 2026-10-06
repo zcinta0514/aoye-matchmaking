@@ -1,6 +1,6 @@
 {
   "version": "1.1",
-  "generatedAt": "2026-10-06T04:16:11.682Z",
+  "generatedAt": "2026-10-06T06:14:02.292Z",
   "corpus": {
     "transcribed": 3513,
     "planned": 3430,
@@ -61,7 +61,7 @@
       "weipangxiaotao52",
       "yslll2008"
     ],
-    "generatedAt": "2026-10-06T04:16:11.695Z"
+    "generatedAt": "2026-10-06T06:14:02.308Z"
   },
   "scales": [
     {
@@ -196,7 +196,7 @@
   ],
   "dimensions": [
     {
-      "id": "face.three_courts",
+      "id": "looks.three_courts",
       "name": "三庭比例",
       "group": "appearance",
       "appliesTo": [
@@ -3466,7 +3466,7 @@
         "when": {
           "any": [
             {
-              "field": "photo.face.three_courts",
+              "field": "photo.looks.three_courts",
               "op": "nin",
               "value": [
                 "三段均衡",
@@ -3474,7 +3474,7 @@
               ]
             },
             {
-              "field": "photo.face.features_balance",
+              "field": "photo.looks.features_balance",
               "op": "nin",
               "value": [
                 "眉眼唇组合协调",
@@ -3482,7 +3482,7 @@
               ]
             },
             {
-              "field": "photo.face.dental_arch",
+              "field": "photo.looks.dental_arch",
               "op": "nin",
               "value": [
                 "牙列整齐",
@@ -3490,7 +3490,7 @@
               ]
             },
             {
-              "field": "photo.face.head_shoulder_ratio",
+              "field": "photo.looks.head_shoulder_ratio",
               "op": "nin",
               "value": [
                 "头肩比例协调",
@@ -3498,7 +3498,7 @@
               ]
             },
             {
-              "field": "photo.face.facial_fold",
+              "field": "photo.looks.facial_fold",
               "op": "nin",
               "value": [
                 "折叠度中等",
@@ -3506,7 +3506,7 @@
               ]
             },
             {
-              "field": "photo.face.craniofacial_ratio",
+              "field": "photo.looks.craniofacial_ratio",
               "op": "nin",
               "value": [
                 "颅面比例适中",

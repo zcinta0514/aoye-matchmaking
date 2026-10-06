@@ -887,4 +887,21 @@
 
 ---
 
-*本报告新增/维护三个产物：`knowledge/AUDIT-v1.md`、`knowledge/evidence-independence.json`、`knowledge/independence-reconciliation.md`；未修改任何他人文件（rules.json / part.* / 其它 md 均未改动）。§1–§8 审计对象 `rules.merged.json` md5 `0ae3e2273a673b398d8ca84edc736aee`（后经重合并，已在 §0 版本注记）；§9–§16 对应 `knowledge/rules.json`，其中 §16 为终版冻结快照（md5 `07051056fdc490b81b6471412a4442a1`）。*
+### 16.6 可达性修复：死条件清零（2026-10-06）
+
+- **触发**：前端实测 R-LOOKS-014 引用 6 个照片字段，只有 1 个（photo.face.three_courts，恰好与 ruleset 维度 id 相同）能对上；另 5 个的运行期键应为 `photo.looks.*`。
+- **根因**：① 规则字段取自 facts.json 里"声明过"的 `photo.face.*`（来源 photo-dimensions.json），而运行期注入键是 `photo.<ruleset appearance 维度 id>`（`photo.looks.*`）；② `check_rules.mjs` 对 `photo.*` 一律放行，声明 ≠ 注入的缺口无人发现。
+- **命名口径（本次裁定）**：照片维度唯一命名 = `looks.*`，运行期键 = `photo.looks.*`。
+  - ruleset 维度 `face.three_courts` → `looks.three_courts`；
+  - R-LOOKS-014 六个字段 → `photo.looks.*`；
+  - `facts.json` 照片字典改由 `rules.json` appearance 维度生成（18 键：15 个 `photo.looks.*` + 3 个 `photo.dim.*`——可达但非 canonical，不建议新规则引用）；
+  - `check_rules.mjs` 删除 `^photo\.` 白名单，字段必须命中 facts.json（或 hardware/soft.breakdown 动态前缀）。
+- **新增工具与权威清单**：`tools/reachability.mjs`（可重复运行，支持 `--json/--strict`）→ `knowledge/reachable-fields.json`（form-direct 39 / derived 20 / breakdown 前缀 2 / photo-track 18 / never 5）。
+- **修正前后**：
+  - 修正前：159 规则 / 48 可执行 / clean 47 / **partial 1（R-LOOKS-014，5 个死字段：features_balance/dental_arch/head_shoulder_ratio/facial_fold/craniofacial_ratio）** / fully-unreachable 0 / true-executable 48；
+  - 修正后：159 / **clean 48** / partial 0 / fully-unreachable 0 / true-executable 48。
+- **验收**：`node tools/check_rules.mjs knowledge/rules.json --merge` → 0 error 0 warn；`node tools/preflight.mjs` → 五项全绿（真实报告 HTTP 200 / level 4.06 / 命中 11 条）；web 测试 **64/64**。
+- **版本影响**：`rules.json` md5 `07051056…` → **`7506cfb48ad2ab48ab99a3e1ae605fce`**（仅维度 id / 字段名变化，证据未动；check_rules --merge 会重写 generatedAt，每次 merge 后以当次 md5 为准）；证据强度与 claimIndex 计数不变（42/22/95、79 规则/127 断言）。
+- **已知遗留（列出未改）**：① `knowledge/photo-dimensions.json` 仍使用 `face.*/body.*/style.*/presence.*` 作为设计文档 id（已不被任何可执行链读取；`reachable-fields.json.aliasMap` 给出对照，其中 eye_brow_symmetry/hair/makeup 永不注入）；② baseline 规则的 `appearance.photoTrack.mappedInterval.*` 属"条件可达"（仅照片轨道映射成功时存在），若 baseline 规则依赖它需兜底；③ `then` 动作中的字段引用目前无实例，扫描器已覆盖但 check_rules 未覆盖。
+
+---

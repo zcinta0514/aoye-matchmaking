@@ -93,15 +93,22 @@ const computed = [
 ];
 for (const c of computed) facts.push(Object.assign({ source: 'web/lib/pipeline.mjs buildFacts' }, c));
 
-// 照片维度（来自 knowledge/photo-dimensions.json，供 scoring 层引用）
+// 照片维度：以**运行期真正会注入的键**为准。
+// pipeline.buildPhotoFacts 注入 photo.<ruleset dimension id>（group=appearance，且排除 web-baseline 维度）。
+// facts.json 必须与运行期一致，否则规则会引用到"声明过但永不注入"的字段（本项目踩过的坑）。
 let photoDims = [];
-const PD = join(ROOT, 'knowledge', 'photo-dimensions.json');
-if (existsSync(PD)) {
-  try {
-    const pd = JSON.parse(readFileSync(PD, 'utf8'));
-    const arr = pd.dimensions || pd || [];
-    photoDims = arr.map((d) => ({ field: `photo.${d.id}`, id: d.id, label: d.name || d.id, type: 'enum', values: d.values || null, source: 'knowledge/photo-dimensions.json' }));
-  } catch {}
+const photoWarnings = [];
+{
+  const RJ = join(ROOT, 'knowledge', 'rules.json');
+  if (existsSync(RJ)) {
+    try {
+      const rd = JSON.parse(readFileSync(RJ, 'utf8'));
+      photoDims = (rd.dimensions || [])
+        .filter((d) => d.group === 'appearance')
+        .map((d) => ({ field: `photo.${d.id}`, id: d.id, label: d.name || d.id, type: 'enum', values: null, source: 'knowledge/rules.json dimension(group=appearance) → 运行期注入键 photo.<id>' }));
+      photoWarnings.push('photo 维度以 knowledge/rules.json 的 appearance 维度为准（运行期注入键）；knowledge/photo-dimensions.json 中未在 ruleset 定义的 face.eye_brow_symmetry / style.hair / style.makeup 不会注入，已从字典剔除。');
+    } catch {}
+  }
 }
 
 const doc = {
@@ -125,6 +132,7 @@ const doc = {
   ],
   warnings: [
     'appearance.selfTrack / photoTrack 是对象（{raw, adjusted, low, high, reasons}），只能用其标量子路径（.raw/.adjusted/.low/.high）做数值比较。',
+    ...photoWarnings,
     ...(pendingAbsorption.length
       ? [`补充字段待表单吸收（引用它们的 machine 规则目前静默失效）：${pendingAbsorption.join(' / ')}`]
       : []),

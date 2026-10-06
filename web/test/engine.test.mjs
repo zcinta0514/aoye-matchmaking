@@ -39,7 +39,7 @@ function baseRulesDoc(rules, dimensions) {
 
 test("ruleset: knowledge 优先、基线补缺、machine 分层统计", () => {
   assert.ok(/^[0-9]+[.][0-9]+/.test(ruleset.main.version));
-  const knowledgeDim = ruleset.dimensions.find((dim) => dim.id === "face.three_courts");
+  const knowledgeDim = ruleset.dimensions.find((dim) => dim.id === "looks.three_courts");
   assert.equal(knowledgeDim._origin, "knowledge");
   const baselineDim = ruleset.dimensions.find((dim) => dim._origin === "web-baseline");
   assert.ok(baselineDim);

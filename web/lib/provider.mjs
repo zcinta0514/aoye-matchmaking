@@ -75,7 +75,7 @@ function placeholderResult(dimensions, reason) {
       observed: null,
       level: null,
       confidence: null,
-      note: "占位：未调用模型。接入点 web/lib/provider.mjs#analyzePhotos（配置 AOYE_LLM_API_KEY 后生效）。"
+      note: "占位：本次未调用模型。"
     })),
     anchorFits: [],
     dataQuality: { usable: null, issues: [] },
@@ -108,7 +108,7 @@ export async function analyzePhotos(options) {
   const fetchImpl = options.fetchImpl || fetch;
   if (!dimensions.length) return { mode: "none", dimensions: [], anchorFits: [], dataQuality: { usable: null, issues: [] }, caveats: ["规则集中没有外观维度定义。"], model: null };
   if (!config.configured) {
-    return placeholderResult(dimensions, "未配置模型（AOYE_LLM_API_KEY 为空）：跳过照片分析，仅用表单自评 + 规则引擎。");
+    return placeholderResult(dimensions, "未配置模型：跳过照片分析，仅用表单自评 + 规则引擎。");
   }
   if (!photos.length) {
     return placeholderResult(dimensions, "未上传照片：跳过照片分析，仅用表单自评 + 规则引擎。");
